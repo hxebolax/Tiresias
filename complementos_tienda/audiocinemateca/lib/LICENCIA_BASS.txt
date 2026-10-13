@@ -1,0 +1,24 @@
+BASS 2.4 (bass.dll, versión de 64 bits)
+Copyright (c) 1999-2021 Un4seen Developments Ltd. Todos los derechos reservados.
+https://www.un4seen.com
+
+Este complemento incluye sin modificar la biblioteca de audio BASS de
+Un4seen Developments, que se usa para reproducir los contenidos de la
+Audiocinemateca. El código del complemento que la utiliza (bass.py) es
+propio; no incluye ningún envoltorio de terceros.
+
+Condiciones de uso de BASS (resumen de la licencia de Un4seen):
+
+- BASS es gratuita para uso no comercial. Si usted no cobra por el software
+  que la incluye, puede usarla libremente en él.
+- Cualquier uso comercial (vender el software, incluirlo en un producto de
+  pago, usarlo dentro de una empresa con ánimo de lucro, etc.) necesita una
+  licencia de Un4seen Developments: consulte https://www.un4seen.com.
+- La biblioteca se proporciona «tal cual», sin garantía de ningún tipo.
+  Un4seen Developments no se hace responsable de los daños que pudiera
+  causar su uso.
+- No se puede modificar ni distribuir por separado del software que la usa,
+  ni atribuirse su autoría.
+
+El texto completo y vigente de la licencia está en el archivo bass.txt de la
+distribución oficial de BASS y en https://www.un4seen.com/bass.html#license.

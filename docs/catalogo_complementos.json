@@ -1,0 +1,356 @@
+{
+	"format": "tiresias-catalogo",
+	"version": 1,
+	"addons": [
+		{
+			"id": "NeuralVoices",
+			"name": "Voces neuronales de Microsoft",
+			"version": "1.0.0",
+			"author": "Proyecto Tiresias (basado en NeuralVoices de Kvark, Alexander Linkov)",
+			"description": "Sintetizador para las voces neuronales naturales de Microsoft, que funcionan en el propio equipo y sin conexión (Speech SDK de Microsoft, síntesis local). Ofrece todas las voces de los paquetes de voces instalados como complementos aparte (por ejemplo «Voz neuronal Álvaro (español de España)»), con velocidad, tono y volumen propios de cada voz, la voz que se prefiere para cada idioma, cambio automático de voz según el idioma del texto, detección opcional del idioma por la escritura Unicode (latina, cirílica, árabe, han...) con el idioma elegido para las escrituras latina, cirílica y CJK, opción de ignorar los números en la detección, índices sincronizados con el audio (lectura continua), pausas, deletreo y fonemas. El diálogo «Voces neuronales: voz de cada idioma» se abre desde el menú Herramientas, desde su categoría de Opciones o con una orden asignable. Después de instalarlo hay que instalar al menos un paquete de voz y elegir «Voces neuronales de Microsoft» en Opciones > Voz.",
+			"minApiVersion": "1.0",
+			"lastTestedApiVersion": "1.0",
+			"url": "NeuralVoices/NeuralVoices-1.0.0.tiresias-addon",
+			"sha256": "31e96084b4747c52e28698ddab88a80915cad8796d48a8bd3f32daed16931970",
+			"size": 7525348,
+			"homepage": "https://t.me/kvark128",
+			"changelog": "Primera versión para Tiresias: adaptación completa del controlador NeuralVoices 2026.07.28 de Kvark (Alexander Linkov) con un envoltorio ctypes propio de la API C del Speech SDK 1.51.1 de Microsoft (sin cffi), voces de todos los paquetes instalados, ajustes por voz, voz de cada idioma, detección del idioma por escritura Unicode, índices sincronizados con el audio, pausas, deletreo y fonemas, diálogo de voz por idioma en el menú Herramientas y en Opciones, y documentación en español.",
+			"date": "2026-10-08",
+			"proprietary": false,
+			"versions": [
+				{
+					"version": "1.0.0",
+					"url": "NeuralVoices/NeuralVoices-1.0.0.tiresias-addon",
+					"sha256": "31e96084b4747c52e28698ddab88a80915cad8796d48a8bd3f32daed16931970",
+					"size": 7525348,
+					"minApiVersion": "1.0",
+					"lastTestedApiVersion": "1.0",
+					"changelog": "Primera versión para Tiresias: adaptación completa del controlador NeuralVoices 2026.07.28 de Kvark (Alexander Linkov) con un envoltorio ctypes propio de la API C del Speech SDK 1.51.1 de Microsoft (sin cffi), voces de todos los paquetes instalados, ajustes por voz, voz de cada idioma, detección del idioma por escritura Unicode, índices sincronizados con el audio, pausas, deletreo y fonemas, diálogo de voz por idioma en el menú Herramientas y en Opciones, y documentación en español.",
+					"date": "2026-10-08"
+				}
+			]
+		},
+		{
+			"id": "NeuralVoices-voz-Alvaro",
+			"name": "Voz neuronal Álvaro (español de España)",
+			"version": "1.0.0",
+			"author": "Microsoft (modelo de voz). Paquete preparado por la comunidad rusa nvda.ru; adaptado a Tiresias por el Proyecto Tiresias",
+			"description": "Voz neuronal natural de Microsoft Álvaro, voz masculina adulta en español de España, que funciona en el propio equipo y sin conexión. Requiere el complemento «Voces neuronales de Microsoft» (NeuralVoices): instálalo primero y luego elige «Voces neuronales de Microsoft» en Opciones > Voz. Este paquete solo contiene los datos del modelo de voz, sin código. El modelo de voz es propiedad de Microsoft y se distribuye con su licencia (archivo SynthModel.license, que no se puede modificar): Microsoft se reserva todos los derechos que la licencia no concede.",
+			"minApiVersion": "1.0",
+			"lastTestedApiVersion": "1.0",
+			"url": "NeuralVoices-voz-Alvaro/NeuralVoices-voz-Alvaro-1.0.0.tiresias-addon",
+			"sha256": "bbd802899977871bf786bd9ddfc2900897fe46d817722f0c9e12db208d9a421e",
+			"size": 21221068,
+			"homepage": "https://microsoft.com",
+			"changelog": "Primera versión para Tiresias: los mismos datos del modelo de voz (versión 6.0.69700) y la misma licencia de Microsoft que el paquete NeuralVoices-voice-Alvaro-Natural-Spanish-Spain de NVDA, con el manifiesto de Tiresias.",
+			"date": "2026-10-08",
+			"proprietary": true,
+			"versions": [
+				{
+					"version": "1.0.0",
+					"url": "NeuralVoices-voz-Alvaro/NeuralVoices-voz-Alvaro-1.0.0.tiresias-addon",
+					"sha256": "bbd802899977871bf786bd9ddfc2900897fe46d817722f0c9e12db208d9a421e",
+					"size": 21221068,
+					"minApiVersion": "1.0",
+					"lastTestedApiVersion": "1.0",
+					"changelog": "Primera versión para Tiresias: los mismos datos del modelo de voz (versión 6.0.69700) y la misma licencia de Microsoft que el paquete NeuralVoices-voice-Alvaro-Natural-Spanish-Spain de NVDA, con el manifiesto de Tiresias.",
+					"date": "2026-10-08"
+				}
+			]
+		},
+		{
+			"id": "TraductorAvanzadoPro",
+			"name": "Traductor Avanzado Pro",
+			"version": "1.0.0",
+			"author": "Héctor J. Benítez Corredera <xebolax@gmail.com>",
+			"description": "Traductor profesional para Tiresias que traduce textos a decenas de idiomas con Google Translate, DeepL (gratuito y API), Microsoft Translator, LibreTranslate, OpenAI, Claude, Google Gemini y DeepSeek. Incluye traducción simultánea de todo lo que dice Tiresias (sin bloquear la voz), traducción de la selección, del portapapeles, del último texto hablado y del objeto navegador, OCR con traducción, diccionario multilingüe, detección de idioma, intercambio automático de idioma, caché inteligente por aplicación, historial con búsqueda, exportación a CSV y JSON y estadísticas, interfaz de traducción manual con audio y reproductor, cambio rápido de servicio, modelo e idiomas, gestión de varias claves de API cifradas con rotación automática, configuración de modelos y prompts de las IA, capa de órdenes con sonidos y un sistema de plugins extensible para añadir servicios y funciones.",
+			"minApiVersion": "1.0",
+			"lastTestedApiVersion": "1.0",
+			"url": "TraductorAvanzadoPro/TraductorAvanzadoPro-1.0.0.tiresias-addon",
+			"sha256": "7a75ad107df19a7eba22211e27679f63520498b6bc7005f479a616754e426d1b",
+			"size": 276586,
+			"homepage": "https://github.com/hxebolax/TranslateAdvanced",
+			"changelog": "Primera versión para Tiresias: todas las funciones del Traductor Avanzado Pro de NVDA reescritas con la API de Tiresias (traducción simultánea con filter_speechSequence, ocho servicios más Claude, OCR con el motor de Tiresias, diccionario, historial persistente con exportación y estadísticas, caché por aplicación, reproductor con wx.media, claves cifradas con DPAPI, categoría propia en Opciones y submenú en Herramientas).",
+			"date": "2026-10-08",
+			"proprietary": false,
+			"versions": [
+				{
+					"version": "1.0.0",
+					"url": "TraductorAvanzadoPro/TraductorAvanzadoPro-1.0.0.tiresias-addon",
+					"sha256": "7a75ad107df19a7eba22211e27679f63520498b6bc7005f479a616754e426d1b",
+					"size": 276586,
+					"minApiVersion": "1.0",
+					"lastTestedApiVersion": "1.0",
+					"changelog": "Primera versión para Tiresias: todas las funciones del Traductor Avanzado Pro de NVDA reescritas con la API de Tiresias (traducción simultánea con filter_speechSequence, ocho servicios más Claude, OCR con el motor de Tiresias, diccionario, historial persistente con exportación y estadísticas, caché por aplicación, reproductor con wx.media, claves cifradas con DPAPI, categoría propia en Opciones y submenú en Herramientas).",
+					"date": "2026-10-08"
+				}
+			]
+		},
+		{
+			"id": "audiocinemateca",
+			"name": "Audiocinemateca",
+			"version": "1.0.1",
+			"author": "Héctor J. Benítez Corredera <xebolax@gmail.com>",
+			"description": "Toda la Audiocinemateca en Tiresias: acceso al catálogo completo de audiocinemateca.com (películas, series, documentales y cortometrajes con audiodescripción en español) con una cuenta de usuario. Ventana con pestañas (General con últimos contenidos, sugerencia aleatoria y búsqueda global; Películas; Series; Documentales; Cortometrajes; Favoritos; Historial y Listas personalizadas), búsqueda por título, año, género, país, director, guion, música, fotografía, reparto, productora, narración o sinopsis, fichas detalladas con enlace a FilmAffinity, temporadas y episodios de las series y partes de las películas. Reproductor integrado basado en la biblioteca BASS con volumen, velocidad, avance y retroceso configurables, reanudación donde se dejó cada contenido, ecualizador de 5 bandas con preajustes, temporizador de sueño y elección del dispositivo de salida. Cola de descargas en segundo plano con aviso al terminar y reproducción sin conexión de lo descargado, copia de la información al portapapeles, historial de reproducción y de búsqueda, estadísticas de uso, actualización de la base de datos, credenciales cifradas en disco y órdenes asignables para manejar el reproductor con la ventana cerrada.",
+			"minApiVersion": "1.0",
+			"lastTestedApiVersion": "1.0",
+			"url": "audiocinemateca/audiocinemateca-1.0.1.tiresias-addon",
+			"sha256": "84745d98982edf37938c076683d88010c056963f78d7d5b757b588546d20a0df",
+			"size": 220371,
+			"homepage": "https://github.com/nvda-es/audiocinemateca-para-nvda",
+			"changelog": "1.0.1 (seguridad): el usuario y la contraseña solo se envían a audiocinemateca.com por https y nunca a otra dirección a la que redirija el servidor; los nombres de las descargas ya no pueden escribir fuera de la carpeta elegida. 1.0.0: primera versión para Tiresias: reescritura completa de «Audiocinemateca para NVDA» 2.0 con la API de Tiresias. Reproductor con un envoltorio ctypes propio de BASS (sin sound_lib), credenciales cifradas con la protección de datos de Windows, opciones en la categoría «Audiocinemateca» de las Opciones de Tiresias (con volumen, velocidad, dispositivo de salida y gestión de la cuenta), entrada «Audiocinemateca» en el menú Herramientas, historial de búsqueda consultable desde el menú de la ventana y marcas de visualización que no dependen de la contraseña.",
+			"date": "2026-10-12",
+			"proprietary": false,
+			"versions": [
+				{
+					"version": "1.0.1",
+					"url": "audiocinemateca/audiocinemateca-1.0.1.tiresias-addon",
+					"sha256": "84745d98982edf37938c076683d88010c056963f78d7d5b757b588546d20a0df",
+					"size": 220371,
+					"minApiVersion": "1.0",
+					"lastTestedApiVersion": "1.0",
+					"changelog": "1.0.1 (seguridad): el usuario y la contraseña solo se envían a audiocinemateca.com por https y nunca a otra dirección a la que redirija el servidor; los nombres de las descargas ya no pueden escribir fuera de la carpeta elegida. 1.0.0: primera versión para Tiresias: reescritura completa de «Audiocinemateca para NVDA» 2.0 con la API de Tiresias. Reproductor con un envoltorio ctypes propio de BASS (sin sound_lib), credenciales cifradas con la protección de datos de Windows, opciones en la categoría «Audiocinemateca» de las Opciones de Tiresias (con volumen, velocidad, dispositivo de salida y gestión de la cuenta), entrada «Audiocinemateca» en el menú Herramientas, historial de búsqueda consultable desde el menú de la ventana y marcas de visualización que no dependen de la contraseña.",
+					"date": "2026-10-12"
+				},
+				{
+					"version": "1.0.0",
+					"url": "audiocinemateca/audiocinemateca-1.0.0.tiresias-addon",
+					"sha256": "1045def383c49f7ef2633120c2a894d37709ef8807f4dbad42da65473e975758",
+					"size": 219422,
+					"minApiVersion": "1.0",
+					"lastTestedApiVersion": "1.0",
+					"changelog": "Primera versión para Tiresias: reescritura completa de «Audiocinemateca para NVDA» 2.0 con la API de Tiresias. Reproductor con un envoltorio ctypes propio de BASS (sin sound_lib), credenciales cifradas con la protección de datos de Windows, opciones en la categoría «Audiocinemateca» de las Opciones de Tiresias (con volumen, velocidad, dispositivo de salida y gestión de la cuenta), entrada «Audiocinemateca» en el menú Herramientas, historial de búsqueda consultable desde el menú de la ventana y marcas de visualización que no dependen de la contraseña.",
+					"date": "2026-10-08"
+				}
+			]
+		},
+		{
+			"id": "consoleLog",
+			"name": "Visor de consola (consoleLog)",
+			"version": "1.0.0",
+			"author": "Héctor J. Benítez Corredera <xebolax@gmail.com>",
+			"description": "Visor accesible y herramientas para consolas de Windows. Permite consultar, seguir en tiempo real, buscar, copiar, guardar y analizar la salida de Console Host, Windows Terminal y numerosos emuladores de terceros (Cmder, ConEmu, mintty y Git Bash, PuTTY y KiTTY, Alacritty, WezTerm, Hyper, Tabby y otros) en un cuadro de texto de solo lectura, sin mover la posición de lectura de la terminal. Incluye seguimiento en tiempo real adaptativo que conserva el cursor, la selección y el desplazamiento; varios visores a la vez, uno por consola; captura escalable de historiales grandes y conservación de las líneas que salen del búfer; protección de la voz frente a ráfagas de salida; alertas por voz y sonido con patrones configurables; definiciones de ventana para silenciar o vigilar regiones; lanzador de terminales (CMD, PowerShell, PowerShell 7, Windows Terminal, Git Bash, WSL, MSYS2 y consolas de desarrollador de Visual Studio) en la carpeta seleccionada del Explorador, normal o como administrador; más de veinte herramientas para analizar registros y formatos de desarrollo (filtro de errores, estadísticas, JSON, SQL, JWT, Base64, marcas de tiempo, trazas de error, tablas delimitadas, indentación, ANSI, calculadora, extractor de URL, rutas e IP...); y chat e informes de inteligencia artificial (Google AI con varias claves o los proveedores de IA de Tiresias) presentados en HTML semántico navegable. Las órdenes se asignan en Gestos de entrada, categoría «Visor de consola».",
+			"minApiVersion": "1.0",
+			"lastTestedApiVersion": "1.0",
+			"url": "consoleLog/consoleLog-1.0.0.tiresias-addon",
+			"sha256": "5ba8d0bdfafdb0da1b34681d5d150e839a591a0df1c358982df2eadac50197d7",
+			"size": 110742,
+			"homepage": "https://github.com/nvda-es/consoleLog",
+			"changelog": "Primera versión para Tiresias: reescritura completa del complemento consoleLog 2026.09.01 de NVDA con la API de Tiresias. Lectura de consolas con la API de consola (historial completo de Console Host) y UI Automation, más PuTTY y KiTTY; protección de ráfagas adaptada a la voz de Tiresias; opciones en la configuración de Tiresias y en el propio visor; claves de Google AI cifradas con DPAPI; posibilidad de usar los proveedores de IA de Tiresias; gestión de definiciones de ventana con diálogo propio; detección de MSYS2 en el lanzador.",
+			"date": "2026-10-08",
+			"proprietary": false,
+			"versions": [
+				{
+					"version": "1.0.0",
+					"url": "consoleLog/consoleLog-1.0.0.tiresias-addon",
+					"sha256": "5ba8d0bdfafdb0da1b34681d5d150e839a591a0df1c358982df2eadac50197d7",
+					"size": 110742,
+					"minApiVersion": "1.0",
+					"lastTestedApiVersion": "1.0",
+					"changelog": "Primera versión para Tiresias: reescritura completa del complemento consoleLog 2026.09.01 de NVDA con la API de Tiresias. Lectura de consolas con la API de consola (historial completo de Console Host) y UI Automation, más PuTTY y KiTTY; protección de ráfagas adaptada a la voz de Tiresias; opciones en la configuración de Tiresias y en el propio visor; claves de Google AI cifradas con DPAPI; posibilidad de usar los proveedores de IA de Tiresias; gestión de definiciones de ventana con diálogo propio; detección de MSYS2 en el lanzador.",
+					"date": "2026-10-08"
+				}
+			]
+		},
+		{
+			"id": "eloquence",
+			"name": "Eloquence (IBMTTS)",
+			"version": "1.0.3",
+			"author": "Proyecto Tiresias. Puente de 32 bits: David CM (ibmtts-host32-bridge, GPL; versión modificada para Tiresias, código en bridge_src)",
+			"description": "Voz Eloquence/IBMTTS para Tiresias: español de España y de Latinoamérica y el resto de idiomas incluidos, con todos sus ajustes (variante, velocidad con aumento, tono, entonación, cabeza, aspereza, respiración, pausas cortas, frecuencia de muestreo). Es la voz por defecto de Tiresias cuando este complemento está instalado.",
+			"minApiVersion": "1.0",
+			"lastTestedApiVersion": "1.0",
+			"url": "eloquence/eloquence-1.0.3.tiresias-addon",
+			"sha256": "bd9924bfb8f9e5fefd5533ce14e44cda5b6b8f53c3fd00f1025b75c6ad9f30cc",
+			"size": 9736762,
+			"homepage": "https://github.com/davidacm/ibmtts-host32-bridge",
+			"changelog": "",
+			"date": "2026-10-12",
+			"proprietary": true,
+			"versions": [
+				{
+					"version": "1.0.3",
+					"url": "eloquence/eloquence-1.0.3.tiresias-addon",
+					"sha256": "bd9924bfb8f9e5fefd5533ce14e44cda5b6b8f53c3fd00f1025b75c6ad9f30cc",
+					"size": 9736762,
+					"minApiVersion": "1.0",
+					"lastTestedApiVersion": "1.0",
+					"changelog": "",
+					"date": "2026-10-12"
+				},
+				{
+					"version": "1.0.2",
+					"url": "eloquence/eloquence-1.0.2.tiresias-addon",
+					"sha256": "069c20b29a27397350fd8cdb42201238937510d06db89220cd0cacde02df1fc5",
+					"size": 9734005,
+					"minApiVersion": "1.0",
+					"lastTestedApiVersion": "1.0",
+					"changelog": "",
+					"date": "2026-10-07"
+				},
+				{
+					"version": "1.0.1",
+					"url": "eloquence/eloquence-1.0.1.tiresias-addon",
+					"sha256": "1381347c2d3f084d7fb74a796f75ff2105cca2ab16349cf4034bb51ceaa2a244",
+					"size": 9734005,
+					"minApiVersion": "1.0",
+					"lastTestedApiVersion": "1.0",
+					"changelog": "",
+					"date": "2026-10-07"
+				},
+				{
+					"version": "1.0.0",
+					"url": "eloquence/eloquence-1.0.0.tiresias-addon",
+					"sha256": "f15cfe978e60755603dd185dd8db94c21479008ce9a2563831237bb878088805",
+					"size": 9352789,
+					"minApiVersion": "1.0",
+					"lastTestedApiVersion": "1.0",
+					"changelog": "",
+					"date": "2026-10-07"
+				}
+			]
+		},
+		{
+			"id": "resourceMonitor",
+			"name": "Monitor de recursos",
+			"version": "1.0.0",
+			"author": "Proyecto Tiresias (basado en Resource Monitor de Alex Hall, Joseph Lee, Kefas Lungu y otros)",
+			"description": "Un práctico monitor de recursos: anuncia la carga del procesador y de cada núcleo, la memoria física y virtual, el espacio de los discos (fijos, extraíbles y de red), la batería, la red wifi conectada (nombre, intensidad de la señal y seguridad), la versión de Windows, el tiempo de actividad del sistema y el uso, la temperatura y la memoria de la GPU NVIDIA. Pulsando dos veces cualquier orden se copia la información al portapapeles. Avisa con un mensaje, un sonido o ambos al conectar o desconectar la wifi. Las órdenes están en una capa (Tiresias+Mayúsculas+0 y una letra) y en Tiresias+Mayúsculas+1 a 7.",
+			"minApiVersion": "1.0",
+			"lastTestedApiVersion": "1.0",
+			"url": "resourceMonitor/resourceMonitor-1.0.0.tiresias-addon",
+			"sha256": "2153be91402fefce752aae58753bd55c4fca2216dcdcfa4c53db3f11ed4172b1",
+			"size": 41315,
+			"homepage": "https://github.com/kefaslungu/resourceMonitor",
+			"changelog": "Primera versión para Tiresias: todas las funciones de Resource Monitor 26.10.1 para NVDA (capa de órdenes, resumen, CPU, memoria, discos, wifi, Windows, tiempo de actividad, GPU y memoria de la GPU, copia al portapapeles con doble pulsación, aviso de conexión y desconexión de la wifi configurable y unidad de temperatura de la GPU), más el informe de la batería de las versiones anteriores del original.",
+			"date": "2026-10-08",
+			"proprietary": false,
+			"versions": [
+				{
+					"version": "1.0.0",
+					"url": "resourceMonitor/resourceMonitor-1.0.0.tiresias-addon",
+					"sha256": "2153be91402fefce752aae58753bd55c4fca2216dcdcfa4c53db3f11ed4172b1",
+					"size": 41315,
+					"minApiVersion": "1.0",
+					"lastTestedApiVersion": "1.0",
+					"changelog": "Primera versión para Tiresias: todas las funciones de Resource Monitor 26.10.1 para NVDA (capa de órdenes, resumen, CPU, memoria, discos, wifi, Windows, tiempo de actividad, GPU y memoria de la GPU, copia al portapapeles con doble pulsación, aviso de conexión y desconexión de la wifi configurable y unidad de temperatura de la GPU), más el informe de la batería de las versiones anteriores del original.",
+					"date": "2026-10-08"
+				}
+			]
+		},
+		{
+			"id": "whatsapp",
+			"name": "WhatsApp accesible",
+			"version": "1.0.3",
+			"author": "Proyecto Tiresias",
+			"description": "Hace WhatsApp para Windows (versión de la Microsoft Store) mucho más fácil de usar: atajos para ir a los chats, a los mensajes y al cuadro de edición, lectura de los últimos mensajes sin mover el foco, lectura automática de mensajes nuevos, notas de voz, llamadas, copia limpia de mensajes y filtros para quitar el ruido (pistas, números de teléfono, «Quizás»).",
+			"minApiVersion": "1.0",
+			"lastTestedApiVersion": "1.0",
+			"url": "whatsapp/whatsapp-1.0.3.tiresias-addon",
+			"sha256": "56cf78e22222241ed93a7aca8c34f249fd9050ab7a199bd30d7154dab3862791",
+			"size": 17351,
+			"homepage": "",
+			"changelog": "",
+			"date": "2026-10-12",
+			"proprietary": false,
+			"versions": [
+				{
+					"version": "1.0.3",
+					"url": "whatsapp/whatsapp-1.0.3.tiresias-addon",
+					"sha256": "56cf78e22222241ed93a7aca8c34f249fd9050ab7a199bd30d7154dab3862791",
+					"size": 17351,
+					"minApiVersion": "1.0",
+					"lastTestedApiVersion": "1.0",
+					"changelog": "",
+					"date": "2026-10-12"
+				},
+				{
+					"version": "1.0.2",
+					"url": "whatsapp/whatsapp-1.0.2.tiresias-addon",
+					"sha256": "e2788c700a7cddf3e0a6d52c51eb4d80c4ef2f5c1eaebbc12d3ee2291db6c064",
+					"size": 16243,
+					"minApiVersion": "1.0",
+					"lastTestedApiVersion": "1.0",
+					"changelog": "",
+					"date": "2026-10-07"
+				},
+				{
+					"version": "1.0.1",
+					"url": "whatsapp/whatsapp-1.0.1.tiresias-addon",
+					"sha256": "e48b2d3c96c495574ed96787082d5b5dbad3a4265b6abd6a30723fd2d87fd198",
+					"size": 14205,
+					"minApiVersion": "1.0",
+					"lastTestedApiVersion": "1.0",
+					"changelog": "",
+					"date": "2026-10-07"
+				},
+				{
+					"version": "1.0.0",
+					"url": "whatsapp/whatsapp-1.0.0.tiresias-addon",
+					"sha256": "f3be2e6b2e2e7f4541e0a0eb966351f55df142eb2b7f9570ec4d5887d2a5af86",
+					"size": 14199,
+					"minApiVersion": "1.0",
+					"lastTestedApiVersion": "1.0",
+					"changelog": "",
+					"date": "2026-10-07"
+				}
+			]
+		},
+		{
+			"id": "zRadioBASS",
+			"name": "zRadio BASS",
+			"version": "1.0.0",
+			"author": "Héctor J. Benítez Corredera <xebolax@gmail.com>",
+			"description": "Reproductor de radios en línea con el motor de audio BASS: miles de emisoras de todo el mundo (API de Radio Browser) buscadas por nombre, país, idioma o etiqueta con filtros de orden, formato y calidad; favoritos avanzados con categorías, notas, orden personal, contador de reproducciones, exportación e importación; historial con duración de cada escucha; volumen, silencio, pausa, dispositivo de salida, ecualizador y balance; título de la canción que suena y reconexión automática; grabación de la emisora a WAV y planificador de grabaciones que graba aunque no se esté escuchando nada; sistema de plugins con plugin de ejemplo y de estadísticas de uso; órdenes asignables para manejar la radio desde cualquier sitio.",
+			"minApiVersion": "1.0",
+			"lastTestedApiVersion": "1.0",
+			"url": "zRadioBASS/zRadioBASS-1.0.0.tiresias-addon",
+			"sha256": "be9875c5544565bd36fba0c1036e25a1d8e939e5eeb6feff49932eefc6485594",
+			"size": 663326,
+			"homepage": "",
+			"changelog": "Primera versión para Tiresias: reescrito con la API de Tiresias, envoltorio ctypes propio de BASS en lugar de sound_lib, cliente propio de Radio Browser con urllib (elección de servidor, reintentos y caché en SQLite) en lugar de pyradios/httpx/requests, opciones en el cuadro de Opciones de Tiresias, grabaciones programadas que se guardan y graban sin reproducir, categorías de favoritos con interfaz, pausa, dispositivo de salida, ecualizador, balance, título de la canción, reconexión automática y administrador de plugins.",
+			"date": "2026-10-08",
+			"proprietary": false,
+			"versions": [
+				{
+					"version": "1.0.0",
+					"url": "zRadioBASS/zRadioBASS-1.0.0.tiresias-addon",
+					"sha256": "be9875c5544565bd36fba0c1036e25a1d8e939e5eeb6feff49932eefc6485594",
+					"size": 663326,
+					"minApiVersion": "1.0",
+					"lastTestedApiVersion": "1.0",
+					"changelog": "Primera versión para Tiresias: reescrito con la API de Tiresias, envoltorio ctypes propio de BASS en lugar de sound_lib, cliente propio de Radio Browser con urllib (elección de servidor, reintentos y caché en SQLite) en lugar de pyradios/httpx/requests, opciones en el cuadro de Opciones de Tiresias, grabaciones programadas que se guardan y graban sin reproducir, categorías de favoritos con interfaz, pausa, dispositivo de salida, ecualizador, balance, título de la canción, reconexión automática y administrador de plugins.",
+					"date": "2026-10-08"
+				}
+			]
+		},
+		{
+			"id": "zUtilidades",
+			"name": "zUtilidades",
+			"version": "1.0.0",
+			"author": "Héctor J. Benítez Corredera <xebolax@gmail.com>",
+			"description": "Conjunto de utilidades para Windows. Lanzador de aplicaciones: organiza por categorías aplicaciones (con parámetros y como administrador), órdenes de CMD o PowerShell, carpetas, accesos directos y aplicaciones instaladas (incluidas las de la tienda) y lánzalas desde cualquier sitio. Notas rápidas: guarda notas por categorías, léelas, cópialas o pégalas donde esté el foco, y crea notas desde cualquier parte con el texto seleccionado (con el título de la ventana y la dirección de la página si se desea). Cada módulo tiene su ventana y un menú virtual sin ventana, copias de seguridad y restauración (también de las copias del complemento de NVDA). Las órdenes se asignan en Gestos de entrada, categoría zUtilidades; los módulos están en Herramientas > zUtilidades.",
+			"minApiVersion": "1.0",
+			"lastTestedApiVersion": "1.0",
+			"url": "zUtilidades/zUtilidades-1.0.0.tiresias-addon",
+			"sha256": "8a5744b3ef01873dfb52d6ac3f7293c362d490cf4f4fe262679fb7d567fe205d",
+			"size": 39565,
+			"homepage": "https://github.com/hxebolax/zUtilidades-para-NVDA",
+			"changelog": "Primera versión para Tiresias: lanzador de aplicaciones y notas rápidas con sus ventanas, menús virtuales, nota rápida desde el texto seleccionado (con título de la ventana y URL opcionales), mover entre categorías, copias de seguridad compatibles con las del complemento de NVDA, categoría propia en Opciones y entrada en el menú Herramientas.",
+			"date": "2026-10-08",
+			"proprietary": false,
+			"versions": [
+				{
+					"version": "1.0.0",
+					"url": "zUtilidades/zUtilidades-1.0.0.tiresias-addon",
+					"sha256": "8a5744b3ef01873dfb52d6ac3f7293c362d490cf4f4fe262679fb7d567fe205d",
+					"size": 39565,
+					"minApiVersion": "1.0",
+					"lastTestedApiVersion": "1.0",
+					"changelog": "Primera versión para Tiresias: lanzador de aplicaciones y notas rápidas con sus ventanas, menús virtuales, nota rápida desde el texto seleccionado (con título de la ventana y URL opcionales), mover entre categorías, copias de seguridad compatibles con las del complemento de NVDA, categoría propia en Opciones y entrada en el menú Herramientas.",
+					"date": "2026-10-08"
+				}
+			]
+		}
+	]
+}

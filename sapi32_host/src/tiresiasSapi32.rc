@@ -1,0 +1,33 @@
+// Información de versión del auxiliar de 32 bits para SAPI 5 y SAPI 4.
+#include <winver.h>
+
+#define TS_VERSION 1,0,12,0
+#define TS_VERSION_STR "1.0.12.0"
+
+VS_VERSION_INFO VERSIONINFO
+FILEVERSION TS_VERSION
+PRODUCTVERSION TS_VERSION
+FILEFLAGSMASK 0x3fL
+FILEFLAGS 0x0L
+FILEOS VOS_NT_WINDOWS32
+FILETYPE VFT_APP
+FILESUBTYPE 0x0L
+BEGIN
+	BLOCK "StringFileInfo"
+	BEGIN
+		BLOCK "0c0a04b0"
+		BEGIN
+			VALUE "CompanyName", "Tiresias"
+			VALUE "FileDescription", "Tiresias: voces SAPI 5 de 32 bits y SAPI 4"
+			VALUE "FileVersion", TS_VERSION_STR
+			VALUE "InternalName", "tiresiasSapi32"
+			VALUE "OriginalFilename", "tiresiasSapi32.exe"
+			VALUE "ProductName", "Tiresias, lector de pantalla"
+			VALUE "ProductVersion", TS_VERSION_STR
+		END
+	END
+	BLOCK "VarFileInfo"
+	BEGIN
+		VALUE "Translation", 0x0c0a, 1200
+	END
+END

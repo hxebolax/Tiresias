@@ -1,0 +1,27 @@
+# Requisitos de Tiresias (Python 3.14 de 64 bits)
+comtypes>=1.4.10
+wxPython>=4.2.2
+espeakng-loader>=0.2.4
+psutil>=5.9
+winrt-runtime>=3.2
+winrt-Windows.Foundation>=3.2
+winrt-Windows.Foundation.Collections>=3.2
+winrt-Windows.Globalization>=3.2
+winrt-Windows.Graphics.Imaging>=3.2
+winrt-Windows.Media.Ocr>=3.2
+winrt-Windows.Media.SpeechSynthesis>=3.2
+winrt-Windows.Media.Core>=3.2
+winrt-Windows.Storage>=3.2
+winrt-Windows.Storage.Streams>=3.2
+# OCR de PDF y «Cara a la vista» (cámara y detección de caras, sin red)
+winrt-Windows.Data.Pdf>=3.2
+winrt-Windows.Media.Capture>=3.2
+winrt-Windows.Media.FaceAnalysis>=3.2
+winrt-Windows.Media.MediaProperties>=3.2
+# Acceso remoto: certificado autofirmado del servidor local
+cryptography>=44
+# Voces neuronales Piper (inferencia ONNX) y procesado de audio
+onnxruntime>=1.20
+numpy>=2.0
+# Compilación
+cx_Freeze>=7.2

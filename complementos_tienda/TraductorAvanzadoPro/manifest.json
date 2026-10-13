@@ -1,0 +1,11 @@
+{
+	"id": "TraductorAvanzadoPro",
+	"name": "Traductor Avanzado Pro",
+	"version": "1.0.0",
+	"author": "Héctor J. Benítez Corredera <xebolax@gmail.com>",
+	"description": "Traductor profesional para Tiresias que traduce textos a decenas de idiomas con Google Translate, DeepL (gratuito y API), Microsoft Translator, LibreTranslate, OpenAI, Claude, Google Gemini y DeepSeek. Incluye traducción simultánea de todo lo que dice Tiresias (sin bloquear la voz), traducción de la selección, del portapapeles, del último texto hablado y del objeto navegador, OCR con traducción, diccionario multilingüe, detección de idioma, intercambio automático de idioma, caché inteligente por aplicación, historial con búsqueda, exportación a CSV y JSON y estadísticas, interfaz de traducción manual con audio y reproductor, cambio rápido de servicio, modelo e idiomas, gestión de varias claves de API cifradas con rotación automática, configuración de modelos y prompts de las IA, capa de órdenes con sonidos y un sistema de plugins extensible para añadir servicios y funciones.",
+	"minApiVersion": "1.0",
+	"lastTestedApiVersion": "1.0",
+	"url": "https://github.com/hxebolax/TranslateAdvanced",
+	"changelog": "Primera versión para Tiresias: todas las funciones del Traductor Avanzado Pro de NVDA reescritas con la API de Tiresias (traducción simultánea con filter_speechSequence, ocho servicios más Claude, OCR con el motor de Tiresias, diccionario, historial persistente con exportación y estadísticas, caché por aplicación, reproductor con wx.media, claves cifradas con DPAPI, categoría propia en Opciones y submenú en Herramientas)."
+}

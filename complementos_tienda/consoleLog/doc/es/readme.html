@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8"><title>Visor de consola (consoleLog) para Tiresias</title>
+<style>body{font-family:Segoe UI,Arial,sans-serif;max-width:60em;margin:1em auto;line-height:1.5;padding:0 1em}table{border-collapse:collapse;margin:.6em 0}td,th{border:1px solid #888;padding:.3em .6em;text-align:left;vertical-align:top}code,kbd{font-family:Consolas,monospace}</style></head>
+<body>
+<h1>Visor de consola (consoleLog)</h1>
+<p>Versión 1.0.0 para Tiresias. Visor accesible, seguimiento en tiempo real y caja de herramientas para las consolas de Windows.</p>
+
+<nav aria-label="Contenido"><h2>Contenido</h2>
+<ol>
+<li><a href="#ofrece">Qué ofrece</a></li>
+<li><a href="#requisitos">Requisitos e instalación</a></li>
+<li><a href="#gestos">Primer uso y órdenes</a></li>
+<li><a href="#visor">Visor accesible</a></li>
+<li><a href="#seguimiento">Seguimiento en tiempo real</a></li>
+<li><a href="#rafagas">Protección de la voz frente a ráfagas</a></li>
+<li><a href="#compatibilidad">Compatibilidad con terminales</a></li>
+<li><a href="#lanzador">Lanzador de consolas</a></li>
+<li><a href="#herramientas">Herramientas incluidas (menú Plugins)</a></li>
+<li><a href="#ia">Inteligencia artificial</a></li>
+<li><a href="#opciones">Opciones</a></li>
+<li><a href="#privacidad">Privacidad y seguridad</a></li>
+<li><a href="#problemas">Solución de problemas</a></li>
+<li><a href="#tiresias">Diferencias con la versión para NVDA</a></li>
+<li><a href="#licencia">Créditos y licencia</a></li>
+</ol></nav>
+
+<h2 id="ofrece">Qué ofrece</h2>
+<p>El complemento captura el contenido de una consola y lo presenta en un cuadro de texto de solo lectura, cómodo para voz y braille. En él puede recorrer con libertad historiales grandes sin depender del cursor de la terminal ni mover su posición de lectura.</p>
+<ul>
+<li>Seguimiento silencioso de la salida en segundo plano, que conserva el foco, el cursor, la selección y el desplazamiento mientras llega texto.</li>
+<li>Varios visores a la vez, uno por cada ventana de consola.</li>
+<li>Acumulación opcional de las líneas que salen del búfer visible de la terminal.</li>
+<li>Lectura escalable del historial completo de Console Host por bloques.</li>
+<li>Búsqueda, ir a línea, copia y guardado en UTF-8.</li>
+<li>Alertas configurables para errores u otros patrones.</li>
+<li>Protección de la voz frente a ráfagas de salida de las consolas.</li>
+<li>Lanzador de terminales en la carpeta seleccionada del Explorador.</li>
+<li>Herramientas locales para analizar, transformar y extraer datos.</li>
+<li>Chat e informes de inteligencia artificial (Google AI o los proveedores de IA de Tiresias) convertidos de Markdown a HTML semántico navegable.</li>
+</ul>
+<p>El complemento no hace nada en modo seguro ni con la pantalla de bloqueo o el escritorio seguro.</p>
+
+<h2 id="requisitos">Requisitos e instalación</h2>
+<ul>
+<li>Windows 10 u 11 y Tiresias 1.0 o posterior.</li>
+<li>No necesita paquetes adicionales para las funciones locales.</li>
+<li>Internet y una clave de Google AI Studio (o un proveedor de IA configurado en Tiresias) solo para las herramientas de inteligencia artificial.</li>
+<li>Para ver el chat y los informes como página web dentro de la ventana hace falta el entorno WebView2 de Microsoft Edge (incluido en Windows 10 actualizado y en Windows 11). Si no está, se usa un cuadro de texto y un botón para abrir el HTML en el navegador.</li>
+</ul>
+<p>Instale el archivo <code>consoleLog.tiresias-addon</code> desde <strong>Complementos, Administrador de complementos, Instalar desde archivo</strong> o desde la tienda de complementos, y reinicie Tiresias si se le pide.</p>
+
+<h2 id="gestos">Primer uso y órdenes</h2>
+<p>Como el original, el complemento no impone combinaciones de teclas, para no chocar con Tiresias, las terminales u otros complementos. Asígnelas así:</p>
+<ol>
+<li>Abra el menú de Tiresias y entre en <strong>Preferencias, Gestos de entrada</strong>.</li>
+<li>Busque la categoría <strong>Visor de consola</strong>.</li>
+<li>Asigne los gestos que necesite a estas órdenes.</li>
+</ol>
+<table><caption>Órdenes de la categoría «Visor de consola»</caption>
+<thead><tr><th scope="col">Orden</th><th scope="col">Qué hace</th><th scope="col">Gesto por defecto</th></tr></thead>
+<tbody>
+<tr><td>Muestra el visor de consola</td><td>Captura la consola en primer plano y abre su visor (o trae al frente el que ya tenga abierto). Mientras lee emite un pitido por segundo.</td><td>Sin asignar</td></tr>
+<tr><td>Copia el contenido completo de la consola al portapapeles (rápido)</td><td>Copia todo el contenido procesado sin abrir el visor.</td><td>Sin asignar</td></tr>
+<tr><td>Pega el contenido del portapapeles mediante clic derecho en la consola enfocada</td><td>Hace clic derecho en el centro de la consola (pega en Console Host y otras terminales) y devuelve el puntero a su sitio.</td><td>Sin asignar</td></tr>
+<tr><td>Abre el lanzador de consolas de Windows</td><td>Abre una terminal en la carpeta seleccionada del Explorador o en el escritorio.</td><td>Sin asignar</td></tr>
+</tbody></table>
+<p>Sitúe el foco en una terminal y ejecute la orden del visor. Si la ventana no es una consola se anuncia «Esta no es una ventana de consola.».</p>
+
+<h2 id="visor">Visor accesible</h2>
+<p>El contenido se abre al principio del documento, en una ventana maximizada (o con el tamaño y la posición que recuerde). El título incluye el nombre de la consola, su proceso y su ventana. La barra de estado indica la línea, la columna y el estado del seguimiento.</p>
+<p>Puede tener abiertos tantos visores como ventanas de consola. Cada uno conserva su captura, su seguimiento y su ciclo de vida. Si vuelve a ejecutar la orden desde una consola que ya tiene visor, se trae al frente el existente en lugar de duplicarlo. En terminales con pestañas o paneles se sigue el área de texto que tenía el foco al abrir el visor.</p>
+<table><caption>Teclas del visor</caption>
+<thead><tr><th scope="col">Tecla</th><th scope="col">Acción</th></tr></thead>
+<tbody>
+<tr><td><kbd>Alt</kbd></td><td>Activa la barra de menús (Archivo, Edición, Ver, Plugins y Ayuda)</td></tr>
+<tr><td><kbd>Control+F</kbd></td><td>Busca texto (sin distinguir mayúsculas)</td></tr>
+<tr><td><kbd>F3</kbd> / <kbd>Mayúsculas+F3</kbd></td><td>Coincidencia siguiente / anterior (da la vuelta al llegar al final)</td></tr>
+<tr><td><kbd>Control+G</kbd></td><td>Va a una línea</td></tr>
+<tr><td><kbd>Control+S</kbd></td><td>Guarda el documento en UTF-8 (Archivo, Guardar como)</td></tr>
+<tr><td><kbd>Control+C</kbd></td><td>Copia la selección</td></tr>
+<tr><td><kbd>Control+A</kbd></td><td>Selecciona todo</td></tr>
+<tr><td><kbd>Control+P</kbd></td><td>Abre las opciones del complemento</td></tr>
+<tr><td><kbd>F1</kbd></td><td>Anuncia la línea y la columna</td></tr>
+<tr><td><kbd>F2</kbd></td><td>Muestra la ayuda de teclas</td></tr>
+<tr><td><kbd>F5</kbd></td><td>Captura de nuevo la consola (Ver, Actualizar contenido)</td></tr>
+<tr><td><kbd>Control+Mayúsculas+F</kbd></td><td>Activa o desactiva el seguimiento automático (Ver, Seguimiento automático)</td></tr>
+<tr><td><kbd>Control+Fin</kbd></td><td>Va al final, a lo más reciente</td></tr>
+<tr><td><kbd>Escape</kbd> o <kbd>Alt+F4</kbd></td><td>Cierra el visor</td></tr>
+</tbody></table>
+<p>El menú Ayuda tiene además «Documentación del complemento», que abre este documento. Las herramientas usan primero el texto seleccionado; si no hay selección, procesan todo el documento.</p>
+
+<h2 id="seguimiento">Seguimiento en tiempo real</h2>
+<p>Active <strong>Ver, Seguimiento automático</strong> o pulse <kbd>Control+Mayúsculas+F</kbd>. El seguimiento:</p>
+<ol>
+<li>Conserva una referencia a la ventana de consola original (no al foco: el foco está en el visor y se recapturaría a sí mismo).</li>
+<li>Hace capturas silenciosas con el intervalo configurado.</li>
+<li>Se salta un ciclo si la captura anterior sigue en curso.</li>
+<li>Compara la nueva captura con la anterior.</li>
+<li>Añade o sustituye solo el fragmento que ha cambiado.</li>
+</ol>
+<p>Así una terminal rápida no crea hilos de lectura sin límite y, sobre todo, no se mueve el foco: si está leyendo una línea anterior, el cursor, la selección y el desplazamiento se quedan donde estaban; si estaba al final, el visor sigue el final. Una línea de progreso o un indicador que cambia se actualiza en su sitio.</p>
+<p>El intervalo es adaptativo: si una captura tarda, el periodo aumenta temporalmente (hasta 10 segundos) y vuelve poco a poco al configurado cuando la terminal se recupera. Si una captura falla durante el seguimiento, el intervalo se duplica y no se muestra ningún mensaje; con F5 sí se avisa del error.</p>
+<p>El modo <strong>Conservar historial</strong> acumula las líneas que desaparecen cuando el búfer de la terminal se desplaza. Las aplicaciones de pantalla completa que redibujan su interfaz (monitores de procesos, editores) se actualizan en su sitio cuando no hay un solapamiento fiable.</p>
+<p>El límite predeterminado del documento es de 5 millones de caracteres. Al alcanzarlo se quitan líneas completas por el principio. Puede cambiarlo o usar cero para no limitarlo; un documento sin límite puede consumir mucha memoria durante procesos largos.</p>
+<p>Con las alertas activadas, cada captura nueva se revisa en busca de los patrones configurados: si aparece alguno se reproduce el sonido «Exclamación» de Windows y se anuncia «Alerta detectada» con la línea. Solo se analiza el texto nuevo (como mucho sus cinco últimas líneas) y se da una alerta por captura, así una alerta antigua no se repite. Las regiones en modo «Monitorizar cambios» de las <a href="#definiciones">definiciones de ventana</a> anuncian sus cambios.</p>
+
+<h2 id="rafagas">Protección de la voz frente a ráfagas</h2>
+<p>En NVDA, el original incorporaba una versión limitada del cambio oficial de NVDA (PR #20177) para que una ráfaga de salida no bloqueara el lector. Tiresias no se bloquea con las ráfagas: su voz es asíncrona, agrupa los cambios de la consola y lee como mucho el número de líneas de su opción «Máximo de líneas que se leen de una vez». Pero una salida continua sí puede <em>saturar la voz</em>: se encolan lotes y lo que se oye va cada vez más retrasado respecto a la pantalla.</p>
+<p>Por eso la opción <strong>Proteger la voz frente a ráfagas de salida de las consolas</strong> adapta la intención del original a Tiresias. Viene <strong>desactivada</strong> de fábrica, porque Tiresias ya limita las ráfagas por sí mismo y con ella se dejan de leer líneas; actívala si la salida continua de un programa te deja la voz muy retrasada:</p>
+<ul>
+<li>de cada ráfaga se leen como mucho las 100 líneas más recientes (o el máximo de Tiresias, si es menor);</li>
+<li>se entregan a la voz en lotes de cinco líneas, y el siguiente lote solo se encola cuando la voz ha terminado el anterior;</li>
+<li>una ráfaga nueva sustituye a lo que quedaba pendiente de la anterior, así lo que oye es siempre lo más reciente;</li>
+<li>al callar la voz (tecla Control) se descarta también lo pendiente.</li>
+</ul>
+<p>La captura completa sigue disponible en el visor: el límite solo afecta a la lectura automática de las consolas. A diferencia del original, se activa y desactiva al momento, sin reiniciar.</p>
+
+<h2 id="compatibilidad">Compatibilidad con terminales</h2>
+<h3>Integradas en Windows</h3>
+<ul>
+<li>Console Host (<code>conhost.exe</code>), Símbolo del sistema y Windows PowerShell clásico: se lee el historial completo del búfer con la API de consola, por bloques. Si no es posible (consola de administrador, o Tiresias ejecutado con consola propia) se usa UI Automation y, en último caso, las líneas visibles.</li>
+<li>Windows Terminal con CMD, PowerShell, PowerShell 7, WSL y cualquier perfil.</li>
+<li>Microsoft Intelligent Terminal cuando expone la misma interfaz accesible.</li>
+</ul>
+<h3>Emuladores de terceros reconocidos</h3>
+<ul>
+<li>Cmder y ConEmu; mintty, Git Bash y Cygwin;</li>
+<li>PuTTY y KiTTY (se leen con su orden «Copiar todo», como el módulo de PuTTY de Tiresias, que devuelve el portapapeles a como estaba);</li>
+<li>Alacritty, WezTerm, Hyper, Tabby y Terminus; Fluent Terminal, Ghostty, Rio, Wave Terminal y Contour;</li>
+<li>Cool Retro Term, MobaXterm, SecureCRT y Tera Term; mRemoteNG y Royal TS;</li>
+<li>cualquier otra ventana cuyo foco Tiresias reconozca como terminal.</li>
+</ul>
+<p>Las terminales modernas se leen con el patrón de texto de Microsoft UI Automation; la compatibilidad depende de que cada emulador exponga el contenido de su sesión. En terminales con pestañas se prioriza el área de texto visible de la ventana original.</p>
+<p>El texto se procesa según la terminal detectada (perfiles): por ejemplo, en CMD no se limpian códigos ANSI y en htop se condensan los símbolos repetidos de sus barras.</p>
+
+<h2 id="lanzador">Lanzador de consolas</h2>
+<p>Abre una terminal en la carpeta seleccionada del Explorador (o en la carpeta abierta) o, desde el escritorio, en la carpeta del icono enfocado o en el propio escritorio. Si se ha seleccionado un archivo se usa su carpeta. Cada consola se puede abrir normal o como administrador:</p>
+<ul>
+<li>Símbolo del sistema (CMD); Windows PowerShell; PowerShell 7 (Core); Windows Terminal;</li>
+<li>Git Bash; WSL (Linux); MSYS2 / MinGW;</li>
+<li>consolas de desarrollador de Visual Studio de 32 y 64 bits.</li>
+</ul>
+<p>La primera vez se buscan las consolas instaladas en segundo plano (se anuncia «Buscando las consolas instaladas...»). Puede recordar la última opción utilizada y mostrar también las consolas no instaladas (marcadas «no instalada»). En el lanzador, <kbd>Intro</kbd> abre la consola elegida y <kbd>Escape</kbd> cancela.</p>
+
+<h2 id="herramientas">Herramientas incluidas (menú Plugins)</h2>
+<p>Se activan o desactivan en <strong>Opciones, Plugins</strong> y aparecen en el menú <strong>Plugins</strong> del visor, agrupadas por categorías si se desea. Los resultados en texto se muestran en un cuadro de lectura con «Copiar todo» y «Guardar como»; las listas, en una lista con filtro donde <kbd>Intro</kbd> copia el elemento elegido.</p>
+<h3>Análisis</h3>
+<ul>
+<li><strong>Filtro de errores y advertencias</strong>: aísla las líneas con error, fallo, excepción, crítico, fatal, aviso o alerta.</li>
+<li><strong>Estadísticas del registro</strong>: caracteres, líneas, palabras, niveles (ERROR, WARNING, INFO, DEBUG), líneas duplicadas y las más repetidas.</li>
+<li><strong>Resumen de actividad</strong>: herramientas de desarrollo que aparecen (Git, Docker, npm, Python, red, compiladores, nube).</li>
+<li><strong>Historial de comandos</strong>: órdenes escritas tras los indicadores de CMD, PowerShell, bash, root, Python y genéricos.</li>
+<li><strong>Extractor de datos (URL, rutas, IP)</strong>: localiza direcciones web, rutas de Windows y Linux e IP; copia el dato elegido.</li>
+<li><strong>Conversor de marcas de tiempo</strong>: convierte marcas Unix de segundos o milisegundos a fecha y hora local.</li>
+<li><strong>Atributos de texto (ANSI)</strong>: colores y estilos de cada tramo con formato y el texto sin códigos.</li>
+<li><strong>Análisis de texto Unicode</strong>: dirección (RTL/LTR), emoji, formato ANSI y ancho de visualización.</li>
+</ul>
+<h3>Desarrollo y formatos</h3>
+<ul>
+<li><strong>Embellecedor de JSON</strong>: detecta todos los bloques JSON y los presenta indentados, uno a uno.</li>
+<li><strong>Formateador SQL Lite</strong>: una cláusula por línea, sin tocar las cadenas entre comillas.</li>
+<li><strong>Analizador de StackTrace</strong>: archivos y líneas de las trazas de Python (y de Node.js, Java y .NET) y los errores.</li>
+<li><strong>Analizador de indentación</strong>: estructura, cambios de nivel y mezcla de espacios y tabulaciones.</li>
+<li><strong>Decodificador Base64</strong>: detecta y decodifica cadenas legibles.</li>
+<li><strong>Decodificador JWT</strong>: muestra encabezado, carga útil y fechas; no valida la firma.</li>
+<li><strong>Alinear tabla delimitada</strong>: detecta CSV, TSV, punto y coma o barra vertical y alinea las columnas.</li>
+<li><strong>Compactar líneas consecutivas</strong>: agrupa mensajes idénticos seguidos e indica cuántos hay.</li>
+<li id="definiciones"><strong>Definiciones de ventana</strong>: gestiona regiones del texto (filas y columnas) con un modo de lectura: <em>Anunciar</em>, <em>Silencio</em> (sus líneas se quitan del visor, por ejemplo la barra de estado) o <em>Monitorizar cambios</em> (se anuncian sus cambios durante el seguimiento). El diálogo permite crear, editar, activar, desactivar y eliminar regiones, que se guardan entre sesiones, y ver el informe de las regiones sobre el texto del visor. Hay cuatro predefinidas, desactivadas: barra de estado, panel principal de tmux y paneles izquierdo y derecho.</li>
+</ul>
+<h3>Utilidades y acciones</h3>
+<ul>
+<li><strong>Copiar salida al portapapeles</strong>: envía el documento (o la selección) al portapapeles.</li>
+<li><strong>Calculadora Express</strong>: resuelve las operaciones aritméticas que encuentra (suma, resta, multiplicación, división y potencia) sin evaluar código y con límites de complejidad; ignora las fechas.</li>
+<li><strong>Monitor de recursos</strong>: espacio libre en disco, memoria y versión de Tiresias.</li>
+<li><strong>Clic derecho en consola</strong>: la usa la orden de pegar con clic derecho (no aparece en el menú).</li>
+</ul>
+<h3>Inteligencia artificial</h3>
+<ul>
+<li><strong>Google AI (Gemini/Gemma) y otros proveedores</strong>: el chat sobre el registro (ver más abajo).</li>
+<li><strong>Generador de informe IA</strong>: prepara un diagnóstico con las secciones Resumen, Hallazgos y evidencia, Errores confirmados, Posibles soluciones y Datos adicionales necesarios, con la fecha local, el nivel de confianza y la separación entre hechos e inferencias. Se envían los últimos 30.000 caracteres.</li>
+</ul>
+
+<h2 id="ia">Inteligencia artificial</h2>
+<p>El chat y los informes pueden usar dos tipos de proveedor (Opciones, IA, o menú IA, Proveedor del chat):</p>
+<ul>
+<li><strong>Google AI con las claves del complemento</strong> (como el original): admite varias claves; si una falla por autenticación o por cuota (errores 401, 403 o 429) se prueba la siguiente. El modelo predeterminado es <code>gemini-3.6-flash</code>; la lista de modelos Gemini y Gemma se pide a la API y se guarda un día en caché (si la consulta falla se usa la caché antigua o una lista de reserva). Los modelos retirados de configuraciones antiguas se cambian por el predeterminado.</li>
+<li><strong>Los proveedores de IA de Tiresias</strong> (el elegido en Tiresias, Anthropic Claude, OpenAI, Google Gemini o un servidor local como Ollama o LM Studio), con la clave y el modelo de <strong>Opciones, Inteligencia artificial</strong> de Tiresias.</li>
+</ul>
+<h3>Chat</h3>
+<p>Cada turno se presenta como un artículo HTML con el autor como encabezado. La ventana tiene el historial, las casillas «Usar selección» y «Usar consola» (el contexto que se envía), los botones «Adjuntar .txt...» (archivos de texto de hasta 1 MB), «Auto-reparar error» (pide la corrección del error del registro o de la selección), «Abrir historial HTML» y «Limpiar chat», y el cuadro «Mensaje» con el botón «Enviar». El menú <strong>IA</strong> permite gestionar las claves de Google (una por línea), elegir el proveedor y el modelo, editar las instrucciones de sistema (con «Restablecer por defecto»), mantener o no el historial de la conversación (se envían los diez últimos turnos) y cerrar el chat. Si el chat ya está abierto, al elegirlo de nuevo con texto seleccionado en el visor se usa esa selección.</p>
+<table><caption>Teclas del chat y de los informes</caption>
+<thead><tr><th scope="col">Tecla</th><th scope="col">Acción</th></tr></thead>
+<tbody>
+<tr><td><kbd>F6</kbd></td><td>Alterna entre el documento HTML y los controles o botones</td></tr>
+<tr><td><kbd>H</kbd> o <kbd>1</kbd> a <kbd>6</kbd></td><td>Navega por los encabezados del documento (modo exploración de Tiresias)</td></tr>
+<tr><td><kbd>Tabulador</kbd></td><td>Recorre los enlaces y elementos interactivos del HTML</td></tr>
+<tr><td><kbd>Control+Intro</kbd></td><td>Envía el mensaje del chat</td></tr>
+<tr><td><kbd>J</kbd> / <kbd>K</kbd></td><td>Anuncia el turno siguiente o anterior (fuera del cuadro de mensaje)</td></tr>
+<tr><td><kbd>Escape</kbd></td><td>Cierra el chat o el informe</td></tr>
+</tbody></table>
+<p>Cuando llega una respuesta solo se anuncia «Respuesta lista. Pulse F6 para leerla.»: el foco y la posición de lectura no se mueven y el contenido no se fuerza por voz. Los enlaces se abren en el navegador. Si WebView2 no está disponible, el historial se muestra como texto y «Abrir historial HTML» abre la versión HTML en el navegador predeterminado. El informe tiene además «Copiar Markdown», «Guardar...» y «Abrir en el navegador».</p>
+
+<h2 id="opciones">Opciones</h2>
+<p>Están en <strong>Preferencias, Opciones, Visor de consola</strong> y también en el visor (<strong>Archivo, Opciones</strong> o <kbd>Control+P</kbd>), en pestañas.</p>
+<h3>Visual y seguimiento</h3>
+<ul>
+<li>Tamaño de la fuente (8 a 30) y fuente monoespaciada (Consolas).</li>
+<li>Recordar tamaño y posición de la ventana (si no, se abre maximizada).</li>
+<li>Emitir sonidos al activar o desactivar el seguimiento; emitir sonidos cada vez que el contenido se actualice.</li>
+<li>Proteger la voz frente a ráfagas de salida de las consolas.</li>
+<li>Seguimiento cada (milisegundos): de 250 a 10.000 (750 por defecto).</li>
+<li>Conservar en el visor las líneas que salgan del búfer de la consola.</li>
+<li>Límite del visor (miles de caracteres, 0 sin límite).</li>
+<li>Agrupar las herramientas del menú Plugins por categorías.</li>
+</ul>
+<h3>Procesamiento de texto</h3>
+<ul>
+<li>Procesar el texto capturado con las opciones siguientes.</li>
+<li>Eliminar los códigos de color ANSI.</li>
+<li>Condensar símbolos repetidos («=====» se lee «5 igual») y símbolos que se condensan (<code>-_=!</code> por defecto).</li>
+<li>Reordenar el texto bidireccional (árabe, hebreo) para su presentación visual.</li>
+<li>Tener en cuenta las secuencias de emoji en los anchos de columna.</li>
+<li>Anunciar la indentación al moverse por las líneas del visor (cuando cambia).</li>
+<li>Nivel de puntuación de los anuncios del visor (Ninguno, Alguno, Mayoría, Todo): se aplica a las alertas.</li>
+<li>Detectar automáticamente el tipo de terminal y aplicar el perfil de la terminal detectada.</li>
+</ul>
+<h3>Lanzador</h3>
+<ul><li>Recordar la última consola seleccionada.</li><li>Mostrar consolas no instaladas en la lista.</li></ul>
+<h3>Plugins</h3>
+<p>Lista de casillas con todas las herramientas; las desmarcadas desaparecen del menú.</p>
+<h3>Alertas</h3>
+<ul>
+<li>Habilitar el sistema de alertas y marcadores.</li>
+<li>Avisar por voz y reproducir un sonido al detectar un patrón.</li>
+<li>Patrones de alerta, uno por línea (no distinguen mayúsculas). Por defecto: ERROR, CRITICAL y FATAL.</li>
+</ul>
+<h3>Inteligencia artificial</h3>
+<ul>
+<li>Proveedor de IA del chat y de los informes.</li>
+<li>Modelo de Google AI.</li>
+<li>Mantener el historial de la conversación.</li>
+<li>Instrucciones de sistema, con «Restablecer las instrucciones por defecto».</li>
+<li>Gestionar las claves de Google AI.</li>
+</ul>
+<p>Las preferencias se guardan con la configuración de Tiresias (sección <code>consoleLog</code>, con perfiles y valores de fábrica). Las definiciones de ventana, las claves de Google cifradas, la caché de modelos y los HTML que se abren en el navegador se guardan en <code>data\addonsData\consoleLog</code>.</p>
+
+<h2 id="privacidad">Privacidad y seguridad</h2>
+<ul>
+<li>Las herramientas locales no envían el contenido fuera del equipo.</li>
+<li>Las funciones de IA envían al proveedor elegido el texto o los archivos que usted decida analizar.</li>
+<li>Las respuestas de la IA se escapan antes de convertir el Markdown: el modelo no puede insertar scripts ni enlaces con protocolos ejecutables.</li>
+<li>Las claves de Google AI se guardan cifradas con DPAPI, ligadas a su cuenta de Windows (en el original solo estaban ofuscadas). Si copia la carpeta de datos a otro equipo hay que volver a escribirlas.</li>
+<li>La clave se transmite en la cabecera <code>x-goog-api-key</code>, nunca en la dirección de la petición.</li>
+<li>Decodificar un JWT no comprueba su autenticidad ni su firma.</li>
+<li>Una consola de administrador solo puede leerla un lector con el mismo nivel de privilegios. No ejecute Tiresias como administrador salvo que sea necesario.</li>
+</ul>
+
+<h2 id="problemas">Solución de problemas</h2>
+<h3>«Esta no es una ventana de consola»</h3>
+<p>Compruebe que el foco está dentro de la terminal antes de ejecutar la orden. Si usa un emulador no reconocido, facilite su nombre de proceso, clase de ventana y versión al informar del problema.</p>
+<h3>El visor está vacío</h3>
+<p>La terminal debe exponer texto accesible. Pruebe F5, cambie a la pestaña correcta y verifique que el área admite el patrón de texto de UI Automation. Algunas interfaces aceleradas o sesiones remotas solo exponen la pantalla visible.</p>
+<h3>No se actualiza</h3>
+<p>Confirme que <strong>Seguimiento automático</strong> está marcado. Aumente el intervalo si la terminal o el equipo están muy ocupados. Si la ventana original se cerró, cierre también el visor y ábralo desde una terminal activa.</p>
+<h3>La salida nueva no aparece mientras leo atrás</h3>
+<p>Es lo previsto: se añade al final sin mover la lectura. Pulse <kbd>Control+Fin</kbd> para ir al final.</p>
+<h3>El historial consume memoria</h3>
+<p>Reduzca el <strong>Límite del visor</strong> o desactive <strong>Conservar</strong> el historial. En sesiones muy largas guarde el contenido de vez en cuando.</p>
+<h3>Acceso denegado</h3>
+<p>La consola es de administrador y Tiresias no. Use el mismo nivel de privilegios; por seguridad, es preferible abrir la consola sin elevar siempre que se pueda.</p>
+<h3>Límites que el complemento no puede eliminar</h3>
+<ul>
+<li>Una consola de administrador no deja leer su búfer a un proceso con menos privilegios; el complemento lo detecta y lo explica, pero no salta esa frontera de seguridad.</li>
+<li>Las líneas que una aplicación de pantalla completa no expone pertenecen al proveedor de UI Automation de esa terminal: el visor ofrece una copia navegable y un modo de historial, pero no puede reconstruir texto que la aplicación nunca publica.</li>
+</ul>
+<h3>La IA no responde</h3>
+<p>Revise la clave, la conexión, el modelo elegido y la cuota de la API. Con los proveedores de Tiresias, revise Opciones, Inteligencia artificial.</p>
+
+<h2 id="tiresias">Diferencias con la versión para NVDA</h2>
+<ul>
+<li>Las consolas se leen con los lectores de Tiresias: la API de consola (compartiendo su cerrojo con el lector de consolas de Tiresias), UI Automation y, en PuTTY y KiTTY, «Copiar todo».</li>
+<li>La protección frente a ráfagas está adaptada a Tiresias (ver arriba) y no necesita reiniciar.</li>
+<li>Las opciones están también en las Opciones de Tiresias; las claves de Google se cifran.</li>
+<li>Además de Google AI se pueden usar los proveedores de IA de Tiresias.</li>
+<li>Las definiciones de ventana tienen un diálogo para gestionarlas y se guardan; las regiones «monitorizar» se anuncian durante el seguimiento.</li>
+<li>El lanzador detecta también MSYS2 y la detección se hace en segundo plano, sin retrasar el arranque.</li>
+<li>Las opciones del original que no tenían efecto («detectar indentación», «nivel de puntuación», «recordar tamaño», «mantener historial») ahora funcionan.</li>
+<li>No se migra el archivo <code>consoleLog_config.json</code> de NVDA.</li>
+</ul>
+
+<h2 id="licencia">Créditos y licencia</h2>
+<p><strong>Autor:</strong> Héctor J. Benítez Corredera (<a href="mailto:xebolax@gmail.com">xebolax@gmail.com</a>). Repositorio del original: <a href="https://github.com/nvda-es/consoleLog">github.com/nvda-es/consoleLog</a>.</p>
+<p>consoleLog es software libre bajo la Licencia Pública General de GNU. Esta versión para Tiresias es una reescritura con la API de Tiresias.</p>
+<p>La superficie HTML accesible del chat y de los informes adapta la idea de <a href="https://github.com/Community-Access/wx-accessible-webview">wx-accessible-webview</a>, Copyright (c) 2026 Taylor Arndt y Community Access, bajo licencia MIT; su aviso está en <code>LICENCIAS_TERCEROS.txt</code>. Las utilidades de texto se inspiran en «Terminal Access for NVDA».</p>
+</body></html>

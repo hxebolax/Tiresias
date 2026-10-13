@@ -1,0 +1,41 @@
+Visor de consola (consoleLog) para Tiresias
+===========================================
+
+consoleLog: Copyright (C) 2024-2026 Héctor J. Benítez Corredera <xebolax@gmail.com>.
+Software libre bajo la Licencia Pública General de GNU (GPL).
+
+El complemento no incluye bibliotecas ni binarios de terceros. La superficie
+HTML accesible del chat y de los informes de IA (globalPlugins/consoleLog/interfaz/webview.py)
+es una adaptación de la idea de «wx-accessible-webview», que el complemento
+original incorporaba bajo la siguiente licencia:
+
+------------------------------------------------------------------------------
+wx-accessible-webview
+https://github.com/Community-Access/wx-accessible-webview
+
+MIT License
+
+Copyright (c) 2026 Taylor Arndt and Community Access
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+------------------------------------------------------------------------------
+
+Las utilidades de texto (ANSI, Unicode, bidireccional, emoji, indentación,
+condensación de símbolos y definiciones de ventana) se inspiran en
+«Terminal Access for NVDA», como en el complemento original; el código es propio.

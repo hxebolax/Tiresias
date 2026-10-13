@@ -1,0 +1,11 @@
+{
+	"id": "zUtilidades",
+	"name": "zUtilidades",
+	"version": "1.0.0",
+	"author": "Héctor J. Benítez Corredera <xebolax@gmail.com>",
+	"description": "Conjunto de utilidades para Windows. Lanzador de aplicaciones: organiza por categorías aplicaciones (con parámetros y como administrador), órdenes de CMD o PowerShell, carpetas, accesos directos y aplicaciones instaladas (incluidas las de la tienda) y lánzalas desde cualquier sitio. Notas rápidas: guarda notas por categorías, léelas, cópialas o pégalas donde esté el foco, y crea notas desde cualquier parte con el texto seleccionado (con el título de la ventana y la dirección de la página si se desea). Cada módulo tiene su ventana y un menú virtual sin ventana, copias de seguridad y restauración (también de las copias del complemento de NVDA). Las órdenes se asignan en Gestos de entrada, categoría zUtilidades; los módulos están en Herramientas > zUtilidades.",
+	"minApiVersion": "1.0",
+	"lastTestedApiVersion": "1.0",
+	"url": "https://github.com/hxebolax/zUtilidades-para-NVDA",
+	"changelog": "Primera versión para Tiresias: lanzador de aplicaciones y notas rápidas con sus ventanas, menús virtuales, nota rápida desde el texto seleccionado (con título de la ventana y URL opcionales), mover entre categorías, copias de seguridad compatibles con las del complemento de NVDA, categoría propia en Opciones y entrada en el menú Herramientas."
+}

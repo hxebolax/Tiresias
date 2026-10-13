@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8"><title>Audiocinemateca para Tiresias</title>
+<style>body{font-family:Segoe UI,Arial,sans-serif;max-width:60em;margin:1em auto;line-height:1.5}table{border-collapse:collapse}td,th{border:1px solid #888;padding:.3em .6em;text-align:left}</style></head>
+<body>
+<h1>Audiocinemateca para Tiresias</h1>
+<p>Toda la Audiocinemateca en Tiresias. Este complemento da acceso a todo el catálogo de la <a href="https://www.audiocinemateca.com/">Audiocinemateca</a>, la plataforma de películas, series, documentales y cortometrajes con audiodescripción en español, directamente desde el lector de pantalla y con un reproductor propio (no hace falta ningún reproductor externo).</p>
+
+<h2>Requisitos</h2>
+<ul>
+<li>Tiresias (versión de 64 bits) con la API de complementos 1.0 o posterior.</li>
+<li>Una cuenta de usuario en <a href="https://www.audiocinemateca.com/">audiocinemateca.com</a>.</li>
+<li>Conexión a Internet (salvo para escuchar lo que ya se haya descargado).</li>
+</ul>
+
+<h2>Características</h2>
+<ul>
+<li>Catálogo organizado en pestañas: General, Películas, Series, Documentales, Cortometrajes, Favoritos, Historial y Listas.</li>
+<li>Pestaña General con los últimos contenidos agregados, una sugerencia al azar y la búsqueda global.</li>
+<li>Reproductor integrado con volumen, velocidad, avance y retroceso.</li>
+<li>Favoritos por categoría.</li>
+<li>Reanudación: el complemento recuerda dónde dejó cada contenido y pregunta si quiere seguir desde ahí.</li>
+<li>Búsqueda por título, año, género, país, director, guion, música, fotografía, reparto, productora, narración o sinopsis, con menú de filtro (Mayúsculas+F10 o tecla Aplicaciones).</li>
+<li>Búsqueda global en todas las categorías a la vez.</li>
+<li>Historial de reproducción con filtro por categoría e historial de búsqueda.</li>
+<li>Listas personalizadas para organizar contenidos.</li>
+<li>Ecualizador de 5 bandas con preajustes.</li>
+<li>Temporizador de sueño con tiempos predefinidos o personalizado.</li>
+<li>Cola de descargas en segundo plano, aviso por voz al terminar cada una y reproducción sin conexión de lo descargado.</li>
+<li>Copia de la información de un contenido al portapapeles.</li>
+<li>Estadísticas de uso (reproducciones, tiempo escuchado, categorías y contenidos más escuchados).</li>
+<li>Fichas detalladas de cada contenido con enlace a FilmAffinity.</li>
+<li>Órdenes para manejar el reproductor con la ventana cerrada.</li>
+<li>Actualización de la base de datos del catálogo.</li>
+<li>Usuario y contraseña cifrados en disco.</li>
+</ul>
+
+<h2>Primer inicio</h2>
+<ol>
+<li>Abra el menú de Tiresias, <strong>Herramientas &gt; Audiocinemateca &gt; Iniciar la Audiocinemateca</strong> (o use la orden «Muestra la ventana de Audiocinemateca» si le ha asignado un gesto).</li>
+<li>Escriba su usuario y su contraseña de audiocinemateca.com. La casilla «Mostrar contraseña» enseña la contraseña mientras la escribe y el botón «Visitar la web» abre la página de la Audiocinemateca. El complemento comprueba las credenciales con el servidor antes de guardarlas.</li>
+<li>El complemento descarga y descomprime el catálogo, con una barra de progreso. Al terminar pulse <strong>Aceptar</strong>.</li>
+<li>Se abre la ventana principal.</li>
+</ol>
+<p>Las veces siguientes la ventana se abre directamente. Si no hay conexión a Internet, el complemento lo avisa y no se inicia.</p>
+
+<h2>Ventana principal</h2>
+<p>Tiene ocho pestañas; se pasa de una a otra con Control+Tabulador o con Alt y su número:</p>
+<table><caption>Pestañas de la ventana principal</caption><thead><tr><th scope="col">Tecla</th><th scope="col">Pestaña</th></tr></thead><tbody>
+<tr><td>Alt+1</td><td>General: últimos contenidos agregados (elija la categoría en el cuadro combinado), botón «¿No sabes qué ver? Pulsa aquí y te ofreceré algo» y búsqueda global.</td></tr>
+<tr><td>Alt+2</td><td>Películas</td></tr>
+<tr><td>Alt+3</td><td>Series</td></tr>
+<tr><td>Alt+4</td><td>Documentales</td></tr>
+<tr><td>Alt+5</td><td>Cortometrajes</td></tr>
+<tr><td>Alt+6</td><td>Favoritos</td></tr>
+<tr><td>Alt+7</td><td>Historial de reproducción</td></tr>
+<tr><td>Alt+8</td><td>Listas personalizadas</td></tr>
+</tbody></table>
+<p>Debajo de las pestañas están los controles del reproductor (Atrasar, Reproducir o Pausar, Adelantar, Detener, Volumen y Velocidad), que solo aparecen mientras algo suena o está en pausa, y el botón <strong>Menú</strong>.</p>
+<p>Al abrir la ventana con algo sonando, la reproducción se pausa mientras se carga la interfaz y luego se reanuda, y el foco va al botón Pausar. Al cerrar la ventana, lo que suena sigue sonando y se puede manejar con las órdenes de control externo.</p>
+
+<h3>Teclas dentro de la ventana</h3>
+<table><caption>Teclas de la ventana principal</caption><thead><tr><th scope="col">Tecla</th><th scope="col">Acción</th></tr></thead><tbody>
+<tr><td>Intro</td><td>En una lista, abre la ficha del contenido. En un campo de búsqueda, busca.</td></tr>
+<tr><td>Escape</td><td>Cierra la ventana.</td></tr>
+<tr><td>Retroceso</td><td>En la lista de una categoría, limpia la búsqueda y vuelve a la lista completa.</td></tr>
+<tr><td>Suprimir</td><td>En «Contenidos de la lista» (pestaña Listas), quita el elemento de la lista.</td></tr>
+<tr><td>Control+I</td><td>Dice la posición en la lista (resultado X de Y).</td></tr>
+<tr><td>Control+F</td><td>Va a una posición concreta de la lista.</td></tr>
+<tr><td>Control+C</td><td>En las pestañas de categoría, copia la información del contenido seleccionado al portapapeles.</td></tr>
+<tr><td>Mayúsculas+F10 o tecla Aplicaciones</td><td>En un campo de búsqueda de categoría, abre el menú para elegir el filtro de búsqueda.</td></tr>
+<tr><td>F1</td><td>Atrasar la reproducción.</td></tr>
+<tr><td>F2</td><td>Reproducir o pausar.</td></tr>
+<tr><td>F3</td><td>Adelantar la reproducción.</td></tr>
+<tr><td>F4</td><td>Detener la reproducción (guarda la posición).</td></tr>
+<tr><td>F5</td><td>Bajar el volumen.</td></tr>
+<tr><td>F6</td><td>Subir el volumen.</td></tr>
+<tr><td>F7</td><td>Bajar la velocidad.</td></tr>
+<tr><td>F8</td><td>Subir la velocidad.</td></tr>
+<tr><td>F9</td><td>Información de la reproducción (tiempo transcurrido y total).</td></tr>
+<tr><td>F10</td><td>Abrir el ecualizador.</td></tr>
+<tr><td>F11</td><td>Estado del temporizador de sueño.</td></tr>
+<tr><td>F12</td><td>Activar o desactivar los mensajes informativos por voz.</td></tr>
+</tbody></table>
+
+<h2>Búsqueda</h2>
+<p>Cada pestaña de categoría (Películas, Series, Documentales, Cortometrajes) tiene un campo de búsqueda: escriba y pulse Intro. Por defecto se busca por título; para buscar por año, género, país, director, guion, música, fotografía, reparto, productora, narración o sinopsis pulse <strong>Mayúsculas+F10</strong> o la tecla Aplicaciones en el campo y elija el filtro. La etiqueta del campo dice el filtro elegido («Buscar películas por Director»). La búsqueda no distingue mayúsculas, tildes ni signos de puntuación y no tiene en cuenta los artículos. Para volver a la lista completa pulse Retroceso en la lista o busque con el campo vacío.</p>
+<h3>Búsqueda global</h3>
+<p>En la pestaña General, el campo «Búsqueda global» busca por título en todas las categorías a la vez. Los resultados llevan la categoría entre corchetes.</p>
+<h3>Historial de búsqueda</h3>
+<p>El complemento recuerda las 20 últimas búsquedas. En <strong>Menú &gt; Historial de búsqueda</strong> puede verlas (texto, pestaña, filtro y fecha), repetir una con Intro o «Buscar de nuevo» y vaciar el historial de búsqueda.</p>
+
+<h2>Ficha de contenido</h2>
+<p>Al pulsar Intro sobre un contenido se abre su ficha: título, año, género, país, director, guion, música, fotografía, reparto, productora, narración, duración, idioma y sinopsis. En las series hay además un cuadro de temporadas y la lista de episodios (Intro en un episodio lo reproduce); en las películas con varias partes, un cuadro para elegir la parte. Botones:</p>
+<ul>
+<li><strong>Reproducir</strong>: empieza a sonar (si ya se descargó, desde el archivo local). Si hay una posición guardada, pregunta si quiere seguir desde ahí.</li>
+<li><strong>Descargar</strong>: pide la carpeta (recuerda la última) y añade el contenido a la cola de descargas.</li>
+<li><strong>Información en la web</strong>: abre la ficha de FilmAffinity si existe.</li>
+<li><strong>Agregar a Favoritos</strong> o <strong>Quitar de Favoritos</strong>.</li>
+<li><strong>Agregar a lista</strong>: menú con sus listas personalizadas.</li>
+<li><strong>Copiar información</strong>: título, año, género, director, (temporadas), sinopsis y dirección web.</li>
+<li><strong>Cerrar</strong> (o Escape).</li>
+</ul>
+
+<h2>Favoritos, historial y listas</h2>
+<p><strong>Favoritos (Alt+6)</strong>: un árbol con las categorías y, al lado, la lista de favoritos de la categoría elegida. Se agregan y se quitan desde la ficha.</p>
+<p><strong>Historial (Alt+7)</strong>: los últimos contenidos reproducidos con su categoría y fecha, con un cuadro para filtrar por categoría. Intro abre la ficha.</p>
+<p><strong>Listas (Alt+8)</strong>: botones «Nueva lista», «Eliminar lista» y «Renombrar lista», la lista «Mis listas» (con el número de elementos de cada una) y «Contenidos de la lista». Intro abre la ficha y Suprimir quita el elemento. Los contenidos se agregan con «Agregar a lista» en la ficha.</p>
+
+<h2>Menú de la ventana</h2>
+<ul>
+<li><strong>Actualizar base de datos</strong>: comprueba si hay un catálogo más reciente y, si lo hay, lo descarga y vuelve a abrir la ventana con él.</li>
+<li><strong>Eliminar marcas de visualización</strong>, <strong>Eliminar favoritos</strong> y <strong>Eliminar historial</strong> (el de reproducción y el de búsqueda), con confirmación.</li>
+<li><strong>Ecualizador</strong> (también F10): casilla «Activar ecualizador», preajustes (Normal, Voz clara, Cine, Música, Graves y Agudos) y cinco controles de −15 a +15 dB: graves (80 Hz: sonidos profundos, explosiones, pasos), graves medios (230 Hz: cuerpo de la voz, calidez), medios (910 Hz: claridad de voz y diálogos), medios altos (3.6 kHz: presencia, nitidez de la voz) y agudos (14 kHz: brillo, detalle, ambiente).</li>
+<li><strong>Temporizador de sueño</strong>: detiene la reproducción (guardando la posición) tras 15, 30 o 45 minutos, 1 hora, 1 hora y media, 2 horas o los minutos que elija (de 1 a 480). «Desactivar» lo cancela. F11 dice cuánto falta. Sigue contando aunque cierre la ventana.</li>
+<li><strong>Descargas</strong>: descargas en curso (con barra de progreso y botón «Cancelar descarga seleccionada», que también quita de la cola las pendientes) y finalizadas (completadas, con error o canceladas) con los botones «Reproducir offline», «Abrir carpeta», «Reintentar» y «Limpiar lista». Se actualiza cada segundo.</li>
+<li><strong>Estadísticas</strong>: total de reproducciones, tiempo total escuchado, reproducciones por categoría, categoría favorita, contenido más reproducido y los 10 más escuchados; botón «Limpiar estadísticas».</li>
+<li><strong>Historial de búsqueda</strong>.</li>
+<li><strong>Opciones</strong>, <strong>Volver a valores por defecto</strong> y <strong>Documentación del complemento</strong>.</li>
+<li><strong>Acerca de</strong>: versión del complemento, de la base de datos y de BASS, autor, licencia, web y registro de cambios, con los botones «Visitar la web» y «Donar».</li>
+<li><strong>Donar a la Audiocinemateca</strong> y <strong>Cerrar</strong>.</li>
+</ul>
+
+<h2>Descargas y reproducción sin conexión</h2>
+<p>Las descargas se hacen de una en una en segundo plano y se avisa por voz al terminar cada una («Descarga completada: …»). Lo descargado se reproduce después sin conexión desde el diálogo Descargas o, automáticamente, al pulsar Reproducir en la ficha de un contenido que ya está descargado.</p>
+
+<h2>Control externo del reproductor</h2>
+<p>Con la ventana de la Audiocinemateca cerrada se puede manejar el reproductor con órdenes de Tiresias. Como en el original, no tienen gesto asignado: asígnelos en <strong>Preferencias &gt; Gestos de entrada</strong>, categoría «Audiocinemateca». Con la ventana abierta avisan de que solo funcionan con ella cerrada.</p>
+<table><caption>Órdenes de la categoría Audiocinemateca (sin gesto por defecto)</caption><thead><tr><th scope="col">Orden</th><th scope="col">Qué hace</th></tr></thead><tbody>
+<tr><td>Muestra la ventana de Audiocinemateca</td><td>Abre la ventana principal (o la trae al frente).</td></tr>
+<tr><td>Muestra la ventana de Opciones</td><td>Abre la categoría Audiocinemateca de las Opciones de Tiresias.</td></tr>
+<tr><td>Bajar volumen / Subir volumen</td><td>Cambia el volumen de 1 en 1 y lo dice.</td></tr>
+<tr><td>Bajar velocidad / Subir velocidad</td><td>Cambia la velocidad un paso (de 0.75 a 2.0) y la dice.</td></tr>
+<tr><td>Atrasar la reproducción / Adelantar la reproducción</td><td>Salta hacia atrás o hacia delante el tiempo elegido en las opciones.</td></tr>
+<tr><td>Reproducir / Pausar la reproducción</td><td>Alterna entre reproducir y pausar.</td></tr>
+<tr><td>Detener la reproducción</td><td>Detiene y guarda la posición (cancela el temporizador de sueño).</td></tr>
+<tr><td>Información de la reproducción</td><td>Tiempo transcurrido y total.</td></tr>
+<tr><td>Anuncia el título del contenido en reproducción</td><td>Dice qué suena.</td></tr>
+<tr><td>Anuncia el tiempo restante de reproducción</td><td>Dice cuánto falta para el final.</td></tr>
+<tr><td>Anuncia el tiempo restante del temporizador de sueño</td><td>Dice cuánto falta para que se detenga.</td></tr>
+<tr><td>Cancela el temporizador de sueño</td><td>Cancela el temporizador.</td></tr>
+</tbody></table>
+
+<h2>Menú Herramientas de Tiresias</h2>
+<p>En <strong>Herramientas &gt; Audiocinemateca</strong>:</p>
+<ul>
+<li><strong>Iniciar la Audiocinemateca</strong>.</li>
+<li><strong>Opciones</strong>: abre la categoría «Audiocinemateca» de las Opciones de Tiresias.</li>
+<li><strong>Volver a valores por defecto</strong>: borra toda la configuración del complemento, incluidos el usuario y la contraseña (solo con la ventana cerrada y sin nada sonando).</li>
+<li><strong>Documentación del complemento</strong>: abre esta página.</li>
+</ul>
+
+<h2>Opciones</h2>
+<p>En <strong>Preferencias &gt; Opciones</strong>, categoría <strong>Audiocinemateca</strong>:</p>
+<ul>
+<li><strong>Activar mensajes informativos</strong> (también con F12 en la ventana): avisos como «Cargando la interfaz», «Verificando credenciales», «Descarga encolada» o «Filtro: Director».</li>
+<li><strong>Cantidad de resultados a mostrar</strong> en «Últimos contenidos agregados»: 10, 15, 20 o 25.</li>
+<li><strong>Tiempo para retroceder</strong>: 1, 5, 15 o 30 segundos o 1 minuto (15 segundos por defecto).</li>
+<li><strong>Tiempo para adelantar</strong>: 1, 5, 15 o 30 segundos o 1, 5, 10 o 15 minutos (30 segundos por defecto).</li>
+<li><strong>Volumen del reproductor</strong> y <strong>Velocidad de reproducción</strong> (los mismos que se cambian con F5 a F8).</li>
+<li><strong>Dispositivo de salida de audio</strong>: «Predeterminado de Windows» (sigue al predeterminado aunque cambie) o una tarjeta concreta.</li>
+<li><strong>Cuenta de la Audiocinemateca</strong>: dice con qué usuario hay sesión iniciada y tiene los botones «Cambiar usuario y contraseña» (comprueba las nuevas antes de guardarlas) y «Cerrar sesión».</li>
+<li><strong>Volver a valores por defecto</strong>: como la entrada del menú Herramientas.</li>
+</ul>
+
+<h2>Datos y privacidad</h2>
+<p>El catálogo, los favoritos, las marcas de visualización, los historiales, las listas, las estadísticas y el registro de descargas se guardan en la carpeta de datos de Tiresias, en <code>addonsData\audiocinemateca</code>, y se conservan al actualizar el complemento. El usuario y la contraseña se guardan cifrados con la protección de datos de Windows: solo su cuenta de Windows, en este equipo, puede leerlos. Se envían únicamente a audiocinemateca.com, en la cabecera de autenticación de cada petición.</p>
+
+<h2>Diferencias con la versión para NVDA</h2>
+<ul>
+<li>Las opciones están en las Opciones de Tiresias (se pueden cambiar en cualquier momento, también mientras suena algo) y se añaden el volumen, la velocidad, el dispositivo de salida y la gestión de la cuenta.</li>
+<li>El historial de búsqueda, que el original guardaba pero no mostraba, se puede consultar y repetir.</li>
+<li>Las marcas de visualización y el historial ya no guardan la contraseña dentro de la dirección del contenido.</li>
+<li>Las actualizaciones del complemento llegan por la tienda de complementos de Tiresias (el original consultaba un archivo de versión del complemento de NVDA).</li>
+<li>La ventana principal no bloquea el resto de Tiresias, y los contenidos se cargan en segundo plano.</li>
+</ul>
+
+<h2>Créditos y licencia</h2>
+<ul>
+<li>Autor del complemento original «Audiocinemateca para NVDA» y de esta versión: Héctor J. Benítez Corredera. Código: <a href="https://github.com/nvda-es/audiocinemateca-para-nvda">github.com/nvda-es/audiocinemateca-para-nvda</a>.</li>
+<li>Contenidos: <a href="https://www.audiocinemateca.com/">Audiocinemateca</a>. Puede apoyarla en <a href="https://audiocinemateca.com/donaciones">audiocinemateca.com/donaciones</a>.</li>
+<li>El original usaba sound_lib de Christopher Toth; esta versión usa directamente la biblioteca BASS con código propio.</li>
+<li>Este complemento está cubierto por la Licencia Pública General GNU (GNU GPL).</li>
+<li>Biblioteca de audio <strong>BASS</strong> (bass.dll, 64 bits) © Un4seen Developments, <a href="https://www.un4seen.com">un4seen.com</a>. BASS es gratuita para uso no comercial; cualquier uso comercial necesita una licencia de Un4seen. El aviso está en <code>lib\LICENCIA_BASS.txt</code>.</li>
+</ul>
+</body></html>

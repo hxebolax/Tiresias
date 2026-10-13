@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8"><title>zRadio BASS para Tiresias</title>
+<style>body{font-family:Segoe UI,Arial,sans-serif;max-width:60em;margin:1em auto;line-height:1.5;padding:0 1em}table{border-collapse:collapse;margin:.5em 0}td,th{border:1px solid #888;padding:.3em .6em;text-align:left;vertical-align:top}code{background:#eee;padding:0 .2em}</style></head>
+<body>
+<h1>zRadio BASS para Tiresias</h1>
+<p>Versión 1.0.0. Autor: Héctor J. Benítez Corredera (<a href="mailto:xebolax@gmail.com">xebolax@gmail.com</a>).</p>
+
+<nav aria-label="Índice"><h2>Índice</h2>
+<ul>
+<li><a href="#descripcion">Descripción</a></li>
+<li><a href="#requisitos">Requisitos</a></li>
+<li><a href="#abrir">Abrir el complemento</a></li>
+<li><a href="#ventana">La ventana principal</a></li>
+<li><a href="#general">Pestaña General</a></li>
+<li><a href="#favoritos">Pestaña Favoritos</a></li>
+<li><a href="#buscador">Pestaña Buscador</a></li>
+<li><a href="#historial">Pestaña Historial</a></li>
+<li><a href="#menu">Menú contextual de las emisoras</a></li>
+<li><a href="#herramientas">Botón Herramientas</a></li>
+<li><a href="#grabacion">Grabación</a></li>
+<li><a href="#ordenes">Órdenes globales y gestos</a></li>
+<li><a href="#opciones">Opciones</a></li>
+<li><a href="#plugins">Plugins</a></li>
+<li><a href="#datos">Dónde se guardan los datos</a></li>
+<li><a href="#nvda">Diferencias con zRadio BASS para NVDA</a></li>
+<li><a href="#creditos">Créditos y licencias</a></li>
+</ul></nav>
+
+<h2 id="descripcion">Descripción</h2>
+<p>zRadio BASS es un reproductor de radios por Internet para el lector de pantalla Tiresias. Usa la API pública de <a href="https://www.radio-browser.info/">Radio Browser</a> para acceder a decenas de miles de emisoras de todo el mundo y el motor de audio <a href="https://www.un4seen.com/">BASS</a> para reproducirlas, sin instalar nada más.</p>
+<p>Características:</p>
+<ul>
+<li>Búsqueda de emisoras por nombre, país, idioma o etiqueta (género), con orden (nombre, votos, popularidad, tendencia, calidad, país, idioma, última modificación o al azar), formato y calidad mínima.</li>
+<li>Listas de países, idiomas y etiquetas con el número de emisoras de cada uno y los nombres en español.</li>
+<li>Favoritos avanzados: categorías, notas, orden personal, ordenación por nombre, más escuchadas o recientes, contador de reproducciones, búsqueda, exportación e importación.</li>
+<li>Historial de reproducción con la fecha, la hora y cuánto tiempo se escuchó cada emisora.</li>
+<li>Control de volumen y silencio que se guardan entre sesiones, pausa, recarga, dispositivo de salida, ecualizador de tres bandas y balance.</li>
+<li>Título de la canción que suena (Shoutcast, Icecast, OGG, WMA y HLS), con anuncio automático opcional.</li>
+<li>Reconexión automática si la emisora se corta.</li>
+<li>Emisoras MP3, AAC y AAC+, OGG, Opus, FLAC, WMA y HLS (.m3u8), y direcciones de listas .pls y .m3u.</li>
+<li>Grabación de la emisora que suena a archivos WAV y planificador de grabaciones que graba aunque no se esté escuchando nada.</li>
+<li>Órdenes asignables para manejar la radio desde cualquier aplicación.</li>
+<li>Sistema de plugins, con un plugin de ejemplo y otro de estadísticas de uso.</li>
+</ul>
+
+<h2 id="requisitos">Requisitos</h2>
+<ul>
+<li>Tiresias con la API de complementos 1.0 o superior (Windows de 64 bits).</li>
+<li>Conexión a Internet.</li>
+</ul>
+
+<h2 id="abrir">Abrir el complemento</h2>
+<p>Abra el menú de Tiresias, entre en <strong>Herramientas</strong> y elija <strong>zRadio BASS</strong>. También puede asignar un gesto a la orden «Muestra la ventana principal de zRadio BASS» (ver <a href="#ordenes">Órdenes globales</a>).</p>
+<p>Si la opción «Verificar la conexión a Internet al abrir la ventana» está activada (lo está por defecto) y no hay conexión, se avisa con el mensaje «zRadio necesita conexión a Internet para funcionar».</p>
+
+<h2 id="ventana">La ventana principal</h2>
+<p>Tiene cuatro pestañas (General, Favoritos, Buscador e Historial) y, debajo, los controles de reproducción:</p>
+<ul>
+<li><strong>Detener</strong> (Alt+D): detiene la radio (y la grabación de la emisora actual, si la hay).</li>
+<li><strong>Pausar / Reanudar</strong> (Alt+U).</li>
+<li><strong>Recargar</strong> (Alt+R): vuelve a conectar con la emisora.</li>
+<li><strong>Silenciar / Quitar silencio</strong> (Alt+S).</li>
+<li><strong>Volumen</strong> (Alt+V): control deslizante de 0 a 100. Las flechas cambian de uno en uno y Avance y Retroceso de página según el paso de volumen de las opciones.</li>
+<li><strong>Estado</strong>: campo de solo lectura con la emisora, la canción que suena, el volumen y las grabaciones en curso o programadas.</li>
+<li><strong>Herramientas</strong> (Alt+H), <strong>Ayuda</strong> (Alt+Y: ayuda rápida, abrir este manual y «Acerca de BASS») y <strong>Cerrar</strong> (Alt+C).</li>
+</ul>
+<table><caption>Teclas de la ventana principal</caption><thead><tr><th scope="col">Tecla</th><th scope="col">Acción</th></tr></thead><tbody>
+<tr><td>Intro o Espacio</td><td>Reproduce la emisora seleccionada en la lista</td></tr>
+<tr><td>F1</td><td>Dice la posición en la lista («3 de 120»)</td></tr>
+<tr><td>Aplicaciones o Mayúsculas+F10</td><td>Menú contextual de la emisora</td></tr>
+<tr><td>Control+1 a Control+4</td><td>Van a la pestaña General, Favoritos, Buscador o Historial y ponen el foco en su lista</td></tr>
+<tr><td>Alt+V</td><td>Va al control de volumen</td></tr>
+<tr><td>Alt+Flecha arriba / Alt+Flecha abajo</td><td>En Favoritos (orden personal): sube o baja la emisora</td></tr>
+<tr><td>Suprimir</td><td>En Favoritos elimina la emisora (pide confirmación); en Historial quita la entrada</td></tr>
+<tr><td>Escape</td><td>Cierra la ventana; la radio sigue sonando</td></tr>
+</tbody></table>
+<p>Cuando una emisora empieza a sonar, el foco pasa al botón <strong>Detener</strong>; al pulsarlo, vuelve a la lista de la pestaña. La ventana recuerda la última pestaña usada y su tamaño.</p>
+
+<h2 id="general">Pestaña General</h2>
+<p>Muestra las emisoras de un país. En el cuadro <strong>País</strong> están primero «Todas las populares» (las más votadas del mundo) y los países más habituales (España, México, Argentina, Colombia, Chile, Perú, Venezuela, Ecuador, Estados Unidos, Reino Unido, Francia, Alemania, Italia, Brasil y Portugal) y después todos los demás por orden alfabético. Elija uno y pulse <strong>Cargar emisoras</strong> (Alt+G); el país elegido se recuerda.</p>
+<p>El cuadro <strong>Filtrar</strong> y el botón <strong>Buscar</strong> reducen la lista a las emisoras cuyo nombre contiene el texto (sin importar tildes ni mayúsculas). Tras filtrar, el botón pasa a llamarse <strong>Limpiar</strong> y vuelve a mostrar todas.</p>
+
+<h2 id="favoritos">Pestaña Favoritos</h2>
+<ul>
+<li><strong>Buscar favorito</strong> y <strong>Buscar/Limpiar</strong>: filtra por nombre o por notas.</li>
+<li><strong>Categoría</strong>: todas, las que no tienen categoría o una categoría concreta.</li>
+<li><strong>Ordenar por</strong>: orden personal, nombre, más escuchadas, escuchadas recientemente o añadidas recientemente.</li>
+<li><strong>Nueva</strong>: añade una emisora a mano (nombre, URL, categoría y notas).</li>
+<li><strong>Editar</strong> y <strong>Eliminar</strong> la emisora seleccionada.</li>
+<li><strong>Categorías...</strong>: crear, editar, eliminar y ordenar las categorías (al eliminar una, sus emisoras quedan sin categoría). Hay una categoría «General» de partida.</li>
+</ul>
+<p>Para mover favoritos con Alt+Flecha arriba y Alt+Flecha abajo, use el orden personal, todas las categorías y ninguna búsqueda. El orden personal es el que usan las órdenes «Reproducir favorito 1» a «5» y «Siguiente/anterior favorito».</p>
+<p>Cada vez que suena una emisora que está en favoritos, se cuenta la reproducción y se guarda la fecha; aparecen en la información de la emisora.</p>
+
+<h2 id="buscador">Pestaña Buscador</h2>
+<ol>
+<li>Elija la <strong>Categoría</strong> de búsqueda: búsqueda general (por nombre), por país, por idioma o por etiqueta.</li>
+<li>Escriba lo que busca. Para país, sirve el nombre en español («Argentina», «reino unido») o el código de dos letras («AR»). Para idioma, el nombre en español o en inglés («Catalán» o «catalan»). Con <strong>Elegir de la lista...</strong> (Alt+L) se elige de la lista completa de países, idiomas o etiquetas, con el número de emisoras y un cuadro para filtrar.</li>
+<li>Opcionalmente: <strong>Ordenar por</strong>, <strong>De mayor a menor</strong>, <strong>Formato</strong> (MP3, AAC, AAC+, OGG, Opus, FLAC, WMA) y <strong>Calidad mínima</strong> en kbps. Estos ajustes se recuerdan.</li>
+<li>Pulse Intro o <strong>Buscar</strong>. Se dice cuántos resultados hay y el foco pasa a la lista. <strong>Limpiar</strong> borra la búsqueda.</li>
+</ol>
+
+<h2 id="historial">Pestaña Historial</h2>
+<p>Muestra las últimas 100 emisoras escuchadas (la más reciente primero) con la fecha, la hora y el tiempo escuchado. <strong>Mostrar más</strong> añade otras 100, <strong>Quitar del historial</strong> (o Suprimir) borra la entrada seleccionada y <strong>Limpiar historial...</strong> borra todo o solo lo anterior a 7, 30 o 90 días.</p>
+
+<h2 id="menu">Menú contextual de las emisoras</h2>
+<p>En las listas de las cuatro pestañas, la tecla Aplicaciones abre un menú con:</p>
+<ul>
+<li><strong>Reproducir</strong>.</li>
+<li><strong>Agregar a favoritos</strong> o <strong>Quitar de favoritos</strong> (en Favoritos: <strong>Editar</strong>, <strong>Eliminar</strong> y <strong>Mover a otra categoría...</strong>).</li>
+<li><strong>Información de la emisora</strong>: nombre, URL, país, idioma, etiquetas, códec, calidad, HLS, estado, votos, reproducciones, tendencia, fechas, página web y, si está sonando, los datos que envía la propia emisora (nombre, canción, formato, frecuencia, género). Si es un favorito, también su categoría, veces reproducida, última reproducción, fecha en que se añadió y notas. Desde la información se puede copiar el texto, votar por la emisora y abrir su página web.</li>
+<li><strong>Copiar URL</strong>.</li>
+<li><strong>Votar por la emisora</strong> en Radio Browser (solo un voto por emisora cada 10 minutos).</li>
+<li><strong>Programar grabación de esta emisora...</strong></li>
+<li>Las entradas que añadan los plugins (por ejemplo «[Ejemplo] Información adicional»).</li>
+</ul>
+<p>En el Historial, además, <strong>Quitar del historial</strong>.</p>
+
+<h2 id="herramientas">Botón Herramientas</h2>
+<ul>
+<li><strong>Grabación</strong>: Grabar emisora actual, Detener grabación, Programar grabación..., Ver grabaciones programadas... y Abrir carpeta de grabaciones.</li>
+<li><strong>Reproducir la última emisora</strong> (si «Recordar la última emisora reproducida» está activada).</li>
+<li><strong>Información de lo que suena...</strong></li>
+<li><strong>Exportar favoritos...</strong> e <strong>Importar favoritos...</strong>: archivo JSON con las categorías y las emisoras. Es compatible con el que exporta zRadio BASS para NVDA, así que puede pasar sus favoritos de NVDA a Tiresias. Las emisoras que ya están en favoritos no se duplican.</li>
+<li><strong>Gestionar categorías...</strong></li>
+<li><strong>Limpiar historial...</strong></li>
+<li><strong>Estadísticas del servidor de Radio Browser...</strong>: servidor en uso, número de emisoras, emisoras que no funcionan, etiquetas, idiomas, países y reproducciones de la última hora y del último día.</li>
+<li><strong>Plugins</strong>: las entradas de los plugins cargados y <strong>Administrar plugins...</strong></li>
+<li><strong>Configuración...</strong>: abre la categoría «zRadio BASS» de las Opciones de Tiresias.</li>
+</ul>
+
+<h2 id="grabacion">Grabación</h2>
+<p><strong>Grabar la emisora actual</strong>: desde Herramientas &gt; Grabación o con la orden «Iniciar grabación de la emisora actual». Se graba lo que suena en un archivo WAV (calidad de CD, unos 10 MB por minuto) llamado <code>Emisora_AAAAMMDD_HHMMSS.wav</code>. La grabación no se ve afectada por el volumen, el silencio ni el ecualizador. Se detiene con «Detener grabación», al detener la radio o al cambiar de emisora.</p>
+<p><strong>Programar una grabación</strong>: indique la emisora y su URL (o pulse <strong>Elegir de favoritos...</strong>), la fecha y hora de inicio y de fin con el formato DD/MM/AAAA HH:MM (por ejemplo, 25/12/2026 18:30) y el nombre del archivo. Si hay una emisora sonando, el diálogo ya viene relleno con ella.</p>
+<ul>
+<li>Las grabaciones programadas abren su propia conexión con la emisora: graban aunque no esté escuchando nada, aunque escuche otra emisora y aunque detenga la radio. No suenan por los altavoces.</li>
+<li>Se avisa con la voz cuando empiezan, cuando terminan y si fallan. Si la emisora se corta, se vuelve a conectar y se sigue grabando en un archivo nuevo (<code>nombre (2).wav</code>) hasta la hora de fin.</li>
+<li>Se guardan: si Tiresias se cierra y vuelve a abrirse antes de la hora de fin, la grabación continúa; si la hora de fin pasó con Tiresias cerrado, queda como «perdida».</li>
+<li>En <strong>Ver grabaciones programadas...</strong> se ven las pendientes y en curso (y, con la casilla, también las terminadas, canceladas, perdidas y fallidas), se pueden cancelar, quitar de la lista, programar otras y abrir la carpeta de grabaciones.</li>
+</ul>
+<p>Las grabaciones se guardan en la carpeta Música del usuario, salvo que elija otra en las opciones.</p>
+
+<h2 id="ordenes">Órdenes globales y gestos</h2>
+<p>Como en el original, ninguna orden tiene un gesto asignado de fábrica. Asígnelos en el menú de Tiresias, <strong>Preferencias &gt; Gestos de entrada</strong>, categoría <strong>zRadio BASS</strong>. Funcionan desde cualquier aplicación, con la ventana abierta o cerrada.</p>
+<table><caption>Órdenes de zRadio BASS</caption><thead><tr><th scope="col">Orden</th><th scope="col">Qué hace</th></tr></thead><tbody>
+<tr><td>Muestra la ventana principal de zRadio BASS</td><td>Abre la ventana (o la trae al frente)</td></tr>
+<tr><td>Subir volumen de la radio</td><td>Sube el paso de volumen (5 % de fábrica) y dice el nuevo valor, o «Volumen al máximo»</td></tr>
+<tr><td>Bajar volumen de la radio</td><td>Baja el volumen, o dice «Volumen al mínimo»</td></tr>
+<tr><td>Detener reproducción de la radio</td><td>Detiene la radio</td></tr>
+<tr><td>Pausar o reanudar la radio</td><td>Pausa o reanuda la emisora</td></tr>
+<tr><td>Recargar la emisora actual</td><td>Vuelve a conectar con la emisora</td></tr>
+<tr><td>Silenciar o restaurar el audio</td><td>Silencia o quita el silencio (se guarda)</td></tr>
+<tr><td>Anunciar la emisora en reproducción</td><td>Dice «Emisora:» y su nombre</td></tr>
+<tr><td>Anunciar el título de la canción que suena</td><td>Dice el título que envía la emisora</td></tr>
+<tr><td>Anunciar información del estado del reproductor</td><td>Emisora, canción, volumen, silencio y grabaciones</td></tr>
+<tr><td>Anunciar estado de grabación</td><td>Si se graba y cuánto tiempo lleva, y cuántas grabaciones hay programadas</td></tr>
+<tr><td>Iniciar grabación de la emisora actual</td><td>Empieza a grabar lo que suena</td></tr>
+<tr><td>Detener grabación actual</td><td>Detiene y guarda la grabación</td></tr>
+<tr><td>Abrir diálogo para programar grabación</td><td>Abre «Programar grabación»</td></tr>
+<tr><td>Ver las grabaciones programadas</td><td>Abre la lista de grabaciones programadas</td></tr>
+<tr><td>Reproducir la última emisora escuchada</td><td>Vuelve a poner la última emisora</td></tr>
+<tr><td>Reproducir favorito 1 a Reproducir favorito 5</td><td>Reproduce el favorito de esa posición (orden personal) y dice su nombre</td></tr>
+<tr><td>Reproducir siguiente favorito / Reproducir favorito anterior</td><td>Recorre los favoritos en círculo y dice «2 de 10. Nombre»</td></tr>
+</tbody></table>
+
+<h2 id="opciones">Opciones</h2>
+<p>Menú de Tiresias, <strong>Preferencias &gt; Opciones</strong>, categoría <strong>zRadio BASS</strong> (o Herramientas &gt; Configuración... en la ventana). El botón de valores de fábrica del cuadro de Opciones restablece todas.</p>
+<table><caption>Opciones de zRadio BASS</caption><thead><tr><th scope="col">Opción</th><th scope="col">De fábrica</th><th scope="col">Qué hace</th></tr></thead><tbody>
+<tr><td colspan="3"><strong>General</strong></td></tr>
+<tr><td>Verificar la conexión a Internet al abrir la ventana</td><td>Sí</td><td>Si no hay conexión, avisa en lugar de abrir la ventana</td></tr>
+<tr><td>Recordar la última emisora reproducida</td><td>Sí</td><td>Permite «Reproducir la última emisora»</td></tr>
+<tr><td>Reproducir la última emisora al iniciar Tiresias</td><td>No</td><td>Al arrancar Tiresias vuelve a sonar la última emisora</td></tr>
+<tr><td>País de la pestaña General</td><td>España</td><td>País que se carga al abrir la ventana</td></tr>
+<tr><td>Número máximo de resultados de búsqueda</td><td>10000</td><td>Límite de emisoras de la pestaña General y del Buscador</td></tr>
+<tr><td>Ocultar las emisoras que no funcionan</td><td>No</td><td>Quita de las listas las emisoras que Radio Browser marca como caídas</td></tr>
+<tr><td colspan="3"><strong>Reproducción</strong></td></tr>
+<tr><td>Dispositivo de salida</td><td>Predeterminado de Windows</td><td>Tarjeta de sonido o auriculares por los que suena la radio (se cambia al momento, sin cortar)</td></tr>
+<tr><td>Paso del volumen (%)</td><td>5</td><td>Cuánto suben o bajan las órdenes de volumen</td></tr>
+<tr><td>Reconectar automáticamente si se corta la emisora</td><td>Sí</td><td>Hasta 5 intentos seguidos</td></tr>
+<tr><td>Anunciar el título de cada canción nueva</td><td>No</td><td>Dice el título cuando la emisora lo cambia</td></tr>
+<tr><td>Anunciar cuando la emisora empiece a sonar</td><td>No</td><td>Dice «Conectado:» y el nombre</td></tr>
+<tr><td colspan="3"><strong>Efectos de sonido</strong></td></tr>
+<tr><td>Graves, Medios y Agudos (dB)</td><td>0</td><td>Ecualizador de −12 a +12 dB en 100 Hz, 1000 Hz y 8000 Hz</td></tr>
+<tr><td>Balance</td><td>0</td><td>De −100 (izquierda) a 100 (derecha)</td></tr>
+<tr><td colspan="3"><strong>Caché</strong></td></tr>
+<tr><td>Habilitar caché de resultados</td><td>Sí</td><td>Guarda las búsquedas y las listas de países, idiomas y etiquetas para no pedirlas otra vez</td></tr>
+<tr><td>Duración de la caché (días)</td><td>3</td><td>De 1 a 30 días. El botón <strong>Vaciar la caché ahora</strong> la borra</td></tr>
+<tr><td colspan="3"><strong>Grabaciones</strong></td></tr>
+<tr><td>Carpeta para guardar las grabaciones</td><td>(vacía: carpeta Música)</td><td>Con <strong>Examinar...</strong> y <strong>Usar la carpeta por defecto</strong></td></tr>
+</tbody></table>
+<p>El volumen, el silencio, la última emisora, la última pestaña, el tamaño de la ventana y los ajustes del Buscador y de Favoritos se guardan solos al momento.</p>
+
+<h2 id="plugins">Plugins</h2>
+<p>zRadio BASS admite plugins: archivos <code>.py</code> que amplían el reproductor. Vienen dos:</p>
+<ul>
+<li><strong>Plugin de ejemplo</strong>: referencia para programadores. Añade «Acerca del plugin de ejemplo...» al submenú Plugins, «[Ejemplo] Información adicional» al menú contextual de las emisoras y una opción para anunciar cada emisora que empieza a sonar.</li>
+<li><strong>Estadísticas de uso</strong>: cuenta el tiempo total de escucha y las emisoras reproducidas. «Ver estadísticas de uso...» muestra además las emisoras más escuchadas del historial; «Reiniciar estadísticas de uso» las pone a cero.</li>
+</ul>
+<p>En <strong>Herramientas &gt; Plugins &gt; Administrar plugins...</strong> se ven todos los plugins con sus datos (versión, autor, descripción, estado, origen, archivo y último error), se activan y desactivan con la casilla, se configuran (los que tienen opciones), se recargan y se abre la carpeta de plugins del usuario.</p>
+<p>Para escribir uno, copie <code>example_plugin.py</code> (carpeta <code>globalPlugins\zRadioBASS\plugins</code> del complemento) en <code>data\addonsData\zRadioBASS\plugins</code>, cambie <code>PLUGIN_ID</code> y el nombre de la clase y pulse «Recargar plugins». Un plugin es una clase que hereda de <code>PluginBase</code>:</p>
+<pre><code>from zradiobass import PluginBase, EventType
+
+class MiPlugin(PluginBase):
+	PLUGIN_ID = "mi_plugin"
+	PLUGIN_NAME = "Mi plugin"
+	PLUGIN_VERSION = "1.0.0"
+	PLUGIN_AUTHOR = "Yo"
+	PLUGIN_DESCRIPTION = "Dice el nombre de cada emisora"
+
+	def on_load(self):
+		self.subscribe(EventType.PLAYBACK_STARTED, self.al_empezar)
+		return True
+
+	def on_unload(self):
+		return True
+
+	def al_empezar(self, station):
+		self.app.speak("Suena " + station.name)
+</code></pre>
+<p>Del módulo <code>zradiobass</code> se pueden importar <code>PluginBase</code>, <code>EventType</code>, <code>Station</code>, <code>Favorite</code>, <code>Category</code>, <code>PlaybackHistory</code>, <code>ScheduledRecording</code>, <code>SearchFilters</code>, <code>PlayerState</code>, <code>format_duration</code> y <code>log</code>. En el plugin están <code>self.app</code> (con <code>speak</code>, <code>message</code>, <code>player</code>, <code>db</code>, <code>api</code>, <code>config</code>, <code>play_station</code>...), <code>self.event_bus</code>, <code>self.subscribe</code> (las suscripciones se cancelan solas al descargar), <code>self.settings</code> y <code>self.save_settings()</code> (opciones que se guardan), <code>self.data_dir</code> y los métodos opcionales <code>get_menu_items</code>, <code>get_context_menu_items(contexto)</code> (contexto <code>"station"</code> o <code>"favorite"</code>; el callback recibe la emisora), <code>get_settings_panel(padre)</code> (panel wx con un método <code>save()</code>), <code>on_enable</code> y <code>on_disable</code>. <code>PLUGIN_DEPENDENCIES</code> lista los plugins que deben cargarse antes.</p>
+<p>Eventos: inicio, fin, pausa, reanudación y error de reproducción; inicio y fin de la carga; cambios de volumen y silencio; título de la canción; favoritos y categorías añadidos, quitados, cambiados o reordenados; búsquedas; apertura y cierre de la ventana y cambio de pestaña; carga, descarga y error de plugins; cambios de configuración; conexión a Internet; grabaciones iniciadas, detenidas y programadas; cambios en las grabaciones programadas y en el historial.</p>
+
+<h2 id="datos">Dónde se guardan los datos</h2>
+<p>En la carpeta <code>data\addonsData\zRadioBASS</code> de Tiresias (no en la del complemento, que se sustituye al actualizar):</p>
+<ul>
+<li><code>zradiobass.db</code>: favoritos, categorías, historial, grabaciones programadas y listas de países, idiomas y etiquetas.</li>
+<li><code>cache\api_cache.db</code>: caché de las búsquedas.</li>
+<li><code>estado.json</code>: volumen, silencio, última emisora, pestaña, tamaño de la ventana, plugins desactivados y opciones de los plugins.</li>
+<li><code>statistics.json</code>: estadísticas de uso.</li>
+<li><code>plugins</code>: sus plugins.</li>
+</ul>
+<p>Las opciones están en la configuración de Tiresias (sección <code>zRadioBASS</code>).</p>
+
+<h2 id="nvda">Diferencias con zRadio BASS para NVDA</h2>
+<ul>
+<li>El diálogo «Configuración» propio pasa a la categoría «zRadio BASS» de las Opciones de Tiresias, con más opciones (reproducción, dispositivo, efectos). La opción «Buscar actualizaciones automáticamente» no existe: las actualizaciones del complemento las ofrece la tienda de complementos de Tiresias.</li>
+<li>Las grabaciones programadas se guardan entre sesiones y graban sin necesidad de estar escuchando la emisora (en el original solo grababan si esa emisora estaba sonando y se perdían al reiniciar). Se graban en WAV, como las inmediatas (el original las nombraba .mp3 aunque eran WAV).</li>
+<li>Las categorías de favoritos tienen interfaz (en el original solo existían en la base de datos).</li>
+<li>Nuevas funciones: pausa, título de la canción, dispositivo de salida, ecualizador, balance, reconexión automática, filtros del Buscador, listas de países/idiomas/etiquetas, votar, historial con duración, administrador de plugins.</li>
+<li>Los avisos que el original mostraba como notificaciones de Windows se dicen con la voz de Tiresias.</li>
+<li>El historial se registra una sola vez por reproducción (el original podía anotar la misma dos veces) y las horas se guardan en hora local.</li>
+</ul>
+
+<h2 id="creditos">Créditos y licencias</h2>
+<ul>
+<li>zRadio BASS: © 2025-2026 Héctor J. Benítez Corredera. Licencia Pública General GNU (GPL) versión 2.</li>
+<li>Datos de emisoras: <a href="https://www.radio-browser.info/">Radio Browser</a>, base de datos libre y comunitaria.</li>
+<li>BASS, BASSenc, BASS_FX, BASS_AAC, BASSFLAC, BASSOPUS, BASSHLS y BASSWMA: © 1999-2024 Un4seen Developments Ltd. (<a href="https://www.un4seen.com/">un4seen.com</a>). Gratuitas para uso no comercial; el uso comercial necesita una licencia de Un4seen. Se incluyen sin modificar (versiones de 64 bits) en <code>globalPlugins\zRadioBASS\bass</code>, junto con su aviso <code>LICENCIA-BASS.txt</code>.</li>
+<li>Esta versión para Tiresias no incluye bibliotecas de Python de terceros: el envoltorio de BASS y el cliente de Radio Browser son código propio que usa la biblioteca estándar de Python.</li>
+</ul>
+</body></html>

@@ -1,0 +1,37 @@
+Bibliotecas de audio BASS incluidas en zRadio BASS
+==================================================
+
+Esta carpeta contiene las versiones de 64 bits (x64) para Windows de:
+
+  bass.dll      BASS 2.4.16.7       (biblioteca principal)
+  bassenc.dll   BASSenc 2.4.16.1    (grabación a WAV)
+  bass_fx.dll   BASS_FX 2.4.12.6    (ecualizador)
+  bass_aac.dll  BASS_AAC 2.4.3.0    (emisoras AAC / AAC+)
+  bassflac.dll  BASSFLAC 2.4.4.5    (emisoras FLAC)
+  bassopus.dll  BASSOPUS 2.4.2.1    (emisoras Opus)
+  basshls.dll   BASSHLS 2.4.5.0     (emisoras HLS, .m3u8)
+  basswma.dll   BASSWMA 2.4.4.0     (emisoras WMA)
+
+Copyright (c) 1999-2024 Un4seen Developments Ltd. Todos los derechos reservados.
+Sitio web: https://www.un4seen.com/
+
+Licencia
+--------
+BASS y sus complementos son gratuitos para uso no comercial. Si usted no es
+una persona que vaya a cobrar por un programa que los incluya (por ejemplo,
+si es una empresa que distribuye un producto comercial), necesita una
+licencia de Un4seen: https://www.un4seen.com/bass.html#license
+
+Resumen de las condiciones de Un4seen:
+
+- El software se proporciona «tal cual», sin garantía de ningún tipo,
+  expresa o implícita. El autor no se hace responsable de ningún daño
+  derivado de su uso.
+- Se puede distribuir libremente junto con programas gratuitos y no
+  comerciales, sin modificar las DLL.
+- El uso comercial (incluidos los programas de pago, los de prueba y los
+  que se usan para ganar dinero) requiere una licencia de pago.
+
+zRadio BASS es un complemento gratuito y no comercial para el lector de
+pantalla Tiresias. Las DLL se usan sin modificar mediante un envoltorio
+ctypes propio (zr_core/bass.py), que no forma parte de BASS.

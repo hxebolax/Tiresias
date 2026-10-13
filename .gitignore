@@ -1,0 +1,109 @@
+# ======================================================================
+#  Tiresias: qué NO se sube al repositorio
+#
+#  El repositorio lleva lo necesario para ejecutar Tiresias desde el código
+#  y compilarlo. No lleva entornos virtuales, compilaciones, material de
+#  estudio, datos del usuario ni componentes propietarios (Eloquence y la voz
+#  neuronal Álvaro de Microsoft, que se distribuyen aparte en la tienda).
+# ======================================================================
+
+# ---------------------------------------------------------------- entornos y compilaciones
+/.venv*/
+/venv/
+/env/
+/build/
+/dist/
+*.egg-info/
+controller/build/
+rdp/build/
+sapi32_host/build/
+
+# ---------------------------------------------------------------- cachés de Python y herramientas
+__pycache__/
+*.py[cod]
+.ruff_cache/
+.mypy_cache/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# ---------------------------------------------------------------- editores, sistema y asistentes
+.claude/
+.vscode/
+.idea/
+*.swp
+*~
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# ---------------------------------------------------------------- material de estudio (copia de NVDA, etc.)
+/adjuntos/
+
+# ---------------------------------------------------------------- datos del programa y del usuario (data)
+# Lista blanca: solo se suben los datos del programa, los mismos que
+# tools/build_data.py copia a la versión compilada. Todo lo demás de data
+# (config, logs, cache, temp, voices, labels, speechDicts, addonsData,
+# actualizacion_resultado.json...) es del usuario o se genera al usarlo.
+/data/*
+!/data/addons/
+!/data/brailleTables/
+!/data/controller/
+!/data/locale/
+!/data/louis/
+!/data/rdp/
+!/data/sounds/
+!/data/symbols/
+!/data/synthDrivers/
+!/data/speechDicts/
+/data/speechDicts/*
+!/data/speechDicts/default.json
+
+# Complementos incluidos: solo WhatsApp. Eloquence (ECI.DLL y .SYN de
+# IBM/Nuance) es propietario y se distribuye aparte en la tienda.
+/data/addons/*
+!/data/addons/whatsapp/
+
+# eSpeak NG se toma del paquete espeakng_loader (requirements.txt); si alguien
+# deja aquí una copia propia, no se sube.
+/data/synthDrivers/espeak/
+
+# ---------------------------------------------------------------- complementos de la tienda
+# La voz neuronal Álvaro es un modelo propietario de Microsoft: no se sube.
+# El motor «Voces neuronales de Microsoft» (NeuralVoices) sí, sin voces.
+/complementos_tienda/NeuralVoices-voz-Alvaro/
+/complementos_tienda/NeuralVoices-voz-*/
+
+# ---------------------------------------------------------------- componentes propietarios (por si acaso)
+[Ee][Cc][Ii].[Dd][Ll][Ll]
+[Ee][Cc][Ii].[Ii][Nn][Ii]
+*.[Ss][Yy][Nn]
+*[Rr][Oo][Mm].[Dd][Ll][Ll]
+ibmtts_host32.dll
+SynthModel.license
+
+# ---------------------------------------------------------------- archivos que deja el programa fuera de data
+/instalado.json
+/systemConfig/
+
+# ---------------------------------------------------------------- copias, registros y temporales
+*.bak
+*.old
+*.tmp
+*.log
+*.orig
+*.rej
+backup_antes_importar/
+
+# ---------------------------------------------------------------- secretos y configuración local
+*.pfx
+*.p12
+*.pem
+*.key
+*.cer
+*.crt
+.env
+.env.*
+# Configuración local de herramientas (rutas personales, etc.): ver README.
+*.local.json
+*.local.bat

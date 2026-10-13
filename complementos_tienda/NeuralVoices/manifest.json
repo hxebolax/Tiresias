@@ -1,0 +1,11 @@
+{
+	"id": "NeuralVoices",
+	"name": "Voces neuronales de Microsoft",
+	"version": "1.0.0",
+	"author": "Proyecto Tiresias (basado en NeuralVoices de Kvark, Alexander Linkov)",
+	"description": "Sintetizador para las voces neuronales naturales de Microsoft, que funcionan en el propio equipo y sin conexión (Speech SDK de Microsoft, síntesis local). Ofrece todas las voces de los paquetes de voces instalados como complementos aparte (por ejemplo «Voz neuronal Álvaro (español de España)»), con velocidad, tono y volumen propios de cada voz, la voz que se prefiere para cada idioma, cambio automático de voz según el idioma del texto, detección opcional del idioma por la escritura Unicode (latina, cirílica, árabe, han...) con el idioma elegido para las escrituras latina, cirílica y CJK, opción de ignorar los números en la detección, índices sincronizados con el audio (lectura continua), pausas, deletreo y fonemas. El diálogo «Voces neuronales: voz de cada idioma» se abre desde el menú Herramientas, desde su categoría de Opciones o con una orden asignable. Después de instalarlo hay que instalar al menos un paquete de voz y elegir «Voces neuronales de Microsoft» en Opciones > Voz.",
+	"minApiVersion": "1.0",
+	"lastTestedApiVersion": "1.0",
+	"url": "https://t.me/kvark128",
+	"changelog": "Primera versión para Tiresias: adaptación completa del controlador NeuralVoices 2026.07.28 de Kvark (Alexander Linkov) con un envoltorio ctypes propio de la API C del Speech SDK 1.51.1 de Microsoft (sin cffi), voces de todos los paquetes instalados, ajustes por voz, voz de cada idioma, detección del idioma por escritura Unicode, índices sincronizados con el audio, pausas, deletreo y fonemas, diálogo de voz por idioma en el menú Herramientas y en Opciones, y documentación en español."
+}

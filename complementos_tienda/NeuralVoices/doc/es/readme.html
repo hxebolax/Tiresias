@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8"><title>Voces neuronales de Microsoft para Tiresias</title>
+<style>body{font-family:Segoe UI,Arial,sans-serif;max-width:60em;margin:1em auto;line-height:1.5}table{border-collapse:collapse}td,th{border:1px solid #888;padding:.3em .6em;text-align:left}</style></head>
+<body><h1>Voces neuronales de Microsoft (NeuralVoices)</h1>
+<p>Controlador para las voces neuronales naturales de Microsoft. Las voces funcionan en el propio equipo, sin conexión a Internet, con el Speech SDK de Microsoft (síntesis local).</p>
+<p>Autor de la versión mejorada original para NVDA: Kvark (Alexander Linkov). Adaptación a Tiresias: Proyecto Tiresias.</p>
+
+<h2>Requisitos e instalación</h2>
+<ol>
+<li>Instala este complemento («Voces neuronales de Microsoft»).</li>
+<li>Instala uno o varios paquetes de voz, por ejemplo «Voz neuronal Álvaro (español de España)». Cada voz es un complemento aparte cuyo identificador empieza por <code>NeuralVoices-voz</code> (también se reconocen los que empiezan por <code>NeuralVoices-voice</code>, como en NVDA). Sin ningún paquete de voz el sintetizador no aparece en la lista.</li>
+<li>Reinicia Tiresias o recarga los complementos (Tiresias+Control+F3).</li>
+<li>En <strong>Opciones &gt; Voz &gt; Cambiar sintetizador...</strong> elige <strong>Voces neuronales de Microsoft</strong>.</li>
+</ol>
+<p>Se necesita Windows de 64 bits. Las bibliotecas del Speech SDK necesarias van incluidas (no hace falta instalar el paquete redistribuible de Visual C++). Los paquetes de voz que se desactivan en el administrador de complementos dejan de ofrecerse.</p>
+
+<h2>Funciones</h2>
+<ul>
+<li><strong>Todas las voces</strong> de todos los paquetes de voz instalados y activados, en la lista «Voz» de Opciones &gt; Voz y en el anillo de ajustes (Tiresias+Control+flechas).</li>
+<li><strong>Velocidad, tono y volumen propios de cada voz.</strong> Al cambiar de voz se recuperan los valores que tenía esa voz. El valor 50 es el normal de cada escala (como en el original): la velocidad va de -100 % a +200 %, el tono y el volumen de -100 % a +100 %.</li>
+<li><strong>Cambio automático de voz según el idioma.</strong> Cuando el texto cambia de idioma (por ejemplo, una página web marcada en inglés o el cambio automático de idioma de Tiresias), se usa la voz de ese idioma si hay alguna instalada. Si no la hay, sigue la voz actual.</li>
+<li><strong>Voz de cada idioma.</strong> Se puede elegir qué voz usar para cada idioma (con país, como «es-ES», o solo el idioma, como «es»). Si no se elige ninguna («Automática»), se usa la voz actual si es de ese idioma o, si no, la primera voz instalada de ese idioma. Al cargar el sintetizador por primera vez se elige la voz del idioma de la interfaz de Tiresias.</li>
+<li><strong>Detección del idioma según la escritura Unicode</strong> (casilla «Detectar el idioma según la escritura Unicode», desactivada por defecto). El texto se divide en trozos según su escritura: latina, cirílica, árabe, devanagari, han, griega, hebrea, georgiana, armenia, tailandesa, hiragana, katakana, hangul y otras, y cada trozo se lee con la voz del idioma de esa escritura.</li>
+<li><strong>Ignorar los números en la detección del idioma</strong> (casilla, desactivada por defecto). Si está desactivada, los números se leen con la voz actual; si está activada, con la voz del texto que los rodea.</li>
+<li><strong>Idioma de la escritura latina, cirílica y de los caracteres CJK.</strong> Cuando hay voces de varios idiomas que usan la misma escritura, aparece una lista para elegir con qué idioma se lee esa escritura (por ejemplo, inglés o español para el alfabeto latino; ruso o ucraniano para el cirílico; chino, japonés o coreano para los caracteres han). La lista solo aparece si hay más de un idioma instalado de esa escritura. Por defecto se usa el idioma de la interfaz de Tiresias si hay voz de ese idioma, o bien inglés (latina), ruso (cirílica) y chino (CJK).</li>
+<li><strong>Índices sincronizados con el audio</strong> (lectura continua, seguimiento del cursor), <strong>pausas</strong>, <strong>deletreo</strong> carácter a carácter, <strong>fonemas</strong> y los cambios de tono, velocidad y volumen dentro del texto (por ejemplo, el cambio de tono de las mayúsculas).</li>
+<li>Parada inmediata al interrumpir la voz.</li>
+</ul>
+
+<h2>Ajustes en Opciones &gt; Voz</h2>
+<table><caption>Ajustes del sintetizador</caption><thead><tr><th scope="col">Ajuste</th><th scope="col">Qué hace</th><th scope="col">En el anillo de ajustes</th></tr></thead><tbody>
+<tr><td>Voz</td><td>Voz que se usa normalmente.</td><td>Sí</td></tr>
+<tr><td>Velocidad</td><td>Velocidad de la voz actual (cada voz guarda la suya).</td><td>Sí</td></tr>
+<tr><td>Tono</td><td>Tono de la voz actual (cada voz guarda el suyo).</td><td>Sí</td></tr>
+<tr><td>Volumen</td><td>Volumen de la voz actual (cada voz guarda el suyo; 50 es el volumen normal).</td><td>Sí</td></tr>
+<tr><td>Detectar el idioma según la escritura Unicode</td><td>Activa el cambio de voz según la escritura de cada trozo de texto.</td><td>Sí</td></tr>
+<tr><td>Ignorar los números en la detección del idioma</td><td>Los números se leen con la voz del texto que los rodea.</td><td>Sí</td></tr>
+<tr><td>Idioma de la escritura latina</td><td>Solo si hay voces de varios idiomas con alfabeto latino.</td><td>Sí</td></tr>
+<tr><td>Idioma de la escritura cirílica</td><td>Solo si hay voces de varios idiomas con alfabeto cirílico.</td><td>Sí</td></tr>
+<tr><td>Idioma de los caracteres CJK</td><td>Solo si hay voces de chino, japonés y coreano.</td><td>Sí</td></tr>
+</tbody></table>
+
+<h2>Voz de cada idioma</h2>
+<p>El diálogo <strong>«Voces neuronales: voz de cada idioma»</strong> se abre de tres formas:</p>
+<ul>
+<li>Menú de Tiresias &gt; <strong>Herramientas &gt; Voces neuronales: voz de cada idioma...</strong> (en NVDA estaba en Preferencias &gt; «Neural Voices Settings...»).</li>
+<li>Opciones de Tiresias, categoría <strong>Voces neuronales de Microsoft</strong> (con los mismos controles; se guarda con Aceptar o Aplicar del cuadro de Opciones).</li>
+<li>La orden «Abre el diálogo de las voces neuronales de Microsoft para elegir la voz de cada idioma», de la categoría «Voces neuronales de Microsoft» en <strong>Gestos de entrada</strong>. No tiene tecla asignada (el original tampoco tenía); puedes asignarle una.</li>
+</ul>
+<p>En el diálogo, elige un idioma en la lista <strong>Idioma</strong> y su voz en la lista <strong>Voz</strong>; repite con los demás idiomas y pulsa <strong>Aceptar</strong> (Escape cancela). La opción «Automática» quita la voz fija de ese idioma.</p>
+<p>Este diálogo solo funciona con «Voces neuronales de Microsoft» como sintetizador en uso; con otro, Tiresias avisa de que hay que elegirlo primero en las opciones de voz. En modo seguro no se añaden el menú ni la categoría de Opciones.</p>
+
+<h2>Órdenes</h2>
+<table><caption>Órdenes del complemento</caption><thead><tr><th scope="col">Tecla</th><th scope="col">Acción</th></tr></thead><tbody>
+<tr><td>Sin asignar (Gestos de entrada, categoría «Voces neuronales de Microsoft»)</td><td>Abre el diálogo «Voces neuronales: voz de cada idioma»</td></tr>
+<tr><td>Tiresias+Control+flechas (del núcleo)</td><td>Cambian los ajustes del sintetizador en el anillo de ajustes, incluidos la detección del idioma y el idioma de cada escritura</td></tr>
+</tbody></table>
+
+<h2>Diferencias con el original de NVDA</h2>
+<ul>
+<li>En NVDA, para mezclar estas voces con otros sintetizadores se recomendaba el controlador virtual MultiLang; en Tiresias no existe. El propio controlador cambia entre las voces neuronales instaladas según el idioma.</li>
+<li>Los índices se colocan en su posición exacta del audio, y una marca repetida por el motor no adelanta la lectura continua.</li>
+<li>Los nombres de las voces se muestran abreviados («Alvaro (español (España))») en lugar del nombre completo del motor; la voz se guarda con su identificador completo, como en el original.</li>
+<li>La vuelta al idioma por defecto dentro de un texto usa la voz elegida, no la del idioma de la interfaz.</li>
+<li>En el diálogo de la voz de cada idioma se puede volver a «Automática».</li>
+</ul>
+
+<h2>Historial de versiones</h2>
+<h3>1.0.0 (Tiresias)</h3>
+<p>Primera versión para Tiresias, basada en NeuralVoices 2026.07.28, con un envoltorio propio de la API C del Speech SDK (sin cffi) y documentación en español.</p>
+<h3>Versiones del original para NVDA (resumen traducido)</h3>
+<ul>
+<li><strong>2026.07.28:</strong> bibliotecas del Speech SDK actualizadas a la versión 1.51.1.</li>
+<li><strong>2026.07.02:</strong> se crea un sintetizador del SDK distinto para cada complemento de voz, aunque varias voces compartan licencia (puede mejorar el rendimiento donde había ralentizaciones).</li>
+<li><strong>2026.05.16:</strong> Speech SDK 1.50.0.</li>
+<li><strong>2026.03.24:</strong> versión mínima de NVDA 2026.1.</li>
+<li><strong>2025.10.15:</strong> funciona sin el paquete redistribuible de Visual C++ instalado (las bibliotecas necesarias van incluidas).</li>
+<li><strong>2025.10.14:</strong> ya no se pierden frases cuando llegan muchas peticiones de voz seguidas (por ejemplo, en terminales).</li>
+<li><strong>2025.10.04:</strong> compatibilidad con las versiones de 64 bits de NVDA.</li>
+<li><strong>2025.08.30:</strong> admite la nueva licencia de las voces Dmitry, Svetlana (actualizada), Eric y Michelle, sin perder las anteriores.</li>
+<li><strong>2025.08.24:</strong> vuelta al Speech SDK 1.44, más estable.</li>
+<li><strong>2025.08.09:</strong> Speech SDK 1.45; pausas (BreakCommand); nombre «Microsoft Neural Voices»; la primera voz elegida tiene en cuenta el idioma de la interfaz.</li>
+<li><strong>2025.07.05:</strong> volumen máximo mucho mayor (se recomienda no pasar del 50 %).</li>
+<li><strong>2025.07.04:</strong> valores por defecto de velocidad, tono y volumen alineados con los internos del motor; corregido el cursor que se adelantaba en la lectura continua.</li>
+<li><strong>2025.07.02:</strong> voces turca, rusa y tres inglesas.</li>
+<li><strong>2025.06.10:</strong> mejores avisos de fin de lectura y voces instalables por separado.</li>
+</ul>
+
+<h2>Créditos y licencias</h2>
+<ul>
+<li>Complemento original NeuralVoices para NVDA: Kvark (Alexander Linkov, kvark128@yandex.ru, <a href="https://t.me/kvark128">https://t.me/kvark128</a>), con licencia GNU GPL. Esta adaptación es una obra derivada y se distribuye con la misma licencia (<a href="https://www.gnu.org/licenses/old-licenses/gpl-2.0.html">GNU GPL</a>).</li>
+<li>Donativos al autor original: si te gusta su trabajo y quieres agradecérselo a Kvark, puedes enviar cualquier cantidad a su monedero de YooMoney: <a href="https://yoomoney.ru/to/410012293543375">https://yoomoney.ru/to/410012293543375</a>.</li>
+<li>La tabla de escrituras Unicode procede del archivo Scripts.txt de Unicode 16.0.0 (<a href="https://www.unicode.org/Public/16.0.0/ucd/Scripts.txt">unicode.org</a>).</li>
+<li>Las bibliotecas del Speech SDK de Microsoft (<code>sdk</code>) son de Microsoft Corporation, no están cubiertas por la GPL y se distribuyen según sus términos de licencia (<a href="https://aka.ms/csspeech/license">https://aka.ms/csspeech/license</a>); ver <code>LICENCIA_SPEECH_SDK.txt</code> en esa carpeta.</li>
+<li>Los modelos de voz (paquetes de voz) son propiedad de Microsoft y llevan su propia licencia (<code>SynthModel.license</code>), que no se puede modificar.</li>
+</ul>
+</body></html>

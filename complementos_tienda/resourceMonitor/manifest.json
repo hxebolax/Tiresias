@@ -1,0 +1,11 @@
+{
+	"id": "resourceMonitor",
+	"name": "Monitor de recursos",
+	"version": "1.0.0",
+	"author": "Proyecto Tiresias (basado en Resource Monitor de Alex Hall, Joseph Lee, Kefas Lungu y otros)",
+	"description": "Un práctico monitor de recursos: anuncia la carga del procesador y de cada núcleo, la memoria física y virtual, el espacio de los discos (fijos, extraíbles y de red), la batería, la red wifi conectada (nombre, intensidad de la señal y seguridad), la versión de Windows, el tiempo de actividad del sistema y el uso, la temperatura y la memoria de la GPU NVIDIA. Pulsando dos veces cualquier orden se copia la información al portapapeles. Avisa con un mensaje, un sonido o ambos al conectar o desconectar la wifi. Las órdenes están en una capa (Tiresias+Mayúsculas+0 y una letra) y en Tiresias+Mayúsculas+1 a 7.",
+	"minApiVersion": "1.0",
+	"lastTestedApiVersion": "1.0",
+	"url": "https://github.com/kefaslungu/resourceMonitor",
+	"changelog": "Primera versión para Tiresias: todas las funciones de Resource Monitor 26.10.1 para NVDA (capa de órdenes, resumen, CPU, memoria, discos, wifi, Windows, tiempo de actividad, GPU y memoria de la GPU, copia al portapapeles con doble pulsación, aviso de conexión y desconexión de la wifi configurable y unidad de temperatura de la GPU), más el informe de la batería de las versiones anteriores del original."
+}

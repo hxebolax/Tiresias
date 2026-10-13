@@ -1,0 +1,11 @@
+{
+	"_comentario": "Configuración de tools/publicar.py. incluirPropietario: false publica el programa (instalador, portable y código fuente) SIN el complemento Eloquence, para poder distribuirlo (decisión del usuario, 8 de octubre de 2026). propietariosEnTienda: true publica en la tienda de complementos los complementos con componentes propietarios (Eloquence, con ECI.DLL y los .SYN de IBM/Nuance, y la voz neuronal Álvaro de Microsoft): lo ha decidido el usuario, que asume la responsabilidad de esas licencias (7 y 8 de octubre de 2026). --sin-propietario no publica ninguno. Ver docs/publicacion.md, apartado 5.",
+	"incluirPropietario": false,
+	"propietariosEnTienda": true,
+	"destino": "",
+	"_comentarioGithub": "github: publica también en las versiones (releases) del repositorio público con la herramienta gh (desde la 1.0.13): v<versión> con el instalador, la portable y el código fuente; «distribucion» con actualizacion.json, versiones.json y catalogo.json; «complementos» con los paquetes. Los complementos propietarios (Eloquence, la voz Álvaro) NUNCA se publican en GitHub (decisión del usuario, 13 de octubre de 2026). --solo-servidor (o --sin-github) y --solo-github eligen un solo destino. Ver docs/publicacion.md, apartado 7.",
+	"github": {
+		"repo": "hxebolax/Tiresias",
+		"publicar": true
+	}
+}

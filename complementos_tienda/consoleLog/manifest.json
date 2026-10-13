@@ -1,0 +1,11 @@
+{
+	"id": "consoleLog",
+	"name": "Visor de consola (consoleLog)",
+	"version": "1.0.0",
+	"author": "Héctor J. Benítez Corredera <xebolax@gmail.com>",
+	"description": "Visor accesible y herramientas para consolas de Windows. Permite consultar, seguir en tiempo real, buscar, copiar, guardar y analizar la salida de Console Host, Windows Terminal y numerosos emuladores de terceros (Cmder, ConEmu, mintty y Git Bash, PuTTY y KiTTY, Alacritty, WezTerm, Hyper, Tabby y otros) en un cuadro de texto de solo lectura, sin mover la posición de lectura de la terminal. Incluye seguimiento en tiempo real adaptativo que conserva el cursor, la selección y el desplazamiento; varios visores a la vez, uno por consola; captura escalable de historiales grandes y conservación de las líneas que salen del búfer; protección de la voz frente a ráfagas de salida; alertas por voz y sonido con patrones configurables; definiciones de ventana para silenciar o vigilar regiones; lanzador de terminales (CMD, PowerShell, PowerShell 7, Windows Terminal, Git Bash, WSL, MSYS2 y consolas de desarrollador de Visual Studio) en la carpeta seleccionada del Explorador, normal o como administrador; más de veinte herramientas para analizar registros y formatos de desarrollo (filtro de errores, estadísticas, JSON, SQL, JWT, Base64, marcas de tiempo, trazas de error, tablas delimitadas, indentación, ANSI, calculadora, extractor de URL, rutas e IP...); y chat e informes de inteligencia artificial (Google AI con varias claves o los proveedores de IA de Tiresias) presentados en HTML semántico navegable. Las órdenes se asignan en Gestos de entrada, categoría «Visor de consola».",
+	"minApiVersion": "1.0",
+	"lastTestedApiVersion": "1.0",
+	"url": "https://github.com/nvda-es/consoleLog",
+	"changelog": "Primera versión para Tiresias: reescritura completa del complemento consoleLog 2026.09.01 de NVDA con la API de Tiresias. Lectura de consolas con la API de consola (historial completo de Console Host) y UI Automation, más PuTTY y KiTTY; protección de ráfagas adaptada a la voz de Tiresias; opciones en la configuración de Tiresias y en el propio visor; claves de Google AI cifradas con DPAPI; posibilidad de usar los proveedores de IA de Tiresias; gestión de definiciones de ventana con diálogo propio; detección de MSYS2 en el lanzador."
+}

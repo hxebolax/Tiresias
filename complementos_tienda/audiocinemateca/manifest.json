@@ -1,0 +1,11 @@
+{
+	"id": "audiocinemateca",
+	"name": "Audiocinemateca",
+	"version": "1.0.1",
+	"author": "Héctor J. Benítez Corredera <xebolax@gmail.com>",
+	"description": "Toda la Audiocinemateca en Tiresias: acceso al catálogo completo de audiocinemateca.com (películas, series, documentales y cortometrajes con audiodescripción en español) con una cuenta de usuario. Ventana con pestañas (General con últimos contenidos, sugerencia aleatoria y búsqueda global; Películas; Series; Documentales; Cortometrajes; Favoritos; Historial y Listas personalizadas), búsqueda por título, año, género, país, director, guion, música, fotografía, reparto, productora, narración o sinopsis, fichas detalladas con enlace a FilmAffinity, temporadas y episodios de las series y partes de las películas. Reproductor integrado basado en la biblioteca BASS con volumen, velocidad, avance y retroceso configurables, reanudación donde se dejó cada contenido, ecualizador de 5 bandas con preajustes, temporizador de sueño y elección del dispositivo de salida. Cola de descargas en segundo plano con aviso al terminar y reproducción sin conexión de lo descargado, copia de la información al portapapeles, historial de reproducción y de búsqueda, estadísticas de uso, actualización de la base de datos, credenciales cifradas en disco y órdenes asignables para manejar el reproductor con la ventana cerrada.",
+	"minApiVersion": "1.0",
+	"lastTestedApiVersion": "1.0",
+	"url": "https://github.com/nvda-es/audiocinemateca-para-nvda",
+	"changelog": "1.0.1 (seguridad): el usuario y la contraseña solo se envían a audiocinemateca.com por https y nunca a otra dirección a la que redirija el servidor; los nombres de las descargas ya no pueden escribir fuera de la carpeta elegida. 1.0.0: primera versión para Tiresias: reescritura completa de «Audiocinemateca para NVDA» 2.0 con la API de Tiresias. Reproductor con un envoltorio ctypes propio de BASS (sin sound_lib), credenciales cifradas con la protección de datos de Windows, opciones en la categoría «Audiocinemateca» de las Opciones de Tiresias (con volumen, velocidad, dispositivo de salida y gestión de la cuenta), entrada «Audiocinemateca» en el menú Herramientas, historial de búsqueda consultable desde el menú de la ventana y marcas de visualización que no dependen de la contraseña."
+}

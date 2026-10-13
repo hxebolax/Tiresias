@@ -1,0 +1,47 @@
+Bibliotecas del Speech SDK de Microsoft incluidas en esta carpeta
+=================================================================
+
+Archivos (sin modificar, tal como los distribuye Microsoft):
+
+  Microsoft.CognitiveServices.Speech.core.dll                    1.51.1
+  Microsoft.CognitiveServices.Speech.extension.embedded.tts.dll  1.51.1
+  Microsoft.CognitiveServices.Speech.extension.audio.sys.dll     1.51.1
+  Microsoft.CognitiveServices.Speech.extension.onnxruntime.dll   1.23.2 (ONNX Runtime de Microsoft)
+  msvcp140_codecvt_ids.dll                                       14.51.36247.0 (Visual C++ de Microsoft)
+
+(c) Microsoft Corporation. Todos los derechos reservados.
+(c) Microsoft Corporation. All rights reserved.
+
+Estas bibliotecas son de Microsoft Corporation y NO están cubiertas por la
+licencia GPL del resto del complemento. Se distribuyen como «código
+distribuible» según los términos de licencia del software de Microsoft para el
+Speech SDK de Microsoft Cognitive Services («MICROSOFT SOFTWARE LICENSE TERMS -
+Microsoft Cognitive Services Speech SDK»):
+
+  https://aka.ms/csspeech/license
+
+Avisos de componentes de terceros del Speech SDK:
+
+  https://aka.ms/csspeech/toctpn
+
+msvcp140_codecvt_ids.dll forma parte de los paquetes redistribuibles de
+Microsoft Visual C++ y se rige por sus términos de licencia:
+
+  https://visualstudio.microsoft.com/license-terms/
+
+Resumen de las condiciones de redistribución (el texto que vale es el de
+Microsoft en los enlaces anteriores):
+
+- Solo se pueden redistribuir los componentes de la lista REDIST del SDK y
+  dentro de una aplicación que añada funcionalidad principal importante.
+- Quienes reciban el código deben aceptar condiciones que protejan el código y
+  a Microsoft al menos tanto como la licencia original.
+- No se pueden quitar, reducir, bloquear ni modificar los avisos de Microsoft o
+  de sus proveedores.
+- No se pueden usar las marcas de Microsoft de forma que sugiera que Microsoft
+  respalda este complemento.
+- El código distribuible no puede quedar sometido a una licencia que obligue a
+  publicar su código fuente o a permitir modificarlo libremente.
+
+Los modelos de las voces (paquetes de voz instalados aparte) son también
+propiedad de Microsoft y llevan su propia licencia (SynthModel.license).

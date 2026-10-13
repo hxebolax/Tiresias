@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8"><title>Monitor de recursos para Tiresias</title>
+<style>body{font-family:Segoe UI,Arial,sans-serif;max-width:60em;margin:1em auto;line-height:1.5}table{border-collapse:collapse}td,th{border:1px solid #888;padding:.3em .6em;text-align:left}</style></head>
+<body><h1>Monitor de recursos</h1>
+<p>Versión 1.0.0 para Tiresias. Basado en <a href="https://github.com/kefaslungu/resourceMonitor">Resource Monitor para NVDA</a>, de Alex Hall, Joseph Lee, Kefas Lungu, Beqa Gozalishvili, Tuukka Ojala, Ethin Probst, Kevin Derome, Wencong, Jonathan Rodriguez y otros colaboradores de NVDA.</p>
+<p>Este complemento te da, con una sola tecla, información sobre la carga del procesador, la memoria, los discos, la batería, la red wifi, la versión de Windows, el tiempo que lleva encendido el equipo y la tarjeta gráfica. También te avisa cuando la wifi se conecta o se desconecta.</p>
+
+<h2 id="capa">La capa de órdenes</h2>
+<p>Pulsa <strong>Tiresias+Mayúsculas+0</strong> para entrar en la capa de órdenes del Monitor de recursos (oirás un pitido corto y la línea braille mostrará «Monitor de recursos»). Después pulsa una de estas teclas:</p>
+<table><caption>Teclas de la capa del Monitor de recursos</caption><thead><tr><th scope="col">Tecla</th><th scope="col">Información</th></tr></thead><tbody>
+<tr><td>Espacio</td><td>Resumen: porcentaje de RAM utilizada, carga media del procesador y, si el equipo tiene batería, su estado.</td></tr>
+<tr><td>C</td><td>CPU: carga media del procesador y, si tiene varios núcleos, la carga de cada uno.</td></tr>
+<tr><td>M</td><td>Memoria: espacio utilizado y total de la RAM física y de la memoria virtual.</td></tr>
+<tr><td>D</td><td>Discos: espacio utilizado y total de las unidades fijas, extraíbles y de red conectadas.</td></tr>
+<tr><td>W</td><td>Wifi: nombre de la red (SSID), intensidad de la señal y tipo de seguridad, o que no hay conexión.</td></tr>
+<tr><td>O</td><td>Sistema operativo: versión de Windows, arquitectura del procesador y número exacto de compilación (compilación.revisión).</td></tr>
+<tr><td>U</td><td>Tiempo de actividad del sistema (días, horas, minutos y segundos desde el último arranque).</td></tr>
+<tr><td>G</td><td>Tarjeta gráfica (GPU): uso y temperatura de cada GPU. No disponible en modo seguro.</td></tr>
+<tr><td>Mayúsculas+G</td><td>Memoria de la tarjeta gráfica: utilizada y total de cada GPU. No disponible en modo seguro.</td></tr>
+<tr><td>B</td><td>Batería: porcentaje, si se está cargando, tiempo restante y aviso si está baja o en nivel crítico.</td></tr>
+<tr><td>Escape</td><td>Sale de la capa (con un pitido).</td></tr>
+</tbody></table>
+<p>Mientras estás en la capa puedes pulsar varias órdenes seguidas, o la misma varias veces. Escape sale de la capa; cualquier otra tecla también sale y llega a la aplicación con normalidad.</p>
+
+<h2 id="atajos">Atajos directos</h2>
+<p>Como en el original, siguen disponibles los atajos antiguos con números (el original los marca como obsoletos y planea quitarlos; en Tiresias se conservan):</p>
+<table><caption>Atajos directos del Monitor de recursos</caption><thead><tr><th scope="col">Tecla</th><th scope="col">Información</th></tr></thead><tbody>
+<tr><td>Tiresias+Mayúsculas+1</td><td>CPU</td></tr>
+<tr><td>Tiresias+Mayúsculas+2 o Tiresias+Mayúsculas+5</td><td>Memoria (el 5 es una alternativa por si no puedes pulsar la combinación con el 2)</td></tr>
+<tr><td>Tiresias+Mayúsculas+3</td><td>Discos</td></tr>
+<tr><td>Tiresias+Mayúsculas+4</td><td>Wifi</td></tr>
+<tr><td>Tiresias+Mayúsculas+6</td><td>Versión de Windows</td></tr>
+<tr><td>Tiresias+Mayúsculas+7</td><td>Tiempo de actividad del sistema</td></tr>
+</tbody></table>
+<p>Las órdenes de resumen, GPU, memoria de la GPU y batería no tienen atajo directo (solo están en la capa), igual que en el original. Todas las órdenes están en la categoría «Monitor de recursos» del diálogo <em>Gestos de entrada</em> de Tiresias, donde puedes asignarles o cambiarles las teclas.</p>
+<p>Diferencia con el original: en NVDA la capa se abre con NVDA+Mayúsculas+E, pero en Tiresias esa combinación ya es «IA: explora la página», por eso aquí se usa Tiresias+Mayúsculas+0. El estado de la batería también lo da Tiresias con Tiresias+Mayúsculas+B; la tecla B de la capa ofrece el informe del Monitor de recursos (con el aviso de batería baja o crítica).</p>
+
+<h2 id="copiar">Copiar al portapapeles</h2>
+<p>Pulsa cualquier orden <strong>dos veces seguidas</strong> para copiar la información al portapapeles en lugar de oírla (Tiresias confirma la copia con su sonido y, si así lo tienes configurado, con «Copiado al portapapeles»). En las pantallas seguras (modo seguro o pantalla de bloqueo) no se copia nada.</p>
+<p>Todas las órdenes funcionan también en el modo de voz «a demanda».</p>
+
+<h2 id="wifi">Avisos de la wifi</h2>
+<p>Cuando el equipo se conecta o se desconecta de una red inalámbrica, o cuando se activa o desactiva un adaptador wifi, el complemento lo anuncia («Conectado a …», «Desconectado de …», «Se ha habilitado un dispositivo de red inalámbrica», «Se ha deshabilitado un dispositivo de red inalámbrica») y reproduce un sonido de conexión o desconexión. Puedes elegir cómo avisa en las opciones.</p>
+
+<h2 id="opciones">Opciones</h2>
+<p>En <em>Opciones de Tiresias</em>, categoría <strong>Monitor de recursos</strong>:</p>
+<ul>
+<li><strong>Unidad de temperatura de la GPU</strong>: Celsius (por defecto) o Fahrenheit.</li>
+<li><strong>Aviso de conexión y desconexión de la wifi</strong>: Desactivado, Mensaje, Sonido o Mensaje y sonido (por defecto).</li>
+</ul>
+
+<h2 id="notas">Notas de uso</h2>
+<ul>
+<li>Este complemento no sustituye al Administrador de tareas ni a otros programas de información del sistema.</li>
+<li>El uso de la CPU se da por procesador lógico, no por núcleo físico. Se nota en los procesadores con Hyper-Threading, donde hay el doble de CPU que de núcleos; en algunos equipos modernos no todos los núcleos tienen Hyper-Threading.</li>
+<li>La memoria virtual es la memoria comprometida de Windows: la RAM física más el archivo de paginación.</li>
+<li>Con mucha actividad de disco (por ejemplo al copiar archivos grandes) o al buscar unidades de red, la información de los discos puede tardar un poco. La consulta se hace en segundo plano: Tiresias sigue respondiendo mientras tanto. Las unidades de red sin conexión se anuncian como «no disponible» y las unidades sin disco (lectores vacíos) se omiten.</li>
+<li>La información de la GPU se obtiene de las tarjetas NVIDIA mediante la herramienta <code>nvidia-smi</code> que instala su controlador. Con otras tarjetas se anuncia «No hay información de la GPU disponible».</li>
+<li>Al anunciar la versión de Windows, «AMD64» se refiere a los procesadores Intel y AMD de 64 bits (x64), «ARM64» a los ARM de 64 bits y «x86» a los de 32 bits; no es el nombre del procesador concreto.</li>
+<li>Las versiones de Windows Server anteriores a 2025 no tienen la biblioteca de redes inalámbricas: allí la orden de wifi dice «No hay dispositivos de red inalámbrica» y no hay avisos de conexión.</li>
+<li>Los números se dicen con coma decimal (por ejemplo «2,50 GB»).</li>
+</ul>
+
+<h2 id="creditos">Créditos y licencia</h2>
+<p>Resource Monitor para NVDA: Copyright 2013-2026 Alex Hall, Joseph Lee, Kefas Lungu, Beqa Gozalishvili, Tuukka Ojala, Ethin Probst, Kevin Derome y otros colaboradores, publicado bajo la licencia GNU GPL versión 2. La parte de la wifi del original procede de <a href="https://github.com/kvark128/WlanReporter">WlanReporter</a> (GPL).</p>
+<p>Esta versión para Tiresias es código propio escrito para la API de Tiresias, con el mismo funcionamiento, y se distribuye también bajo la licencia GNU GPL versión 2. Los sonidos <code>connect.wav</code> y <code>disconnect.wav</code> son los del complemento original (GPL versión 2).</p>
+<p>Usa <a href="https://github.com/giampaolo/psutil">psutil</a> (licencia BSD de 3 cláusulas), que ya incluye Tiresias, y las funciones del propio Windows (Native Wifi, estado de energía, versión del sistema).</p>
+<p>Historial de cambios del original: <a href="https://github.com/kefaslungu/resourceMonitor/blob/main/changes.md">changes.md</a>.</p>
+</body></html>

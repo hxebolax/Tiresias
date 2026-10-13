@@ -1,0 +1,38 @@
+/*
+Interfaz privada de reenvío entre el auxiliar tiresiasNvdaWindow.exe y
+Tiresias (no es parte de la API pública).
+
+El auxiliar atiende el punto de conexión de NVDA ("NvdaCtlr.<sesión>.
+<escritorio>") en un proceso aparte que se puede cerrar en cualquier momento:
+un proceso no puede liberar un punto de conexión ncalrpc sin terminar
+(RpcServerUseProtseqEp no tiene operación inversa; RpcMgmtStopServerListening
+y RpcServerUnregisterIf no cierran el puerto). Cuando NVDA arranca, cierra el
+auxiliar y el punto de conexión queda libre para NVDA.
+
+El auxiliar reenvía cada llamada a Tiresias por esta interfaz, en el punto
+de conexión propio de Tiresias, indicando el proceso que hizo la llamada
+original. Tiresias solo acepta estas llamadas del auxiliar que ha iniciado.
+
+Archivo escrito para Tiresias. Compilar con MIDL (lo hace build.py).
+*/
+
+[
+	uuid(A3E1F0C4-5B7D-4E2A-9F36-2C8D41B7E905),
+	version(1.0),
+]
+interface TiresiasRelay {
+	error_status_t relayTestIfRunning([in] unsigned long pid);
+	error_status_t relaySpeakText([in] unsigned long pid, [in, string] const wchar_t* text);
+	error_status_t relayCancelSpeech([in] unsigned long pid);
+	error_status_t relayBrailleMessage([in] unsigned long pid, [in, string] const wchar_t* message);
+	error_status_t relaySpeakSsml(
+		[in] unsigned long pid,
+		[in, string] const wchar_t* ssml,
+		[in] long symbolLevel,
+		[in] long priority,
+		[in] boolean asynchronous
+	);
+	error_status_t relayIsSpeaking([in] unsigned long pid, [out] boolean* speaking);
+	/* Retrollamada al auxiliar durante relaySpeakSsml síncrono. */
+	[callback] error_status_t relayOnSsmlMarkReached([in, string] const wchar_t* mark);
+}

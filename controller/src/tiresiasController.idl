@@ -1,0 +1,91 @@
+/*
+API de control de Tiresias (definición de las interfaces RPC).
+
+Tiresias publica estas interfaces por RPC local (ncalrpc) en dos puntos de
+conexión de la sesión y el escritorio actuales:
+
+- "TiresiasCtlr.<sesión>.<escritorio>": propio de Tiresias.
+- "NvdaCtlr.<sesión>.<escritorio>": el que usan las bibliotecas
+  nvdaControllerClient de los juegos y programas, para que funcionen con
+  Tiresias sin cambios. Lo atiende el auxiliar tiresiasNvdaWindow.exe, que
+  reenvía las llamadas a Tiresias (tiresiasRelay.idl) y se cierra cuando
+  NVDA arranca; nunca mientras NVDA está en ejecución.
+
+Las tres primeras interfaces reproducen el contrato público y estable del
+"NVDA Controller Client" (mismos identificadores, mismo orden de
+procedimientos y mismos tipos en la red) para ser compatibles con las
+bibliotecas existentes. La cuarta es propia de Tiresias.
+
+Archivo escrito para Tiresias. Compilar con MIDL (lo hace build.py).
+*/
+
+[
+	uuid(DFF50B99-F7FD-4ca7-A82C-DAEB3E025295),
+	version(1.0),
+]
+interface NvdaController {
+	/* Devuelve 0 si el lector está en ejecución. */
+	error_status_t testIfRunning();
+	/* Habla un texto (se encola tras lo que se esté diciendo). */
+	error_status_t speakText([in, string] const wchar_t* text);
+	/* Corta la voz. */
+	error_status_t cancelSpeech();
+	/* Muestra un mensaje temporal en la línea braille. */
+	error_status_t brailleMessage([in, string] const wchar_t* message);
+}
+
+[
+	uuid(3D168D45-CB58-4270-8257-4E0BE515D557),
+	version(1.0),
+]
+interface NvdaController2 {
+	typedef [v1_enum] enum tagSPEECH_PRIORITY {
+		SPEECH_PRIORITY_NORMAL = 0,
+		SPEECH_PRIORITY_NEXT = 1,
+		SPEECH_PRIORITY_NOW = 2
+	} SPEECH_PRIORITY;
+
+	typedef [v1_enum] enum tagSYMBOL_LEVEL {
+		SYMBOL_LEVEL_NONE = 0,
+		SYMBOL_LEVEL_SOME = 100,
+		SYMBOL_LEVEL_MOST = 200,
+		SYMBOL_LEVEL_ALL = 300,
+		SYMBOL_LEVEL_CHAR = 1000,
+		SYMBOL_LEVEL_UNCHANGED = -1
+	} SYMBOL_LEVEL;
+
+	/* Identificador del proceso del lector. */
+	error_status_t getProcessId([out] unsigned long* pid);
+	/* Habla SSML. Si asynchronous es FALSE, vuelve al terminar de hablar y
+	   llama a onSsmlMarkReached por cada <mark> alcanzada. */
+	error_status_t speakSsml(
+		[in, string] const wchar_t* ssml,
+		[in] const SYMBOL_LEVEL symbolLevel,
+		[in] const SPEECH_PRIORITY priority,
+		[in] const boolean asynchronous
+	);
+	/* Retrollamada al cliente durante speakSsml síncrono. */
+	[callback] error_status_t onSsmlMarkReached([in, string] const wchar_t* mark);
+}
+
+[
+	uuid(019e4216-a9a1-7540-a217-e1a2d2793025),
+	version(1.0),
+]
+interface NvdaController3 {
+	/* Indica si el lector está hablando. */
+	error_status_t isSpeaking([out] boolean* speaking);
+}
+
+[
+	uuid(6B1C9E52-3F0A-4D7B-9C1E-7A54D2E8B310),
+	version(1.0),
+]
+interface TiresiasController {
+	/* Versión de esta API: 0xMMMMmmmm (mayor y menor). */
+	error_status_t getApiVersion([out] unsigned long* version);
+	/* Habla un texto con opciones (TIRESIAS_SPEAK_*). */
+	error_status_t speakTextEx([in, string] const wchar_t* text, [in] unsigned long flags);
+	/* Pausa (TRUE) o reanuda (FALSE) la voz. */
+	error_status_t pauseSpeech([in] boolean pause);
+}

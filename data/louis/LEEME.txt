@@ -1,0 +1,17 @@
+liblouis 3.39.0 (Windows, 64 bits)
+==================================
+
+Biblioteca de traducción braille liblouis y sus tablas, tal como se publican
+en https://github.com/liblouis/liblouis/releases/tag/v3.39.0
+(archivo liblouis-3.39.0-win64.zip).
+
+- liblouis.dll: biblioteca (sin cambios).
+- tables\: tablas de traducción (sin cambios).
+- COPYING.LESSER.txt: licencia (GNU LGPL 2.1 o posterior).
+
+Tiresias carga la biblioteca con ctypes (src\tiresias\braille\liblouis.py)
+desde esta carpeta (data\louis), tanto desde el código fuente como en la
+versión compilada.
+El código fuente de liblouis está en https://github.com/liblouis/liblouis.
+Para actualizarla basta con sustituir liblouis.dll y la carpeta tables por los
+de una versión nueva.

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8"><title>Traductor Avanzado Pro para Tiresias</title>
+<style>body{font-family:Segoe UI,Arial,sans-serif;max-width:60em;margin:1em auto;line-height:1.5;padding:0 1em}table{border-collapse:collapse}td,th{border:1px solid #888;padding:.3em .6em;text-align:left;vertical-align:top}code,pre{background:#f2f2f2}pre{padding:.6em;overflow:auto}</style></head>
+<body>
+<h1>Traductor Avanzado Pro</h1>
+<p>Versión 1.0.0 para Tiresias. Basado en el complemento Traductor Avanzado Pro (TranslateAdvanced) de NVDA de Héctor J. Benítez Corredera, reescrito por completo con la API de Tiresias.</p>
+
+<h2 id="indice">Índice</h2>
+<ul>
+<li><a href="#descripcion">Descripción</a></li>
+<li><a href="#requisitos">Requisitos e instalación</a></li>
+<li><a href="#ordenes">Órdenes y teclas</a></li>
+<li><a href="#capa">Capa de órdenes</a></li>
+<li><a href="#simultanea">Traducción simultánea</a></li>
+<li><a href="#servicios">Servicios de traducción</a></li>
+<li><a href="#claves">Claves de API, modelos y prompts</a></li>
+<li><a href="#opciones">Opciones</a></li>
+<li><a href="#interfaz">Interfaz de traducción y reproductor</a></li>
+<li><a href="#historial">Historial</a></li>
+<li><a href="#cache">Caché inteligente</a></li>
+<li><a href="#plugins">Plugins de extensión (OCR, diccionario, detectores)</a></li>
+<li><a href="#extender">Añadir servicios y plugins propios</a></li>
+<li><a href="#menu">Menú Herramientas</a></li>
+<li><a href="#datos">Dónde se guardan los datos</a></li>
+<li><a href="#diferencias">Diferencias con la versión de NVDA</a></li>
+<li><a href="#creditos">Créditos, licencia y apoyo</a></li>
+<li><a href="#cambios">Historial de cambios</a></li>
+</ul>
+
+<h2 id="descripcion">Descripción</h2>
+<p>Traductor Avanzado Pro traduce textos a decenas de idiomas con varios servicios. Sus funciones principales son:</p>
+<ul>
+<li>Traducción simultánea de todo lo que dice Tiresias, sin bloquear la voz.</li>
+<li>Traducción del texto seleccionado, del portapapeles, del último texto verbalizado y del objeto navegador.</li>
+<li>Ocho servicios: Google Translate, DeepL (gratuito y API oficial), Microsoft Translator, LibreTranslate, OpenAI, Claude, Google Gemini y DeepSeek.</li>
+<li>OCR con traducción, diccionario multilingüe y detección del idioma.</li>
+<li>Intercambio automático de idioma: si el texto ya está en el idioma de destino, se traduce al idioma alternativo.</li>
+<li>Caché inteligente por aplicación e idioma, e historial con búsqueda, filtros, exportación a CSV y JSON y estadísticas.</li>
+<li>Interfaz de traducción manual con audio (voz de Google) y un reproductor con control de volumen, velocidad y saltos.</li>
+<li>Varias claves de API por servicio, cifradas, con rotación automática si una falla.</li>
+<li>Un sistema de plugins para añadir servicios y funciones nuevas.</li>
+</ul>
+
+<h2 id="requisitos">Requisitos e instalación</h2>
+<ul>
+<li>Tiresias 1.0 o posterior y conexión a internet.</li>
+<li>Para OCR: un idioma de reconocimiento de Windows (Configuración de Windows, Hora e idioma) o Tesseract, como para el OCR de Tiresias.</li>
+<li>Para OpenAI, Claude, Gemini, DeepSeek y la API de DeepL hace falta una clave de API propia de cada servicio (suele ser de pago). Google, DeepL gratuito y Microsoft no necesitan clave; LibreTranslate puede necesitarla según el servidor.</li>
+</ul>
+<p>Instálalo desde la tienda de complementos de Tiresias o con «Complementos, Administrador de complementos, Instalar desde archivo». Después de instalarlo, reinicia Tiresias.</p>
+
+<h2 id="ordenes">Órdenes y teclas</h2>
+<p>Todas las órdenes están en la categoría «Traductor Avanzado Pro» del diálogo Gestos de entrada, donde se les puede asignar cualquier tecla. Por defecto solo hay dos atajos globales (en NVDA eran NVDA+Mayúsculas+T y NVDA+Mayúsculas+I, pero en Tiresias esas combinaciones ya son de «IA: traducir el texto seleccionado» y «Lupa: invertir colores»):</p>
+<table><caption>Atajos globales</caption><thead><tr><th scope="col">Tecla</th><th scope="col">Acción</th></tr></thead><tbody>
+<tr><td>Tiresias+Control+Mayúsculas+T</td><td>Activa la capa de órdenes del traductor (suena un aviso; vuelve a pulsarla para cerrarla)</td></tr>
+<tr><td>Tiresias+Control+Mayúsculas+G</td><td>Detecta el idioma del texto seleccionado (Google; si no hay conexión, con el detector local)</td></tr>
+</tbody></table>
+
+<h2 id="capa">Capa de órdenes</h2>
+<p>Pulsa Tiresias+Control+Mayúsculas+T y después una de estas letras. Cualquier otra tecla cierra la capa y funciona como siempre. Al abrir y cerrar la capa suenan dos avisos (se pueden desactivar en las opciones).</p>
+<table><caption>Teclas de la capa</caption><thead><tr><th scope="col">Tecla</th><th scope="col">Acción</th></tr></thead><tbody>
+<tr><td>T</td><td>Activa o desactiva la traducción simultánea</td></tr>
+<tr><td>S</td><td>Traduce el texto seleccionado</td></tr>
+<tr><td>B</td><td>Traduce el contenido del portapapeles</td></tr>
+<tr><td>L</td><td>Copia la última traducción al portapapeles</td></tr>
+<tr><td>H</td><td>Muestra el historial de traducciones</td></tr>
+<tr><td>D</td><td>Cambia el idioma de destino (lista con búsqueda)</td></tr>
+<tr><td>O</td><td>Cambia el idioma de origen (lista con búsqueda)</td></tr>
+<tr><td>C</td><td>Cambio rápido de servicio, modelo de IA e idiomas</td></tr>
+<tr><td>A</td><td>Limpia toda la caché (fuera de la capa, la orden pide pulsar dos veces)</td></tr>
+<tr><td>X</td><td>Limpia la caché de la aplicación actual (fuera de la capa, pulsar dos veces)</td></tr>
+<tr><td>G</td><td>Activa o desactiva la caché</td></tr>
+<tr><td>V</td><td>Traduce el último texto verbalizado por Tiresias</td></tr>
+<tr><td>Z</td><td>Traduce el objeto navegador (su nombre o, si no tiene, su texto)</td></tr>
+<tr><td>W</td><td>Abre la interfaz de traducción (con el texto seleccionado, si lo hay)</td></tr>
+<tr><td>I</td><td>Detecta el idioma del texto seleccionado</td></tr>
+<tr><td>J</td><td>Activa o desactiva el intercambio automático de idioma</td></tr>
+<tr><td>K</td><td>Intercambia el idioma de destino y el alternativo</td></tr>
+<tr><td>U</td><td>Comprueba si hay una versión nueva del complemento en la tienda de Tiresias</td></tr>
+<tr><td>P</td><td>Abre la configuración (categoría del complemento en las Opciones de Tiresias)</td></tr>
+<tr><td>R</td><td>Reconoce con OCR el objeto navegador y traduce el texto</td></tr>
+<tr><td>E</td><td>Busca la palabra seleccionada en el diccionario</td></tr>
+<tr><td>Escape</td><td>Cierra la capa</td></tr>
+<tr><td>F1</td><td>Muestra la ayuda de la capa</td></tr>
+</tbody></table>
+<p>Las órdenes que traducen avisan con «Hay una traducción en curso» si ya hay otra en marcha. Las de selección, portapapeles, último texto, objeto y OCR piden desactivar antes la traducción simultánea, como en el original.</p>
+
+<h2 id="simultanea">Traducción simultánea</h2>
+<p>Con la traducción simultánea activada (capa, T), todo lo que dice Tiresias pasa por el traductor mediante el punto de extensión de voz <code>filter_speechSequence</code>:</p>
+<ul>
+<li>Si la frase ya está en la caché, se dice traducida al momento.</li>
+<li>Si no, se dice el original y la traducción se pide en segundo plano; en cuanto llega se dice a continuación, sin interrumpir. La voz de Tiresias nunca se bloquea esperando a la red.</li>
+<li>No se traducen los caracteres y palabras que escribes, los mensajes del propio complemento ni las traducciones que ya ha dicho (así no hay bucles).</li>
+<li>Las traducciones se muestran también en la línea braille.</li>
+<li>Al desactivarla se descarta lo pendiente y la caché se guarda en disco.</li>
+</ul>
+
+<h2 id="servicios">Servicios de traducción</h2>
+<table><caption>Servicios disponibles</caption><thead><tr><th scope="col">Servicio</th><th scope="col">Clave</th><th scope="col">Notas</th></tr></thead><tbody>
+<tr><td>Google Translate (API Gratuita)</td><td>No</td><td>Servicio por defecto. Corta los textos largos en trozos. Si Google limita las peticiones, usa durante un rato el servicio alternativo de Google (el de la extensión del navegador).</td></tr>
+<tr><td>DeepL (Gratuito)</td><td>No</td><td>El servicio de la extensión del navegador de DeepL. DeepL lo limita mucho: si responde «demasiadas solicitudes», hay que esperar o usar otro servicio.</td></tr>
+<tr><td>DeepL API</td><td>Sí</td><td>API oficial. Las claves terminadas en «:fx» usan la API Free y las demás la Pro. Rota de clave si una no es válida o agota la cuota. Desde «Gestionar claves» se puede consultar el uso de caracteres.</td></tr>
+<tr><td>Microsoft Translator (Gratuito)</td><td>No</td><td>Usa el token público del traductor de Edge y, si Microsoft no lo da, el traductor web de Bing (mismo motor).</td></tr>
+<tr><td>LibreTranslate</td><td>Opcional</td><td>Código abierto. Puedes indicar tu propio servidor («URL del servidor») y una clave; sin servidor propio prueba los servidores públicos, que hoy suelen pedir clave.</td></tr>
+<tr><td>OpenAI GPT</td><td>Sí</td><td>Modelo por defecto gpt-4o-mini. Admite cualquier API compatible con OpenAI indicando su URL. Adapta los parámetros a los modelos de razonamiento.</td></tr>
+<tr><td>Claude (Anthropic)</td><td>Sí</td><td>Modelo por defecto claude-opus-5-5 con esfuerzo bajo (rápido para traducir). Con los modelos que lo admiten pide el modelo de respaldo automático si el principal rehúsa el texto.</td></tr>
+<tr><td>Google Gemini</td><td>Sí</td><td>Modelo por defecto gemini-2.5-flash.</td></tr>
+<tr><td>DeepSeek</td><td>Sí</td><td>Modelo por defecto deepseek-chat.</td></tr>
+</tbody></table>
+<p>Hay unos 90 idiomas en las listas. Cada servicio convierte el código al formato que espera (por ejemplo, el chino simplificado es «zh-CN» en Google, «zh-Hans» en Microsoft y «ZH» en DeepL).</p>
+
+<h2 id="claves">Claves de API, modelos y prompts</h2>
+<p>En las Opciones de Tiresias, categoría «Traductor Avanzado Pro», grupo «Claves API», cada servicio que usa clave tiene:</p>
+<ul>
+<li><strong>Gestionar claves</strong>: lista de claves (se muestran censuradas) en el orden de uso, con Subir, Bajar y Eliminar; un campo para añadir una clave nueva; la casilla «Habilitar rotación automática de claves (usar la siguiente si una falla)»; la URL del servidor en LibreTranslate y OpenAI; y en DeepL API el botón para consultar el uso.</li>
+<li><strong>Configurar</strong> (OpenAI, Claude, Gemini y DeepSeek, cuando hay clave): modelo (lista descargada del servicio, que se guarda una semana; «Actualizar lista» la vuelve a pedir; también se puede escribir el nombre), prompt de sistema y prompt de usuario con los marcadores <code>{idioma_destino}</code> y <code>{texto}</code>, y un botón para restablecer los prompts predeterminados.</li>
+</ul>
+<p>Las claves se guardan cifradas con la protección de datos de Windows (DPAPI): solo tu usuario, en este equipo, puede descifrarlas. Si copias la carpeta de datos a otro equipo tendrás que volver a escribirlas.</p>
+<p>En los diálogos del complemento, Control+H muestra la ayuda del control con el foco.</p>
+
+<h2 id="opciones">Opciones</h2>
+<p>Están en Tiresias, menú Preferencias, Opciones, categoría «Traductor Avanzado Pro» (también con la capa y P, o desde el menú Herramientas). Se guardan con la configuración de Tiresias (y con sus perfiles).</p>
+<ul>
+<li><strong>General</strong>: servicio activo, idioma de origen (o detección automática), idioma de destino e idioma alternativo.</li>
+<li><strong>Opciones</strong>: habilitar caché de traducciones; guardar historial de traducciones; mostrar resultados en ventana (si no, se leen y se muestran en braille); reproducir sonidos; volumen de los sonidos.</li>
+<li><strong>Avanzado</strong>: intercambio automático de idioma si el origen coincide con el destino.</li>
+<li><strong>Reproductor de audio</strong>: volumen, velocidad y tamaño de los saltos al retroceder y adelantar.</li>
+<li><strong>Servicios</strong>: lista de servicios con su descripción, si requieren clave, si está configurada, si detectan el idioma, versión y modelo.</li>
+<li><strong>Claves API</strong>: ver el apartado anterior.</li>
+<li><strong>Plugins de extensión</strong>: casillas para activar o desactivar cada plugin, con su descripción.</li>
+<li><strong>Información y mantenimiento</strong>: versión y carpeta de datos; botones Limpiar caché, Limpiar historial, Restablecer configuración (pone los valores de fábrica; se guardan al pulsar Aceptar; no borra las claves) y Abrir carpeta de datos.</li>
+</ul>
+
+<h2 id="interfaz">Interfaz de traducción y reproductor</h2>
+<p>Con la capa y W (o desde el menú) se abre la interfaz de traducción, con el texto seleccionado si lo hay:</p>
+<ul>
+<li>Alt+1: texto de origen; Alt+2: texto de destino (solo lectura); Alt+3: idioma de origen; Alt+4: idioma de destino; Alt+5: número de caracteres.</li>
+<li>Botones: Traducir (también Control+Intro), Escuchar, Intercambiar (cambia los idiomas y pasa la traducción al campo de origen), Limpiar, Pegar al foco (pega la traducción en la ventana que estaba activa y restaura el portapapeles) y Cerrar.</li>
+<li>Los idiomas elegidos se recuerdan para la próxima vez.</li>
+</ul>
+<p>«Escuchar» descarga la traducción con la voz de Google (con una barra de progreso que se puede cancelar) y abre el reproductor:</p>
+<table><caption>Teclas del reproductor</caption><thead><tr><th scope="col">Tecla</th><th scope="col">Acción</th></tr></thead><tbody>
+<tr><td>F1</td><td>Retroceder</td></tr><tr><td>F2</td><td>Reproducir o pausar</td></tr><tr><td>F3</td><td>Adelantar</td></tr><tr><td>F4</td><td>Detener</td></tr>
+<tr><td>F5 y F6</td><td>Bajar y subir el volumen</td></tr><tr><td>F7 y F8</td><td>Bajar y subir la velocidad (de 0,5 a 2)</td></tr><tr><td>F9</td><td>Tiempo transcurrido y total</td></tr>
+<tr><td>Mayúsculas+F10 o tecla Aplicaciones en Retroceder o Adelantar</td><td>Elegir el salto: 1, 5, 10, 15 o 30 segundos o 1 minuto</td></tr>
+</tbody></table>
+<p>«Guardar audio» guarda el audio como MP3. Volumen, velocidad y saltos se recuerdan.</p>
+
+<h2 id="historial">Historial</h2>
+<p>Se guardan las 500 traducciones más recientes, también entre sesiones. El diálogo del historial (capa y H) tiene búsqueda, filtros por idioma de destino y por servicio, la lista de traducciones, el texto completo de la seleccionada y los botones Copiar original, Copiar traducción (o Intro en la lista), Eliminar, Exportar (CSV para hojas de cálculo o JSON), Estadísticas (total, caracteres, idioma y servicio más usados, y el estado de la caché) y Limpiar todo.</p>
+
+<h2 id="cache">Caché inteligente</h2>
+<p>Las traducciones se guardan por aplicación e idioma de destino (como mucho 1000 por grupo; cuando se llena se descartan las menos usadas). Se busca primero en la caché de la aplicación con el foco y después en la general. La caché se guarda en disco cada pocas traducciones, al desactivar la traducción y al cerrar Tiresias. Con la capa: A limpia toda la caché, X la de la aplicación actual y G la activa o desactiva.</p>
+
+<h2 id="plugins">Plugins de extensión</h2>
+<ul>
+<li><strong>Traductor OCR</strong> (capa, R): reconoce el objeto navegador con el motor de OCR de Tiresias (Windows OCR o Tesseract, con el idioma elegido en sus opciones) y traduce el texto.</li>
+<li><strong>Diccionario Multilingüe</strong> (capa, E): definiciones, fonética, ejemplos, sinónimos y antónimos de la palabra seleccionada, en una ventana navegable y traducidos al idioma de destino. Usa Free Dictionary API y Wiktionary (con palabras de muchos idiomas); si no encuentra la palabra, busca su traducción al inglés.</li>
+<li><strong>Detector de Idioma Google</strong> (Tiresias+Control+Mayúsculas+G o capa, I).</li>
+<li><strong>Detector de Idioma</strong> local, sin conexión (alfabetos y palabras frecuentes), que se usa si Google no responde.</li>
+<li><strong>Historial Inteligente</strong>: exportación, estadísticas y búsqueda avanzada del historial.</li>
+</ul>
+
+<h2 id="extender">Añadir servicios y plugins propios</h2>
+<p>Los archivos <code>.py</code> que pongas en las carpetas <code>traductores</code> y <code>plugins</code> de la carpeta de datos del complemento se cargan al iniciar Tiresias (y no se pierden al actualizar). Un servicio hereda de <code>TraductorBase</code>:</p>
+<pre>from ..nucleo.gestor_traductores import TraductorBase
+
+class MiTraductor(TraductorBase):
+	id = "mi_traductor"
+	nombre = "Mi traductor personalizado"
+	descripcion = "Descripción del servicio"
+	requiere_api = True
+
+	def traducir(self, texto, idioma_origen="auto", idioma_destino="es", **kwargs):
+		# Devuelve la traducción, o None si falla (y pon el motivo en self.ultimo_error)
+		return texto_traducido</pre>
+<p>Un plugin hereda de <code>PluginBase</code> (<code>from ..nucleo.gestor_plugins import PluginBase, TipoPlugin</code>), define <code>id</code>, <code>nombre</code>, <code>descripcion</code> y <code>ejecutar()</code>, y puede exponer comandos con <code>obtener_comandos()</code> y entradas para el submenú del complemento con <code>obtener_elementos_menu()</code> (lista de <code>{"etiqueta": ..., "accion": ...}</code>). Con <code>self.plugin_principal</code> accede al complemento (gestores de traductores, idiomas, caché e historial).</p>
+
+<h2 id="menu">Menú Herramientas</h2>
+<p>En el menú de Tiresias, Herramientas, Traductor Avanzado Pro: Configuración, Historial de traducciones, Interfaz de traducción, Cambio rápido de servicio e idiomas, Idioma de destino, Idioma de origen, Documentación (este documento) y Apoyar el proyecto.</p>
+
+<h2 id="datos">Dónde se guardan los datos</h2>
+<p>En la carpeta de datos de Tiresias, <code>addonsData\TraductorAvanzadoPro</code>: <code>apis.json</code> (claves cifradas y ajustes de cada servicio), <code>historial.json</code>, <code>cache</code> (caché de traducciones), <code>modelos</code> (listas de modelos de las IA), <code>temp</code> (audio temporal del reproductor), y las carpetas <code>traductores</code>, <code>plugins</code> y <code>sonidos</code> para tus añadidos (un <code>open.wav</code> o <code>close.wav</code> propio sustituye a los sonidos de la capa). También se puede poner un <code>idiomas.json</code> para añadir o renombrar idiomas.</p>
+
+<h2 id="diferencias">Diferencias con la versión de NVDA</h2>
+<ul>
+<li>Atajos globales: Tiresias+Control+Mayúsculas+T y Tiresias+Control+Mayúsculas+G (los de NVDA chocaban con órdenes de Tiresias).</li>
+<li>La configuración es una categoría de las Opciones de Tiresias en lugar de un diálogo propio con pestañas; el menú del complemento está en Herramientas.</li>
+<li>Se añade el servicio Claude, que la descripción del original citaba pero no traía.</li>
+<li>Las claves se cifran con DPAPI (el original solo las ocultaba con base64).</li>
+<li>El historial se conserva entre sesiones y se puede buscar, filtrar, exportar y ver sus estadísticas (en el original el plugin de historial inteligente no estaba conectado).</li>
+<li>La caché por aplicación funciona de verdad (en el original «limpiar la caché de la aplicación» no encontraba nada).</li>
+<li>El OCR traduce el texto reconocido (en el original se quedaba en el portapapeles por un fallo).</li>
+<li>Las teclas D y O de la capa abren una lista de idiomas; C abre el cambio rápido (en el original las tres abrían el cambio rápido).</li>
+<li>Comprobar actualizaciones consulta la tienda de complementos de Tiresias (en el original era un aviso fijo).</li>
+<li>El audio se guarda como MP3, que es lo que devuelve Google (el original lo llamaba .wav).</li>
+<li>El reproductor usa el <code>wx.media</code> que trae Tiresias; no hacen falta las copias de <code>wx.media</code> para Python 3.11 y 3.13 del original.</li>
+<li>La traducción simultánea no traduce lo que escribes ni los mensajes del propio complemento.</li>
+</ul>
+
+<h2 id="creditos">Créditos, licencia y apoyo</h2>
+<p>Autor: Héctor J. Benítez Corredera (xebolax@gmail.com). Proyecto original: <a href="https://github.com/hxebolax/TranslateAdvanced">https://github.com/hxebolax/TranslateAdvanced</a>. Versión para Tiresias: reescritura del complemento para el lector de pantalla Tiresias.</p>
+<p>Este complemento está cubierto por la Licencia Pública General de GNU (GPL), como el original. No incluye bibliotecas ni binarios de terceros: usa la biblioteca estándar de Python y lo que ya trae Tiresias. Los servicios de traducción, diccionario y voz pertenecen a sus empresas (Google, DeepL, Microsoft, LibreTranslate, OpenAI, Anthropic, DeepSeek, Free Dictionary API y Wikimedia) y están sujetos a sus condiciones de uso.</p>
+<p>Si este complemento te resulta útil, puedes apoyar su desarrollo: <a href="https://paypal.me/hjbcdonaciones">https://paypal.me/hjbcdonaciones</a>.</p>
+
+<h2 id="cambios">Historial de cambios</h2>
+<h3>1.0.0</h3>
+<p>Primera versión para Tiresias: todas las funciones del Traductor Avanzado Pro de NVDA (versión 2025.12.28) reescritas con la API de Tiresias, más el servicio Claude, el historial persistente con exportación y estadísticas, el diccionario multilingüe con Wiktionary, los servicios de respaldo de Google y Microsoft y el cifrado de las claves.</p>
+</body></html>

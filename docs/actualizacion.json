@@ -1,0 +1,27 @@
+{
+	"format": "tiresias-actualizacion",
+	"formatVersion": 1,
+	"version": "1.0.12",
+	"date": "2026-10-12",
+	"url": "descargas/1.0.12/Tiresias-1.0.12-instalador.exe",
+	"sha256": "bb44d9ed2fa8bca7b2a8bb7a5bae048f38d77e82fe4264964a47b6bdf5c506c4",
+	"size": 62349312,
+	"minWindows": "10.0.10240",
+	"notes": "Funciones nuevas: lectura del inicio de sesión y las pantallas seguras con la copia instalada, anuncio del cambio de idioma del teclado y del escritorio virtual, voces SAPI 5 de 32 bits y SAPI 4, y líneas braille EcoBraille, Albatross, Lilli, hedo, SuperBraille, nBraille y Dot Pad.",
+	"notesUrl": "novedades.html",
+	"installer": {
+		"url": "descargas/1.0.12/Tiresias-1.0.12-instalador.exe",
+		"sha256": "bb44d9ed2fa8bca7b2a8bb7a5bae048f38d77e82fe4264964a47b6bdf5c506c4",
+		"size": 62349312
+	},
+	"portable": {
+		"url": "descargas/1.0.12/Tiresias-1.0.12-portable.zip",
+		"sha256": "de68440ce2181df7f4705b071356913fe909a79b5535b78dafd5b6ab5a3f3911",
+		"size": 85065953
+	},
+	"source": {
+		"url": "descargas/1.0.12/Tiresias-1.0.12-codigo-fuente.zip",
+		"sha256": "32e98d4a0521c5282a54742f0e6bbf426e1231efb51b257e2f913917de709843",
+		"size": 16653340
+	}
+}

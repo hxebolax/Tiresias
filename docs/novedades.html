@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Novedades de Tiresias</title>
+<style>
+:root { color-scheme: light dark; --fondo:#ffffff; --texto:#000000; --enlace:#0b4fa8; --cabecera:#e8eef7; }
+@media (prefers-color-scheme: dark) { :root { --fondo:#000000; --texto:#ffffff; --enlace:#9cc9ff; --cabecera:#1c2a3d; } }
+html { font-size: 112.5%; }
+body { background: var(--fondo); color: var(--texto); font-family: "Segoe UI", Verdana, Arial, sans-serif; line-height: 1.6; margin: 0 auto; max-width: 52em; padding: 0 1em 3em; }
+a { color: var(--enlace); }
+h1, h2 { border-bottom: 2px solid var(--cabecera); }
+kbd { font-family: inherit; font-weight: bold; }
+</style>
+</head>
+<body>
+<h1>Novedades de Tiresias</h1>
+<p>Esta página resume lo que ha cambiado en cada versión, empezando por la más reciente; al final, las novedades de la versión 1.0.1 ordenadas por áreas. Los detalles de cada función están en el manual de usuario (menú de Tiresias, Ayuda, Manual de usuario). Todas las teclas nuevas están también en la referencia rápida de órdenes del manual y en Ayuda, Referencia rápida de órdenes.</p>
+
+<h2 id="v1-0-13">Versión 1.0.13</h2>
+<ul>
+<li><strong>Tiresias está en GitHub.</strong> El código fuente completo está en el repositorio público <a href="https://github.com/hxebolax/Tiresias">https://github.com/hxebolax/Tiresias</a>, con las instrucciones para ejecutarlo desde el código y compilarlo. Eloquence y la voz neuronal Álvaro no están en el repositorio porque son software propietario; siguen en la tienda de complementos del servidor del proyecto.</li>
+<li><strong>Dos orígenes para las actualizaciones y la tienda.</strong> Tiresias busca las versiones nuevas y los complementos en el servidor del proyecto y en GitHub. Si uno no responde, usa el otro, y si una descarga falla, la intenta en el otro origen; siempre comprueba la suma SHA-256. La tienda combina los dos catálogos, así que los complementos que solo están en el servidor siguen apareciendo. Se elige en Opciones, categoría Actualizaciones y complementos, «Origen de las actualizaciones y de la tienda»: los dos (por defecto), solo el servidor del proyecto, solo GitHub o un servidor propio.</li>
+</ul>
+
+<h2 id="v1-0-12">Versión 1.0.12</h2>
+<p>Funciones nuevas que tenían otros lectores de pantalla y le faltaban a Tiresias.</p>
+<ul>
+<li><strong>Inicio de sesión y pantallas seguras.</strong> La copia instalada para todos los usuarios puede leer la pantalla de inicio de sesión, el Control de cuentas de usuario y la pantalla de <kbd>Control+Alt+Suprimir</kbd>, como NVDA instalado. Actívalo en Opciones, categoría Generales, con «Usar Tiresias durante el inicio de sesión y en las pantallas seguras» (pide permiso de administrador una vez). En esas pantallas Tiresias funciona siempre en modo seguro y con la configuración del sistema.</li>
+<li><strong>Cambio de idioma o distribución del teclado.</strong> Al cambiar el idioma de entrada o la distribución del teclado (<kbd>Alt+Mayúsculas</kbd>, <kbd>Windows+Espacio</kbd>, <kbd>Control+Mayúsculas</kbd> o el indicador de idioma de la barra de tareas), Tiresias dice el idioma y la distribución nuevos. Se puede desactivar en la categoría Teclado de las Opciones.</li>
+<li><strong>Escritorios virtuales.</strong> Al pasar a otro escritorio virtual, crearlo o cerrarlo, Tiresias dice su nombre.</li>
+<li><strong>Voces SAPI 5 de 32 bits y SAPI 4.</strong> Dos sintetizadores nuevos para usar las voces antiguas o comerciales que solo existen en 32 bits, con un pequeño programa auxiliar que se abre y se cierra solo.</li>
+<li>Con las voces SAPI 5 (también Eloquence para SAPI 5), la velocidad ya cambia de verdad.</li>
+<li><strong>Líneas braille nuevas:</strong> EcoBraille (ONCE), Caiku Albatross, MDV Lilli, hedo ProfiLine y MobilLine, SuperBraille, Nattiq nBraille y Dot Pad. Al importar la configuración de NVDA se reconocen también estas líneas y sus teclas.</li>
+</ul>
+
+<h2 id="v1-0-11">Versión 1.0.11</h2>
+<p>Versión de estabilidad: se ha revisado a fondo todo el programa y se han corregido muchos fallos que podían dejarte sin voz, sin teclado o con la información equivocada.</p>
+<h3>Voz</h3>
+<ul>
+<li>Si el sintetizador falla y Tiresias cambia a otro, ya no se queda mudo: anuncia el cambio y sigue leyendo por donde iba.</li>
+<li>En la lectura continua, el cursor y la línea braille ya no se adelantan a lo que se está oyendo; al detenerla con <kbd>Control</kbd> y reanudarla no se salta texto, y <kbd>Mayúsculas</kbd> vuelve a pausar.</li>
+<li>Un emoji cortado o un carácter extraño en el texto ya no hace fallar la voz ni provoca el cambio de sintetizador.</li>
+<li>Con las voces de Windows (OneCore), bajar la velocidad de la lectura continua con <kbd>Avanzar página</kbd> o con los esquemas de voz ya no la acelera.</li>
+<li>Las voces SAPI 5 se callan al momento al pulsar <kbd>Control</kbd>, y una voz latinoamericana ya no cambia a la de España en textos marcados con un dialecto.</li>
+<li>Al conectar unos auriculares, la voz pasa a ellos en un par de segundos, también en mitad de una lectura.</li>
+<li>Los textos muy largos ya no ocupan memoria sin límite, y el vigilante del sintetizador ya no confunde una lectura larga con un cuelgue.</li>
+<li>Las voces neuronales Piper leen bien los números con puntos y comas («1.500», «3,14»).</li>
+</ul>
+<h3>Audio</h3>
+<ul>
+<li>La atenuación de otras aplicaciones ya no baja cada vez más el volumen de una aplicación que se cierra y se vuelve a abrir, respeta el volumen que cambies tú y nunca atenúa a otros lectores de pantalla ni los sonidos del sistema.</li>
+<li>La división del sonido solo se aplica a las aplicaciones estéreo (las mono ya no se quedan mudas) y devuelve el sonido al centro también tras un cierre inesperado.</li>
+<li>Se ha corregido una fuga de memoria del audio de Windows, y los pitidos muy seguidos ya no se acumulan.</li>
+</ul>
+<h3>Teclado</h3>
+<ul>
+<li>Si Windows retira a Tiresias la captura del teclado (por ejemplo, con el equipo muy cargado), Tiresias lo detecta, la recupera solo y te lo dice.</li>
+<li>Después de <kbd>Control+Alt+Suprimir</kbd>, <kbd>Windows+L</kbd> o el Control de cuentas de usuario ya no se quedan «pegadas» las teclas Control, Alt, Windows ni la tecla Tiresias.</li>
+<li>Las teclas ya no llegan desordenadas a la aplicación (por ejemplo, el Retroceso al escribir rápido o la negrita en Word).</li>
+<li>La ayuda de entrada ya no deja pasar Windows ni Alt (no se abre el menú Inicio) y anuncia los modificadores.</li>
+<li>Compatibilidad con las teclas especiales de Windows, con el dictado (<kbd>Windows+H</kbd>), el panel de emojis y los teclados en pantalla.</li>
+<li>Gestos de entrada muestra también las órdenes propias del control en el que estás (Word, Excel, listas...). El mapa compatible con JAWS ya no deja ninguna orden sin tecla.</li>
+</ul>
+<h3>Foco y aplicaciones</h3>
+<ul>
+<li>Vuelven a oírse las alertas, el autocompletado de los editores de código, el panel de emojis, el historial del portapapeles de Windows y la búsqueda de Windows, que a veces se quedaban mudos.</li>
+<li>Las ventanas en segundo plano ya no roban el foco a Tiresias, las avalanchas de eventos de una aplicación ya no lo ralentizan y las regiones vivas ya no se repiten.</li>
+<li>Al volver del Control de cuentas de usuario se vuelve a leer el control que tiene el foco.</li>
+<li>Las notificaciones de las aplicaciones en segundo plano ya no cortan la lectura (se pueden activar en las Opciones).</li>
+<li>Nuevo módulo para el nuevo Outlook para Windows, y mejoras en Excel, PowerPoint, LibreOffice, Zoom, PuTTY y la búsqueda de Windows.</li>
+<li>WhatsApp accesible 1.0.3: los filtros ya no borran teléfonos ni texto del contenido de los mensajes, y <kbd>Control+C</kbd> copia el mensaje completo.</li>
+</ul>
+<h3>Navegación web y documentos</h3>
+<ul>
+<li>Los cambios de una pestaña en segundo plano ya no hacen que se reconstruya la página que estás leyendo.</li>
+<li>Al abrirse un diálogo web, el cursor va a él, y el paso automático entre modo foco y modo exploración funciona como en NVDA (menús, pestañas, botones de opción, cuadrículas...).</li>
+<li>Las regiones vivas (por ejemplo, los chats web) solo leen lo nuevo, y las palabras partidas en varios elementos ya no se separan.</li>
+<li>Mientras carga una página, las teclas que no son de navegación llegan a la página.</li>
+<li>En los campos de edición con emojis ya no se lee el carácter equivocado, y <kbd>Control+Flecha izquierda</kbd> ya no se para en cada espacio.</li>
+<li>Los documentos de Word y del panel de lectura de Outlook se vuelven a leer si su texto ha cambiado.</li>
+</ul>
+<h3>Braille</h3>
+<ul>
+<li>Al escribir al final de una línea, el cursor braille ya no salta al principio de la línea.</li>
+<li>Los mensajes se quitan en cuanto pulsas una tecla y cambia el foco. Si una tabla braille falla, Tiresias lo dice.</li>
+</ul>
+<h3>Inteligencia artificial</h3>
+<ul>
+<li>Nuevos modelos de Claude (Haiku 5.5 y Fable 5.1) y posibilidad de escribir cualquier otro; el modelo de Gemini por defecto pasa a ser gemini-3.8-flash.</li>
+<li>Reintentos automáticos si el servicio está saturado y mensajes de error claros en español; nunca se muestra tu clave.</li>
+<li>Se avisa cuando una respuesta se corta por su longitud.</li>
+<li>«Traducir todo lo que se dice» traduce en orden, no deja más de 8 segundos de silencio y se desactiva si la clave falla.</li>
+<li>El aviso de privacidad es de cada servicio, y un servidor «local» que en realidad esté en otro equipo también avisa.</li>
+<li>El agente nunca escribe en campos de contraseña.</li>
+</ul>
+<h3>Seguridad y privacidad</h3>
+<ul>
+<li>Con el equipo bloqueado solo funcionan las órdenes necesarias para la pantalla de bloqueo: no se pueden abrir el menú, la consola ni los historiales.</li>
+<li>En la pantalla de inicio de sesión y en el escritorio seguro, Tiresias se inicia siempre en modo seguro.</li>
+<li>Las contraseñas copiadas desde gestores de contraseñas (KeePass, Bitwarden, 1Password...) no se leen ni se guardan en el historial del portapapeles.</li>
+<li>Lo que se escribe en los campos de contraseña, también con la línea braille, nunca se lee, y el registro de depuración ya no guarda las teclas pulsadas.</li>
+<li>Tiresias no abre los adjuntos peligrosos de Outlook y marca los adjuntos como descargados de Internet.</li>
+<li>Las actualizaciones y la tienda de complementos solo aceptan direcciones web seguras, y el acceso remoto limita los intentos con una clave incorrecta.</li>
+<li>Audiocinemateca 1.0.1: las credenciales solo se envían a la Audiocinemateca por conexión segura.</li>
+</ul>
+<h3>Arranque, cierre y actualizaciones</h3>
+<ul>
+<li>Si una parte de Tiresias no puede iniciarse, Tiresias arranca igualmente con voz y teclado y dice qué ha fallado; si los últimos arranques no terminaron, arranca sin complementos.</li>
+<li>Tiresias ya no impide que Windows se apague o cierre la sesión, y al salir nunca se queda colgado.</li>
+<li>Si deja de responder, se reinicia solo, pero ya no entra en un bucle de reinicios.</li>
+<li>La actualización de la copia portable prepara la versión nueva aparte: si se corta la luz a mitad, la copia sigue funcionando.</li>
+<li>Al salir de un perfil se vuelve al sintetizador automático, y las opciones generales (idioma, actualizaciones...) ya no se guardan en los perfiles.</li>
+</ul>
+<h3>Complementos</h3>
+<ul>
+<li>Eloquence 1.0.3 (en la tienda): más estable, y las voces japonesa, china y coreana leen su propio texto.</li>
+<li>Instalar o actualizar un complemento ya nunca lo deja a medias si algo falla.</li>
+</ul>
+
+<h2 id="v1-0-10">Versión 1.0.10</h2>
+<ul>
+<li><strong>eSpeak NG ya habla en español de Latinoamérica.</strong> Con la voz «Spanish (Latin America)» de eSpeak NG, Tiresias decía bien la primera frase, pero a partir de la segunda volvía al español de España (por ejemplo, «cielo» con zeta en lugar de con ese). Ahora la voz elegida se mantiene en todas las frases y también después de leer un texto en otro idioma. Además, el texto que sigue a un cambio de idioma vuelve a leerse con tu voz, y no con la del otro idioma.</li>
+<li><strong>Importar la voz de eSpeak desde NVDA.</strong> Si en NVDA nunca habías cambiado la voz de eSpeak, NVDA la guarda con un nombre que Tiresias no reconocía (por ejemplo «roa\es-419»). Ahora se reconoce y se usa la misma voz que en NVDA. También se reconocen los nombres de voz de NVDA que no coinciden con el idioma, como «en» para el inglés británico.</li>
+<li>Las voces de eSpeak NG «English (Great Britain)», «French (France)» y «Cherokee» ya se pueden elegir; antes sonaba otra voz en su lugar.</li>
+</ul>
+
+<h2 id="v1-0-9">Versión 1.0.9</h2>
+<ul>
+<li><strong>Tiresias se puede distribuir libremente.</strong> El instalador, la copia portable y el código fuente ya no traen la voz Eloquence, que es software propietario: Tiresias habla con eSpeak NG o con las voces de Windows. Si ya tenías Eloquence, la actualización no lo quita. Si tienes licencia, el complemento Eloquence sigue en la tienda de complementos y, al instalarlo, vuelve a ser tu voz por defecto.</li>
+<li><strong>Siete complementos nuevos en la tienda</strong> (menú de Tiresias, Complementos, Tienda de complementos), reescritos para Tiresias con todas las funciones de sus versiones para NVDA:
+<ul>
+<li><strong>zRadio BASS</strong>: miles de emisoras de radio en línea (Radio Browser), con búsqueda por país, idioma y etiqueta, favoritos con categorías, historial, grabación, grabaciones programadas, ecualizador, título de la canción y plugins.</li>
+<li><strong>Audiocinemateca</strong>: todo el catálogo de la Audiocinemateca (necesitas tu cuenta), con fichas, búsqueda, reproductor con marcas de posición, ecualizador, temporizador de sueño, favoritos, listas y descargas.</li>
+<li><strong>Visor de consola</strong>: consulta, sigue en tiempo real, busca, copia, guarda y analiza la salida de las consolas (Símbolo del sistema, PowerShell, Windows Terminal y otros) sin perder tu posición, con 23 herramientas, lanzador de terminales, alertas y chat e informes de inteligencia artificial.</li>
+<li><strong>zUtilidades</strong>: lanzador de aplicaciones y notas rápidas con categorías, menús virtuales y copias de seguridad (restaura también las copias hechas en NVDA).</li>
+<li><strong>Voces neuronales de Microsoft</strong> y la voz <strong>Álvaro (español de España)</strong>: voces naturales sin conexión, con cambio automático de voz según el idioma. La voz Álvaro es propiedad de Microsoft.</li>
+<li><strong>Monitor de recursos</strong>: procesador, memoria, discos, wifi (con avisos al conectar y desconectar), batería, versión de Windows, tiempo de actividad y tarjeta gráfica. Capa de órdenes con <kbd>Tiresias+Mayúsculas+0</kbd>.</li>
+<li><strong>Traductor Avanzado Pro</strong>: traducción simultánea de todo lo que lee Tiresias, de la selección, del portapapeles y de imágenes con OCR, con Google, DeepL, Microsoft, LibreTranslate, OpenAI, Claude, Gemini y DeepSeek, caché, historial y diccionario. Capa de órdenes con <kbd>Tiresias+Control+Mayúsculas+T</kbd>.</li>
+</ul></li>
+<li>La tienda de complementos avisa de los complementos que son software propietario y pide confirmación antes de instalarlos.</li>
+<li>Los complementos pueden añadir sus propias entradas al menú Herramientas, y en Opciones, F1 sobre la categoría de un complemento abre la ayuda de ese complemento.</li>
+</ul>
+
+<h2 id="v1-0-8">Versión 1.0.8</h2>
+<ul>
+<li><strong>Los signos se vuelven a leer bien carácter a carácter.</strong> Al moverte por caracteres, deletrear o escribir, los signos cuyo nombre tiene varias palabras se leían con «espacio» en medio: los dos puntos se oían «dos espacio puntos» y la barra invertida, «barra espacio invertida». Lo mismo pasaba con letras como la uve doble cuando no se usa el deletreo del sintetizador. Ahora se dice el nombre tal cual.</li>
+<li><strong>Los nombres de los emojis no se leen con sus signos.</strong> Muchos emojis tienen nombres con dos puntos o guiones («bandera: España», «T-rex»), y Tiresias leía esos signos («bandera dos puntos España»). Ahora se dicen como un nombre; el resto del texto se sigue leyendo con tu nivel de puntuación.</li>
+<li><strong>Tiresias vuelve a arrancar y cerrarse en un momento.</strong> Al avisar a Windows de que hay un lector de pantalla activo, Tiresias esperaba a que todos los programas abiertos atendieran el aviso; si alguno tardaba, el arranque y el cierre podían llevar unos 20 segundos. Ahora el aviso se manda sin esperar.</li>
+</ul>
+
+<h2 id="v1-0-7">Versión 1.0.7</h2>
+<ul>
+<li><strong>Word ya no dice el número de palabras mientras escribes.</strong> Tiresias leía cada cambio de la barra de estado de Office («Contar palabras, 12 palabras») como si fuera un aviso; ahora la ignora, como NVDA. La barra de estado se puede leer cuando quieras con Tiresias+Fin (en portátil, Tiresias+Mayúsculas+Fin).</li>
+<li><strong>Word entra directamente en modo foco</strong> al volver a un documento que se puede editar, sin preparar el modo exploración ni releer el documento. Los documentos de solo lectura, la vista de lectura y la vista protegida siguen en modo exploración.</li>
+<li><strong>Opciones revisadas y ordenadas.</strong> Las opciones repetidas están ahora en un solo sitio (las de Word y Excel usan las de Formato de documento; «elementos en los que se puede hacer clic», la línea braille y el dispositivo de audio aparecen una sola vez), cada opción está en la categoría donde la buscarías, como en NVDA, y las categorías siguen un orden lógico con Avanzado al final. Desaparecen las categorías Mezclador de audio, Líneas braille, UI Automation y Objetos y aplicaciones, cuyas opciones pasan a Audio, Braille y Avanzado.</li>
+<li>Nuevo botón «Valores de fábrica de esta categoría» en cada categoría de Opciones.</li>
+<li><strong>Acceso remoto: conexión automática sin preajustes.</strong> En Opciones › Acceso remoto, «Conectar automáticamente al iniciar Tiresias» ofrece ahora «Sí, con los datos de conexión siguientes», con campos para el modo, el tipo de conexión, el servidor, el puerto y la clave, además de tus preajustes. El cuadro Conectar tiene la casilla «Conectar automáticamente con estos datos al iniciar Tiresias». Antes la lista solo decía «(no conectar)» si no habías guardado ningún preajuste.</li>
+<li>El tamaño del búfer de audio y las opciones de UI Automation en consolas y de Java Access Bridge se aplican al momento.</li>
+<li>«Reproducir un sonido al registrarse un error» funciona con cualquier error y viene desactivada de fábrica, como en NVDA.</li>
+</ul>
+
+<h2 id="v1-0-6">Versión 1.0.6</h2>
+<p>Una versión de revisión a fondo: se ha repasado cada parte de Tiresias en busca de fallos, opciones que no hacían nada y momentos en los que el lector se quedaba callado.</p>
+<ul>
+<li><strong>Python 3.14.</strong> Tiresias funciona ahora con Python 3.14. Al actualizar una copia portable se quitan los archivos de la versión anterior de Python; si la actualización falla, se deja todo como estaba.</li>
+<li><strong>Teclas nuevas de productividad</strong>, iguales en todos los programas: el historial de notificaciones se abre con <kbd>Tiresias+Control+Mayúsculas+Alt+N</kbd> y la vigilancia de una zona de la pantalla con reconocimiento de texto (OCR) se activa y desactiva con <kbd>Tiresias+Control+Mayúsculas+Alt+V</kbd>. Las teclas anteriores, <kbd>Tiresias+Mayúsculas+Alt+N</kbd> y <kbd>Tiresias+Mayúsculas+Alt+V</kbd>, chocaban con las de PuTTY y KiTTY, que las siguen usando.</li>
+<li><strong>WhatsApp accesible tiene su categoría en Opciones</strong> (<kbd>Tiresias+Control+G</kbd>), «WhatsApp accesible», con las mismas casillas que su diálogo de ajustes (<kbd>Mayúsculas+Alt+S</kbd>). Está aunque WhatsApp no esté abierto y puede ser distinta en cada perfil. Además, se leen los mensajes recibidos aunque contengan palabras como «entregado» o «leído», y la ayuda del complemento lista todas sus órdenes.</li>
+</ul>
+
+<h3 id="v1-0-6-fiabilidad">Fiabilidad</h3>
+<ul>
+<li>Una aplicación ocupada que no atiende (por ejemplo, mientras abre muchas ventanas) ya no deja mudo a Tiresias durante varios segundos: si no responde a tiempo, Tiresias la deja de lado un momento y sigue con lo demás.</li>
+<li>Escribir el registro ya no puede detener a Tiresias, y los niveles de registro «Solo errores graves» y «Desactivado» funcionan.</li>
+<li>Al salir de la espera (cuando cierras NVDA, JAWS o el Narrador), Tiresias habla enseguida y prepara lo demás después.</li>
+<li>Con el modo dormir, ni el modo exploración, ni los complementos, ni el teclado, ni el ratón dicen nada.</li>
+<li>Con el mapa de teclas compatible con JAWS, <kbd>Tiresias+Retroceder página</kbd> dice el título de la ventana. La tecla AltGr ya no se confunde con Control+Alt.</li>
+</ul>
+
+<h3 id="v1-0-6-voz">Voz y audio</h3>
+<ul>
+<li><strong>Lectura de números dígito a dígito, por pares o por grupos de tres:</strong> los puntos y las comas entre cifras se interpretan según el idioma de la voz. En español, «1.500» se lee «1 5 0 0» y «1,5», «1 coma 5»; con una voz en inglés, «3.14» se lee «3 point 1 4». Antes «1.500» podía leerse como un número con decimales.</li>
+<li>«Número mínimo de repeticiones» de los símbolos admite también 2 y 3.</li>
+<li>En el modo de voz «a petición», la lectura continua que empiezas con su orden se lee hasta el final y ya no se queda atascada.</li>
+<li>Eloquence: cambiar un ajuste al mismo valor ya no corta la voz, los emojis no cortan el final de la frase y una voz que no existe no se guarda.</li>
+<li>Si la salida de audio elegida (WASAPI o waveOut) no funciona, Tiresias usa la otra sin cortar la voz. Al desconectar unos auriculares o cambiar de dispositivo, la voz sigue en el dispositivo nuevo.</li>
+<li>Atenuación de otras aplicaciones: el volumen elegido se aplica al guardar las opciones, las aplicaciones que empiezan a sonar después se atenúan al momento, se respetan los cambios de volumen que hagas mientras dura y los sonidos desactivados no atenúan nada.</li>
+<li>División del sonido: desactivada, Tiresias no toca el balance que hayas puesto a cada aplicación; «Aplicar la división del sonido a las demás aplicaciones» se aplica al pulsar Aceptar.</li>
+<li>Al arrancar, Tiresias quita el silencio de su propia voz en el mezclador de Windows. Guardar como audio sigue bien aunque hagas callar la voz mientras tanto.</li>
+</ul>
+
+<h3 id="v1-0-6-braille">Braille y pantalla táctil</h3>
+<ul>
+<li>En el modo exploración, desplazar la línea pasa a la línea siguiente o vuelve al final de la anterior, el desplazamiento automático avanza línea a línea y los botones de enrutamiento llevan al sitio correcto también en las fórmulas y en los elementos con etiqueta.</li>
+<li>Una línea braille que deja de responder ya no cuelga Tiresias. El joystick de las líneas HID funciona, y las líneas que lo permiten pueden activar o desactivar su simulación de teclado.</li>
+<li>Las tablas braille que no se pueden cargar no se ponen al cambiar de tabla, y los modificadores del teclado braille se quitan al cambiar el foco.</li>
+<li>Panel táctil: un toque con un dedo hace solo el clic de Windows y apoyar el dedo solo mueve el puntero; los ajustes de los toques se recargan al cambiar de perfil.</li>
+</ul>
+
+<h3 id="v1-0-6-web">Páginas web y aplicaciones</h3>
+<ul>
+<li>Modo exploración: los enlaces que están en la misma línea se encuentran con la navegación rápida, la navegación con una sola letra se activa o desactiva al momento, las páginas grandes se actualizan sin bloquear la lectura y la vista web flexible nunca oculta todo el documento.</li>
+<li>Campos de edición: <kbd>Alt+Flecha arriba</kbd> y <kbd>Alt+Flecha abajo</kbd> se mueven por frases, y en los cuadros combinados y en los campos con lista o calendario desplegable abren y cierran la lista, como siempre.</li>
+<li>Las listas dicen bien cuántos elementos hay seleccionados, y las órdenes de las columnas de una fila funcionan.</li>
+<li>Office: la lectura continua de Excel lee las fechas y los importes como se ven; PowerPoint dice «Fin de la presentación» y lee las notas durante la presentación (<kbd>Tiresias+Alt+N</kbd>); en Word, moverse por líneas ya no dice «no seleccionado» e ir al comentario siguiente es más rápido; <kbd>Tiresias+Alt+G</kbd> recorre los gráficos también en el cuerpo de un mensaje de Outlook.</li>
+<li>PuTTY y KiTTY recuperan el contenido del portapapeles después de leer la pantalla. El editor de métodos de entrada (IME) lee los candidatos de cada página nueva y no confunde los emojis con candidatos.</li>
+</ul>
+
+<h3 id="v1-0-6-vision">Visión, OCR e inteligencia artificial</h3>
+<ul>
+<li>La ventana del resultado del OCR no sale en sus propias capturas, se lee sola también en modo foco y solo se actualiza el resultado de las zonas de la pantalla.</li>
+<li>El agente de IA trabaja siempre sobre la ventana que estaba activa al pedirle la tarea, nunca sobre las de Tiresias, y se detiene si cancelas la pregunta.</li>
+<li>La ayuda de Tiresias envía los apartados del manual que más tienen que ver con tu pregunta y avisa cuando el manual no cabe entero.</li>
+<li>El etiquetado automático se detiene y avisa si el servicio rechaza la clave, y avisa una sola vez si se supera el límite de uso. «Traducir todo lo que se dice» vuelve a intentar al cabo de un minuto las frases que no se pudieron traducir.</li>
+<li>La lupa dice si se ha activado de verdad, y la cortina de pantalla no se queda a medias si falla.</li>
+</ul>
+
+<h3 id="v1-0-6-remoto">Acceso remoto y productividad</h3>
+<ul>
+<li>Acceso remoto: mientras escuchas un equipo remoto, el Tiresias de ese equipo no habla por su cuenta (se puede cambiar); los pitidos del Escritorio remoto se silencian igual que la voz; una clave guardada que no se puede leer no conecta sola.</li>
+<li>Al vigilar una zona con OCR, lo que ya había al empezar no se lee: solo lo nuevo. Vigilar objetos y buscar texto en una ventana funcionan también en programas antiguos.</li>
+<li>El analizador de texto avisa con un sonido (y, si quieres, con una descripción) justo después de leer la línea nueva.</li>
+</ul>
+
+<h3 id="v1-0-6-configuracion">Opciones, perfiles e instalación</h3>
+<ul>
+<li><strong>Opciones:</strong> se comprueba que las direcciones del servidor de distribución, del catálogo, del servidor de IA local y del servidor BrlAPI estén bien escritas antes de guardar. Los Ajustes rápidos aplican los cambios al momento, igual que el cuadro de Opciones, y manejan bien las listas de casillas. Si una categoría no se puede guardar, Opciones no se cierra, y Aceptar sin cambios no recarga la voz.</li>
+<li><strong>Perfiles:</strong> el diccionario del perfil se guarda en el perfil que abriste aunque cambie el perfil activo mientras lo editas; sin un perfil activo, Tiresias explica que no se puede editar en lugar de perder las entradas. «Solo lectura» guarda antes los cambios del perfil, y la casilla del modo dormir en la aplicación activa solo se puede marcar en un perfil.</li>
+<li><strong>Importar la configuración de NVDA:</strong> las entradas de diccionario con comodines, el estilo de las matemáticas, los atributos de fuente y los símbolos sin nombre se importan bien; los perfiles de solo lectura no se tocan, los nombres de perfil no distinguen mayúsculas y solo se guardan las cinco últimas copias de seguridad.</li>
+<li><strong>Complementos:</strong> se instalan bien los paquetes cuyo manifiesto se guardó con el Bloc de notas; un complemento que vuelves a instalar después de marcarlo para eliminar ya no se borra al reiniciar; los complementos que se eliminan se borran al reiniciar Tiresias y no al recargar los complementos; las versiones previas («1.1.0b1») se comparan bien con la final; desactivar un complemento ya no depende del perfil activo.</li>
+<li><strong>Seguridad de las descargas:</strong> las actualizaciones y los complementos descargados de Internet se comprueban siempre con su suma SHA-256; un paquete que no la indica no se instala.</li>
+<li><strong>Actualizaciones:</strong> una versión omitida deja de ofrecerse en el menú Ayuda; si buscas una actualización mientras se está buscando otra, se muestra el resultado; la copia portable se descomprime sin bloquear la ventana.</li>
+<li><strong>Instalación:</strong> Tiresias no se instala en una carpeta que tenga otras cosas; al actualizar, tus cambios de símbolos, tus temas de sonidos y tu diccionario no se pisan, y las casillas de los accesos directos salen como las tenías. La instalación sin preguntas permite elegir la carpeta, abrir Tiresias al terminar y decidir los accesos directos, y anota los errores. Reparar los registros COM pide permiso de administrador si hace falta. Una copia portable nunca se crea encima de una copia instalada.</li>
+<li>Arreglos en varios diálogos: Intro sobre «Cancelar» o «Cerrar» ya no acepta; el diálogo de marcadores de texto y el de posiciones guardadas del ratón se cierran con Escape; la lista de ventanas se actualiza al cerrar una; el tutorial no quita el foco a la paleta de órdenes ni avanza mientras la ayuda de entrada sigue activada.</li>
+<li>La consola de Python no se abre si la política del equipo o el modo seguro la desactivan, y «Guardar configuración» avisa cuando no se puede guardar.</li>
+</ul>
+
+<h2 id="v1-0-5">Versión 1.0.5</h2>
+<ul>
+<li><strong>Menús clásicos de Windows:</strong> se leen los menús contextuales y de barra de cualquier programa (la Papelera, SocialRSS y otros programas hechos con wxPython o Win32), con su nombre, atajo, estado (marcado, no disponible, submenú) y posición, también los submenús y el menú del sistema (Alt+Espacio). Antes, si el foco estaba en una lista clásica, solo se oía «Contexto menú».</li>
+<li><strong>Alt+Tab:</strong> la primera pulsación dice directamente la ventana elegida («Documento1 Word, 2 de 4»), sin «Conmutación de tareas» ni cortes.</li>
+<li>El eco de teclado ya no falla con las teclas que escriben dos caracteres a la vez (por ejemplo, un acento que no se combina con la letra siguiente).</li>
+<li>Primer arranque más claro: primero se ofrece importar la configuración de NVDA y después siempre aparece la pantalla de configuración inicial (teclado, teclas Tiresias, inicio con Windows).</li>
+</ul>
+
+<h2 id="v1-0-4">Versión 1.0.4</h2>
+<ul>
+<li><strong>Manual de usuario revisado a fondo.</strong> Se ha comprobado frase a frase con el programa: teclas, opciones, menús y valores por defecto coinciden. Es más corto y ordenado: el cuadro de Opciones sigue el orden real de sus categorías (con una fila por opción y su valor por defecto), la referencia rápida tiene todas las órdenes, las teclas de cada línea braille están en un apéndice y lo destinado a administradores en otro. La tecla F1 en Opciones lleva a la explicación de cada opción.</li>
+<li><strong>Casillas de verificación:</strong> al pulsar Espacio se dice una sola vez el estado nuevo, «marcado» o «no marcado» (antes se oía «pulsado... no pulsado» y parecía que siempre decía «no marcado»).</li>
+<li><strong>Explorador de archivos:</strong> ya no dice «selección múltiple» en cada archivo; en la vista Detalles las flechas derecha e izquierda recorren las columnas («Tipo: Hoja de cálculo», «Tamaño: 12 KB»...) sin cortes; las listas clásicas cuentan bien los elementos y los árboles dicen su posición y nivel.</li>
+<li><strong>Correo en Thunderbird:</strong> el cuerpo de los mensajes ya no termina con la palabra «edición».</li>
+<li>Las sugerencias de los campos de búsqueda y de los cuadros combinados editables ya no se pierden, y el cuadro combinado editable no repite el elemento.</li>
+<li><strong>PowerPoint:</strong> vuelven a funcionar Tiresias+Suprimir, Tiresias+Alt+Mayúsculas+T, Tiresias+Alt+G y Tiresias+F7.</li>
+<li><strong>WhatsApp:</strong> vuelven a funcionar Alt+Mayúsculas+1 a 0.</li>
+<li>Las etiquetas personalizadas se usan también en la línea braille, en la revisión y en las páginas web.</li>
+<li>Las plantillas de anuncio por tipo de control se aplican también en el modo exploración.</li>
+<li>Con el mapa de teclas compatible con JAWS, Tiresias+Espacio y Tiresias+V siguen haciendo lo suyo dentro de las páginas web.</li>
+<li>Se han corregido 41 teclas rápidas (Alt+letra) repetidas en las Opciones y los diálogos; la línea braille HID describe sus teclas; en las tablas de programas de escritorio no se oyen nombres técnicos.</li>
+</ul>
+
+<h2 id="v1-0-3">Versión 1.0.3</h2>
+<ul>
+<li><strong>Eloquence tiene su propio puente.</strong> Ya no se queda mudo al cerrar NVDA: Tiresias nunca comparte el puente de Eloquence de NVDA, y si el suyo falla lo vuelve a arrancar en un instante o cambia a otra voz.</li>
+<li><strong>Menú de Tiresias:</strong> se leen todos sus elementos y submenús con su posición y estado.</li>
+<li>Los diálogos propios de Tiresias (como la pregunta de importar la configuración de NVDA) ya no pueden bloquearlo.</li>
+<li>La cortina de pantalla vuelve a funcionar.</li>
+<li><strong>Nunca te quedas sin lector de pantalla.</strong> Tiresias recuerda el lector profesional que usas (NVDA, JAWS, el Narrador...) y la ubicación exacta de su programa. Si sales de Tiresias o Tiresias falla y se cierra, por grave que sea el fallo, un pequeño vigilante aparte vuelve a abrir ese lector, salvo que ya esté funcionando. No lo hace cuando Tiresias solo se reinicia o se actualiza.</li>
+<li>Opcionalmente, el vigilante abre también tu lector si Tiresias deja de responder durante un rato (20 segundos por defecto); cuando Tiresias se recupera, se pone en espera.</li>
+<li>Nueva entrada del menú «Volver a NVDA (cierra Tiresias)», con el nombre de tu lector, y orden equivalente en la paleta de órdenes.</li>
+<li>Se ajusta en Opciones, Generales, grupo «Otros lectores de pantalla», donde también ves qué lector recuerda Tiresias y puedes olvidarlo.</li>
+</ul>
+
+<h2 id="v1-0-2">Versión 1.0.2</h2>
+<ul>
+<li><strong>Convivencia con otros lectores de pantalla.</strong> Si NVDA, JAWS o el Narrador están activos, Tiresias se queda en espera y lo anuncia a través de ese lector; cuando el otro se cierra, Tiresias se activa, y le cede el sitio si vuelve a abrirse.</li>
+<li><strong>Importar la configuración de NVDA</strong> (menú Herramientas): voz, teclado, braille, perfiles, gestos, diccionarios y símbolos, con copia de seguridad y opción de deshacer. En el primer arranque Tiresias lo ofrece si encuentra NVDA.</li>
+<li>Los cuadros combinados de las Opciones responden al instante.</li>
+<li>Voz y braille por Escritorio remoto también con Citrix Workspace, Omnissa Horizon, Windows App y Azure Virtual Desktop.</li>
+<li>Todo lo que Tiresias necesita o genera está dentro de la carpeta data.</li>
+<li>Actualizaciones y tienda de complementos desde el servidor oficial de Tiresias, con actualización automática también de la copia portable.</li>
+<li>Si Windows bloquea algún archivo de Tiresias (Smart App Control), Tiresias explica cómo desbloquearlo.</li>
+</ul>
+
+<nav aria-labelledby="indice"><h2 id="indice">Índice</h2>
+<ul>
+<li><a href="#v1-0-13">Versión 1.0.13</a></li>
+<li><a href="#v1-0-12">Versión 1.0.12</a></li>
+<li><a href="#v1-0-11">Versión 1.0.11</a></li>
+<li><a href="#v1-0-10">Versión 1.0.10</a></li>
+<li><a href="#v1-0-9">Versión 1.0.9</a></li>
+<li><a href="#v1-0-8">Versión 1.0.8</a></li>
+<li><a href="#v1-0-7">Versión 1.0.7</a></li>
+<li><a href="#v1-0-6">Versión 1.0.6</a></li>
+<li><a href="#v1-0-5">Versión 1.0.5</a></li>
+<li><a href="#v1-0-4">Versión 1.0.4</a></li>
+<li><a href="#v1-0-3">Versión 1.0.3</a></li>
+<li><a href="#v1-0-2">Versión 1.0.2</a></li>
+<li><a href="#remoto">Acceso remoto</a></li>
+<li><a href="#rdp">Voz y braille por Escritorio remoto</a></li>
+<li><a href="#tactil">Pantalla y panel táctil</a></li>
+<li><a href="#matematicas">Matemáticas</a></li>
+<li><a href="#voz">Voz</a></li>
+<li><a href="#piper">Voces neuronales Piper</a></li>
+<li><a href="#audio">Audio y mezclador</a></li>
+<li><a href="#braille">Braille</a></li>
+<li><a href="#exploracion">Modo exploración</a></li>
+<li><a href="#objetos">Objetos, programas antiguos, Java y consolas</a></li>
+<li><a href="#aplicaciones">Aplicaciones</a></li>
+<li><a href="#configuracion">Configuración, idioma e instalación</a></li>
+<li><a href="#vision">Visión</a></li>
+<li><a href="#ocr">Reconocimiento de texto (OCR)</a></li>
+<li><a href="#ia">Inteligencia artificial</a></li>
+<li><a href="#herramientas">Ratón por teclado y otras herramientas</a></li>
+<li><a href="#productividad">Productividad</a></li>
+<li><a href="#api">Juegos y programas que hablan a través de Tiresias</a></li>
+<li><a href="#correcciones">Fiabilidad y correcciones</a></li>
+</ul></nav>
+
+<h2 id="remoto">Acceso remoto</h2>
+<ul>
+<li><strong>Maneja otro ordenador desde el tuyo</strong>, por Internet o por tu red local, oyendo en tu equipo lo que dice el lector del otro, y viendo su braille en tu línea. También al revés: deja que otra persona maneje tu equipo para ayudarte.</li>
+<li>Es <strong>compatible con el acceso remoto de NVDA</strong> y con el complemento NVDA Remote: puedes conectar un Tiresias con un NVDA y usar los mismos servidores de retransmisión.</li>
+<li>Dos formas de conectarse: a través de un servidor de retransmisión con una clave, o directamente, alojando la conexión en tu equipo (Tiresias crea su propio certificado).</li>
+<li><kbd>Tiresias+Alt+R</kbd> conecta o desconecta; <kbd>Tiresias+Alt+Tab</kbd> pasa el teclado de un equipo al otro. Las teclas de Tiresias y de la línea braille funcionan en el equipo controlado.</li>
+<li>Preajustes con nombre y conexión automática al arrancar; las claves guardadas se cifran con tu usuario de Windows.</li>
+<li>Enviar el portapapeles al otro equipo, copiar un enlace de conexión, silenciar el equipo remoto y enviar Control+Alt+Supr.</li>
+<li>Conexiones cifradas, con aviso si el certificado del servidor no es de confianza y opción de confiar en él siempre o solo esa vez.</li>
+<li>Al bloquear tu equipo, el teclado vuelve solo a tu equipo; al desbloquearlo, recuperas el control remoto.</li>
+</ul>
+
+<h2 id="rdp">Voz y braille por Escritorio remoto</h2>
+<ul>
+<li>Si usas la <strong>Conexión a Escritorio remoto</strong> de Windows y Tiresias está también en el equipo remoto, <strong>oyes la voz del Tiresias remoto con tu propia voz</strong>, tu velocidad y tu volumen, y su braille aparece en tu línea. Los pitidos y sonidos también llegan.</li>
+<li>Las teclas de tu línea braille se envían al equipo remoto, y la línea sigue a la ventana de Escritorio remoto que tengas en primer plano (puedes tener varias abiertas).</li>
+<li>Se activa con dos casillas, en la nueva categoría «Escritorio remoto» de las Opciones: «Recibir la voz de los equipos remotos» en tu equipo y «Enviar la voz al equipo cliente» en el remoto. No hace falta ser administrador.</li>
+<li>Para no oír lo mismo dos veces, la voz local del equipo remoto se silencia mientras tu equipo la recibe.</li>
+<li>Nueva orden «Estado de la voz por Escritorio remoto» (sin tecla de fábrica) para saber si funciona.</li>
+</ul>
+
+<h2 id="tactil">Pantalla y panel táctil</h2>
+<ul>
+<li><strong>Maneja Tiresias con los dedos</strong> en tabletas, portátiles convertibles y monitores táctiles: toca o arrastra un dedo para oír qué hay debajo, toca dos veces para activar, y usa deslizamientos de uno a cuatro dedos para moverte por los objetos, el texto o la página.</li>
+<li>Tres <strong>modos táctiles</strong> (objetos, texto y modo exploración), toque dividido, toque y mantener, secuencias de dos deslizamientos (también en «L») y gestos desde los bordes (opcional).</li>
+<li>Escritura con el teclado táctil de Windows: escribe al levantar el dedo o con doble toque, según prefieras.</li>
+<li><strong>Gestos en el panel táctil (touchpad)</strong> de precisión de los portátiles, con varios dedos (desactivado por defecto).</li>
+<li>Todos los gestos se pueden cambiar en Gestos de entrada, también por modo táctil, y aparecen en la ayuda de entrada y en la paleta de órdenes.</li>
+<li><kbd>Tiresias+Control+Alt+T</kbd> activa o desactiva la interacción táctil. Nueva categoría «Interacción táctil» en las Opciones.</li>
+</ul>
+
+<h2 id="matematicas">Matemáticas</h2>
+<ul>
+<li>Las <strong>fórmulas se leen de forma natural</strong> en español («fracción con numerador...»), con tres niveles de detalle y dos estilos de lectura.</li>
+<li>Funcionan en Edge, Chrome y demás navegadores basados en Chromium (MathML, MathJax y Wikipedia), en Firefox, en las ecuaciones de Word y en imágenes cuyo texto alternativo es LaTeX.</li>
+<li><kbd>Tiresias+Alt+E</kbd> <strong>explora una fórmula paso a paso</strong>: entrar en el numerador, en un exponente o en una celda de una matriz, salir, preguntar «dónde estoy»...</li>
+<li><strong>Braille matemático</strong> con la signografía de la ONCE (Código Matemático Unificado), con el cursor y los botones de enrutamiento.</li>
+<li>Copiar una fórmula como MathML, LaTeX o texto, y leer y explorar una fórmula copiada con <kbd>Tiresias+Mayúsculas+Alt+E</kbd>.</li>
+<li>En el modo exploración, la tecla <kbd>0</kbd> salta a la fórmula siguiente. Nueva categoría «Matemáticas» en las Opciones.</li>
+</ul>
+
+<h2 id="voz">Voz</h2>
+<ul>
+<li><strong>Prioridades</strong>: los avisos urgentes interrumpen lo que se está diciendo y, al terminar, Tiresias retoma lo interrumpido desde donde iba. Al moverte rápido por una lista o un menú, lo pendiente de los controles anteriores se descarta.</li>
+<li><strong>Cambio automático de idioma</strong>: si un texto está marcado, o se detecta, en otro idioma, la voz cambia a ese idioma (con eSpeak NG, OneCore y Eloquence). Nueva categoría «Idioma de la voz», que también decide qué tabla de símbolos se usa.</li>
+<li><strong>Números</strong>: completos, dígito a dígito, por pares o por grupos de tres cifras; lectura alfanumérica que separa letras y cifras.</li>
+<li>Descripción fonética retardada de caracteres, normalización Unicode (para las letras «decoradas» de las redes sociales) y nombres de los emojis.</li>
+<li><strong>Verbosidad</strong> en tres niveles (principiante, intermedio y experto), orden de las propiedades a tu gusto, <strong>plantillas de anuncio por tipo de control</strong> y mensajes de tutor.</li>
+<li><strong>Voces por contexto</strong> (cursor del sistema, cursor de revisión, eco de teclado y mensajes de Tiresias) y <strong>esquemas de voz y sonido</strong>: los enlaces, encabezados, citas o textos con énfasis pueden sonar con otro tono o con un sonido. Trae tres esquemas y puedes crear los tuyos.</li>
+<li>El <strong>historial de voz</strong> indica el origen de cada frase y se puede exportar. Diccionarios de voz con más tipos de entrada y entradas que se pueden desactivar.</li>
+<li>Si el sintetizador falla o se queda colgado, Tiresias <strong>cambia solo a otro</strong> que funcione y te avisa, sin borrar tu elección.</li>
+<li>Lectura continua por tablas: <kbd>Tiresias+Control+Alt+Flecha abajo</kbd> lee una columna y <kbd>Tiresias+Control+Alt+Flecha derecha</kbd> una fila.</li>
+<li><strong>Lectura continua por párrafos</strong>, además de por líneas y por frases. Durante la lectura, <kbd>Re Pág</kbd> y <kbd>Av Pág</kbd> cambian una <strong>velocidad propia de la lectura continua</strong>, que se recuerda sin tocar la velocidad normal (o, si lo prefieres, solo la lectura en curso).</li>
+<li>Las voces por contexto pueden usar <strong>otra voz</strong> y <strong>otro nivel de puntuación</strong>, y hay dos contextos nuevos: <strong>menús</strong> y <strong>diálogos</strong>.</li>
+<li>Los esquemas de voz y sonido distinguen también <strong>colores</strong>, <strong>tipos de control</strong> (botones, casillas…) y <strong>estados</strong> (marcado, no disponible…), y funcionan también fuera del modo exploración. Nuevo esquema «Corrección».</li>
+<li>La descripción fonética retardada de caracteres llega antes: medio segundo por defecto en lugar de uno.</li>
+<li>Los <strong>colores</strong> del formato se pueden decir con sus <strong>valores RGB</strong> o su <strong>código hexadecimal</strong> además del nombre, en documentos, páginas, Word y Excel (que ahora dice también el relleno de la celda).</li>
+</ul>
+
+<h2 id="piper">Voces neuronales Piper</h2>
+<ul>
+<li>Nuevo sintetizador con <strong>voces neuronales Piper</strong>, muy naturales, que funcionan <strong>sin conexión</strong>: español de España, México y Argentina y decenas de idiomas más.</li>
+<li><strong>Gestor de voces</strong> (Preferencias): ver el catálogo por idioma y calidad, descargar e instalar con barra de progreso y comprobación de los archivos, probar, usar y borrar voces. Tiresias solo se conecta a Internet cuando tú lo pides.</li>
+<li>Ajustes de velocidad (con aumento), tono, entonación, volumen y hablante.</li>
+</ul>
+
+<h2 id="audio">Audio y mezclador</h2>
+<ul>
+<li><strong>Mezclador de audio</strong> (<kbd>Tiresias+Alt+A</kbd>): salida y volumen del sistema, micrófono, salida de Tiresias y el volumen de cada aplicación, en un solo cuadro.</li>
+<li>Teclas para <strong>silenciar el micrófono</strong> (con confirmación sonora), subir, bajar o silenciar <strong>todas las aplicaciones menos Tiresias</strong> o la aplicación en primer plano, y cambiar la salida de Tiresias o la predeterminada de Windows.</li>
+<li><strong>Sonidos de los controles</strong> (<kbd>Tiresias+Alt+Mayúsculas+S</kbd>): un sonido para cada tipo de control y estado, junto a la voz o en lugar de las palabras, con <strong>audio posicional</strong> opcional.</li>
+<li>Temas de sonidos en WAV, salida WASAPI o waveOut, atenuación también con los sonidos, ruido de fondo opcional para que los auriculares Bluetooth no corten el principio de las frases, y la tecla Silenciar del teclado pide confirmación.</li>
+<li>Al arrancar, si el equipo está silenciado o con el volumen a cero, Tiresias lo corrige para que puedas oírlo.</li>
+<li><strong>Tonos de coordenadas</strong> opcionales al mover el objeto navegador o el cursor de revisión: el tono indica la altura en la pantalla y el sonido se desplaza a la izquierda o a la derecha según la posición.</li>
+</ul>
+
+<h2 id="braille">Braille</h2>
+<ul>
+<li>Traducción braille con <strong>liblouis</strong>: más de 250 tablas con su nombre en español, braille integral, contraído e informático, tablas de entrada y salida distintas y elección automática según el idioma.</li>
+<li><strong>Controladores de líneas braille</strong> por USB y Bluetooth, con detección automática: Baum y compatibles (HumanWare Brailliant2, APH Refreshabraille, Orbit Reader, NLS eReader Zoomax), Eurobraille, Freedom Scientific Focus y PAC Mate, Handy Tech, HIMS, HumanWare BrailleNote y Brailliant BI/B, Optelec ALVA, Papenmeier BRAILLEX, Seika, Seika Notetaker, BRLTTY y cualquier línea HID estándar. Cada línea trae sus teclas asignadas y sus opciones propias.</li>
+<li>Cuadro <strong>Seleccionar línea braille</strong> con puerto, botón Probar y lista de líneas detectadas.</li>
+<li><strong>Escribir en braille</strong> desde la línea (también contraído) o desde el teclado del ordenador, con los modificadores Control, Alt, Mayúsculas, Windows y Tiresias.</li>
+<li>Ajuste del texto en límites de palabra o de sílaba, línea dividida, modo «mostrar la voz», desplazamiento automático, propiedades y abreviaturas configurables, y el visor braille en pantalla con enrutamiento.</li>
+</ul>
+
+<h2 id="exploracion">Modo exploración</h2>
+<ul>
+<li>Las páginas se cargan en segundo plano y los cambios se aplican solo a la parte que cambia, sin perder tu posición.</li>
+<li>Nuevas teclas de navegación rápida: anotaciones (<kbd>Ñ</kbd>), fórmulas (<kbd>0</kbd>), vistazo a lo que destaca visualmente (<kbd>Punto</kbd>), párrafos de texto y más.</li>
+<li>Tablas con celdas combinadas, primera y última fila y columna, leer una fila o una columna entera y títulos fijados a mano.</li>
+<li><strong>Lectura rápida</strong> (<kbd>Tiresias+Control+Mayúsculas+S</kbd>): resume un documento largo por primeras frases, encabezados o texto buscado.</li>
+<li><strong>Web flexible</strong>: oculta bloques molestos de un sitio, fija dónde empieza la lectura o cambia al orden visual por columnas, y Tiresias lo recuerda para todo el sitio.</li>
+<li><kbd>Tabulador</kbd> parte desde la posición del cursor, elementos relacionados (<kbd>Tiresias+Mayúsculas+J</kbd>), atributos del elemento, dirección de la página y distribución en pantalla.</li>
+<li>Opción para que la <strong>entrada y salida de listas, tablas, regiones y otros contenedores</strong> («lista con 3 elementos», «fuera de lista») vayan en <strong>una línea aparte</strong>. Esas líneas no se copian con el texto.</li>
+<li><kbd>Coma</kbd> y <kbd>Mayúsculas+Coma</kbd> llevan al final y al principio del contenedor <strong>sin salir de él</strong>, y avisan si ya estás allí. Salir del contenedor queda como orden propia.</li>
+<li>Sin disposición en pantalla, el texto que sigue a un enlace empieza otra línea, con la puntuación del enlace en su línea; una opción permite dejarlo en la línea del enlace.</li>
+<li><strong>Orden de lectura a mano</strong> en PDF y páginas: marca un bloque (<kbd>Tiresias+Control+Mayúsculas+M</kbd>) y colócalo antes o después de otro (<kbd>Tiresias+Control+Mayúsculas+A</kbd> o <kbd>D</kbd>); <kbd>Tiresias+Control+Mayúsculas+Z</kbd> lo deshace. Tiresias lo recuerda por documento o por sitio.</li>
+</ul>
+
+<h2 id="objetos">Objetos, programas antiguos, Java y consolas</h2>
+<ul>
+<li>Tiresias elige solo la mejor forma de leer cada ventana: UI Automation, <strong>MSAA e IAccessible2</strong> (LibreOffice, aplicaciones Qt, listas clásicas de Windows, la cinta de Office 2013 y anteriores) o <strong>Java Access Bridge</strong> (pregunta antes de activarlo).</li>
+<li><strong>Consolas</strong>: se lee solo lo nuevo y solo lo que se ve; las contraseñas no se dicen nunca; un exceso de líneas se recorta para no bloquear el lector.</li>
+<li>Listas con columnas: <kbd>Control+Tiresias+1</kbd> a <kbd>0</kbd> leen una columna, y <kbd>Control+Tiresias+E</kbd> dice los elementos seleccionados.</li>
+<li><strong>Pantalla de bloqueo protegida</strong>: con el equipo bloqueado no se puede leer lo que hay detrás. Aviso al entrar en el escritorio seguro.</li>
+<li><strong>Campos con límite de caracteres</strong>: <kbd>Tiresias+Control+L</kbd> dice cuántos llevas escritos y cuántos quedan, y Tiresias avisa al acercarte al límite y al llegar a él.</li>
+<li>Las <strong>imágenes sin texto alternativo</strong> se anuncian con el nombre de su archivo, también fuera del modo exploración y en cualquier aplicación.</li>
+<li>Con el cambio automático de idioma, los <strong>nombres de los controles</strong> se leen en su idioma también en modo foco.</li>
+<li>Más detalles de las páginas: descripciones de grupos y regiones, citas cortas («cita… fin de cita»), abreviaturas de los encabezados de tabla, etiquetas braille propias de la página (aria-braillelabel) y los guiones blandos ya no se leen.</li>
+<li>Listas de <strong>ventanas</strong> (<kbd>Tiresias+F11</kbd>), <strong>procesos</strong> (<kbd>Tiresias+Mayúsculas+F11</kbd>) e <strong>iconos de la bandeja</strong> (<kbd>Tiresias+Control+F11</kbd>).</li>
+</ul>
+
+<h2 id="aplicaciones">Aplicaciones</h2>
+<ul>
+<li><strong>Word</strong>: avisos de página, tablas, listas, comentarios y revisiones al moverte; comentarios, revisiones y notas al pie con sus teclas; confirmación de los atajos de formato; lista de elementos (<kbd>Tiresias+F7</kbd>).</li>
+<li><strong>Excel</strong>: fórmulas, comentarios y notas, detalles de la celda, títulos de filas y columnas, anuncio de la selección, vigilar celdas y lista de elementos.</li>
+<li><strong>PowerPoint</strong>: notas del orador, leer la diapositiva, tablas, posición de las formas y presentación con diapositivas.</li>
+<li><strong>Gráficos</strong> de Excel, Word y PowerPoint: recórrelos punto a punto con las flechas y óyelos con tonos (<kbd>Tiresias+Alt+G</kbd>).</li>
+<li><strong>Outlook y Thunderbird</strong>: campos del mensaje con <kbd>Alt+1</kbd> a <kbd>Alt+6</kbd> y cabeceras o detalles.</li>
+<li><strong>Adjuntos de Outlook</strong> (<kbd>Tiresias+Control+Mayúsculas+A</kbd>): lista con nombre y tamaño para abrirlos o guardarlos.</li>
+<li><strong>Excel</strong>: leer la fila (<kbd>Tiresias+Control+Alt+Flecha izquierda</kbd>) o la columna (<kbd>Tiresias+Control+Alt+Flecha arriba</kbd>) entera con sus títulos, y visor de la celda completa con su fórmula (<kbd>Tiresias+Mayúsculas+V</kbd>).</li>
+<li><strong>Word</strong>: entrada y salida de listas también al moverte por párrafos, y teclas para ir al elemento de lista siguiente, anterior, primero y último.</li>
+<li><strong>PowerPoint</strong>: las ecuaciones de las diapositivas se leen con el motor de matemáticas y se exploran con <kbd>Tiresias+Alt+E</kbd>.</li>
+<li><strong>Google Docs, Hojas de cálculo y Presentaciones</strong>: títulos de fila y columna en las hojas de cálculo, fijados a mano y recordados por hoja, y aviso para activar la compatibilidad de Google con lectores de pantalla y braille.</li>
+<li><strong>Chats</strong> (Teams, Zoom, Discord, Telegram y Slack): los últimos mensajes con <kbd>Alt+1</kbd> a <kbd>Alt+0</kbd>, modo de avisos e historial de avisos.</li>
+<li>Editores de código (Visual Studio Code y derivados, Notepad++...), Explorador, Calculadora, panel de emojis, foobar2000, Winamp, PuTTY, LibreOffice y Kindle.</li>
+<li>WhatsApp accesible y Eloquence también se pueden usar en inglés.</li>
+</ul>
+
+<h2 id="configuracion">Configuración, idioma e instalación</h2>
+<ul>
+<li>Tiresias se puede usar <strong>en inglés</strong>: interfaz, mensajes y complementos incluidos. El idioma se elige en Opciones, Generales (o con <code>--lang</code>) y por defecto sigue al de Windows.</li>
+<li><strong>Instalador propio</strong> (<code>Tiresias-1.0.1-instalador.exe</code>): arranca hablando, instala para todos o solo para tu usuario, crea accesos directos (escritorio con <kbd>Control+Alt+T</kbd>), puede iniciar Tiresias con Windows y se desinstala sin dejar restos. Las copias portables también se pueden instalar desde Herramientas.</li>
+<li><strong>Crear una copia portable</strong>, <strong>buscar actualizaciones</strong> (aviso discreto) y <strong>reparar los registros COM</strong> de accesibilidad.</li>
+<li><strong>Tienda de complementos</strong>: instalar, actualizar y ver los cambios de cada versión. Al instalar encima, Tiresias pregunta si actualizar, reinstalar o volver atrás; los complementos no probados se pueden activar de todos modos.</li>
+<li><strong>Perfiles por sitio web</strong>: un perfil se activa al visitar un dominio. Los perfiles se pueden desactivar, marcar como de solo lectura, copiar y tener su propio diccionario de voz.</li>
+<li>La configuración se comprueba al cargar y, si un archivo se daña, se recupera la copia de seguridad. Restablecer los valores de fábrica se puede deshacer.</li>
+<li><strong>Tutorial de primeros pasos</strong>, <strong>ajustes rápidos</strong> (<kbd>Tiresias+Control+Q</kbd>), <strong>teclas por capas</strong> (<kbd>Tiresias+Alt+Espacio</kbd> y una letra) y <strong>mapa de gestos compatible con JAWS</strong>. El mapa de gestos se puede exportar e importar.</li>
+<li>Ayuda contextual: <kbd>F1</kbd> sobre una opción abre el manual en su explicación. Gestor de etiquetas personalizadas.</li>
+<li><strong>Bloq Mayús</strong> viene activada como tecla Tiresias, junto a Insert e Insert numérico. Pulsada dos veces seguidas cambia el bloqueo de mayúsculas.</li>
+<li>Los <strong>avisos y preguntas de Tiresias</strong> muestran el texto en un campo que se recorre con las flechas, se selecciona y se copia.</li>
+<li>Para empresas y aulas: archivo de política <code>policy.json</code> y modo seguro (<code>--secure</code>).</li>
+<li>Nuevos argumentos de la línea de órdenes: <code>--lang</code>, <code>--minimal</code>, <code>--secure</code>, <code>--disable-addons</code>, <code>--config-path</code>, <code>--check-running</code>, <code>--no-replace</code>, <code>--create-portable</code>, <code>--install</code>, <code>--uninstall</code>, <code>--repair-com</code>, <code>--copy-config-to-system</code> y <code>--debug-logging</code>.</li>
+</ul>
+
+<h2 id="vision">Visión</h2>
+<ul>
+<li><strong>Lupa</strong> con cuatro vistas (pantalla completa, ventana acoplada, lente y foco), filtros de color, seguimiento del foco, de los cursores y del ratón, y vista general momentánea.</li>
+<li><strong>Resaltado visual</strong> con varios marcos de colores a la vez: foco, objeto navegador, cursor del modo exploración y objeto bajo el ratón.</li>
+<li>La cortina de pantalla avisa al arrancar y se puede guardar por perfil; las capturas para el OCR y la IA funcionan aunque la cortina o la lupa estén activas.</li>
+</ul>
+
+<h2 id="ocr">Reconocimiento de texto (OCR)</h2>
+<ul>
+<li>Reconocer <strong>archivos de imagen y PDF</strong> (cada página con su encabezado) y la imagen o el archivo copiado en el portapapeles.</li>
+<li><strong>Revisión de pantalla por OCR</strong> (<kbd>Tiresias+Control+Mayúsculas+R</kbd>) para Citrix, juegos y programas antiguos: cada palabra conserva su posición y se puede hacer clic en ella.</li>
+<li><strong>Lectura continua por OCR</strong> (<kbd>Tiresias+Alt+Mayúsculas+R</kbd>), ideal para subtítulos incrustados en un vídeo.</li>
+<li>Motor Tesseract opcional, si lo instalas, además del de Windows.</li>
+</ul>
+
+<h2 id="ia">Inteligencia artificial</h2>
+<ul>
+<li>Con el servicio que elijas (Anthropic Claude, OpenAI, Google Gemini o un servidor local) y tu propia clave, que se guarda cifrada:</li>
+<li>Describir el objeto (<kbd>Tiresias+G</kbd>), la ventana (<kbd>Tiresias+Mayúsculas+G</kbd>), la pantalla o una imagen, y hacer preguntas sobre ella.</li>
+<li>Resumir y preguntar sobre una página o un documento; sugerir etiquetas para botones sin nombre; preguntar cómo se hace algo en Tiresias.</li>
+<li><strong>Traducir</strong> la selección (<kbd>Tiresias+Mayúsculas+T</kbd>), el portapapeles o todo lo que se dice.</li>
+<li><strong>Recorrido de la página</strong> (<kbd>Tiresias+Mayúsculas+E</kbd>): para qué sirve, cómo está organizada a la vista y qué teclas llevan a cada parte, con preguntas de seguimiento.</li>
+<li><strong>Etiquetado automático</strong> opcional de botones, enlaces e imágenes sin nombre, con un límite por hora.</li>
+<li>Orden de lectura de los PDF propuesto por la IA (tú lo confirmas) y <strong>texto alternativo</strong> para sus imágenes sin descripción.</li>
+<li>Los <strong>CAPTCHA</strong> se detectan y se anuncian solos, sin IA. <kbd>Tiresias+Control+Mayúsculas+U</kbd> lleva al reto de audio y baja la voz mientras suena.</li>
+<li>Ayuda con los CAPTCHA (tú decides la respuesta) y un <strong>agente</strong> que hace tareas en la ventana pidiendo permiso antes de cada paso (<kbd>Tiresias+Mayúsculas+Escape</kbd> lo detiene).</li>
+<li><strong>Cara a la vista</strong>: comprueba con la cámara el encuadre y la luz antes de una videollamada, sin enviar nada a Internet.</li>
+</ul>
+
+<h2 id="herramientas">Ratón por teclado y otras herramientas</h2>
+<ul>
+<li><strong>Ratón por teclado</strong> (<kbd>Tiresias+Alt+Mayúsculas+K</kbd>): las flechas mueven el puntero, con clics, paso ajustable y posiciones guardadas por aplicación.</li>
+<li><strong>Guardar como audio</strong> (WAV) el texto seleccionado, el documento o el portapapeles con tu voz.</li>
+<li>Añadir al portapapeles (<kbd>Tiresias+Mayúsculas+C</kbd>) y saber qué contiene (texto, imagen o archivos).</li>
+<li>Espera opcional antes de leer lo que hay bajo el <strong>ratón</strong>: Tiresias lee cuando el puntero se detiene.</li>
+</ul>
+
+<h2 id="productividad">Productividad</h2>
+<ul>
+<li><strong>Analizador de texto</strong>: avisa de incoherencias (paréntesis o comillas sin cerrar, espacios dobles, formato mezclado...) y lleva el cursor a ellas.</li>
+<li><strong>Historial de notificaciones</strong> (<kbd>Tiresias+Mayúsculas+Alt+N</kbd>) y <strong>reglas</strong> para silenciar, mostrar solo en braille o dar prioridad a las notificaciones de cada aplicación.</li>
+<li><strong>Vigilar</strong> un objeto o una zona de la pantalla (con OCR) y oír solo lo que cambia.</li>
+<li><strong>Nota:</strong> desde la versión 1.0.6, el historial de notificaciones se abre con <kbd>Tiresias+Control+Mayúsculas+Alt+N</kbd> y la vigilancia de una zona con OCR usa <kbd>Tiresias+Control+Mayúsculas+Alt+V</kbd> (ver <a href="#v1-0-6">Versión 1.0.6</a>). <kbd>Tiresias+Mayúsculas+Alt+N</kbd> y <kbd>Tiresias+Mayúsculas+Alt+V</kbd> quedan solo para PuTTY y KiTTY.</li>
+<li><strong>Buscar texto en cualquier ventana</strong> y <strong>marcadores en cualquier texto</strong>, que se recuerdan.</li>
+</ul>
+
+<h2 id="api">Juegos y programas que hablan a través de Tiresias</h2>
+<ul>
+<li>Los audiojuegos, mods y programas hechos para NVDA (los que usan <strong>nvdaControllerClient</strong> o bibliotecas como Tolk) <strong>hablan y muestran braille con Tiresias</strong> sin cambiar nada, aunque NVDA no esté instalado.</li>
+<li>Opciones para silenciarlos (<kbd>Tiresias+Mayúsculas+Alt+G</kbd>), atender solo al programa en primer plano, cortar la voz con cada texto nuevo y mostrar sus textos en braille.</li>
+<li>Para desarrolladores, Tiresias trae además su propia API y bibliotecas de 32 y 64 bits (carpeta <code>controller</code> del programa).</li>
+</ul>
+
+<h2 id="correcciones">Fiabilidad y correcciones</h2>
+<ul>
+<li>Si una aplicación que no responde bloquea a Tiresias, se cancela la llamada bloqueada y, si no basta, Tiresias se reinicia solo. Mientras está bloqueado, el teclado sigue funcionando.</li>
+<li>Las aplicaciones que envían demasiados eventos ya no ralentizan el lector.</li>
+<li>Reiniciar después de un arranque sin complementos vuelve a cargarlos, y al ejecutar Tiresias otra vez la copia nueva sustituye a la anterior.</li>
+<li>La ayuda de entrada también describe los gestos táctiles sin ejecutarlos.</li>
+<li>Se han quitado opciones duplicadas o confusas y todas las opciones tienen ahora su control en el cuadro de Opciones.</li>
+<li>Muchas correcciones menores en la lectura de listas, menús, diálogos, notificaciones y barras de progreso.</li>
+</ul>
+</body>
+</html>

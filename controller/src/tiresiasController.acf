@@ -1,0 +1,36 @@
+/*
+Atributos de configuración de las interfaces de tiresiasController.idl.
+
+- explicit_handle: cada procedimiento recibe el manejador de enlace como
+  primer parámetro (el cliente elige el punto de conexión y el servidor
+  averigua el proceso que llama).
+- fault_status / comm_status: los errores de comunicación se devuelven como
+  valor de retorno en vez de lanzar excepciones estructuradas.
+*/
+
+[explicit_handle]
+interface NvdaController {
+	[fault_status, comm_status] testIfRunning();
+	[fault_status, comm_status] speakText();
+	[fault_status, comm_status] cancelSpeech();
+	[fault_status, comm_status] brailleMessage();
+}
+
+[explicit_handle]
+interface NvdaController2 {
+	[fault_status, comm_status] getProcessId();
+	[fault_status, comm_status] speakSsml();
+	[fault_status, comm_status] onSsmlMarkReached();
+}
+
+[explicit_handle]
+interface NvdaController3 {
+	[fault_status, comm_status] isSpeaking();
+}
+
+[explicit_handle]
+interface TiresiasController {
+	[fault_status, comm_status] getApiVersion();
+	[fault_status, comm_status] speakTextEx();
+	[fault_status, comm_status] pauseSpeech();
+}

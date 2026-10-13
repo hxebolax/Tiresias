@@ -1,0 +1,10 @@
+{
+	"id": "whatsapp",
+	"name": "WhatsApp accesible",
+	"version": "1.0.3",
+	"author": "Proyecto Tiresias",
+	"description": "Hace WhatsApp para Windows (versión de la Microsoft Store) mucho más fácil de usar: atajos para ir a los chats, a los mensajes y al cuadro de edición, lectura de los últimos mensajes sin mover el foco, lectura automática de mensajes nuevos, notas de voz, llamadas, copia limpia de mensajes y filtros para quitar el ruido (pistas, números de teléfono, «Quizás»).",
+	"minApiVersion": "1.0",
+	"lastTestedApiVersion": "1.0",
+	"url": ""
+}

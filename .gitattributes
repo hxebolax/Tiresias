@@ -1,0 +1,23 @@
+# Finales de línea de Tiresias.
+#
+# Por defecto, Git guarda cada archivo tal y como está (sin convertir los
+# finales de línea), haya o no core.autocrlf: el código mezcla archivos LF y
+# CRLF y así se conservan byte a byte.
+* -text
+
+# Los .bat y el LEEME para Windows llevan CRLF al sacarlos del repositorio
+# (cmd.exe necesita CRLF en los .bat; el LEEME se abre con el Bloc de notas).
+*.bat text eol=crlf
+*.cmd text eol=crlf
+/LEEME.txt text eol=crlf
+
+# Binarios (sin diferencias de texto).
+*.dll binary
+*.exe binary
+*.lib binary
+*.pyd binary
+*.ico binary
+*.png binary
+*.wav binary
+*.mo binary
+*.zip binary

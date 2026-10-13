@@ -1,0 +1,37 @@
+TIRESIAS 1.0.13 - lector de pantalla para Windows 10 y 11
+
+CÓMO EMPEZAR
+- Ejecuta Tiresias.exe. Al arrancar suena un sonido y Tiresias empieza a hablar.
+- Para tenerlo en este equipo, abre el menú de Tiresias, Herramientas,
+  Instalar Tiresias en este equipo. También puedes seguir usándolo desde
+  esta carpeta (versión portable).
+
+LA TECLA TIRESIAS
+- La tecla Tiresias es Insert (también Insert del teclado numérico o
+  Bloq Mayús).
+  Las órdenes de Tiresias se pulsan manteniéndola: por ejemplo, Tiresias+T
+  lee el título de la ventana.
+- Tiresias+M o Tiresias+Aplicaciones abre el menú de Tiresias.
+- Tiresias+1 activa y desactiva la ayuda de entrada (dice qué hace cada
+  tecla sin ejecutarla).
+- Control hace callar la voz. Tiresias+Q cierra Tiresias.
+
+EL MANUAL
+- El manual completo está en "Manual de usuario.html", en esta misma
+  carpeta, y en el menú de Tiresias, Ayuda, Manual de usuario.
+- En el menú Ayuda están también el tutorial de primeros pasos, la
+  referencia rápida de órdenes y las novedades.
+
+IMPORTANTE
+- Si otro lector de pantalla (NVDA, JAWS o el Narrador) está funcionando,
+  Tiresias se queda en espera, sin hablar ni capturar teclas, hasta que lo
+  cierres. Control+Alt+Mayúsculas+T lo activa igualmente.
+
+DATOS Y PROBLEMAS
+- En la copia portable, toda tu configuración se guarda en la carpeta
+  "data" de esta carpeta; si has instalado Tiresias, en %APPDATA%\Tiresias.
+- Si algo falla, ejecuta Tiresias-depuracion.exe y revisa el registro
+  logs\tiresias.log de esa carpeta de datos. El capítulo "Solución de problemas" del manual
+  explica qué hacer.
+- Licencia: LICENSE.txt (GPL de GNU, versión 2 o posterior). La voz
+  Eloquence no viene incluida: es software propietario de sus titulares.

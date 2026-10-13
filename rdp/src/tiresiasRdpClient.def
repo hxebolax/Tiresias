@@ -1,0 +1,5 @@
+LIBRARY tiresiasRdpClient
+EXPORTS
+	DllGetClassObject PRIVATE
+	DllCanUnloadNow PRIVATE
+	TiresiasRdp_GetVersion

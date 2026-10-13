@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8"><title>zUtilidades para Tiresias</title>
+<style>body{font-family:Segoe UI,Arial,sans-serif;max-width:60em;margin:1em auto;line-height:1.5}table{border-collapse:collapse}td,th{border:1px solid #888;padding:.3em .6em;text-align:left}code{background:#eee;padding:0 .2em}</style></head>
+<body>
+<h1>zUtilidades</h1>
+<p>Autor: Héctor J. Benítez Corredera. Versión 1.0.0 para Tiresias, basada en zUtilidades 0.2.8 para NVDA. Proyecto original: <a href="https://github.com/hxebolax/zUtilidades-para-NVDA">zUtilidades para NVDA en GitHub</a>.</p>
+
+<nav aria-label="Índice">
+<h2>Índice</h2>
+<ul>
+<li><a href="#introduccion">Introducción</a></li>
+<li><a href="#ordenes">Órdenes y cómo asignarles teclas</a></li>
+<li><a href="#lanzador">Módulo Lanzador de aplicaciones</a></li>
+<li><a href="#notas">Módulo Notas rápidas</a></li>
+<li><a href="#notarapida">Agregar una nota rápida desde cualquier lugar</a></li>
+<li><a href="#menuvirtual">Menús virtuales</a></li>
+<li><a href="#copias">Copias de seguridad y valores por defecto</a></li>
+<li><a href="#opciones">Opciones</a></li>
+<li><a href="#datos">Dónde se guardan los datos</a></li>
+<li><a href="#requisitos">Requisitos y diferencias con la versión de NVDA</a></li>
+<li><a href="#creditos">Créditos y licencia</a></li>
+<li><a href="#cambios">Registro de cambios</a></li>
+</ul>
+</nav>
+
+<h2 id="introduccion">Introducción</h2>
+<p>zUtilidades es un conjunto de pequeñas aplicaciones para tenerlas a mano desde cualquier parte del ordenador, fáciles de manejar y con una interfaz clara. Actualmente tiene dos módulos:</p>
+<ul>
+<li><strong>Lanzador de aplicaciones</strong>: abre aplicaciones, órdenes de consola, carpetas, accesos directos y aplicaciones instaladas, ordenados por categorías.</li>
+<li><strong>Notas rápidas</strong>: pequeñas notas por categorías que se pueden consultar, copiar o pegar donde esté el foco.</li>
+</ul>
+<p>Los módulos están en el menú de Tiresias, <strong>Herramientas &gt; zUtilidades</strong> (Lanzador de Aplicaciones y Notas rápidas). También se pueden abrir con una combinación de teclas que asigne el usuario.</p>
+<p>Solo puede haber una ventana de zUtilidades abierta a la vez (ni dos ventanas ni una ventana y un menú virtual). Si se intenta abrir otra, Tiresias dice: «Ya hay una instancia de zUtilidades abierta. No es posible tener dos instancias a la vez».</p>
+
+<h2 id="ordenes">Órdenes y cómo asignarles teclas</h2>
+<p>Como en el original, las órdenes vienen <strong>sin ninguna tecla asignada</strong>. Para asignarlas abra el menú de Tiresias, Preferencias, <strong>Gestos de entrada</strong>, y busque la categoría <strong>zUtilidades</strong>.</p>
+<table><caption>Órdenes de zUtilidades (categoría «zUtilidades» de Gestos de entrada)</caption>
+<thead><tr><th scope="col">Orden</th><th scope="col">Una pulsación</th><th scope="col">Dos pulsaciones</th></tr></thead>
+<tbody>
+<tr><td>Lanzador de aplicaciones</td><td>Muestra la ventana del lanzador de aplicaciones</td><td>Activa el menú virtual del lanzador de aplicaciones</td></tr>
+<tr><td>Notas rápidas</td><td>Muestra la ventana de notas rápidas</td><td>Activa el menú virtual de notas rápidas</td></tr>
+<tr><td>Nota rápida</td><td>Agrega una nota rápida con el texto seleccionado</td><td>Agrega una nueva nota rápida (vacía)</td></tr>
+</tbody></table>
+<p>Para distinguir una pulsación de dos, Tiresias espera el tiempo de pulsación múltiple configurado en Opciones, Teclado (medio segundo por defecto).</p>
+
+<h2 id="lanzador">Módulo Lanzador de aplicaciones</h2>
+<p>Permite lanzar de forma rápida y desde cualquier parte una aplicación, portable o instalada, una orden de consola, una carpeta o un acceso directo.</p>
+<h3>Pantalla principal</h3>
+<p>Consta de una <strong>lista de categorías</strong>, una <strong>lista de acciones</strong> y un botón <strong>Menú</strong>. Con Tab se recorren las tres zonas.</p>
+<h4>Lista de categorías</h4>
+<p>Aquí se añaden, editan o borran las categorías para ordenar las acciones a nuestro gusto. Las opciones Añadir, Editar y Borrar categoría están en el menú contextual (tecla Aplicaciones o Mayúsculas+F10) y en el botón Menú (Alt+M), submenú Categorías. Editar y Borrar actúan siempre sobre la categoría con el foco.</p>
+<p>Los diálogos de añadir y editar tienen un campo para el nombre y los botones Aceptar y Cancelar. El nombre no puede quedar en blanco ni repetirse.</p>
+<p><strong>Cuidado</strong>: al borrar una categoría se borra todo lo que contiene y no se puede deshacer.</p>
+<p>Con <strong>Alt+Flecha arriba</strong> y <strong>Alt+Flecha abajo</strong> se mueve la categoría para ordenarlas. Al llegar al principio o al final suena un tono distinto para saber que no se puede subir o bajar más.</p>
+<h4>Lista de acciones</h4>
+<p>Muestra las acciones de la categoría elegida. Su menú contextual (o el submenú Acciones del botón Menú) tiene: <strong>Añadir acción</strong>, <strong>Editar acción</strong>, <strong>Borrar acción</strong> y <strong>Mover acción</strong>.</p>
+<ul>
+<li><strong>Espacio</strong> ejecuta la acción con el foco. El lanzador se cierra al ejecutarla; hay que volver a abrirlo para ejecutar otra.</li>
+<li><strong>Alt+Flecha arriba</strong> y <strong>Alt+Flecha abajo</strong> mueven la acción para ordenarlas.</li>
+<li>Pulsando la primera letra se va rápidamente a la acción que empieza por ella.</li>
+<li>Si la aplicación, la carpeta o el acceso directo ya no existen, se pregunta si se quiere editar la acción para corregirla.</li>
+</ul>
+<h4>Menú Añadir acción</h4>
+<ul>
+<li><strong>Añadir aplicación</strong>: el nombre y la ruta de la aplicación (botón Seleccionar archivo; archivos .exe, .com y .bat, o cualquier archivo) son obligatorios. Se puede marcar «Usar parámetros adicionales» y escribirlos, y «Ejecutar como administrador» (Windows pedirá el permiso al lanzarla).</li>
+<li><strong>Añadir comando CMD</strong>: un nombre para identificar el comando y los comandos, obligatorios. Se pueden ejecutar órdenes de PowerShell escribiendo <code>PowerShell</code> seguido de lo que se quiere ejecutar, y varias órdenes separadas por el símbolo «et» (&amp;, Mayúsculas+6 en un teclado español; Mayúsculas+7 en uno inglés). Ejemplo para reiniciar el explorador de Windows: <code>taskkill /f /im explorer.exe &amp; start explorer</code>. Se puede pausar la consola al terminar (para ver el resultado) y ejecutar como administrador.</li>
+<li><strong>Añadir accesos a carpetas</strong>: un nombre y una carpeta, para abrirla rápidamente desde cualquier parte.</li>
+<li><strong>Añadir ejecutar accesos directos de Windows</strong>: un nombre y un acceso directo (.lnk), con la opción de ejecutarlo como administrador. Se guarda el propio acceso directo, no el programa al que apunta.</li>
+<li><strong>Añadir aplicación instalada</strong>: muestra todas las aplicaciones instaladas en el equipo (del usuario, de Windows y de la tienda de Microsoft, la misma lista que el menú Inicio). Al elegir una, su nombre se copia al campo de nombre, que se puede cambiar. Estas acciones no se pueden editar: si la aplicación cambia o se desinstala hay que borrar la acción y volver a añadirla. La opción administrador solo funciona con las aplicaciones que lo permiten. Algunas entradas de la lista son herramientas de administración: si no sabe para qué son, mejor no tocarlas. La lista se obtiene con PowerShell y tarda unos segundos; mientras tanto el cuadro dice «Obteniendo la lista de aplicaciones instaladas...».</li>
+</ul>
+<h4>Editar, borrar y mover acción</h4>
+<p>El diálogo de editar es el mismo que el de añadir, con los datos de la acción elegida (salvo las aplicaciones instaladas, que no se pueden editar). Borrar una acción no se puede deshacer. <strong>Mover acción</strong> pasa la acción a otra categoría (hacen falta al menos dos); si en la de destino ya hay una con el mismo nombre, se activa el campo «Introduzca un nuevo nombre» para darle otro.</p>
+<h3>Botón Menú</h3>
+<p>Se llega desde cualquier parte de la ventana con <strong>Alt+M</strong>. Tiene los submenús Categorías, Acciones, Hacer o restaurar copias de seguridad y Opciones (Volver a valores por defecto el lanzador de aplicaciones), y la opción Salir. Las copias y los valores por defecto se explican en <a href="#copias">Copias de seguridad</a>.</p>
+<h3>Teclas de la ventana</h3>
+<table><caption>Teclas de la ventana del lanzador y de notas rápidas</caption>
+<thead><tr><th scope="col">Tecla</th><th scope="col">Acción</th></tr></thead>
+<tbody>
+<tr><td>Alt+C</td><td>Va a la lista de categorías</td></tr>
+<tr><td>Alt+L</td><td>Va a la lista de acciones (o de notas)</td></tr>
+<tr><td>Alt+M</td><td>Abre el menú</td></tr>
+<tr><td>Aplicaciones o Mayúsculas+F10</td><td>Menú contextual de la lista de categorías o de la de acciones (notas)</td></tr>
+<tr><td>Alt+Flecha arriba / Alt+Flecha abajo</td><td>Mueve la categoría, la acción o la nota con el foco</td></tr>
+<tr><td>Espacio</td><td>Lanzador: ejecuta la acción. Notas: muestra la nota en una ventana</td></tr>
+<tr><td>F1</td><td>Notas: lee el contenido de la nota</td></tr>
+<tr><td>F2</td><td>Notas: copia la nota al portapapeles</td></tr>
+<tr><td>F3</td><td>Notas: cierra la ventana y pega la nota donde estaba el foco</td></tr>
+<tr><td>Escape</td><td>Cierra cualquier diálogo del complemento, incluida la pantalla principal, y vuelve a donde estaba</td></tr>
+</tbody></table>
+<h3>Observaciones</h3>
+<p>Durante la sesión de Tiresias se recuerda la última categoría y la última acción elegidas, y el control que tenía el foco (por ejemplo, si se cierra con el foco en el botón Menú, la próxima vez se abrirá en el botón Menú). Al reiniciar Tiresias se empieza de nuevo en la lista de categorías.</p>
+
+<h2 id="notas">Módulo Notas rápidas</h2>
+<p>Sirve para tener a mano pequeñas notas que se pueden consultar, editar, borrar, copiar y pegar. Se maneja igual que el lanzador (categorías, lista de notas y botón Menú, con las mismas teclas para moverse y ordenar), con estas diferencias:</p>
+<ul>
+<li>Menú contextual de la lista de notas y submenú Notas del botón Menú: <strong>Añadir Nota</strong>, <strong>Editar Nota</strong>, <strong>Borrar Nota</strong> y <strong>Mover Nota</strong>. En los diálogos de añadir y editar se escribe el título de la nota y, tabulando, su contenido (de varias líneas). Ni el título ni el contenido pueden quedar vacíos ni repetirse el título en la misma categoría.</li>
+<li><strong>Espacio</strong> abre una ventana de solo lectura con la nota.</li>
+<li><strong>F1</strong> lee el contenido de la nota.</li>
+<li><strong>F2</strong> copia la nota al portapapeles.</li>
+<li><strong>F3</strong> cierra las notas rápidas y pega la nota en la aplicación donde estaba el foco (el Bloc de notas, un correo, Word...). Si se abrió desde el escritorio u otro sitio donde no se puede escribir, no pasa nada. En la consola clásica de Windows se usa la orden Pegar de su menú. Después se deja el portapapeles como estaba.</li>
+<li>El submenú Opciones del botón Menú tiene <strong>Opciones</strong> (ver <a href="#opciones">Opciones</a>) y <strong>Volver a valores por defecto Notas rápidas</strong>.</li>
+</ul>
+
+<h2 id="notarapida">Agregar una nota rápida desde cualquier lugar</h2>
+<p>Asigne una tecla a la orden «Con una pulsación agrega una nota rápida del texto seleccionado, con doble pulsación agrega una nueva nota rápida» (Gestos de entrada, categoría zUtilidades).</p>
+<ul>
+<li><strong>Una pulsación</strong>, con texto seleccionado en cualquier sitio (también en el modo exploración de una página web): abre «Agregar nota rápida del texto seleccionado». Primero se elige la categoría donde guardarla (solo las que ya existen); tabulando, el título de la nota; y tabulando otra vez, el texto seleccionado, que se puede modificar. Aceptar la guarda. Si no hay texto seleccionado se avisa: «Seleccione un texto para poder agregar a una nota rápida».</li>
+<li><strong>Dos pulsaciones</strong>: abre «Añadir una nueva nota rápida», la misma ventana pero para escribir una nota desde cero.</li>
+</ul>
+<p>Si no hay ninguna categoría de notas, se avisa de que hay que agregar una antes.</p>
+
+<h2 id="menuvirtual">Menús virtuales</h2>
+<p>Pulsando <strong>dos veces</strong> la orden del lanzador o la de notas rápidas se activa su menú virtual, sin ninguna ventana: Tiresias dice «Menú activado» (la primera vez de la sesión, también la ayuda) y el nombre de la categoría. Mientras el menú está activo tiene prioridad sobre el resto de órdenes y teclas, hasta que se sale con Escape.</p>
+<table><caption>Teclas de los menús virtuales</caption>
+<thead><tr><th scope="col">Tecla</th><th scope="col">Acción</th></tr></thead>
+<tbody>
+<tr><td>Flecha derecha / Flecha izquierda</td><td>Categoría siguiente o anterior</td></tr>
+<tr><td>Flecha abajo / Flecha arriba</td><td>Elemento siguiente o anterior de la categoría («Sin acción» o «Sin notas» si no hay)</td></tr>
+<tr><td>Letras (y cifras)</td><td>Va a la siguiente categoría que empieza por esa letra; si no hay ninguna, suena un pitido</td></tr>
+<tr><td>Intro (también el del teclado numérico)</td><td>Lanzador: ejecuta la acción elegida y sale del menú</td></tr>
+<tr><td>F1</td><td>Notas: lee el contenido de la nota</td></tr>
+<tr><td>F2</td><td>Notas: copia la nota al portapapeles y sale del menú</td></tr>
+<tr><td>F3</td><td>Notas: sale del menú y pega la nota donde está el foco</td></tr>
+<tr><td>Escape</td><td>Sale del menú («Saliendo del menú»)</td></tr>
+<tr><td>Cualquier otra tecla</td><td>Repite la ayuda del menú</td></tr>
+</tbody></table>
+<p>Si se pulsa Intro, F1, F2 o F3 sin haber elegido antes un elemento con las flechas, se oye la ayuda. Si la ruta de una aplicación, carpeta o acceso directo ya no existe, se avisa de que se use el lanzador en modo gráfico para editar la acción. Las teclas de la línea braille siguen funcionando con el menú activo. La categoría y el elemento elegidos se recuerdan durante la sesión.</p>
+
+<h2 id="copias">Copias de seguridad y valores por defecto</h2>
+<p>En el botón Menú, submenú <strong>Hacer o restaurar copias de seguridad</strong>:</p>
+<ul>
+<li><strong>Hacer copia de seguridad</strong>: abre el diálogo Guardar de Windows (en la carpeta Documentos) con un nombre como <code>Backup-03052021230645.zut-zl</code> (fecha y hora de creación; se puede poner otro). La extensión es <code>.zut-zl</code> para el lanzador y <code>.zut-zn</code> para las notas. Una ventana muestra el progreso; al terminar se activa el botón Aceptar (o Cerrar si algo salió mal).</li>
+<li><strong>Restaurar copia de seguridad</strong>: tras una advertencia (toda la base de datos del módulo se sustituye y no se puede deshacer) se elige el archivo. Al pulsar Aceptar el módulo se cierra; la próxima vez que se abra tendrá la copia restaurada.</li>
+</ul>
+<p>Los archivos de copia son ZIP con una firma: si se modifican, la firma no coincide y no se pueden restaurar. Se pueden restaurar también las <strong>copias hechas con zUtilidades para NVDA</strong> (mismas extensiones): se convierten automáticamente al formato de Tiresias. Así se pasan los datos de NVDA a Tiresias.</p>
+<p>En el submenú Opciones, <strong>Volver a valores por defecto</strong> borra toda la base de datos del módulo (tras una advertencia) y lo deja como recién instalado; la ventana se cierra.</p>
+
+<h2 id="opciones">Opciones</h2>
+<p>Están en la ventana de Notas rápidas (botón Menú, Opciones, Opciones) y también en las Opciones de Tiresias, categoría <strong>zUtilidades</strong>:</p>
+<ul>
+<li><strong>Capturar el título de la ventana en las notas rápidas (desde cualquier parte)</strong>: al agregar una nota rápida (del texto seleccionado o nueva) el título de la nota se rellena con el de la ventana enfocada. Desactivada por defecto.</li>
+<li><strong>Anexar la URL del documento a las notas rápidas cuando se copia texto de una página web</strong>: añade al final del texto la dirección de la página; en una nota nueva, la dirección es el contenido inicial. Desactivada por defecto.</li>
+</ul>
+
+<h2 id="datos">Dónde se guardan los datos</h2>
+<p>En la carpeta de datos de Tiresias, <code>addonsData\zUtilidades</code>, con una subcarpeta <code>zLauncher</code> para el lanzador y otra <code>zNotes</code> para las notas (un índice de categorías y un archivo por categoría, en formato JSON). No se pierden al actualizar el complemento.</p>
+
+<h2 id="requisitos">Requisitos y diferencias con la versión de NVDA</h2>
+<ul>
+<li>Windows 10 u 11. La lista de aplicaciones instaladas usa PowerShell (<code>Get-StartApps</code>), que no existe en Windows 7.</li>
+<li>No funciona en las pantallas seguras ni con la sesión bloqueada.</li>
+<li>La lista de aplicaciones instaladas se carga en segundo plano: la ventana se abre enseguida.</li>
+<li>Los menús virtuales también saltan a categorías que empiezan por ñ o por una cifra.</li>
+<li>La opción de anexar la URL se respeta también en las notas nuevas.</li>
+<li>Los datos se guardan en JSON (las copias de NVDA se convierten al restaurarlas).</li>
+</ul>
+
+<h2 id="creditos">Créditos y licencia</h2>
+<p>zUtilidades es obra de Héctor J. Benítez Corredera (xebolax@gmail.com), con licencia GNU General Public License (GPL). Esta versión para Tiresias se distribuye con la misma licencia.</p>
+<p>Agradecimientos del original:</p>
+<ul>
+<li>Traductores: Rémy Ruiz (francés), Ângelo Miguel Abrantes (portugués), Alessio Lenzi (italiano), Valentin Kupriyanov (ruso), Umut KORKMAZ (turco), Wafiq Taher (árabe), Daniel Gartmann (danés), VovaMobile (ucraniano) y Sof (inglés).</li>
+<li>Javi Domínguez, por enseñar a programar el menú virtual.</li>
+<li>La obtención del texto seleccionado se basó en el Buscador de definiciones de la RAE (DLEChecker) de Antonio Cascales.</li>
+<li>El pegado en el foco se basó en el complemento frequentText de Rui Fontes y Ângelo Abrantes.</li>
+<li>El método para obtener la URL del documento lo descubrió Alberto Buffolino.</li>
+<li>El código de la capa de teclado de los menús virtuales venía de Tyler Spivey, con mejoras de Joseph Lee.</li>
+</ul>
+
+<h2 id="cambios">Registro de cambios</h2>
+<h3>1.0.0 (Tiresias)</h3>
+<p>Primera versión para Tiresias, con todo lo de la versión 0.2.8 para NVDA: lanzador de aplicaciones (aplicaciones con parámetros y como administrador, órdenes de CMD y PowerShell, carpetas, accesos directos y aplicaciones instaladas), notas rápidas, nota rápida desde el texto seleccionado o nueva (con título de la ventana y URL opcionales), mover elementos entre categorías, menús virtuales, copias de seguridad compatibles con las de NVDA, valores por defecto, categoría en Opciones y entrada en Herramientas.</p>
+<h3>Historia de la versión para NVDA</h3>
+<ul>
+<li>0.2.7 y 0.2.8: idioma inglés.</li>
+<li>0.2.6: idioma danés; arreglo de mensajes en líneas braille; compatibilidad con NVDA 2023.1.</li>
+<li>0.2.5: arreglo de seguridad en pantallas seguras y de la recarga de complementos.</li>
+<li>0.2.4: captura de la URL en las notas rápidas; idiomas ruso y turco; arreglos de rutas y de teclados cirílicos.</li>
+<li>0.2.3: captura del título de la ventana en las notas rápidas.</li>
+<li>0.2.2: mover elementos entre categorías; doble pulsación para crear una nota nueva; idioma italiano.</li>
+<li>0.2.1: arreglo con el portapapeles vacío al pegar.</li>
+<li>0.2: módulo de Notas rápidas y menús virtuales.</li>
+<li>0.1.6: idiomas francés y portugués.</li>
+<li>0.1.5: órdenes de CMD, carpetas, accesos directos, aplicaciones instaladas y valores por defecto.</li>
+<li>0.1: versión inicial con el lanzador de aplicaciones.</li>
+</ul>
+</body></html>

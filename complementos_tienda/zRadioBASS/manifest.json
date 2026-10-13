@@ -1,0 +1,11 @@
+{
+	"id": "zRadioBASS",
+	"name": "zRadio BASS",
+	"version": "1.0.0",
+	"author": "Héctor J. Benítez Corredera <xebolax@gmail.com>",
+	"description": "Reproductor de radios en línea con el motor de audio BASS: miles de emisoras de todo el mundo (API de Radio Browser) buscadas por nombre, país, idioma o etiqueta con filtros de orden, formato y calidad; favoritos avanzados con categorías, notas, orden personal, contador de reproducciones, exportación e importación; historial con duración de cada escucha; volumen, silencio, pausa, dispositivo de salida, ecualizador y balance; título de la canción que suena y reconexión automática; grabación de la emisora a WAV y planificador de grabaciones que graba aunque no se esté escuchando nada; sistema de plugins con plugin de ejemplo y de estadísticas de uso; órdenes asignables para manejar la radio desde cualquier sitio.",
+	"minApiVersion": "1.0",
+	"lastTestedApiVersion": "1.0",
+	"url": "",
+	"changelog": "Primera versión para Tiresias: reescrito con la API de Tiresias, envoltorio ctypes propio de BASS en lugar de sound_lib, cliente propio de Radio Browser con urllib (elección de servidor, reintentos y caché en SQLite) en lugar de pyradios/httpx/requests, opciones en el cuadro de Opciones de Tiresias, grabaciones programadas que se guardan y graban sin reproducir, categorías de favoritos con interfaz, pausa, dispositivo de salida, ecualizador, balance, título de la canción, reconexión automática y administrador de plugins."
+}

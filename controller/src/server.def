@@ -1,0 +1,14 @@
+; Exportaciones de tiresiasControllerServer.dll (solo las usa Tiresias).
+LIBRARY tiresiasControllerServer
+EXPORTS
+	tcs_initialize
+	tcs_listen
+	tcs_terminate
+	tcs_ssmlMarkReached
+	tcs_apiVersion
+	tcs_setRelayPid
+	tcs_nvdaTestIfRunning
+	tcs_nvdaSpeakText
+	tcs_nvdaCancelSpeech
+	tcs_nvdaBrailleMessage
+	tcs_nvdaGetProcessId

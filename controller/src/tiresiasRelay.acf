@@ -1,0 +1,15 @@
+/*
+Atributos de configuración de tiresiasRelay.idl (igual que
+tiresiasController.acf: manejador explícito y errores como valor devuelto).
+*/
+
+[explicit_handle]
+interface TiresiasRelay {
+	[fault_status, comm_status] relayTestIfRunning();
+	[fault_status, comm_status] relaySpeakText();
+	[fault_status, comm_status] relayCancelSpeech();
+	[fault_status, comm_status] relayBrailleMessage();
+	[fault_status, comm_status] relaySpeakSsml();
+	[fault_status, comm_status] relayIsSpeaking();
+	[fault_status, comm_status] relayOnSsmlMarkReached();
+}
