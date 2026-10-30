@@ -1,27 +1,27 @@
 {
 	"format": "tiresias-actualizacion",
 	"formatVersion": 1,
-	"version": "1.0.13",
-	"date": "2026-10-13",
-	"url": "descargas/1.0.13/Tiresias-1.0.13-instalador.exe",
-	"sha256": "049f2c0c7d0464e6cb2a37b21f65f7b3fc48554087901219a0e1ea20d996b067",
-	"size": 62341120,
+	"version": "1.0.14",
+	"date": "2026-10-30",
+	"url": "descargas/1.0.14/Tiresias-1.0.14-instalador.exe",
+	"sha256": "d79918243d6abbb9a208b9286a6c9c3319ceb3b813aaf0d5b632856a28fb6202",
+	"size": 62349312,
 	"minWindows": "10.0.10240",
-	"notes": "Tiresias ya está en GitHub, y las actualizaciones y la tienda de complementos usan dos orígenes: el servidor del proyecto y GitHub.",
+	"notes": "Compatibilidad con WhatsApp y otras aplicaciones WinUI 3 con WebView2 (Teams y Outlook nuevos): se anuncia el control con foco al entrar y funcionan la lectura, Control+flechas y los atajos. Retroceso anuncia siempre lo borrado. Complemento WhatsApp accesible 1.0.4.",
 	"notesUrl": "novedades.html",
 	"installer": {
-		"url": "descargas/1.0.13/Tiresias-1.0.13-instalador.exe",
-		"sha256": "049f2c0c7d0464e6cb2a37b21f65f7b3fc48554087901219a0e1ea20d996b067",
-		"size": 62341120
+		"url": "descargas/1.0.14/Tiresias-1.0.14-instalador.exe",
+		"sha256": "d79918243d6abbb9a208b9286a6c9c3319ceb3b813aaf0d5b632856a28fb6202",
+		"size": 62349312
 	},
 	"portable": {
-		"url": "descargas/1.0.13/Tiresias-1.0.13-portable.zip",
-		"sha256": "bfe2d53d18fcd78a0895b6213cf7db2c2f04d31d657337d2eb2c653f45e48483",
-		"size": 85082813
+		"url": "descargas/1.0.14/Tiresias-1.0.14-portable.zip",
+		"sha256": "bcb0c79656dc1825476b928c1a4f3f577bfa295aff24d9f236a939329001dbb9",
+		"size": 85087730
 	},
 	"source": {
-		"url": "descargas/1.0.13/Tiresias-1.0.13-codigo-fuente.zip",
-		"sha256": "1c53bd8a508d95726c3ff3a8e53f6b656c4e532a1a0931f8fe3de00f2eb5e809",
-		"size": 16686530
+		"url": "descargas/1.0.14/Tiresias-1.0.14-codigo-fuente.zip",
+		"sha256": "2dd76c87ed28c7c9f0e9df85ad77f8fa2f02cded4763e7087c5053a24bd09ba6",
+		"size": 16695960
 	}
 }
