@@ -18,6 +18,14 @@ kbd { font-family: inherit; font-weight: bold; }
 <h1>Novedades de Tiresias</h1>
 <p>Esta página resume lo que ha cambiado en cada versión, empezando por la más reciente; al final, las novedades de la versión 1.0.1 ordenadas por áreas. Los detalles de cada función están en el manual de usuario (menú de Tiresias, Ayuda, Manual de usuario). Todas las teclas nuevas están también en la referencia rápida de órdenes del manual y en Ayuda, Referencia rápida de órdenes.</p>
 
+<h2 id="v1-0-14">Versión 1.0.14</h2>
+<p>Corrige lo que contaban los usuarios de WhatsApp: al entrar en la ventana no se oía nada, no aparecían los controles, <kbd>Control+flechas</kbd> no leían y <kbd>Retroceso</kbd> no decía lo borrado.</p>
+<ul>
+<li><strong>WhatsApp y las demás aplicaciones WinUI 3 con contenido web (WebView2): Teams, el Outlook nuevo...</strong> Tiresias se quedaba en un panel vacío de la ventana y no veía el control web que tenía el foco: al entrar solo decía el título, <kbd>Tab</kbd> y las flechas no leían nada, no había eco al escribir y las órdenes del cursor (<kbd>Control+flechas</kbd>, <kbd>Inicio</kbd>, <kbd>Fin</kbd>, <kbd>Retroceso</kbd>) no hablaban. Ahora baja hasta el control real: al entrar en WhatsApp dice la ventana y el control con el foco, y el cuadro de escribir un mensaje se comporta como cualquier campo de texto (eco, palabras, borrado, selección).</li>
+<li><strong>Retroceso anuncia siempre el carácter borrado</strong>, también con el eco de caracteres desactivado (como hace NVDA). Antes, con el eco en «desactivado», borrar no decía nada.</li>
+<li><strong>Complemento «WhatsApp accesible» 1.0.4</strong>, adaptado a la interfaz actual de WhatsApp (2.2641): las filas de la lista de chats y los mensajes ya no se leen como «agrupación» ni se repiten al pulsar la primera flecha; <kbd>Alt+2</kbd>, <kbd>Alt+3</kbd> y <kbd>Alt+D</kbd> vuelven a enfocar el mensaje (WhatsApp ya no deja enfocar el mensaje en sí, sino su contenedor); <kbd>Alt+D</kbd> sin un chat abierto lo avisa.</li>
+</ul>
+
 <h2 id="v1-0-13">Versión 1.0.13</h2>
 <ul>
 <li><strong>Tiresias está en GitHub.</strong> El código fuente completo está en el repositorio público <a href="https://github.com/hxebolax/Tiresias">https://github.com/hxebolax/Tiresias</a>, con las instrucciones para ejecutarlo desde el código y compilarlo. Eloquence y la voz neuronal Álvaro no están en el repositorio porque son software propietario; siguen en la tienda de complementos del servidor del proyecto.</li>
@@ -284,6 +292,7 @@ kbd { font-family: inherit; font-weight: bold; }
 
 <nav aria-labelledby="indice"><h2 id="indice">Índice</h2>
 <ul>
+<li><a href="#v1-0-14">Versión 1.0.14</a></li>
 <li><a href="#v1-0-13">Versión 1.0.13</a></li>
 <li><a href="#v1-0-12">Versión 1.0.12</a></li>
 <li><a href="#v1-0-11">Versión 1.0.11</a></li>

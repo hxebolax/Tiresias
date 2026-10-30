@@ -1134,7 +1134,43 @@ def getFocusObject() -> AccObject | None:
 		if obj is not None:
 			return obj
 	el = uc.getFocusedElement(uc.baseCacheRequest)
-	return UIAObject.fromElement(el) if el else None
+	obj = UIAObject.fromElement(el) if el else None
+	if obj is not None and hwnd and isStaleFocus(obj, hwnd):
+		# Rev. 1.0.14: UIA sigue dando el foco de la ventana anterior (al volver
+		# a WhatsApp u otra aplicación WinUI 3 con WebView2 que no avisa del
+		# foco al activarse): se busca el elemento con foco dentro de la
+		# ventana que de verdad tiene el foco del teclado.
+		fresh = uc.focusedDescendantOfWindow(hwnd, uc.baseCacheRequest)
+		fallback = UIAObject.fromElement(fresh) if fresh else None
+		if fallback is not None:
+			log.debug("Foco UIA caducado (%r): se usa el elemento con foco de la ventana %x", obj, hwnd)
+			obj = fallback
+	return obj
+
+
+def isStaleFocus(obj: "UIAObject", focusHwnd: int) -> bool:
+	"""``True`` si ``obj`` no pertenece a la ventana con el foco del teclado.
+
+	Cuenta el proceso: el del objeto, o el que lo muestra si es contenido
+	incrustado de otro proceso (WebView2, CEF: ``appmodules.handler.hostProcessId``),
+	tiene que ser el de la ventana del foco.
+	"""
+	from ..appmodules import handler as appHandler
+
+	try:
+		focusPid = winapi.getWindowProcessId(focusHwnd)
+		if not focusPid:
+			return False
+		objPid = int(obj.processID or 0)
+		if not objPid or objPid == focusPid:
+			return False
+		hwnd = obj.windowHandle
+		if not hwnd:
+			return False
+		root = winapi.getAncestor(hwnd, winapi.GA_ROOT) or hwnd
+		return appHandler.hostProcessId(obj, root) != focusPid
+	except Exception:
+		return False
 
 
 def _isOwnWindow(hwnd: int) -> bool:

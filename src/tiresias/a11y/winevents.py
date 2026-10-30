@@ -243,6 +243,7 @@ def onWinEvent(event: int, hwnd: int, idObject: int, idChild: int, threadId: int
 		global _lastForeignForeground
 		if hwnd and _pidOf(hwnd) != _ownPid:
 			_lastForeignForeground = hwnd
+		log.debug("Primer plano: ventana %x", hwnd or 0)
 		queue_handler.queueFunction(_onForeground)
 		return
 	if event in (msaa.EVENT_SYSTEM_MENUPOPUPEND, msaa.EVENT_SYSTEM_MENUEND, msaa.EVENT_SYSTEM_SWITCHEND):
@@ -359,6 +360,7 @@ def scheduleFocusCheck(delay: int, force: bool = False) -> None:
 	if _pendingCheck is not None:
 		if now - _pendingCheckSince >= FOCUS_CHECK_MAX_WAIT:
 			# Ya se aplazó bastante: se deja la que está programada.
+			log.debug("Comprobación del foco ya aplazada %.1f s: se mantiene la programada", now - _pendingCheckSince)
 			return
 		queue_handler.cancelCallLater(_pendingCheck)
 	else:
@@ -368,6 +370,10 @@ def scheduleFocusCheck(delay: int, force: bool = False) -> None:
 
 # Compatibilidad con el nombre antiguo.
 _scheduleFocusCheck = scheduleFocusCheck
+
+
+#: La última comprobación del foco no encontró objeto y ya se reintentó una vez.
+_focusCheckRetried = False
 
 
 def _checkFocus() -> None:
@@ -385,11 +391,22 @@ def _checkFocus() -> None:
 		return
 	obj = getFocusObject()
 	if obj is None:
+		global _focusCheckRetried
+		log.debug("Comprobación del foco: no se encontró el objeto con foco")
+		if not _focusCheckRetried:
+			# Rev. 1.0.14: el proveedor no respondió (WinUI 3 con WebView2 al
+			# activarse la ventana): se vuelve a mirar una vez un poco después.
+			_focusCheckRetried = True
+			scheduleFocusCheck(300, force=force)
 		return
+	_focusCheckRetried = False
 	if focus is not None and obj == focus and not force:
+		log.debug("Comprobación del foco: sigue en %r", obj)
 		return
 	if not getattr(obj, "shouldAllowFocusEvent", True):
+		log.debug("Comprobación del foco: %r no admite eventos de foco", obj)
 		return
+	log.debug("Comprobación del foco: el foco real es %r", obj)
 	executeEvent("gainFocus", obj)
 	from . import uia_handler
 

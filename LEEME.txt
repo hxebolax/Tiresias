@@ -1,4 +1,4 @@
-TIRESIAS 1.0.13 - lector de pantalla para Windows 10 y 11
+TIRESIAS 1.0.14 - lector de pantalla para Windows 10 y 11
 
 CÓMO EMPEZAR
 - Ejecuta Tiresias.exe. Al arrancar suena un sonido y Tiresias empieza a hablar.

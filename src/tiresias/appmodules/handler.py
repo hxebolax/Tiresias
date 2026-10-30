@@ -281,8 +281,6 @@ def getAppModuleForObject(obj) -> AppModule | None:
 	muestra. Las aplicaciones UWP dentro de ``ApplicationFrameHost`` usan el
 	proceso que dibuja su contenido.
 	"""
-	from ..objects.base import HOSTED_CONTENT_PROCESSES
-
 	pid = obj.processID
 	hwnd = obj.windowHandle
 	root = winapi.getAncestor(hwnd, winapi.GA_ROOT) if hwnd else 0
@@ -305,13 +303,29 @@ def getAppModuleForObject(obj) -> AppModule | None:
 					pid = hostPid
 				return getAppModuleForPid(pid)
 			pid = rootPid
-		if winapi.getProcessName(pid) in HOSTED_CONTENT_PROCESSES:
-			hostPid = _hostPidCache.get(root)
-			if hostPid is None:
-				hostPid = obj._findHostProcessId() or pid
-				_hostPidCache[root] = hostPid
-			pid = hostPid
+		pid = hostProcessId(obj, root)
 	return getAppModuleForPid(pid)
+
+
+def hostProcessId(obj, root: int) -> int:
+	"""Proceso que muestra la ventana raíz ``root`` de ``obj``.
+
+	Es el de la propia ventana, salvo si es contenido incrustado de otro
+	proceso (WebView2, CEF: :data:`HOSTED_CONTENT_PROCESSES`): entonces el de
+	la ventana de nivel superior que lo compone, según el árbol de
+	accesibilidad (``_findHostProcessId``), recordado por ventana raíz. Lo
+	usan el módulo de aplicación y el filtro de foco de :mod:`uia_handler`.
+	"""
+	from ..objects.base import HOSTED_CONTENT_PROCESSES
+
+	pid = winapi.getWindowProcessId(root)
+	if not pid or winapi.getProcessName(pid) not in HOSTED_CONTENT_PROCESSES:
+		return pid
+	hostPid = _hostPidCache.get(root)
+	if hostPid is None:
+		hostPid = obj._findHostProcessId() or pid
+		_hostPidCache[root] = hostPid
+	return hostPid
 
 
 def getRunningModules() -> list[AppModule]:
