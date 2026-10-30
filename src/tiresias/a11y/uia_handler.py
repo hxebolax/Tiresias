@@ -643,7 +643,17 @@ def isInForegroundWindow(obj) -> bool:
 		if not hwnd:
 			return True
 		root = winapi.getAncestor(hwnd, winapi.GA_ROOT)
-		return root == fg or winapi.getWindowProcessId(root) == fgPid
+		if root == fg or winapi.getWindowProcessId(root) == fgPid:
+			return True
+		# Rev. 1.0.14: en WinUI 3 el contenido WebView2 (WhatsApp, Teams, el
+		# Outlook nuevo) vive en una ventana de nivel superior de
+		# msedgewebview2.exe que la aplicación compone dentro de la suya: su
+		# raíz Win32 no es la ventana activa, pero quien lo muestra sí. Sin
+		# esto, todos los focos de la página se descartaban como «internos de
+		# una ventana en segundo plano».
+		from ..appmodules import handler as appHandler
+
+		return appHandler.hostProcessId(obj, root) == fgPid
 	except Exception:
 		return True
 
@@ -679,6 +689,7 @@ def _onFocus(element, seq: int) -> None:
 		# el foco real por si acaso.
 		from . import winevents
 
+		log.debug("Foco UIA de una ventana en segundo plano descartado: %r", obj)
 		winevents.scheduleFocusCheck(150)
 		return
 	from . import api_choice
@@ -692,6 +703,7 @@ def _onFocus(element, seq: int) -> None:
 		# (WinEvent o Java Access Bridge); por si no avisa, se comprueba luego.
 		from . import winevents
 
+		log.debug("Foco UIA en una ventana que se lee con %s (%x): se deja a su API", choice, hwnd)
 		winevents.scheduleFocusCheck(100)
 		return
 	old = api.getFocusObject()

@@ -444,7 +444,9 @@ class EditableText(AccObject):
 		gesture.send()
 		if isProtected(self):
 			deleted = ""
-		if deleted and conf["keyboard"]["speakTypedCharacters"] != "off":
+		# Rev. 1.0.14: lo borrado se anuncia siempre, como en NVDA, aunque el eco
+		# de caracteres esté apagado (antes Retroceso se quedaba mudo).
+		if deleted:
 			speech.cancelSpeech()
 			if len(deleted) == 1:
 				speech.speakCharacter(deleted)
@@ -867,7 +869,7 @@ class EditableTextNoCaret(AccObject):
 		text, pos = st
 		deleted = text[pos - 1] if 0 < pos <= len(text) else ""
 		gesture.send()
-		if deleted and not isProtected(self) and conf["keyboard"]["speakTypedCharacters"] != "off":
+		if deleted and not isProtected(self):
 			speech.cancelSpeech()
 			speech.speakCharacter(deleted)
 		queue_handler.callLater(40, self._syncValue)

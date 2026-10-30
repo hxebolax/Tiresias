@@ -307,6 +307,58 @@ class WAMessage(AccObject):
 		return ""
 
 
+def focusableNode(node: Node | None, maxUp: int = 3) -> Node | None:
+	"""``node`` si es enfocable; si no, su antecesor enfocable más cercano (hasta
+	``maxUp`` niveles) o, en su defecto, el propio ``node``."""
+	if node is None:
+		return None
+	cur = node
+	for _i in range(maxUp + 1):
+		if cur.focusable:
+			return cur
+		if cur.parent is None:
+			break
+		cur = cur.parent
+	return node
+
+
+def _innerFocusable(node: Node | None) -> Node | None:
+	"""El hijo enfocable directo de ``node`` si lo hay (el elemento al que WhatsApp
+	pasa el foco con la primera flecha); si no, ``node``. Así Alt+1 y el cambio de
+	chat no anuncian dos veces la misma fila (rev. 1.0.14)."""
+	if node is None:
+		return None
+	inner = next((c for c in node.children if c.focusable), None)
+	return inner if inner is not None else node
+
+
+def _isMessageWrapper(obj: UIAObject) -> bool:
+	"""El objeto es el contenedor enfocable de un mensaje (su hijo o nieto lleva
+	la clase ``focusable-list-item``)."""
+	try:
+		if not obj.isFocusable:
+			return False
+	except Exception:
+		return False
+	node = snapshot(obj.element, maxNodes=60)
+	if node is None:
+		return False
+	return any(n.isMessage for n in node.walk() if 0 < n.depth <= 2)
+
+
+def _isChatRowWrapper(obj: UIAObject) -> bool:
+	"""El objeto es el grupo interior enfocable de una celda de la lista de chats."""
+	try:
+		if not obj.isFocusable:
+			return False
+		parent = obj.parent
+		if not isinstance(parent, UIAObject):
+			return False
+		return parent.UIAControlType == uc.CT_DATAITEM and parent.UIAAriaRole in ("gridcell", "row")
+	except Exception:
+		return False
+
+
 # ====================================================================== módulo
 class AppModule(BaseAppModule):
 	disableBrowseModeByDefault = True
@@ -346,6 +398,16 @@ class AppModule(BaseAppModule):
 		if "focusable-list-item" in cls:
 			clsList.insert(0, WAMessage)
 		elif ct == uc.CT_DATAITEM and aria in ("gridcell", "row"):
+			clsList.insert(0, WAChatItem)
+		elif ct == uc.CT_GROUP and aria == "group" and _isMessageWrapper(obj):
+			# WhatsApp 2.2641 (rev. 1.0.14): el foco de la lista de mensajes se
+			# posa en un contenedor enfocable sin nombre propio cuyo hijo es el
+			# mensaje (``focusable-list-item``). Se lee como el mensaje: sin
+			# «agrupación», con el texto limpio y con los atajos de mensaje.
+			clsList.insert(0, WAMessage)
+		elif ct == uc.CT_GROUP and aria == "group" and _isChatRowWrapper(obj):
+			# Igual en la lista de chats: las flechas enfocan el grupo interior de
+			# la celda, con el mismo nombre que ella.
 			clsList.insert(0, WAChatItem)
 		elif ct in (uc.CT_BUTTON, uc.CT_DATAITEM, uc.CT_GROUP, uc.CT_LISTITEM, uc.CT_TEXT, uc.CT_HYPERLINK):
 			clsList.insert(0, WACleanName)
@@ -440,10 +502,17 @@ class AppModule(BaseAppModule):
 
 	@staticmethod
 	def _focus(node: Node | None) -> bool:
-		if node is None:
+		"""Enfoca ``node`` o, si no es enfocable, su antecesor enfocable más cercano.
+
+		Rev. 1.0.14: en WhatsApp 2.2641 el mensaje (``focusable-list-item``)
+		deja de ser enfocable cuando no es el actual; lo es su contenedor.
+		``SetFocus`` en el mensaje no hacía nada y Alt+2 o Alt+D se quedaban mudos.
+		"""
+		target = focusableNode(node)
+		if target is None:
 			return False
 		try:
-			node.el.SetFocus()
+			target.el.SetFocus()
 			return True
 		except comtypes.COMError:
 			return False
@@ -475,7 +544,7 @@ class AppModule(BaseAppModule):
 		if not cells:
 			cells = [n for n in grid.walk() if n.focusable]
 		target = next((c for c in cells if c.selected), None) or (cells[0] if cells else None)
-		if not self._focus(target):
+		if not self._focus(_innerFocusable(target)):
 			self._speak(_("No se pudo ir a la lista de chats"))
 
 	@script(description=_("Va al último mensaje del chat abierto"), gesture="kb:alt+2", category=CAT)
@@ -515,7 +584,11 @@ class AppModule(BaseAppModule):
 					pass
 			self.script_goToLastMessage(gesture)
 			return
-		box = self._composeBox()
+		main = self._mainSnapshot()
+		if main is None:
+			self._speak(_("No hay un chat abierto"))
+			return
+		box = self._composeBox(main)
 		if not self._focus(box):
 			self._speak(_("No se encontró el cuadro de edición"))
 
@@ -560,7 +633,7 @@ class AppModule(BaseAppModule):
 			tones.playSound("boundary")
 			return
 		cell = cells[target]
-		if self._focus(cell):
+		if self._focus(_innerFocusable(cell)):
 			from tiresias.input.gestures import sendKey
 
 			sendKey("enter")

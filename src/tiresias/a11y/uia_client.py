@@ -6,6 +6,8 @@ cliente, los andadores del árbol y solicitudes de caché reutilizables.
 
 from __future__ import annotations
 
+import ctypes
+
 import comtypes
 import comtypes.client
 
@@ -461,10 +463,93 @@ def compareElements(a, b) -> bool:
 def getFocusedElement(cacheRequest=None):
 	try:
 		if cacheRequest is not None:
-			return client.GetFocusedElementBuildCache(cacheRequest)
-		return client.GetFocusedElement()
+			el = client.GetFocusedElementBuildCache(cacheRequest)
+		else:
+			el = client.GetFocusedElement()
 	except comtypes.COMError:
+		# Rev. 1.0.14: el proveedor de la ventana (WinUI 3 con WebView2) a veces
+		# no responde a tiempo. Se busca el foco desde la ventana con el foco del
+		# teclado antes de darse por vencido.
+		el = _focusedDescendantOfFocusWindow(0, cacheRequest)
+		if el is not None:
+			log.debug("GetFocusedElement falló: se usa el descendiente con foco de la ventana del teclado")
+		return el
+	return refineFocusedElement(el, cacheRequest)
+
+
+def _keyboardFocusWindow() -> int:
+	"""Ventana con el foco del teclado del hilo en primer plano (0 si no se sabe)."""
+	from .. import winapi
+
+	info = winapi.getGUIThreadInfo(0)
+	return int(info.hwndFocus or 0) if info is not None else 0
+
+
+def focusedDescendantOfWindow(hwnd: int, cacheRequest=None):
+	"""Descendiente con ``HasKeyboardFocus`` de la ventana ``hwnd`` (o ``None``)."""
+	return _focusedDescendantOfFocusWindow(hwnd, cacheRequest) if hwnd else None
+
+
+def _focusedDescendantOfFocusWindow(focusHwnd: int, cacheRequest=None):
+	"""Descendiente con ``HasKeyboardFocus`` de la ventana con el foco del teclado."""
+	try:
+		focusHwnd = focusHwnd or _keyboardFocusWindow()
+		if not focusHwnd:
+			return None
+		request = cacheRequest if cacheRequest is not None else baseCacheRequest
+		root = client.ElementFromHandleBuildCache(focusHwnd, request)
+		if not root:
+			return None
+		cond = createPropertyCondition(P_HASKEYBOARDFOCUS, True)
+		found = root.FindFirstBuildCache(TreeScope_Descendants, cond, request)
+		return found if found else None
+	except (comtypes.COMError, ValueError, TypeError, AttributeError):
 		return None
+
+
+_user32 = ctypes.windll.user32
+_user32.IsChild.argtypes = [ctypes.c_void_p, ctypes.c_void_p]
+_user32.IsChild.restype = ctypes.c_int
+
+
+def refineFocusedElement(el, cacheRequest=None):
+	"""Baja hasta el elemento con el foco cuando UIA se queda en una ventana por encima.
+
+	En las aplicaciones WinUI 3 con WebView2 (WhatsApp, Teams, el Outlook nuevo...)
+	el foco del teclado está en la ventana ``Chrome_WidgetWin_0`` del contenido,
+	pero esa ventana solo tiene el proxy MSAA del sistema, que no sabe qué
+	elemento tiene el foco: ``GetFocusedElement`` devuelve el panel
+	``Microsoft.UI.Content.DesktopChildSiteBridge`` que la contiene, sin nombre
+	y sin el estado «con foco». Tiresias se quedaba con ese panel: no leía el
+	control web, ni el eco, ni el cursor (rev. 1.0.14).
+
+	Si el elemento devuelto no es la ventana con el foco del teclado, esta
+	ventana está dentro de la suya y el elemento no tiene el foco, se busca el
+	descendiente con ``HasKeyboardFocus`` desde la ventana del foco. En
+	Chromium es inmediato (el foco está marcado en el árbol); si no hay ninguno,
+	se devuelve el elemento original.
+	"""
+	if el is None:
+		return None
+	try:
+		focusHwnd = _keyboardFocusWindow()
+		if not focusHwnd:
+			return el
+		if cacheRequest is not None:
+			elHwnd = int(el.GetCachedPropertyValue(P_NATIVEWINDOWHANDLE) or 0)
+		else:
+			elHwnd = int(el.CurrentNativeWindowHandle or 0)
+		if not elHwnd or elHwnd == focusHwnd or not _user32.IsChild(elHwnd, focusHwnd):
+			return el
+		if bool(el.CurrentHasKeyboardFocus):
+			return el
+		found = _focusedDescendantOfFocusWindow(focusHwnd, cacheRequest)
+		if found is not None:
+			log.debug("Foco UIA en una ventana por encima del foco del teclado: se usa el descendiente con foco")
+			return found
+	except (comtypes.COMError, ValueError, TypeError, AttributeError):
+		pass
+	return el
 
 
 def elementFromHandle(hwnd: int):

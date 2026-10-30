@@ -715,7 +715,7 @@ class WhatsAppTests(unittest.TestCase):
 		import json
 
 		with open(os.path.join(WA_BASE, "manifest.json"), encoding="utf-8") as f:
-			self.assertEqual(json.load(f)["version"], "1.0.3")
+			self.assertEqual(json.load(f)["version"], "1.0.4")
 
 
 class OfficeTests(Base):
