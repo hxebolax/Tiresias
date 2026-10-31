@@ -1,9 +1,9 @@
 # Traducción de Tiresias (en).
 msgid ""
 msgstr ""
-"Project-Id-Version: Tiresias 1.0.13\n"
+"Project-Id-Version: Tiresias 1.0.15\n"
 "Language: en\n"
-"POT-Creation-Date: 2026-10-13 10:25+0000\n"
+"POT-Creation-Date: 2026-10-31 09:39+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -105,302 +105,302 @@ msgstr "Announce when the contact is typing or recording"
 msgid "Sonido al llegar un mensaje nuevo"
 msgstr "Sound when a new message arrives"
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:1047
+#: data/addons/whatsapp/appModules/whatsapp_root.py:1120
 #, python-brace-format
 msgid "Lee el mensaje {n} contando desde el final (dos veces: lo enfoca)"
 msgstr "Reads message {n} counting from the end (twice: focuses it)"
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:1047
+#: data/addons/whatsapp/appModules/whatsapp_root.py:1120
 msgid "Lee el último mensaje (dos veces: lo enfoca)"
 msgstr "Reads the last message (twice: focuses it)"
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:1066
+#: data/addons/whatsapp/appModules/whatsapp_root.py:1139
 msgid "Ajustes de WhatsApp accesible"
 msgstr "Accessible WhatsApp settings"
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:468
+#: data/addons/whatsapp/appModules/whatsapp_root.py:537
 msgid "Va a la lista de chats (al chat seleccionado)"
 msgstr "Goes to the chat list (to the selected chat)"
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:472 data/addons/whatsapp/appModules/whatsapp_root.py:550
+#: data/addons/whatsapp/appModules/whatsapp_root.py:541 data/addons/whatsapp/appModules/whatsapp_root.py:623
 msgid "No se encontró la lista de chats"
 msgstr "Chat list not found"
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:479
+#: data/addons/whatsapp/appModules/whatsapp_root.py:548
 msgid "No se pudo ir a la lista de chats"
 msgstr "Could not go to the chat list"
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:481
+#: data/addons/whatsapp/appModules/whatsapp_root.py:550
 msgid "Va al último mensaje del chat abierto"
 msgstr "Goes to the last message of the open chat"
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:485
+#: data/addons/whatsapp/appModules/whatsapp_root.py:554
 msgid "No hay mensajes visibles. Abre un chat primero."
 msgstr "No visible messages. Open a chat first."
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:489
+#: data/addons/whatsapp/appModules/whatsapp_root.py:558
 msgid "Va al primer mensaje no leído"
 msgstr "Goes to the first unread message"
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:493 data/addons/whatsapp/appModules/whatsapp_root.py:531
+#: data/addons/whatsapp/appModules/whatsapp_root.py:562 data/addons/whatsapp/appModules/whatsapp_root.py:589 data/addons/whatsapp/appModules/whatsapp_root.py:604
 msgid "No hay un chat abierto"
 msgstr "No chat is open"
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:503
+#: data/addons/whatsapp/appModules/whatsapp_root.py:572
 msgid "No hay mensajes no leídos en este chat"
 msgstr "No unread messages in this chat"
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:505
+#: data/addons/whatsapp/appModules/whatsapp_root.py:574
 msgid "Alterna entre el cuadro de edición y el último mensaje enfocado"
 msgstr "Switches between the message box and the last focused message"
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:520
+#: data/addons/whatsapp/appModules/whatsapp_root.py:593
 msgid "No se encontró el cuadro de edición"
 msgstr "Message box not found"
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:522
+#: data/addons/whatsapp/appModules/whatsapp_root.py:595
 msgid "Lee el título del chat y su estado (dos veces: activa o desactiva el aviso de «escribiendo»)"
 msgstr "Reads the chat title and status (twice: turns the “typing” announcement on or off)"
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:527
+#: data/addons/whatsapp/appModules/whatsapp_root.py:600
 msgid "Aviso de escribiendo activado"
 msgstr "Typing announcement on"
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:527
+#: data/addons/whatsapp/appModules/whatsapp_root.py:600
 msgid "Aviso de escribiendo desactivado"
 msgstr "Typing announcement off"
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:538
+#: data/addons/whatsapp/appModules/whatsapp_root.py:611
 #, python-brace-format
 msgid "No hay {n} mensajes visibles"
 msgstr "There are not {n} visible messages"
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:545
+#: data/addons/whatsapp/appModules/whatsapp_root.py:618
 msgid "Mensaje sin texto"
 msgstr "Message without text"
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:574
+#: data/addons/whatsapp/appModules/whatsapp_root.py:647
 msgid "Abre el chat anterior de la lista"
 msgstr "Opens the previous chat in the list"
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:578
+#: data/addons/whatsapp/appModules/whatsapp_root.py:651
 msgid "Abre el chat siguiente de la lista"
 msgstr "Opens the next chat in the list"
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:589
+#: data/addons/whatsapp/appModules/whatsapp_root.py:662
 msgid "En un mensaje de voz o vídeo: reproduce o pausa"
 msgstr "On a voice or video message: plays or pauses"
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:611
+#: data/addons/whatsapp/appModules/whatsapp_root.py:684
 msgid "Pausado"
 msgstr "Paused"
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:611
+#: data/addons/whatsapp/appModules/whatsapp_root.py:684
 msgid "Reproduciendo"
 msgstr "Playing"
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:613
+#: data/addons/whatsapp/appModules/whatsapp_root.py:686
 msgid "Posición y duración de la nota de voz del mensaje"
 msgstr "Position and length of the message's voice note"
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:622
+#: data/addons/whatsapp/appModules/whatsapp_root.py:695
 msgid "No hay una nota de voz"
 msgstr "No voice note"
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:631
+#: data/addons/whatsapp/appModules/whatsapp_root.py:704
 #, python-brace-format
 msgid "{pos} de {total}"
 msgstr "{pos} of {total}"
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:633
+#: data/addons/whatsapp/appModules/whatsapp_root.py:706
 msgid "Copia el texto limpio del mensaje con foco"
 msgstr "Copies the clean text of the focused message"
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:645
+#: data/addons/whatsapp/appModules/whatsapp_root.py:718
 msgid "Muestra el mensaje completo en una ventana (expande «Leer más»)"
 msgstr "Shows the full message in a window (expands “Read more”)"
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:649
+#: data/addons/whatsapp/appModules/whatsapp_root.py:722
 msgid "Sitúate en un mensaje"
 msgstr "Move to a message first"
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:666
+#: data/addons/whatsapp/appModules/whatsapp_root.py:739
 msgid "Mensaje de WhatsApp"
 msgstr "WhatsApp message"
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:668
+#: data/addons/whatsapp/appModules/whatsapp_root.py:741
 msgid "Abre el menú contextual del mensaje"
 msgstr "Opens the message's context menu"
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:680
+#: data/addons/whatsapp/appModules/whatsapp_root.py:753
 msgid "Reacciona al mensaje con foco"
 msgstr "Reacts to the focused message"
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:689
+#: data/addons/whatsapp/appModules/whatsapp_root.py:762
 msgid "No se encontró el botón de reaccionar"
 msgstr "React button not found"
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:712
+#: data/addons/whatsapp/appModules/whatsapp_root.py:785
 msgid "Empieza a grabar una nota de voz; si ya se graba, la envía"
 msgstr "Starts recording a voice note; if one is already recording, sends it"
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:718
+#: data/addons/whatsapp/appModules/whatsapp_root.py:791
 msgid "Nota de voz enviada"
 msgstr "Voice note sent"
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:722
+#: data/addons/whatsapp/appModules/whatsapp_root.py:795
 msgid "Grabando nota de voz. Alt+M para enviar, Alt+Mayúsculas+M para descartar"
 msgstr "Recording voice note. Alt+M to send, Alt+Shift+M to discard"
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:724
+#: data/addons/whatsapp/appModules/whatsapp_root.py:797
 msgid "Descarta la nota de voz que se está grabando"
 msgstr "Discards the voice note being recorded"
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:732
+#: data/addons/whatsapp/appModules/whatsapp_root.py:805
 msgid "Grabación descartada"
 msgstr "Recording discarded"
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:734
+#: data/addons/whatsapp/appModules/whatsapp_root.py:807
 msgid "No hay ninguna grabación en curso"
 msgstr "No recording in progress"
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:744
+#: data/addons/whatsapp/appModules/whatsapp_root.py:817
 msgid "Llamada de voz al chat abierto"
 msgstr "Voice call to the open chat"
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:746
+#: data/addons/whatsapp/appModules/whatsapp_root.py:819
 msgid "No se encontró el botón de llamada"
 msgstr "Call button not found"
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:748
+#: data/addons/whatsapp/appModules/whatsapp_root.py:821
 msgid "Videollamada al chat abierto"
 msgstr "Video call to the open chat"
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:750
+#: data/addons/whatsapp/appModules/whatsapp_root.py:823
 msgid "No se encontró el botón de videollamada"
 msgstr "Video call button not found"
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:782
+#: data/addons/whatsapp/appModules/whatsapp_root.py:855
 msgid "Acepta una llamada entrante"
 msgstr "Accepts an incoming call"
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:788
+#: data/addons/whatsapp/appModules/whatsapp_root.py:861
 msgid "Llamada aceptada"
 msgstr "Call accepted"
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:790
+#: data/addons/whatsapp/appModules/whatsapp_root.py:863
 msgid "Rechaza la llamada entrante o cuelga"
 msgstr "Declines the incoming call or hangs up"
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:796
+#: data/addons/whatsapp/appModules/whatsapp_root.py:869
 msgid "Llamada rechazada"
 msgstr "Call declined"
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:799
+#: data/addons/whatsapp/appModules/whatsapp_root.py:872
 msgid "Cierra el visor de multimedia, el reproductor o el aviso que tapa la ventana"
 msgstr "Closes the media viewer, the player or the notice covering the window"
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:810
+#: data/addons/whatsapp/appModules/whatsapp_root.py:883
 msgid "Cerrado"
 msgstr "Closed"
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:812
+#: data/addons/whatsapp/appModules/whatsapp_root.py:885
 msgid "No hay nada que cerrar"
 msgstr "Nothing to close"
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:814
+#: data/addons/whatsapp/appModules/whatsapp_root.py:887
 msgid "Activa o desactiva la lectura automática de mensajes nuevos"
 msgstr "Turns automatic reading of new messages on or off"
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:818
+#: data/addons/whatsapp/appModules/whatsapp_root.py:891
 msgid "Lectura automática de mensajes nuevos activada"
 msgstr "Automatic reading of new messages on"
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:818
+#: data/addons/whatsapp/appModules/whatsapp_root.py:891
 msgid "Lectura automática desactivada"
 msgstr "Automatic reading off"
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:820
+#: data/addons/whatsapp/appModules/whatsapp_root.py:893
 msgid "Activa o desactiva el filtro de números de teléfono"
 msgstr "Turns the phone number filter on or off"
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:827
+#: data/addons/whatsapp/appModules/whatsapp_root.py:900
 msgid "Números de teléfono ocultos en mensajes"
 msgstr "Phone numbers hidden in messages"
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:827
+#: data/addons/whatsapp/appModules/whatsapp_root.py:900
 msgid "Números de teléfono visibles en mensajes"
 msgstr "Phone numbers shown in messages"
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:829
+#: data/addons/whatsapp/appModules/whatsapp_root.py:902
 msgid "Números de teléfono ocultos en la lista de chats"
 msgstr "Phone numbers hidden in the chat list"
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:829
+#: data/addons/whatsapp/appModules/whatsapp_root.py:902
 msgid "Números de teléfono visibles en la lista de chats"
 msgstr "Phone numbers shown in the chat list"
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:831
+#: data/addons/whatsapp/appModules/whatsapp_root.py:904
 msgid "Activa o desactiva la lectura de las pistas de uso de WhatsApp"
 msgstr "Turns reading of WhatsApp usage hints on or off"
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:835
+#: data/addons/whatsapp/appModules/whatsapp_root.py:908
 msgid "Pistas ocultas"
 msgstr "Hints hidden"
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:835
+#: data/addons/whatsapp/appModules/whatsapp_root.py:908
 msgid "Pistas visibles"
 msgstr "Hints shown"
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:837
+#: data/addons/whatsapp/appModules/whatsapp_root.py:910
 msgid "Ayuda de los atajos del complemento de WhatsApp"
 msgstr "Help for the WhatsApp add-on shortcuts"
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:842
+#: data/addons/whatsapp/appModules/whatsapp_root.py:915
 msgid "Atajos del complemento WhatsApp accesible:"
 msgstr "Accessible WhatsApp add-on shortcuts:"
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:849
+#: data/addons/whatsapp/appModules/whatsapp_root.py:922
 msgid "Atajos propios de WhatsApp (siguen funcionando):"
 msgstr "WhatsApp's own shortcuts (they still work):"
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:850
+#: data/addons/whatsapp/appModules/whatsapp_root.py:923
 msgid "Control+Alt+N: nuevo chat. Control+Mayúsculas+N: nuevo grupo."
 msgstr "Control+Alt+N: new chat. Control+Shift+N: new group."
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:851
+#: data/addons/whatsapp/appModules/whatsapp_root.py:924
 msgid "Control+Alt+barra: buscar. Control+Mayúsculas+F: buscar en el chat."
 msgstr "Control+Alt+slash: search. Control+Shift+F: search in the chat."
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:852
+#: data/addons/whatsapp/appModules/whatsapp_root.py:925
 msgid "Control+Mayúsculas+U: marcar como no leído. Control+Mayúsculas+M: silenciar. Control+Mayúsculas+A: archivar."
 msgstr "Control+Shift+U: mark as unread. Control+Shift+M: mute. Control+Shift+A: archive."
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:853
+#: data/addons/whatsapp/appModules/whatsapp_root.py:926
 msgid "Control+Alt+Mayúsculas+P: fijar chat. Alt+I: información del chat. Alt+S: ajustes de WhatsApp."
 msgstr "Control+Alt+Shift+P: pin chat. Alt+I: chat info. Alt+S: WhatsApp settings."
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:854
+#: data/addons/whatsapp/appModules/whatsapp_root.py:927
 msgid "Alt+R: responder. Control+Alt+D: reenviar (fuera de llamadas). Alt+8: destacar. Alt+A: adjuntar."
 msgstr "Alt+R: reply. Control+Alt+D: forward (outside calls). Alt+8: star. Alt+A: attach."
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:855
+#: data/addons/whatsapp/appModules/whatsapp_root.py:928
 msgid "Mayúsculas+punto y Mayúsculas+coma: velocidad de la nota de voz. Alt+P: pausar la grabación."
 msgstr "Shift+period and Shift+comma: voice note speed. Alt+P: pause the recording."
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:856
+#: data/addons/whatsapp/appModules/whatsapp_root.py:929
 msgid "Control+flecha arriba: editar el último mensaje. Escape: cerrar el chat."
 msgstr "Control+up arrow: edit the last message. Escape: close the chat."
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:857
+#: data/addons/whatsapp/appModules/whatsapp_root.py:930
 msgid "Control+1 a Control+9: abrir el chat número N."
 msgstr "Control+1 to Control+9: open chat number N."
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:859
+#: data/addons/whatsapp/appModules/whatsapp_root.py:932
 msgid "Ayuda de WhatsApp accesible"
 msgstr "Accessible WhatsApp help"
 
-#: data/addons/whatsapp/appModules/whatsapp_root.py:861
+#: data/addons/whatsapp/appModules/whatsapp_root.py:934
 msgid "Ajustes del complemento de WhatsApp"
 msgstr "WhatsApp add-on settings"
 
@@ -430,11 +430,11 @@ msgstr "Java Access Bridge enabled. Reopen the Java application."
 msgid "No se pudo activar Java Access Bridge"
 msgstr "Could not enable Java Access Bridge"
 
-#: src/tiresias/a11y/winevents.py:611
+#: src/tiresias/a11y/winevents.py:628
 msgid "Escritorio seguro"
 msgstr "Secure desktop"
 
-#: src/tiresias/a11y/winevents.py:614
+#: src/tiresias/a11y/winevents.py:631
 msgid "Escritorio seguro (Control de cuentas de usuario o inicio de sesión). Tiresias no puede leerlo porque Windows solo lo permite a servicios del sistema."
 msgstr "Secure desktop (User Account Control or sign-in). Tiresias cannot read it because Windows only allows system services to do so."
 
@@ -770,7 +770,7 @@ msgstr "The whole manual does not fit in the context limit: the table of content
 msgid "Ayuda de Tiresias"
 msgstr "Tiresias help"
 
-#: src/tiresias/ai/autolabel.py:109 src/tiresias/appmodules/_excel.py:178 src/tiresias/appmodules/outlook.py:355 src/tiresias/browse/buffer.py:787 src/tiresias/browse/document.py:77 src/tiresias/browse/document.py:552
+#: src/tiresias/ai/autolabel.py:109 src/tiresias/appmodules/_excel.py:178 src/tiresias/appmodules/outlook.py:355 src/tiresias/browse/buffer.py:918 src/tiresias/browse/document.py:77 src/tiresias/browse/document.py:552
 msgid "enlace"
 msgstr "link"
 
@@ -2060,7 +2060,7 @@ msgstr "Slide {n} of {total}"
 msgid "autoforma"
 msgstr "AutoShape"
 
-#: src/tiresias/appmodules/_ppt.py:22 src/tiresias/browse/document.py:89 src/tiresias/browse/document.py:589 src/tiresias/browse/html_details.py:121 src/tiresias/objects/roles.py:192
+#: src/tiresias/appmodules/_ppt.py:22 src/tiresias/browse/document.py:89 src/tiresias/browse/document.py:595 src/tiresias/browse/html_details.py:121 src/tiresias/objects/roles.py:192
 msgid "gráfico"
 msgstr "chart"
 
@@ -2145,7 +2145,7 @@ msgstr "extends off the slide"
 msgid "cuadro de texto"
 msgstr "text box"
 
-#: src/tiresias/appmodules/_ppt.py:32 src/tiresias/browse/document.py:82 src/tiresias/browse/document.py:572 src/tiresias/objects/roles.py:204
+#: src/tiresias/appmodules/_ppt.py:32 src/tiresias/browse/document.py:82 src/tiresias/browse/document.py:578 src/tiresias/objects/roles.py:204
 msgid "tabla"
 msgstr "table"
 
@@ -2248,11 +2248,11 @@ msgstr "with {n} revisions"
 msgid "con nota al pie"
 msgstr "with footnote"
 
-#: src/tiresias/appmodules/_word.py:255 src/tiresias/browse/document.py:567
+#: src/tiresias/appmodules/_word.py:255 src/tiresias/browse/document.py:573
 msgid "lista con 1 elemento"
 msgstr "list with 1 item"
 
-#: src/tiresias/appmodules/_word.py:255 src/tiresias/browse/document.py:567
+#: src/tiresias/appmodules/_word.py:255 src/tiresias/browse/document.py:573
 #, python-brace-format
 msgid "lista con {n} elementos"
 msgstr "list with {n} items"
@@ -2261,7 +2261,7 @@ msgstr "list with {n} items"
 msgid "lista"
 msgstr "list"
 
-#: src/tiresias/appmodules/_word.py:259 src/tiresias/browse/buffer.py:137
+#: src/tiresias/appmodules/_word.py:259 src/tiresias/browse/buffer.py:151
 msgid "fuera de lista"
 msgstr "out of list"
 
@@ -6124,15 +6124,15 @@ msgstr "current time"
 msgid "actual"
 msgstr "current"
 
-#: src/tiresias/browse/aria.py:53 src/tiresias/objects/base.py:751 src/tiresias/objects/roles.py:456
+#: src/tiresias/browse/aria.py:53 src/tiresias/objects/base.py:752 src/tiresias/objects/roles.py:456
 msgid "orden ascendente"
 msgstr "sorted ascending"
 
-#: src/tiresias/browse/aria.py:54 src/tiresias/objects/base.py:753 src/tiresias/objects/roles.py:457
+#: src/tiresias/browse/aria.py:54 src/tiresias/objects/base.py:754 src/tiresias/objects/roles.py:457
 msgid "orden descendente"
 msgstr "sorted descending"
 
-#: src/tiresias/browse/aria.py:55 src/tiresias/objects/base.py:755 src/tiresias/objects/roles.py:455
+#: src/tiresias/browse/aria.py:55 src/tiresias/objects/base.py:756 src/tiresias/objects/roles.py:455
 msgid "ordenado"
 msgstr "sorted"
 
@@ -6144,52 +6144,52 @@ msgstr "horizontal"
 msgid "vertical"
 msgstr "vertical"
 
-#: src/tiresias/browse/buffer.py:138
+#: src/tiresias/browse/buffer.py:152
 msgid "fuera de tabla"
 msgstr "out of table"
 
-#: src/tiresias/browse/buffer.py:139
+#: src/tiresias/browse/buffer.py:153
 msgid "fuera de cuadrícula"
 msgstr "out of grid"
 
-#: src/tiresias/browse/buffer.py:140
+#: src/tiresias/browse/buffer.py:154
 #, python-brace-format
 msgid "fuera de {landmark}"
 msgstr "out of {landmark}"
 
-#: src/tiresias/browse/buffer.py:141
+#: src/tiresias/browse/buffer.py:155
 msgid "fuera de cita"
 msgstr "out of block quote"
 
-#: src/tiresias/browse/buffer.py:142
+#: src/tiresias/browse/buffer.py:156
 msgid "fuera de artículo"
 msgstr "out of article"
 
-#: src/tiresias/browse/buffer.py:143
+#: src/tiresias/browse/buffer.py:157
 msgid "fuera de figura"
 msgstr "out of figure"
 
-#: src/tiresias/browse/buffer.py:144
+#: src/tiresias/browse/buffer.py:158
 msgid "fuera de diálogo"
 msgstr "out of dialog"
 
-#: src/tiresias/browse/buffer.py:145
+#: src/tiresias/browse/buffer.py:159
 msgid "fuera de región"
 msgstr "out of region"
 
-#: src/tiresias/browse/buffer.py:146
+#: src/tiresias/browse/buffer.py:160
 msgid "fuera de árbol"
 msgstr "out of tree"
 
-#: src/tiresias/browse/buffer.py:147
+#: src/tiresias/browse/buffer.py:161
 msgid "fuera de marco"
 msgstr "out of frame"
 
-#: src/tiresias/browse/buffer.py:148
+#: src/tiresias/browse/buffer.py:162
 msgid "fuera de agrupación"
 msgstr "out of grouping"
 
-#: src/tiresias/browse/buffer.py:830 src/tiresias/browse/document.py:92 src/tiresias/objects/roles.py:214
+#: src/tiresias/browse/buffer.py:961 src/tiresias/browse/document.py:92 src/tiresias/objects/roles.py:214
 msgid "separador"
 msgstr "separator"
 
@@ -6209,165 +6209,165 @@ msgstr "math formula"
 msgid "fórmulas matemáticas"
 msgstr "math formulas"
 
-#: src/tiresias/browse/document.py:1093
+#: src/tiresias/browse/document.py:1099
 msgid "Selecciona todo el documento"
 msgstr "Selects the entire document"
 
-#: src/tiresias/browse/document.py:1099
+#: src/tiresias/browse/document.py:1105
 msgid "todo seleccionado"
 msgstr "all selected"
 
-#: src/tiresias/browse/document.py:1102
+#: src/tiresias/browse/document.py:1108
 msgid "Copia el texto seleccionado"
 msgstr "Copies the selected text"
 
-#: src/tiresias/browse/document.py:1111
+#: src/tiresias/browse/document.py:1117
 msgid "copiado"
 msgstr "copied"
 
-#: src/tiresias/browse/document.py:1123 src/tiresias/browse/document.py:1141 src/tiresias/browse/document.py:1157
+#: src/tiresias/browse/document.py:1129 src/tiresias/browse/document.py:1147 src/tiresias/browse/document.py:1163
 msgid "No se puede activar"
 msgstr "Cannot activate"
 
-#: src/tiresias/browse/document.py:1173
+#: src/tiresias/browse/document.py:1179
 msgid "Activa el elemento en el cursor"
 msgstr "Activates the element at the cursor"
 
-#: src/tiresias/browse/document.py:1177
+#: src/tiresias/browse/document.py:1183
 msgid "Abre el menú contextual del elemento"
 msgstr "Opens the element's context menu"
 
-#: src/tiresias/browse/document.py:1196
+#: src/tiresias/browse/document.py:1202
 msgid "Alterna entre modo exploración y modo foco"
 msgstr "Toggles between browse mode and focus mode"
 
-#: src/tiresias/browse/document.py:1232
+#: src/tiresias/browse/document.py:1238
 msgid "Sale del modo foco"
 msgstr "Exits focus mode"
 
-#: src/tiresias/browse/document.py:1255
+#: src/tiresias/browse/document.py:1261
 msgid "Activa o desactiva la navegación con una sola letra"
 msgstr "Turns single letter navigation on or off"
 
-#: src/tiresias/browse/document.py:1259
+#: src/tiresias/browse/document.py:1265
 msgid "navegación con una sola letra activada"
 msgstr "single letter navigation on"
 
-#: src/tiresias/browse/document.py:1259
+#: src/tiresias/browse/document.py:1265
 msgid "navegación con una sola letra desactivada"
 msgstr "single letter navigation off"
 
-#: src/tiresias/browse/document.py:1261
+#: src/tiresias/browse/document.py:1267
 msgid "Actualiza el contenido del documento"
 msgstr "Refreshes the document content"
 
-#: src/tiresias/browse/document.py:1265 src/tiresias/browse/loader.py:220
+#: src/tiresias/browse/document.py:1271 src/tiresias/browse/loader.py:225
 msgid "documento actualizado"
 msgstr "document refreshed"
 
-#: src/tiresias/browse/document.py:1273 src/tiresias/browse/loader.py:270
+#: src/tiresias/browse/document.py:1279 src/tiresias/browse/loader.py:275
 msgid "cargando el documento"
 msgstr "loading the document"
 
-#: src/tiresias/browse/document.py:1310
+#: src/tiresias/browse/document.py:1316
 #, python-brace-format
 msgid "no hay más {what}"
 msgstr "no more {what}"
 
-#: src/tiresias/browse/document.py:1310
+#: src/tiresias/browse/document.py:1316
 #, python-brace-format
 msgid "no hay {what} anteriores"
 msgstr "no previous {what}"
 
-#: src/tiresias/browse/document.py:1328 src/tiresias/browse/document.py:574 src/tiresias/browse/document.py:579 src/tiresias/browse/document.py:448 src/tiresias/browse/document.py:776 src/tiresias/browse/extras.py:912
+#: src/tiresias/browse/document.py:1334 src/tiresias/browse/document.py:580 src/tiresias/browse/document.py:585 src/tiresias/browse/document.py:448 src/tiresias/browse/document.py:782 src/tiresias/browse/extras.py:912
 msgid "región"
 msgstr "region"
 
-#: src/tiresias/browse/document.py:1353 src/tiresias/browse/document.py:1379
+#: src/tiresias/browse/document.py:1359 src/tiresias/browse/document.py:1385
 msgid "no se está dentro de un contenedor"
 msgstr "not inside a container"
 
-#: src/tiresias/browse/document.py:1362
+#: src/tiresias/browse/document.py:1368
 #, python-brace-format
 msgid "final de {what}"
 msgstr "end of {what}"
 
-#: src/tiresias/browse/document.py:1368
+#: src/tiresias/browse/document.py:1374
 #, python-brace-format
 msgid "principio de {what}"
 msgstr "start of {what}"
 
-#: src/tiresias/browse/document.py:1386
+#: src/tiresias/browse/document.py:1392
 msgid "final del documento"
 msgstr "end of document"
 
-#: src/tiresias/browse/document.py:1390
+#: src/tiresias/browse/document.py:1396
 msgid "Va al final del contenedor (lista, tabla...) sin salir de él"
 msgstr "Goes to the end of the container (list, table...) without leaving it"
 
-#: src/tiresias/browse/document.py:1394
+#: src/tiresias/browse/document.py:1400
 msgid "Va al principio del contenedor"
 msgstr "Moves to the start of the container"
 
-#: src/tiresias/browse/document.py:1399
+#: src/tiresias/browse/document.py:1405
 msgid "Salta tras el final del contenedor (lo primero que hay después de él)"
 msgstr "Jumps past the end of the container (to the first thing after it)"
 
-#: src/tiresias/browse/document.py:1403
+#: src/tiresias/browse/document.py:1409
 msgid "Salta al texto que sigue a un bloque de enlaces"
 msgstr "Skips to the text after a block of links"
 
-#: src/tiresias/browse/document.py:1407
+#: src/tiresias/browse/document.py:1413
 msgid "Salta al texto anterior a un bloque de enlaces"
 msgstr "Skips to the text before a block of links"
 
-#: src/tiresias/browse/document.py:1426
+#: src/tiresias/browse/document.py:1432
 msgid "no hay más texto fuera de enlaces"
 msgstr "no more text outside links"
 
-#: src/tiresias/browse/document.py:1492
+#: src/tiresias/browse/document.py:1498
 msgid "Pone o quita un marcador en la posición actual del documento"
 msgstr "Sets or removes a bookmark at the current position in the document"
 
-#: src/tiresias/browse/document.py:1504 src/tiresias/gui/productivity_dialogs.py:665 src/tiresias/productivity/plugin.py:471
+#: src/tiresias/browse/document.py:1510 src/tiresias/gui/productivity_dialogs.py:665 src/tiresias/productivity/plugin.py:471
 msgid "marcador quitado"
 msgstr "bookmark removed"
 
-#: src/tiresias/browse/document.py:1507 src/tiresias/productivity/plugin.py:471
+#: src/tiresias/browse/document.py:1513 src/tiresias/productivity/plugin.py:471
 msgid "marcador puesto"
 msgstr "bookmark set"
 
-#: src/tiresias/browse/document.py:1527
+#: src/tiresias/browse/document.py:1533
 msgid "no hay marcadores en este documento"
 msgstr "no bookmarks in this document"
 
-#: src/tiresias/browse/document.py:1537
+#: src/tiresias/browse/document.py:1543
 msgid "Va al marcador siguiente"
 msgstr "Moves to the next bookmark"
 
-#: src/tiresias/browse/document.py:1541
+#: src/tiresias/browse/document.py:1547
 msgid "Va al marcador anterior"
 msgstr "Moves to the previous bookmark"
 
-#: src/tiresias/browse/document.py:1596
+#: src/tiresias/browse/document.py:1602
 msgid "Lista de elementos: enlaces, encabezados, campos..."
 msgstr "Elements list: links, headings, fields..."
 
-#: src/tiresias/browse/document.py:1852
+#: src/tiresias/browse/document.py:1899
 #, python-brace-format
 msgid "Siguiente {what}"
 msgstr "Next {what}"
 
-#: src/tiresias/browse/document.py:1853
+#: src/tiresias/browse/document.py:1900
 #, python-brace-format
 msgid "{what} anterior"
 msgstr "Previous {what}"
 
-#: src/tiresias/browse/document.py:506 src/tiresias/browse/extras.py:931 src/tiresias/touch/gestures.py:32
+#: src/tiresias/browse/document.py:506 src/tiresias/browse/extras.py:934 src/tiresias/touch/gestures.py:32
 msgid "modo exploración"
 msgstr "browse mode"
 
-#: src/tiresias/browse/document.py:506 src/tiresias/browse/extras.py:931
+#: src/tiresias/browse/document.py:506 src/tiresias/browse/extras.py:934
 msgid "modo foco"
 msgstr "focus mode"
 
@@ -6375,32 +6375,42 @@ msgstr "focus mode"
 msgid "visitado"
 msgstr "visited"
 
-#: src/tiresias/browse/document.py:571
+#: src/tiresias/browse/document.py:572
+#, python-brace-format
+msgid "lista de nivel {level} con 1 elemento"
+msgstr "level {level} list with 1 item"
+
+#: src/tiresias/browse/document.py:572
+#, python-brace-format
+msgid "lista de nivel {level} con {n} elementos"
+msgstr "level {level} list with {n} items"
+
+#: src/tiresias/browse/document.py:577
 #, python-brace-format
 msgid "tabla con {rows} filas y {cols} columnas"
 msgstr "table with {rows} rows and {cols} columns"
 
-#: src/tiresias/browse/document.py:585 src/tiresias/browse/quicknav.py:53 src/tiresias/objects/roles.py:314
+#: src/tiresias/browse/document.py:591 src/tiresias/browse/quicknav.py:53 src/tiresias/objects/roles.py:314
 msgid "figura"
 msgstr "figure"
 
-#: src/tiresias/browse/document.py:591
+#: src/tiresias/browse/document.py:597
 msgid "árbol"
 msgstr "tree view"
 
-#: src/tiresias/browse/document.py:595 src/tiresias/browse/quicknav.py:52 src/tiresias/objects/roles.py:232
+#: src/tiresias/browse/document.py:601 src/tiresias/browse/quicknav.py:52 src/tiresias/objects/roles.py:232
 msgid "agrupación"
 msgstr "grouping"
 
-#: src/tiresias/browse/document.py:603
+#: src/tiresias/browse/document.py:609
 msgid "énfasis fuerte"
 msgstr "strong emphasis"
 
-#: src/tiresias/browse/document.py:607 src/tiresias/objects/roles.py:319
+#: src/tiresias/browse/document.py:613 src/tiresias/objects/roles.py:319
 msgid "comentario"
 msgstr "comment"
 
-#: src/tiresias/browse/document.py:642 src/tiresias/objects/roles.py:477
+#: src/tiresias/browse/document.py:648 src/tiresias/objects/roles.py:477
 msgid "no marcado"
 msgstr "not checked"
 
@@ -6496,7 +6506,7 @@ msgstr "edit field"
 msgid "campos de edición"
 msgstr "edit fields"
 
-#: src/tiresias/browse/document.py:843 src/tiresias/browse/extras.py:700
+#: src/tiresias/browse/document.py:849 src/tiresias/browse/extras.py:700
 msgid "documento vacío"
 msgstr "blank document"
 
@@ -6532,7 +6542,7 @@ msgstr "radio buttons"
 msgid "botón de opción"
 msgstr "radio button"
 
-#: src/tiresias/browse/document.py:90 src/tiresias/browse/document.py:574 src/tiresias/objects/roles.py:311
+#: src/tiresias/browse/document.py:90 src/tiresias/browse/document.py:580 src/tiresias/objects/roles.py:311
 msgid "punto de referencia"
 msgstr "landmark"
 
@@ -6540,7 +6550,7 @@ msgstr "landmark"
 msgid "puntos de referencia"
 msgstr "landmarks"
 
-#: src/tiresias/browse/document.py:91 src/tiresias/browse/document.py:581 src/tiresias/browse/html_details.py:207 src/tiresias/objects/roles.py:224
+#: src/tiresias/browse/document.py:91 src/tiresias/browse/document.py:587 src/tiresias/browse/html_details.py:207 src/tiresias/objects/roles.py:224
 msgid "cita"
 msgstr "block quote"
 
@@ -6548,7 +6558,7 @@ msgstr "block quote"
 msgid "separadores"
 msgstr "separators"
 
-#: src/tiresias/browse/document.py:93 src/tiresias/browse/document.py:593 src/tiresias/objects/roles.py:210
+#: src/tiresias/browse/document.py:93 src/tiresias/browse/document.py:599 src/tiresias/objects/roles.py:210
 msgid "marco"
 msgstr "frame"
 
@@ -6556,23 +6566,23 @@ msgstr "frame"
 msgid "objetos incrustados"
 msgstr "embedded objects"
 
-#: src/tiresias/browse/document.py:946
-msgid "Línea siguiente"
-msgstr "Next line"
-
 #: src/tiresias/browse/document.py:95 src/tiresias/touch/commands.py:29
 msgid "párrafos"
 msgstr "paragraphs"
 
-#: src/tiresias/browse/document.py:950
+#: src/tiresias/browse/document.py:952
+msgid "Línea siguiente"
+msgstr "Next line"
+
+#: src/tiresias/browse/document.py:956
 msgid "Línea anterior"
 msgstr "Previous line"
 
-#: src/tiresias/browse/document.py:96 src/tiresias/browse/document.py:583 src/tiresias/objects/roles.py:312
+#: src/tiresias/browse/document.py:96 src/tiresias/browse/document.py:589 src/tiresias/objects/roles.py:312
 msgid "artículo"
 msgstr "article"
 
-#: src/tiresias/browse/document.py:97 src/tiresias/browse/document.py:587 src/tiresias/objects/roles.py:180
+#: src/tiresias/browse/document.py:97 src/tiresias/browse/document.py:593 src/tiresias/objects/roles.py:180
 msgid "diálogo"
 msgstr "dialog"
 
@@ -6596,129 +6606,129 @@ msgstr "menu item"
 msgid "elementos de menú"
 msgstr "menu items"
 
-#: src/tiresias/browse/extras.py:1002
+#: src/tiresias/browse/extras.py:1005
 msgid "Cambia el nivel de las flechas: líneas, elementos o controles (navegación inteligente)"
 msgstr "Changes the arrow key level: lines, elements or controls (smart navigation)"
 
-#: src/tiresias/browse/extras.py:1039
+#: src/tiresias/browse/extras.py:1042
 msgid "Lectura rápida: resume el documento con una regla (primera frase de cada párrafo, texto buscado...)"
 msgstr "Quick read: summarizes the document using a rule (first sentence of each paragraph, searched text...)"
 
-#: src/tiresias/browse/extras.py:1092
+#: src/tiresias/browse/extras.py:1095
 msgid "Web flexible: oculta en este sitio el bloque del cursor"
 msgstr "Flexible web: hides the block at the cursor on this site"
 
-#: src/tiresias/browse/extras.py:1100 src/tiresias/browse/extras.py:1122 src/tiresias/browse/extras.py:1147
+#: src/tiresias/browse/extras.py:1103 src/tiresias/browse/extras.py:1125 src/tiresias/browse/extras.py:1150
 msgid "no se puede identificar este elemento"
 msgstr "this element cannot be identified"
 
-#: src/tiresias/browse/extras.py:1104
+#: src/tiresias/browse/extras.py:1107
 #, python-brace-format
 msgid "no se oculta: se ocultaría casi toda la página ({what})"
 msgstr "not hidden: almost the whole page would be hidden ({what})"
 
-#: src/tiresias/browse/extras.py:1107
+#: src/tiresias/browse/extras.py:1110
 #, python-brace-format
 msgid "elemento oculto en este sitio: {what}"
 msgstr "element hidden on this site: {what}"
 
-#: src/tiresias/browse/extras.py:1110
+#: src/tiresias/browse/extras.py:1113
 msgid "Web flexible: la lectura de este sitio empezará en el bloque del cursor (dos veces: lo olvida)"
 msgstr "Flexible web: reading on this site will start at the block at the cursor (twice: forgets it)"
 
-#: src/tiresias/browse/extras.py:1116
+#: src/tiresias/browse/extras.py:1119
 msgid "inicio de lectura olvidado"
 msgstr "reading start forgotten"
 
-#: src/tiresias/browse/extras.py:1125
+#: src/tiresias/browse/extras.py:1128
 msgid "la lectura de este sitio empezará aquí"
 msgstr "reading on this site will start here"
 
-#: src/tiresias/browse/extras.py:1127
+#: src/tiresias/browse/extras.py:1130
 msgid "Web flexible: alterna el orden de lectura visual por columnas en este sitio (PDF, varias columnas)"
 msgstr "Flexible web: toggles visual column reading order on this site (PDF, multiple columns)"
 
-#: src/tiresias/browse/extras.py:1133
+#: src/tiresias/browse/extras.py:1136
 msgid "orden de lectura del documento"
 msgstr "document reading order"
 
-#: src/tiresias/browse/extras.py:1133
+#: src/tiresias/browse/extras.py:1136
 msgid "orden de lectura visual por columnas"
 msgstr "visual column reading order"
 
-#: src/tiresias/browse/extras.py:1141
+#: src/tiresias/browse/extras.py:1144
 msgid "Orden de lectura: marca el bloque o párrafo del cursor para moverlo"
 msgstr "Reading order: marks the block or paragraph at the cursor to move it"
 
-#: src/tiresias/browse/extras.py:1150
+#: src/tiresias/browse/extras.py:1153
 #, python-brace-format
 msgid "bloque marcado para mover: {text}"
 msgstr "block marked to move: {text}"
 
-#: src/tiresias/browse/extras.py:1157
+#: src/tiresias/browse/extras.py:1160
 msgid "primero marca el bloque que quieres mover"
 msgstr "first mark the block you want to move"
 
-#: src/tiresias/browse/extras.py:1163
+#: src/tiresias/browse/extras.py:1166
 msgid "el bloque marcado ya no está en el documento"
 msgstr "the marked block is no longer in the document"
 
-#: src/tiresias/browse/extras.py:1166
+#: src/tiresias/browse/extras.py:1169
 msgid "coloca el cursor en otro bloque"
 msgstr "place the cursor in another block"
 
-#: src/tiresias/browse/extras.py:1170
+#: src/tiresias/browse/extras.py:1173
 msgid "no se puede mover el bloque ahí"
 msgstr "the block cannot be moved there"
 
-#: src/tiresias/browse/extras.py:1175
+#: src/tiresias/browse/extras.py:1178
 #, python-brace-format
 msgid "bloque movido antes de: {text}"
 msgstr "block moved before: {text}"
 
-#: src/tiresias/browse/extras.py:1175
+#: src/tiresias/browse/extras.py:1178
 #, python-brace-format
 msgid "bloque movido después de: {text}"
 msgstr "block moved after: {text}"
 
-#: src/tiresias/browse/extras.py:1178
+#: src/tiresias/browse/extras.py:1181
 msgid "Orden de lectura: coloca el bloque marcado antes del bloque del cursor"
 msgstr "Reading order: places the marked block before the block at the cursor"
 
-#: src/tiresias/browse/extras.py:1182
+#: src/tiresias/browse/extras.py:1185
 msgid "Orden de lectura: coloca el bloque marcado después del bloque del cursor"
 msgstr "Reading order: places the marked block after the block at the cursor"
 
-#: src/tiresias/browse/extras.py:1186
+#: src/tiresias/browse/extras.py:1189
 msgid "Orden de lectura: deshace el último cambio del orden (dos veces: vuelve al orden original)"
 msgstr "Reading order: undoes the last change to the order (twice: returns to the original order)"
 
-#: src/tiresias/browse/extras.py:1196 src/tiresias/browse/extras.py:1193
+#: src/tiresias/browse/extras.py:1199 src/tiresias/browse/extras.py:1196
 msgid "orden de lectura original"
 msgstr "original reading order"
 
-#: src/tiresias/browse/extras.py:1198
+#: src/tiresias/browse/extras.py:1201
 #, python-brace-format
 msgid "deshecho el último cambio del orden de lectura; quedan {n}"
 msgstr "undid the last change to the reading order; {n} left"
 
-#: src/tiresias/browse/extras.py:1201
+#: src/tiresias/browse/extras.py:1204
 msgid "Orden de lectura: el orden propio vale para este documento o para todo el sitio"
 msgstr "Reading order: the custom order applies to this document or to the whole site"
 
-#: src/tiresias/browse/extras.py:1207 src/tiresias/browse/extras.py:1193
+#: src/tiresias/browse/extras.py:1210 src/tiresias/browse/extras.py:1196
 msgid "no hay cambios en el orden de lectura"
 msgstr "there are no changes to the reading order"
 
-#: src/tiresias/browse/extras.py:1209
+#: src/tiresias/browse/extras.py:1212
 msgid "el orden de lectura propio vale para todo el sitio"
 msgstr "the custom reading order applies to the whole site"
 
-#: src/tiresias/browse/extras.py:1209
+#: src/tiresias/browse/extras.py:1212
 msgid "el orden de lectura propio vale solo para este documento"
 msgstr "the custom reading order applies only to this document"
 
-#: src/tiresias/browse/extras.py:1212
+#: src/tiresias/browse/extras.py:1215
 msgid "Web flexible: gestiona los elementos ocultos y el inicio de lectura de cada sitio"
 msgstr "Flexible web: manages hidden elements and the reading start for each site"
 
@@ -7270,7 +7280,7 @@ msgstr "subtitle"
 msgid "Pegado"
 msgstr "Pasted"
 
-#: src/tiresias/clipboard.py:227 src/tiresias/presentation.py:808
+#: src/tiresias/clipboard.py:227 src/tiresias/presentation.py:823
 #, python-brace-format
 msgid "y {n} caracteres más"
 msgstr "and {n} more characters"
@@ -7316,7 +7326,7 @@ msgstr "File: {names}"
 msgid "{n} archivos: {names}"
 msgstr "{n} files: {names}"
 
-#: src/tiresias/clipboard.py:350 src/tiresias/objects/behaviors.py:1088
+#: src/tiresias/clipboard.py:350 src/tiresias/objects/behaviors.py:1090
 #, python-brace-format
 msgid "y {n} más"
 msgstr "and {n} more"
@@ -7921,7 +7931,7 @@ msgstr "app modules"
 msgid "órdenes de voz"
 msgstr "speech commands"
 
-#: src/tiresias/core.py:832 src/tiresias/browse/document.py:599 src/tiresias/mathpres/plugin.py:66 src/tiresias/objects/roles.py:278
+#: src/tiresias/core.py:832 src/tiresias/browse/document.py:605 src/tiresias/mathpres/plugin.py:66 src/tiresias/objects/roles.py:278
 msgid "matemáticas"
 msgstr "math"
 
@@ -8058,7 +8068,7 @@ msgstr "superscript"
 msgid "subíndice"
 msgstr "subscript"
 
-#: src/tiresias/formatting.py:223 src/tiresias/appmodules/_word.py:753 src/tiresias/browse/document.py:604 src/tiresias/objects/roles.py:315
+#: src/tiresias/formatting.py:223 src/tiresias/appmodules/_word.py:753 src/tiresias/browse/document.py:610 src/tiresias/objects/roles.py:315
 msgid "resaltado"
 msgstr "highlighted"
 
@@ -8070,11 +8080,11 @@ msgstr "no highlight"
 msgid "fin de insertado"
 msgstr "end of inserted"
 
-#: src/tiresias/formatting.py:224 src/tiresias/browse/document.py:605 src/tiresias/objects/roles.py:310
+#: src/tiresias/formatting.py:224 src/tiresias/browse/document.py:611 src/tiresias/objects/roles.py:310
 msgid "insertado"
 msgstr "inserted"
 
-#: src/tiresias/formatting.py:225 src/tiresias/browse/document.py:606 src/tiresias/objects/roles.py:309
+#: src/tiresias/formatting.py:225 src/tiresias/browse/document.py:612 src/tiresias/objects/roles.py:309
 msgid "eliminado"
 msgstr "deleted"
 
@@ -8719,7 +8729,7 @@ msgstr "Reads the current line (twice: spells it; three times: phonetic spelling
 msgid "sin cursor"
 msgstr "no caret"
 
-#: src/tiresias/global_commands.py:172 src/tiresias/global_commands.py:725 src/tiresias/global_commands_extra.py:363 src/tiresias/global_commands_extra.py:382 src/tiresias/presentation.py:417 src/tiresias/presentation.py:700
+#: src/tiresias/global_commands.py:172 src/tiresias/global_commands.py:725 src/tiresias/global_commands_extra.py:363 src/tiresias/global_commands_extra.py:382 src/tiresias/presentation.py:431 src/tiresias/presentation.py:432
 msgid "en blanco"
 msgstr "blank"
 
@@ -8727,7 +8737,7 @@ msgstr "blank"
 msgid "Lee el texto seleccionado (dos veces: lo deletrea; tres: deletreo fonético; cuatro: lo muestra)"
 msgstr "Reads the selected text (twice: spells it; three times: phonetic spelling; four times: shows it)"
 
-#: src/tiresias/global_commands.py:184 src/tiresias/global_commands_extra.py:508 src/tiresias/presentation.py:850 src/tiresias/appmodules/_excel.py:241
+#: src/tiresias/global_commands.py:184 src/tiresias/global_commands_extra.py:508 src/tiresias/presentation.py:865 src/tiresias/appmodules/_excel.py:241
 msgid "sin selección"
 msgstr "no selection"
 
@@ -8736,7 +8746,7 @@ msgstr "no selection"
 msgid "{n} caracteres seleccionados"
 msgstr "{n} characters selected"
 
-#: src/tiresias/global_commands.py:188 src/tiresias/presentation.py:413 src/tiresias/presentation.py:846
+#: src/tiresias/global_commands.py:188 src/tiresias/presentation.py:423 src/tiresias/presentation.py:861
 #, python-brace-format
 msgid "{text} seleccionado"
 msgstr "{text} selected"
@@ -9925,7 +9935,7 @@ msgstr "superscripts and subscripts"
 msgid "revisiones"
 msgstr "revisions"
 
-#: src/tiresias/global_commands_extra.py:837 src/tiresias/browse/document.py:602
+#: src/tiresias/global_commands_extra.py:837 src/tiresias/browse/document.py:608
 msgid "énfasis"
 msgstr "emphasis"
 
@@ -10078,7 +10088,7 @@ msgstr "cell borders"
 msgid "colores y estilos"
 msgstr "colors and styles"
 
-#: src/tiresias/global_commands_extra.py:882 src/tiresias/nvda_import.py:2728 src/tiresias/browse/document.py:644 src/tiresias/gui/config_dialogs.py:434 src/tiresias/gui/system_dialogs.py:133 src/tiresias/objects/roles.py:479
+#: src/tiresias/global_commands_extra.py:882 src/tiresias/nvda_import.py:2728 src/tiresias/browse/document.py:650 src/tiresias/gui/config_dialogs.py:434 src/tiresias/gui/system_dialogs.py:133 src/tiresias/objects/roles.py:479
 msgid "desactivado"
 msgstr "off"
 
@@ -19123,78 +19133,78 @@ msgstr "unknown frequency"
 msgid "Eloquence en Tiresias funciona a 8 u 11 kHz; se usa 11 kHz"
 msgstr "Eloquence in Tiresias works at 8 or 11 kHz; 11 kHz is used"
 
-#: src/tiresias/objects/base.py:714
+#: src/tiresias/objects/base.py:715
 msgid "1 sugerencia"
 msgstr "1 suggestion"
 
-#: src/tiresias/objects/base.py:714
+#: src/tiresias/objects/base.py:715
 #, python-brace-format
 msgid "{n} sugerencias"
 msgstr "{n} suggestions"
 
-#: src/tiresias/objects/base.py:726
+#: src/tiresias/objects/base.py:727
 #, python-brace-format
 msgid "Arrastrando {name}"
 msgstr "Dragging {name}"
 
-#: src/tiresias/objects/base.py:726 src/tiresias/objects/behaviors.py:1288
+#: src/tiresias/objects/base.py:727 src/tiresias/objects/behaviors.py:1290
 msgid "elemento"
 msgstr "item"
 
-#: src/tiresias/objects/base.py:729
+#: src/tiresias/objects/base.py:730
 msgid "Arrastre cancelado"
 msgstr "Drag canceled"
 
-#: src/tiresias/objects/base.py:735
+#: src/tiresias/objects/base.py:736
 #, python-brace-format
 msgid "Sobre {name}"
 msgstr "Over {name}"
 
-#: src/tiresias/objects/base.py:735
+#: src/tiresias/objects/base.py:736
 msgid "destino"
 msgstr "target"
 
-#: src/tiresias/objects/base.py:741
+#: src/tiresias/objects/base.py:742
 msgid "Soltado"
 msgstr "Dropped"
 
-#: src/tiresias/objects/base.py:741
+#: src/tiresias/objects/base.py:742
 #, python-brace-format
 msgid "Soltado en {name}"
 msgstr "Dropped on {name}"
 
-#: src/tiresias/objects/base.py:757
+#: src/tiresias/objects/base.py:758
 msgid "sin ordenar"
 msgstr "unsorted"
 
-#: src/tiresias/objects/behaviors.py:1077
+#: src/tiresias/objects/behaviors.py:1079
 msgid "No hay ninguna lista"
 msgstr "There is no list"
 
-#: src/tiresias/objects/behaviors.py:1081
+#: src/tiresias/objects/behaviors.py:1083
 msgid "Ningún elemento seleccionado"
 msgstr "No item selected"
 
-#: src/tiresias/objects/behaviors.py:1086
+#: src/tiresias/objects/behaviors.py:1088
 #, python-brace-format
 msgid "Seleccionado: {item}"
 msgstr "Selected: {item}"
 
-#: src/tiresias/objects/behaviors.py:1086
+#: src/tiresias/objects/behaviors.py:1088
 #, python-brace-format
 msgid "{n} seleccionados: {items}"
 msgstr "{n} selected: {items}"
 
-#: src/tiresias/objects/behaviors.py:1096 src/tiresias/objects/behaviors.py:1298
+#: src/tiresias/objects/behaviors.py:1098 src/tiresias/objects/behaviors.py:1300
 msgid "Anuncia los elementos seleccionados de la lista"
 msgstr "Announces the selected items in the list"
 
-#: src/tiresias/objects/behaviors.py:1289
+#: src/tiresias/objects/behaviors.py:1291
 #, python-brace-format
 msgid "{name} no seleccionado"
 msgstr "{name} not selected"
 
-#: src/tiresias/objects/behaviors.py:1289
+#: src/tiresias/objects/behaviors.py:1291
 #, python-brace-format
 msgid "{name} seleccionado"
 msgstr "{name} selected"
@@ -19211,12 +19221,12 @@ msgstr "Text review"
 msgid "Listas y tablas"
 msgstr "Lists and tables"
 
-#: src/tiresias/objects/behaviors.py:452
+#: src/tiresias/objects/behaviors.py:454
 #, python-brace-format
 msgid "{text} eliminado"
 msgstr "{text} deleted"
 
-#: src/tiresias/objects/behaviors.py:642 src/tiresias/objects/behaviors.py:747
+#: src/tiresias/objects/behaviors.py:644 src/tiresias/objects/behaviors.py:749
 #, python-brace-format
 msgid "máximo {n} caracteres"
 msgstr "maximum {n} characters"
@@ -19241,7 +19251,7 @@ msgstr "complementary"
 msgid "búsqueda"
 msgstr "search"
 
-#: src/tiresias/objects/iaccessible.py:794 src/tiresias/objects/jab.py:379 src/tiresias/objects/uia.py:864
+#: src/tiresias/objects/iaccessible.py:794 src/tiresias/objects/jab.py:379 src/tiresias/objects/uia.py:948
 msgid "hacer clic"
 msgstr "click"
 
@@ -19865,23 +19875,23 @@ msgstr[1] "{n} left"
 msgid "{written} de {max}, {remaining}"
 msgstr "{written} of {max}, {remaining}"
 
-#: src/tiresias/objects/uia.py:1093
+#: src/tiresias/objects/uia.py:1181
 msgid "Escritorio"
 msgstr "Desktop"
 
-#: src/tiresias/objects/uia.py:857
+#: src/tiresias/objects/uia.py:941
 msgid "pulsar"
 msgstr "press"
 
-#: src/tiresias/objects/uia.py:859 src/tiresias/speech/verbosity.py:98
+#: src/tiresias/objects/uia.py:943 src/tiresias/speech/verbosity.py:98
 msgid "alternar"
 msgstr "toggle"
 
-#: src/tiresias/objects/uia.py:861
+#: src/tiresias/objects/uia.py:945
 msgid "expandir o contraer"
 msgstr "expand or collapse"
 
-#: src/tiresias/objects/uia.py:863
+#: src/tiresias/objects/uia.py:947
 msgid "seleccionar"
 msgstr "select"
 
@@ -20080,34 +20090,34 @@ msgstr "Page {n}"
 msgid "encabezado de nivel {level}"
 msgstr "heading level {level}"
 
-#: src/tiresias/presentation.py:224
+#: src/tiresias/presentation.py:234
 #, python-brace-format
 msgid "{index} de {total}"
 msgstr "{index} of {total}"
 
-#: src/tiresias/presentation.py:226
+#: src/tiresias/presentation.py:236
 #, python-brace-format
 msgid "nivel {level}"
 msgstr "level {level}"
 
-#: src/tiresias/presentation.py:313
+#: src/tiresias/presentation.py:323
 msgid "sin descripción"
 msgstr "no description"
 
-#: src/tiresias/presentation.py:336 src/tiresias/browse/document.py:612 src/tiresias/objects/roles.py:449
+#: src/tiresias/presentation.py:346 src/tiresias/browse/document.py:618 src/tiresias/objects/roles.py:449
 msgid "pulsable"
 msgstr "clickable"
 
-#: src/tiresias/presentation.py:358 src/tiresias/mathpres/interaction.py:170
+#: src/tiresias/presentation.py:368 src/tiresias/mathpres/interaction.py:170
 #, python-brace-format
 msgid "fila {row} columna {col}"
 msgstr "row {row} column {col}"
 
-#: src/tiresias/presentation.py:846
+#: src/tiresias/presentation.py:861
 msgid "espacio seleccionado"
 msgstr "space selected"
 
-#: src/tiresias/presentation.py:848
+#: src/tiresias/presentation.py:863
 #, python-brace-format
 msgid "{text} deseleccionado"
 msgstr "{text} unselected"

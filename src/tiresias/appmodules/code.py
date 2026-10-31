@@ -25,6 +25,8 @@ class Workbench(AccObject):
 	"""Documento raíz del banco de trabajo: sin modo exploración."""
 
 	shouldCreateTreeInterceptor = False
+	#: Rev. 1.0.15: el título de la ventana ya se ha dicho; no se repite con «documento».
+	isPresentableFocusAncestor = False
 
 
 def isWorkbenchDocument(obj) -> bool:

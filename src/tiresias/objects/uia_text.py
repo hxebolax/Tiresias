@@ -191,6 +191,22 @@ class UIATextInfo(textinfo.TextInfo):
 			self._range.ExpandToEnclosingUnit(u)
 		except comtypes.COMError:
 			pass
+		if unit == textinfo.UNIT_CHARACTER:
+			self._joinSurrogates()
+
+	def _joinSurrogates(self) -> None:
+		"""Completa un emoji que el proveedor parte en dos (WPF, WeChat; NVDA #20150)."""
+		try:
+			text = self._range.GetText(2)
+			if len(text) != 1:
+				return
+			code = ord(text)
+			if 0xD800 <= code <= 0xDBFF:
+				self._range.MoveEndpointByUnit(uc.EP_END, uc.TU_CHARACTER, 1)
+			elif 0xDC00 <= code <= 0xDFFF:
+				self._range.MoveEndpointByUnit(uc.EP_START, uc.TU_CHARACTER, -1)
+		except (comtypes.COMError, TypeError, ValueError):
+			pass
 
 	def _isCollapsedAtEnd(self) -> bool:
 		"""``True`` si el rango está contraído al final del texto."""

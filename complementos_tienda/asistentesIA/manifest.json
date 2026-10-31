@@ -1,0 +1,11 @@
+{
+	"id": "asistentesIA",
+	"name": "Asistentes de IA accesibles",
+	"version": "1.0.0",
+	"author": "Proyecto Tiresias",
+	"description": "Hace más cómodas con Tiresias las aplicaciones de escritorio de Claude y Codex y el panel de agente de Antigravity IDE: avisa con voz y sonido cuando el asistente termina (también con la aplicación en segundo plano), lee la última respuesta sin mover el foco, pasa de un mensaje a otro de la conversación, copia la respuesta, abre un mensaje en una ventana de texto, lleva el foco al cuadro de escribir y dice si el asistente está trabajando. En Codex acorta además los botones de «Mensajes de usuarios», que leían el turno entero. El complemento solo lee: nunca escribe en la aplicación ni pulsa sus botones.",
+	"minApiVersion": "1.0",
+	"lastTestedApiVersion": "1.0",
+	"url": "",
+	"changelog": "Primera versión: Claude, Codex y Antigravity IDE."
+}

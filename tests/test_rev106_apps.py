@@ -308,6 +308,8 @@ class SearchHostTests(unittest.TestCase):
 
 		app = searchhost.AppModule.__new__(searchhost.AppModule)
 		app._last = (None, 0.0)
+		app._checkSeq = 0
+		app._lastSuggestion = None
 		item = Obj("Bloc de notas", runtimeId=(1,))
 		nxt = mock.Mock()
 		with mock.patch.object(searchhost.api, "getFocusObject", return_value=item), mock.patch.object(searchhost.presentation, "speakObject") as spk, mock.patch.object(speech, "cancelSpeech") as cancel:

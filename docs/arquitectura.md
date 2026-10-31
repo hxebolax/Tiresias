@@ -346,6 +346,21 @@ salta por encima (selección nativa, lectura rápida, celda actual de tabla);
 «lista con N» de un antecesor no rehecho se actualiza en la siguiente
 reconstrucción completa). No se aplican a `TextPatternBuffer`.
 
+**Filtro de nodos (`buffer.filter_node`).** Al final de `VirtualBuffer._makeNode`,
+cuando el nodo ya tiene rol, nombre, estados y las etiquetas del usuario y de
+la IA (pero todavía ni hijos ni texto), se pasa por el punto de extensión
+`filter_node` con `buffer` y `controlType` (tipo de control UIA). Los
+manejadores devuelven el nodo cambiado o `None` para dejarlo fuera con sus
+descendientes; lo que cambien en `role` se respeta en `_walk` (un `GROUPING`
+vuelto `BUTTON` pasa a ser atómico y emite su nombre; un `STATICTEXT` vuelto
+`HEADING2` ocupa su propia línea y se anuncia como encabezado). El búfer lleva
+`documentKey` (lo fija `configureBuffer`) para que los manejadores apliquen
+reglas por sitio; se llama igual en los sub-búferes de las actualizaciones
+parciales. Lo usa el complemento de tienda «Arreglo web»
+(`complementos_tienda/arregloWeb`), que guarda por sitio nombres deducidos,
+etiquetas de campos, pulsables como botones, encabezados por formato, región
+principal y tablas de maquetación.
+
 **Texto tras los enlaces (#11073, `browseMode.breakAfterLinks`).** Sin
 disposición en pantalla, un enlace o control empieza línea y deja
 `_pendingBreak`: el siguiente `_emit` pega a él la puntuación de cierre y
@@ -369,6 +384,16 @@ activado, sin el estado MSAA enfocable ni valor) y `isMsaaProxyProvider`
 los vuelven `STATICTEXT` en el búfer y en `UIAObject.role`. Firefox con UIA
 propio da `Text` y no se toca. `controlSuffix` respeta además la plantilla del
 rol (`verbosity.templateFor`): sin `{role}`/`{states}`/`{description}` no los dice.
+
+### Textos que Chromium no publica (1.0.15)
+
+La vista de control de Chromium omite los textos sueltos de un elemento con otros
+hijos: `<li><span>listo</span><div>Tarea</div></li>` llega con un solo hijo. El
+nombre del elemento sí los contiene, porque sale de su contenido, así que
+`buffer.NameGaps` recorre el nombre a la vez que los hijos y emite lo que falta.
+Si un hijo no aparece en el nombre (`aria-label`, espacios distintos) deja de
+buscar, de modo que nunca inventa texto. Solo se aplica a los roles de
+`NAME_FROM_CONTENT_ROLES`.
 
 ## 7. Configuración
 
@@ -402,6 +427,7 @@ registran su sección con `conf.registerDefaults("miSeccion", {...})`.
 | `audio.tones.pre_beep`, `pre_playSound` | audio/tones.py | Cada pitido y cada sonido |
 | `input.core.decide_handleRawKey` | input/core.py | Cada tecla en bruto, en el hilo de ganchos (``False`` la captura) |
 | `input.core.decide_executeBrailleGesture` | input/core.py | Teclas de la línea braille (``False`` las descarta) |
+| `browse.buffer.filter_node` | browse/buffer.py | Cada `Node` del búfer del modo exploración al crearlo (`value`, `buffer`, `controlType`): cambiar lo que se presenta (`role`, `name`, `level`, `landmark`, `layoutTable`, `clickable`, `states`) o devolver `None` para quitarlo con sus descendientes. Se llama en el hilo de construcción, con `buffer.documentKey` como clave del documento; lo usa el complemento «Arreglo web» |
 
 ## 9. Datos (`data/`)
 

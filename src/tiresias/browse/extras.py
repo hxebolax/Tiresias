@@ -915,6 +915,9 @@ class BrowseExtrasMixin(ScriptableObject):
 	def insideApplication(self, node: Node | None) -> bool:
 		"""¿El elemento está dentro de role=application (se usa modo foco)?"""
 		while node is not None:
+			if node.ariaRole == "document" and node.parent is not None:
+				# Documento dentro de la aplicación: es contenido para leer (NVDA #20695).
+				return False
 			if node.role in APPLICATION_ROLES:
 				return True
 			node = node.parent

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8"><title>Arreglo web para Tiresias</title>
+<style>body{font-family:Segoe UI,Arial,sans-serif;max-width:60em;margin:1em auto;line-height:1.5}table{border-collapse:collapse}td,th{border:1px solid #888;padding:.3em .6em;text-align:left}</style></head>
+<body><h1>Arreglo web: reparar páginas poco accesibles</h1>
+<p>Versión 1.0.0 para Tiresias. Proyecto Tiresias.</p>
+<p>Cuando una página web está mal hecha (enlaces que solo dicen «enlace» o «gráfico», botones sin nombre, campos sin etiqueta, elementos que se pulsan pero no son botones, páginas sin encabezados, ventanas de cookies que tapan todo...), este complemento la analiza a petición tuya, te cuenta qué ha encontrado y te deja elegir qué arreglos aplicar. Los arreglos cambian <strong>lo que Tiresias te presenta</strong> en el modo exploración, no la página: un lector de pantalla no puede modificar la página (su DOM), pero sí puede poner nombre a lo que no lo tiene, presentar como botón lo que se comporta como botón o como encabezado lo que lo parece, y ocultar lo que estorba. Los arreglos se guardan por sitio web y se aplican solos la próxima vez que entres en él.</p>
+<p>Las heurísticas están tomadas de lo que hacen NVDA, JAWS (Web flexible, etiquetado automático de formularios), Web Access for NVDA, las extensiones axe y Sa11y y las vistas de lectura de los navegadores (ver <code>docs/investigacion/arreglo_web.md</code> en el repositorio de Tiresias).</p>
+
+<h2 id="uso">Cómo se usa</h2>
+<p>Con el cursor en una página web en modo exploración, pulsa <strong>Tiresias+Mayúsculas+Alt+P</strong>. Tiresias anuncia un resumen («Arreglo web: 6 problemas en www.ejemplo.com: 2 enlaces sin nombre, 1 imagen sin texto alternativo, 3 elementos pulsables que no son botones. 5 con arreglo») y abre la lista de problemas. Cada línea dice qué pasa, dónde y qué arreglo se propone; los que tienen arreglo vienen marcados. Puedes:</p>
+<ul>
+<li><strong>Aplicar los marcados</strong> (desmarca con Espacio los que no quieras) o <strong>Aplicar todos</strong>. La página se vuelve a construir en el acto conservando tu posición y Tiresias dice cuántos arreglos ha aplicado.</li>
+<li><strong>Ir al elemento</strong> (o Intro sobre la línea) para colocar el cursor en el elemento problemático y verlo en su contexto.</li>
+<li><strong>Describir las imágenes con IA</strong>: envía las imágenes sin texto alternativo a los proveedores de IA de Tiresias (los de <em>Opciones, Inteligencia artificial</em>) y guarda las descripciones como textos de IA de Tiresias, igual que hace el etiquetado automático. Solo funciona con un proveedor configurado y tras aceptar el aviso de privacidad de las imágenes.</li>
+<li><strong>Copiar el informe</strong> al portapapeles como texto.</li>
+</ul>
+<p>La casilla <strong>Guardar los arreglos para este sitio</strong> (marcada por defecto) hace que se recuerden y se apliquen solos en todas las páginas del sitio. Si la desmarcas, valen solo hasta que cierres Tiresias.</p>
+<p>Pulsa la orden <strong>dos veces</strong> seguidas para aplicar todos los arreglos sin preguntar.</p>
+
+<h2 id="ordenes">Órdenes</h2>
+<table><caption>Órdenes del Arreglo web (categoría «Arreglo web» en Gestos de entrada)</caption><thead><tr><th scope="col">Tecla</th><th scope="col">Orden</th></tr></thead><tbody>
+<tr><td>Tiresias+Mayúsculas+Alt+P</td><td>Analiza la página, anuncia los problemas y abre la lista de arreglos. Dos veces: aplica todos los arreglos sin preguntar.</td></tr>
+<tr><td>Tiresias+Mayúsculas+Alt+Q</td><td>Quita los arreglos guardados del sitio de la página actual (también las ocultaciones que puso en la web flexible) y vuelve a construir la página.</td></tr>
+<tr><td>Sin tecla</td><td>Anunciar solo el resumen de problemas (funciona en el modo de voz «a demanda»).</td></tr>
+<tr><td>Sin tecla</td><td>Activar o desactivar la aplicación automática de los arreglos guardados.</td></tr>
+<tr><td>Sin tecla</td><td>Abrir la lista de sitios con arreglos guardados.</td></tr>
+</tbody></table>
+<p>Tiresias+Alt+R («reparar») ya lo usa el acceso remoto y todas las letras de Tiresias+Alt están ocupadas por el núcleo o por otros complementos, por eso se usan combinaciones con Mayúsculas+Alt. Puedes cambiarlas en <em>Gestos de entrada</em>.</p>
+<p>En el menú de Tiresias, <em>Herramientas</em>, la entrada <strong>Arreglo web: arreglos guardados por sitio...</strong> abre un diálogo con todos los sitios que tienen arreglos y sus reglas, para quitar una regla o todo el sitio.</p>
+
+<h2 id="detecta">Qué detecta</h2>
+<ul>
+<li><strong>Enlaces sin nombre</strong>: enlaces que solo contienen una imagen sin texto alternativo (se oyen como «enlace gráfico») o nada.</li>
+<li><strong>Botones sin nombre</strong>: botones con icono y sin texto ni etiqueta.</li>
+<li><strong>Nombres poco útiles</strong>: «clic aquí», «leer más», «ver», «aquí», «+», direcciones web crudas como texto del enlace, etc.</li>
+<li><strong>Nombres repetidos</strong>: varios enlaces con el mismo texto («Detalle del producto») que llevan a sitios distintos.</li>
+<li><strong>Imágenes sin texto alternativo</strong> (las de menos de 12 píxeles se consideran decorativas y no se listan).</li>
+<li><strong>Campos de formulario sin etiqueta</strong>: cuadros de edición, combinados, casillas, botones de opción, deslizadores y conmutadores sin nombre.</li>
+<li><strong>Elementos pulsables que no son botones ni enlaces</strong>: texto o grupos genéricos con un gestor de clic (Tiresias los anuncia como «pulsable»).</li>
+<li><strong>Textos que parecen encabezados</strong>: textos cortos con letra más grande que el cuerpo o en negrita, que la página no marca como encabezados. Para saberlo se consulta el formato de la página, así que en páginas muy largas puede tardar un poco; se puede desactivar en las opciones.</li>
+<li><strong>Página sin encabezados</strong> y <strong>página sin regiones</strong> (puntos de referencia), en páginas con bastante texto.</li>
+<li><strong>Tablas de maquetación</strong> que Tiresias no ha reconocido como tales: sin encabezados y con otras tablas dentro, celdas con párrafos largos o muy pocas filas.</li>
+<li><strong>Superposiciones que tapan el contenido</strong>: ventanas de cookies, consentimiento, suscripción o publicidad (por su identificador, su clase o su texto).</li>
+</ul>
+
+<h2 id="arregla">Qué arregla y cómo</h2>
+<ul>
+<li><strong>Nombre de enlaces y botones</strong>, por este orden: el <code>title</code> o la descripción del elemento; la etiqueta o el texto alternativo de algún elemento interior; el nombre del archivo de la imagen («informe-anual.pdf» → «informe anual (pdf)»); el identificador o la clase del elemento si parecen palabras («btnBuscar» → «Buscar»); el texto cercano; y, en los enlaces, el último tramo con sentido de la dirección. A los nombres poco útiles o repetidos se les añade el encabezado o el párrafo anterior («leer más: Matrícula del curso»).</li>
+<li><strong>Etiqueta de los campos</strong>: el texto inmediatamente anterior (o el siguiente, en casillas y botones de opción), la cabecera de la columna si el campo está en una tabla, el <code>title</code> o el identificador del campo.</li>
+<li><strong>Botones</strong>: los elementos pulsables se presentan como botones con su texto como nombre; Intro o Espacio los activan igual que antes.</li>
+<li><strong>Encabezados</strong>: los textos que lo parecen se presentan como encabezados; el nivel sale del tamaño de letra (el más grande, nivel 1 si la página no tiene encabezado de nivel 1, o nivel 2 si lo tiene; los siguientes tamaños, los niveles siguientes). Desde ese momento funcionan la tecla H, la lista de elementos y la navegación por niveles.</li>
+<li><strong>Región principal</strong>: en páginas sin regiones, el bloque con más texto fuera de enlaces se presenta como punto de referencia «principal» (teclas D y M).</li>
+<li><strong>Tablas de maquetación</strong>: se presentan como maquetación, sin anuncios de tabla ni de celdas (como con la opción de Tiresias para las tablas de maquetación).</li>
+<li><strong>Superposiciones</strong>: se ocultan con la <strong>web flexible</strong> de Tiresias (quedan en su diálogo de gestión, Tiresias+Control+Mayúsculas+H y el diálogo de la web flexible). Como medida de seguridad, no se oculta nada que sea más de la mitad del texto de la página.</li>
+<li><strong>Imágenes sin texto alternativo</strong>: no tienen arreglo automático salvo que se conozca el nombre del archivo; el botón «Describir las imágenes con IA» pide una descripción a los proveedores de IA de Tiresias y la guarda.</li>
+</ul>
+
+<h2 id="guardado">Arreglos guardados</h2>
+<p>Los arreglos se guardan en <code>data\addonsData\arregloWeb\sitios.json</code>, por sitio (dominio). Cada elemento se reconoce por su tipo de control y su identificador HTML; si no tiene, por el destino del enlace y su nombre, por su nombre o, en último caso, por su clase, el nombre de su contenedor y su posición entre sus hermanos. Si la página cambia y un elemento ya no se reconoce, su arreglo deja de aplicarse (y el análisis volverá a proponerlo). Las ocultaciones se guardan en la web flexible de Tiresias (<code>data\config\flexibleWeb.json</code>) y las descripciones de imágenes con IA en sus textos de IA (<code>data\config\aiLabels.json</code>).</p>
+<p>Los arreglos se aplican al construir cada página mediante el punto de extensión <code>browse.buffer.filter_node</code> del modo exploración de Tiresias, así que valen también para las actualizaciones parciales de la página.</p>
+
+<h2 id="opciones">Opciones</h2>
+<p>En <em>Opciones de Tiresias</em>, categoría <strong>Arreglo web</strong>:</p>
+<ul>
+<li><strong>Aplicar al cargar cada página los arreglos guardados de su sitio</strong> (activada por defecto). Desactivada, los arreglos guardados solo se aplican en los sitios en los que los hayas pedido durante la sesión.</li>
+<li><strong>Anunciar por voz el resumen de problemas antes de abrir la lista</strong> (activada).</li>
+<li><strong>Buscar textos que parecen encabezados por su tamaño o negrita</strong> (activada). Consulta el formato de la página; desactívala si el análisis tarda demasiado.</li>
+<li><strong>Proponer presentar como botón los elementos pulsables</strong> (activada).</li>
+<li><strong>Ofrecer describir con IA las imágenes sin texto alternativo</strong> (activada) y <strong>Máximo de imágenes que se describen con IA en cada tanda</strong> (8).</li>
+</ul>
+
+<h2 id="limites">Límites: lo que no se puede arreglar sin tocar la página</h2>
+<ul>
+<li><strong>No se puede hacer que la página reaccione</strong>: si un elemento pulsable no responde al teclado, presentarlo como botón hace que Tiresias lo active con Intro mediante el patrón de invocación o un clic de ratón, pero la página sigue sin ser accesible para quien no use Tiresias.</li>
+<li><strong>No se puede quitar de verdad una superposición</strong>: se oculta en el modo exploración, pero sigue en pantalla y puede impedir el clic en lo que hay debajo o seguir capturando el foco. Para esos casos sirve el botón de rechazar de la propia ventana, la vista de lectura del navegador o una extensión como Consent-O-Matic.</li>
+<li><strong>No se cambia el orden de lectura ni el foco</strong>; para el orden de lectura están las órdenes de la web flexible de Tiresias.</li>
+<li><strong>Los nombres deducidos son suposiciones</strong>: un nombre de archivo o un tramo de dirección puede no describir bien el destino. Siempre se dice de dónde sale cada nombre, y puedes desmarcar los que no te convenzan.</li>
+<li><strong>El formato del texto</strong> (para los encabezados deducidos) depende de que el navegador lo exponga; en los PDF y en algunos marcos no está disponible.</li>
+<li><strong>Las descripciones con IA</strong> envían la imagen (con un poco de contexto alrededor) al proveedor configurado y pueden equivocarse; se guardan como «textos de IA» y se pueden borrar desde el diálogo de la web flexible.</li>
+</ul>
+
+<h2 id="creditos">Créditos</h2>
+<p>Código propio del Proyecto Tiresias. Las técnicas se inspiran en NVDA (nombre de los enlaces por el archivo de la imagen y por <code>title</code>), JAWS (Web flexible, etiquetado automático de formularios, etiquetas personalizadas), Web Access for NVDA de Accessolutions (módulos web con reglas por sitio), las reglas <code>p-as-heading</code> de axe y de Sa11y y la heurística de Readability para la región principal.</p>
+</body></html>

@@ -3,7 +3,7 @@
 Tiresias es un lector de pantalla para Windows 10 y 11 escrito en Python 3.14
 (64 bits) con código propio. Se inspira en NVDA y añade lo que más piden sus
 usuarios (ver `docs/estudio_necesidades_usuarios.md` y `docs/investigacion/`).
-Versión actual: **1.0.14**. Interfaz en español e inglés.
+Versión actual: **1.0.15**. Interfaz en español e inglés.
 
 - Web del proyecto (descargas, novedades, manual y tienda de complementos):
   **https://xebolax.synology.me/Tiresias/**

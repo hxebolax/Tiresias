@@ -265,8 +265,10 @@ class MultilineEditTests(unittest.TestCase):
 		for fw in ("Chrome", "Gecko", "MicrosoftEdge"):
 			self.assertEqual(_FakeUIA(_docProps(framework=fw, cls=""), "Chrome_RenderWidgetHostHWND").role, Role.DOCUMENT, fw)
 		self.assertEqual(_FakeUIA(_docProps(cls="_WwG"), "_WwG").role, Role.DOCUMENT)
-		# Los documentos de solo lectura no cambian (modo exploración, visores).
-		self.assertEqual(_FakeUIA(_docProps(readOnly=True), "RICHEDIT50W").role, Role.DOCUMENT)
+		# Los documentos de solo lectura no cambian (modo exploración, visores)...
+		self.assertEqual(_FakeUIA(_docProps(readOnly=True, cls="Visor"), "Visor").role, Role.DOCUMENT)
+		# ...salvo los RichEdit: en NVDA son «edición multilínea» de solo lectura (1.0.15).
+		self.assertEqual(_FakeUIA(_docProps(readOnly=True), "RICHEDIT50W").role, Role.EDITABLETEXT)
 
 	def test_multilinea_no_se_repite_al_mover_el_cursor(self) -> None:
 		obj = _FakeUIA(_docProps(), "RICHEDIT50W")

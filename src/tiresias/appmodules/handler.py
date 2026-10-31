@@ -48,6 +48,7 @@ EXECUTABLE_ALIASES: dict[str, str] = {
 	"cursor": "code",
 	"windsurf": "code",
 	"antigravity": "code",
+	"antigravity ide": "code",
 	"kiro": "code",
 	"positron": "code",
 	"azuredatastudio": "code",
