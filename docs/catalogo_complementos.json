@@ -87,6 +87,62 @@
 			]
 		},
 		{
+			"id": "arregloWeb",
+			"name": "Arreglo web: reparar páginas poco accesibles",
+			"version": "1.0.0",
+			"author": "Proyecto Tiresias",
+			"description": "Cuando una página web tiene problemas de accesibilidad, pulsa Tiresias+Mayúsculas+Alt+P en el modo exploración: el complemento la analiza y presenta un informe por voz y en una lista (enlaces y botones sin nombre o con nombres inútiles o repetidos, imágenes sin texto alternativo, campos de formulario sin etiqueta, elementos pulsables que no son botones, falta de encabezados o de regiones, tablas de maquetación, textos que parecen encabezados y superposiciones de cookies que tapan el contenido). Elige qué arreglos aplicar sobre lo que Tiresias presenta: nombres deducidos del título, de la imagen, del texto cercano o de la dirección; etiquetas de los campos por el texto anterior o la cabecera de columna; botones para lo pulsable; encabezados con nivel según el tamaño de letra; región principal deducida; tablas de maquetación; ocultación de las superposiciones con la web flexible; y descripción con IA de las imágenes sin alternativo. Los arreglos se guardan por sitio y se aplican solos la próxima vez.",
+			"minApiVersion": "1.0",
+			"lastTestedApiVersion": "1.0",
+			"url": "arregloWeb/arregloWeb-1.0.0.tiresias-addon",
+			"sha256": "c9de177a434199abe1bb76c8f50dfd487c6c17b85bc71ab1b1b17ea3d3fce754",
+			"size": 30745,
+			"homepage": "https://github.com/hxebolax/Tiresias",
+			"changelog": "Primera versión: análisis de la página con informe por voz y diálogo con casillas, arreglos sobre la presentación (nombres, etiquetas, botones, encabezados, región principal, tablas de maquetación y ocultación de superposiciones), descripción de imágenes con los proveedores de IA de Tiresias, arreglos guardados por sitio con aplicación automática al cargar, orden para quitarlos y diálogo de gestión en el menú Herramientas.",
+			"date": "2026-10-31",
+			"proprietary": false,
+			"versions": [
+				{
+					"version": "1.0.0",
+					"url": "arregloWeb/arregloWeb-1.0.0.tiresias-addon",
+					"sha256": "c9de177a434199abe1bb76c8f50dfd487c6c17b85bc71ab1b1b17ea3d3fce754",
+					"size": 30745,
+					"minApiVersion": "1.0",
+					"lastTestedApiVersion": "1.0",
+					"changelog": "Primera versión: análisis de la página con informe por voz y diálogo con casillas, arreglos sobre la presentación (nombres, etiquetas, botones, encabezados, región principal, tablas de maquetación y ocultación de superposiciones), descripción de imágenes con los proveedores de IA de Tiresias, arreglos guardados por sitio con aplicación automática al cargar, orden para quitarlos y diálogo de gestión en el menú Herramientas.",
+					"date": "2026-10-31"
+				}
+			]
+		},
+		{
+			"id": "asistentesIA",
+			"name": "Asistentes de IA accesibles",
+			"version": "1.0.0",
+			"author": "Proyecto Tiresias",
+			"description": "Hace más cómodas con Tiresias las aplicaciones de escritorio de Claude y Codex y el panel de agente de Antigravity IDE: avisa con voz y sonido cuando el asistente termina (también con la aplicación en segundo plano), lee la última respuesta sin mover el foco, pasa de un mensaje a otro de la conversación, copia la respuesta, abre un mensaje en una ventana de texto, lleva el foco al cuadro de escribir y dice si el asistente está trabajando. En Codex acorta además los botones de «Mensajes de usuarios», que leían el turno entero. El complemento solo lee: nunca escribe en la aplicación ni pulsa sus botones.",
+			"minApiVersion": "1.0",
+			"lastTestedApiVersion": "1.0",
+			"url": "asistentesIA/asistentesIA-1.0.0.tiresias-addon",
+			"sha256": "06de3b3f5eb5aed897d26a3e60e23917ebd6ee05f2f497bc329daf49400992d5",
+			"size": 13165,
+			"homepage": "",
+			"changelog": "Primera versión: Claude, Codex y Antigravity IDE.",
+			"date": "2026-10-31",
+			"proprietary": false,
+			"versions": [
+				{
+					"version": "1.0.0",
+					"url": "asistentesIA/asistentesIA-1.0.0.tiresias-addon",
+					"sha256": "06de3b3f5eb5aed897d26a3e60e23917ebd6ee05f2f497bc329daf49400992d5",
+					"size": 13165,
+					"minApiVersion": "1.0",
+					"lastTestedApiVersion": "1.0",
+					"changelog": "Primera versión: Claude, Codex y Antigravity IDE.",
+					"date": "2026-10-31"
+				}
+			]
+		},
+		{
 			"id": "audiocinemateca",
 			"name": "Audiocinemateca",
 			"version": "1.0.1",
@@ -235,6 +291,34 @@
 					"lastTestedApiVersion": "1.0",
 					"changelog": "Primera versión para Tiresias: todas las funciones de Resource Monitor 26.10.1 para NVDA (capa de órdenes, resumen, CPU, memoria, discos, wifi, Windows, tiempo de actividad, GPU y memoria de la GPU, copia al portapapeles con doble pulsación, aviso de conexión y desconexión de la wifi configurable y unidad de temperatura de la GPU), más el informe de la batería de las versiones anteriores del original.",
 					"date": "2026-10-08"
+				}
+			]
+		},
+		{
+			"id": "speechHistoryExplorer",
+			"name": "Explorador del historial de voz",
+			"version": "1.0.0",
+			"author": "Proyecto Tiresias (basado en Speech History Explorer de Tyler Spivey, James Scholes y David CM)",
+			"description": "Recorre con la voz lo último que ha dicho Tiresias: Tiresias+Alt+F11 dice el elemento anterior y Tiresias+Alt+F12 el siguiente (con un pitido a la izquierda o a la derecha al llegar al principio o al final del historial), Tiresias+Control+F12 copia al portapapeles el elemento en el que estás (el más reciente si no has navegado) y Tiresias+Mayúsculas+F12 abre un diálogo con todos los elementos recientes, donde puedes buscar, seleccionar varios, ver el texto completo y copiar el elemento o todos, limpiar el historial o actualizar la lista. La posición vuelve al elemento más reciente cada vez que Tiresias dice algo nuevo. Opciones: recortar los espacios del principio y del final al copiar, pitar al realizar acciones, pitido paneado en los extremos y el tamaño del historial de voz de Tiresias.",
+			"minApiVersion": "1.0",
+			"lastTestedApiVersion": "1.0",
+			"url": "speechHistoryExplorer/speechHistoryExplorer-1.0.0.tiresias-addon",
+			"sha256": "57bd24cfaaae7830e6dab768918fdc9698d05049b6f8ecf113ba84315e9a0b98",
+			"size": 11130,
+			"homepage": "https://github.com/davidacm/SpeechHistoryExplorer",
+			"changelog": "Primera versión para Tiresias: todas las funciones de Speech History Explorer 2023 para NVDA (elemento anterior y siguiente del historial con pitidos paneados en los extremos, copia al portapapeles del elemento actual con recorte opcional de espacios, diálogo de elementos del historial con búsqueda, selección múltiple, texto completo, Copiar elemento, Copiar todo, Limpiar historial, Actualizar y Cerrar, y categoría propia en las Opciones de Tiresias). Usa el historial de voz del propio Tiresias, así que el tamaño máximo es la opción «Tamaño del historial de voz» de la categoría Voz. Las órdenes anterior y siguiente van en Tiresias+Alt+F11 y Tiresias+Alt+F12 y el diálogo en Tiresias+Mayúsculas+F12 porque Tiresias+Mayúsculas+F11 ya es la lista de procesos.",
+			"date": "2026-10-31",
+			"proprietary": false,
+			"versions": [
+				{
+					"version": "1.0.0",
+					"url": "speechHistoryExplorer/speechHistoryExplorer-1.0.0.tiresias-addon",
+					"sha256": "57bd24cfaaae7830e6dab768918fdc9698d05049b6f8ecf113ba84315e9a0b98",
+					"size": 11130,
+					"minApiVersion": "1.0",
+					"lastTestedApiVersion": "1.0",
+					"changelog": "Primera versión para Tiresias: todas las funciones de Speech History Explorer 2023 para NVDA (elemento anterior y siguiente del historial con pitidos paneados en los extremos, copia al portapapeles del elemento actual con recorte opcional de espacios, diálogo de elementos del historial con búsqueda, selección múltiple, texto completo, Copiar elemento, Copiar todo, Limpiar historial, Actualizar y Cerrar, y categoría propia en las Opciones de Tiresias). Usa el historial de voz del propio Tiresias, así que el tamaño máximo es la opción «Tamaño del historial de voz» de la categoría Voz. Las órdenes anterior y siguiente van en Tiresias+Alt+F11 y Tiresias+Alt+F12 y el diálogo en Tiresias+Mayúsculas+F12 porque Tiresias+Mayúsculas+F11 ya es la lista de procesos.",
+					"date": "2026-10-31"
 				}
 			]
 		},

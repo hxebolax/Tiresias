@@ -1,27 +1,27 @@
 {
 	"format": "tiresias-actualizacion",
 	"formatVersion": 1,
-	"version": "1.0.14",
-	"date": "2026-10-30",
-	"url": "descargas/1.0.14/Tiresias-1.0.14-instalador.exe",
-	"sha256": "d79918243d6abbb9a208b9286a6c9c3319ceb3b813aaf0d5b632856a28fb6202",
-	"size": 62349312,
+	"version": "1.0.15",
+	"date": "2026-10-31",
+	"url": "descargas/1.0.15/Tiresias-1.0.15-instalador.exe",
+	"sha256": "45de238152225f91874546928f15b298d7c3f3884295b3661930aa39908bb207",
+	"size": 62377984,
 	"minWindows": "10.0.10240",
-	"notes": "Compatibilidad con WhatsApp y otras aplicaciones WinUI 3 con WebView2 (Teams y Outlook nuevos): se anuncia el control con foco al entrar y funcionan la lectura, Control+flechas y los atajos. Retroceso anuncia siempre lo borrado. Complemento WhatsApp accesible 1.0.4.",
+	"notes": "Lee mejor la búsqueda del menú Inicio, Thunderbird, los campos de solo lectura y las aplicaciones Electron. Tres complementos nuevos: Asistentes de IA accesibles, Explorador del historial de voz y Arreglo web.",
 	"notesUrl": "novedades.html",
 	"installer": {
-		"url": "descargas/1.0.14/Tiresias-1.0.14-instalador.exe",
-		"sha256": "d79918243d6abbb9a208b9286a6c9c3319ceb3b813aaf0d5b632856a28fb6202",
-		"size": 62349312
+		"url": "descargas/1.0.15/Tiresias-1.0.15-instalador.exe",
+		"sha256": "45de238152225f91874546928f15b298d7c3f3884295b3661930aa39908bb207",
+		"size": 62377984
 	},
 	"portable": {
-		"url": "descargas/1.0.14/Tiresias-1.0.14-portable.zip",
-		"sha256": "bcb0c79656dc1825476b928c1a4f3f577bfa295aff24d9f236a939329001dbb9",
-		"size": 85087730
+		"url": "descargas/1.0.15/Tiresias-1.0.15-portable.zip",
+		"sha256": "48127229e40140d8703ef11abc3e0c83047383e0066fad8d80b67e073d26a929",
+		"size": 85106688
 	},
 	"source": {
-		"url": "descargas/1.0.14/Tiresias-1.0.14-codigo-fuente.zip",
-		"sha256": "2dd76c87ed28c7c9f0e9df85ad77f8fa2f02cded4763e7087c5053a24bd09ba6",
-		"size": 16695960
+		"url": "descargas/1.0.15/Tiresias-1.0.15-codigo-fuente.zip",
+		"sha256": "fdadff03c5a1dafe09490e5a3c8e8cba1ea7dc915f9ce401adec6651d0a5fa25",
+		"size": 16804990
 	}
 }
