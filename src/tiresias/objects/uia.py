@@ -160,6 +160,35 @@ def isMsaaProxyProvider(description: Any) -> bool:
 	return "MSAA Proxy" in str(description or "")
 
 
+#: Tipos de control que pueden ser un encabezado (``HeadingLevel``): texto,
+#: grupos, paneles, personalizados y enlaces. Los elementos de árbol, de
+#: lista, de cuadrícula, pestañas, botones, etc. tienen nivel propio y nunca
+#: son encabezados: el puente MSAA→UIA del sistema (Thunderbird, Gecko) copia
+#: el nivel del elemento (``aria-level``) en ``HeadingLevel``, y la lista de
+#: cuentas del correo se leía «ana@ejemplo.com encabezado de nivel 1».
+HEADING_CONTROL_TYPES = frozenset({uc.CT_TEXT, uc.CT_GROUP, uc.CT_PANE, uc.CT_CUSTOM, uc.CT_HYPERLINK})
+
+#: Vistas nativas de la ventana de Chromium y Electron. Publican ``role="region"``
+#: con el título de la ventana: al entrar en Claude o en Codex se oía el título
+#: dos veces («Claude», «Claude región»). No son regiones de la página.
+CHROMIUM_SHELL_CLASSES = frozenset({"RootView", "BrowserRootView"})
+
+#: Nombre que el proveedor UIA de ``msftedit.dll`` da a todo RichEdit sin etiqueta.
+RICHEDIT_DEFAULT_NAME = "RichEdit Control"
+
+
+def uiaHeadingLevel(controlType: int, headingLevel: Any) -> int:
+	"""Nivel de encabezado (1-6; 7 si lo es sin nivel conocido) o 0 si no es un encabezado."""
+	try:
+		value = int(headingLevel or 0)
+	except (TypeError, ValueError):
+		return 0
+	if value <= uc.HEADINGLEVEL_NONE or controlType not in HEADING_CONTROL_TYPES:
+		return 0
+	level = value - uc.HEADINGLEVEL_NONE
+	return level if 1 <= level <= 6 else 7
+
+
 def looksLikeTextLeaf(get: Any) -> bool:
 	"""Trozo de texto de Gecko que el puente MSAA→UIA presenta como campo de edición.
 
@@ -363,14 +392,64 @@ class UIAObject(AccObject):
 
 	def _get_name(self) -> str:
 		name = self._prop(uc.P_NAME, "") or ""
-		if not name and self.UIAControlType in (uc.CT_EDIT, uc.CT_COMBOBOX, uc.CT_LIST, uc.CT_SLIDER):
+		richEdit = False
+		if name == RICHEDIT_DEFAULT_NAME and self._isRichEdit():
+			# msftedit llama «RichEdit Control» a todo campo sin etiqueta (MSAA no
+			# da nombre y NVDA, que lee los RichEdit con MSAA, no lo dice): se
+			# busca la etiqueta de verdad y, si no la hay, se queda sin nombre.
+			name = ""
+			richEdit = True
+		if not name and (self.UIAControlType in (uc.CT_EDIT, uc.CT_COMBOBOX, uc.CT_LIST, uc.CT_SLIDER) or richEdit):
 			try:
 				el = uc.labeledBy(self.element)
 				if el is not None:
 					name = el.CurrentName or ""
 			except Exception:
 				pass
+			if not name and richEdit:
+				name = self._win32StaticLabel()
 		return name.strip() if isinstance(name, str) else ""
+
+	def _isReadOnlyRange(self) -> bool:
+		"""Control de valor de solo lectura (sin el patrón, UIA dice «solo lectura» siempre)."""
+		if self._prop(uc.P_ISRANGEVALUEPATTERNAVAILABLE, False) and self._prop(uc.P_RANGEVALUEISREADONLY, False):
+			return True
+		return bool(self._prop(uc.P_ISVALUEPATTERNAVAILABLE, False) and self._prop(uc.P_VALUEISREADONLY, False))
+
+	def _get_isPresentableFocusAncestor(self) -> bool:
+		return self.UIAClassName not in CHROMIUM_SHELL_CLASSES
+
+	def _isRichEdit(self) -> bool:
+		"""Control RichEdit de Win32 (clase ``RICHEDIT50W`` y parientes, proveedor de ``msftedit.dll``)."""
+		from ..a11y import win32ctl
+
+		if win32ctl.isRichEditClass(self.UIAClassName) or win32ctl.isRichEditClass(self.windowClassName):
+			return True
+		return "msftedit" in str(self._prop(uc.P_PROVIDERDESCRIPTION, "") or "").lower()
+
+	def _win32StaticLabel(self) -> str:
+		"""Etiqueta de un campo Win32 sin nombre: el ``Static`` con texto justo
+		antes en el orden Z (la regla de oleacc para los campos de edición)."""
+		hwnd = self._prop(uc.P_NATIVEWINDOWHANDLE, 0) or 0
+		if not hwnd:
+			return ""
+		from .. import winapi
+
+		prev = int(hwnd)
+		try:
+			for _ in range(3):
+				prev = int(winapi.user32.GetWindow(prev, 3) or 0)  # GW_HWNDPREV
+				if not prev:
+					break
+				if winapi.getClassName(prev).lower() == "static":
+					text = winapi.getWindowText(prev).replace("&&", "\0").replace("&", "").replace("\0", "&").strip().rstrip(":")
+					if text:
+						return text
+				elif winapi.user32.IsWindowVisible(prev):
+					break
+		except Exception:
+			log.debug("No se pudo buscar la etiqueta Win32 de %x", hwnd, exc_info=True)
+		return ""
 
 	def _get_role(self) -> Role:
 		ct = self.UIAControlType
@@ -378,17 +457,16 @@ class UIAObject(AccObject):
 		aria = self.UIAAriaRole
 		if ct == uc.CT_EDIT and self._prop(uc.P_ISPASSWORD, False):
 			return Role.PASSWORDEDIT
-		heading = self._prop(uc.P_HEADINGLEVEL, 0) or 0
-		if heading and heading > uc.HEADINGLEVEL_NONE:
-			level = heading - uc.HEADINGLEVEL_NONE
-			return Role(Role.HEADING1 + level - 1) if 1 <= level <= 6 else Role.HEADING
+		level = uiaHeadingLevel(ct, self._prop(uc.P_HEADINGLEVEL, 0))
+		if level:
+			return Role(Role.HEADING1 + level - 1) if level <= 6 else Role.HEADING
 		if aria:
 			if aria == "heading":
 				return Role.HEADING
 			mapped = _ARIA_ROLES.get(aria)
 			if mapped is not None and role not in (Role.EDITABLETEXT, Role.BUTTON, Role.LINK, Role.CHECKBOX):
 				return mapped
-			if aria in _LANDMARK_ARIA and role in (Role.GROUPING, Role.PANE, Role.CUSTOM, Role.UNKNOWN):
+			if aria in _LANDMARK_ARIA and role in (Role.GROUPING, Role.PANE, Role.CUSTOM, Role.UNKNOWN) and self.UIAClassName not in CHROMIUM_SHELL_CLASSES:
 				if aria != "region" or self._prop(uc.P_NAME, ""):
 					return Role.LANDMARK
 		if role == Role.BUTTON and self._prop(uc.P_ISTOGGLEPATTERNAVAILABLE, False):
@@ -405,9 +483,11 @@ class UIAObject(AccObject):
 			# Celda de DataGrid de WPF (DataGridCell, tipo «personalizado» con
 			# GridItem/TableItem): es una celda, no «personalizado pulsable».
 			return Role.TABLECELL
-		if role == Role.DOCUMENT and self._isPlainEditableDocument():
-			# RichEdit y documentos editables que no son web ni Word: «edición
-			# multilínea», como NVDA (el modo exploración no les afecta).
+		if role == Role.DOCUMENT and (self._isPlainEditableDocument() or self._isRichEdit()):
+			# RichEdit (también de solo lectura) y documentos editables que no son
+			# web ni Word: «edición multilínea», como NVDA (el modo exploración no
+			# les afecta). Un RichEdit de solo lectura se leía «documento» sin
+			# avisar de que no se puede escribir.
 			return Role.EDITABLETEXT
 		if role == Role.EDITABLETEXT and self.UIAFrameworkId == "Gecko" and looksLikeTextLeaf(self._prop) and isMsaaProxyProvider(self._prop(uc.P_PROVIDERDESCRIPTION, "")):
 			# Texto del cuerpo de un correo de Thunderbird (Gecko con el puente MSAA):
@@ -556,6 +636,10 @@ class UIAObject(AccObject):
 				states.add(State.EDITABLE if self._isEditableWordDocument() else State.READONLY)
 			if role == Role.EDITABLETEXT and self._isMultiline():
 				states.add(State.MULTILINE)
+		elif role in (Role.SPINBUTTON, Role.SLIDER) and self._isReadOnlyRange():
+			# NVDA #20525: un <input type=number readonly> no avisaba y las
+			# flechas no hacían nada, sin explicación.
+			states.add(State.READONLY)
 		aria = self.UIAAriaProperties
 		if aria:
 			if aria.get("multiline") == "true":
@@ -1035,6 +1119,10 @@ class UIAObject(AccObject):
 			Role.COMBOBOX,
 		):
 			if role == Role.DOCUMENT and State.EDITABLE not in self.states:
+				clsList.append(behaviors.ReadOnlyDocument)
+			elif role == Role.EDITABLETEXT and ct == uc.CT_DOCUMENT and State.READONLY in self.states:
+				# RichEdit de solo lectura: cursor y lectura de un campo, sin
+				# anunciar borrados que no ocurren.
 				clsList.append(behaviors.ReadOnlyDocument)
 			else:
 				clsList.append(behaviors.EditableTextWithCaret)

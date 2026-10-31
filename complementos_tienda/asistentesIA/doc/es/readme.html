@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8"><title>Asistentes de IA accesibles para Tiresias</title>
+<style>body{font-family:Segoe UI,Arial,sans-serif;max-width:60em;margin:1em auto;line-height:1.5}table{border-collapse:collapse}td,th{border:1px solid #888;padding:.3em .6em;text-align:left}</style></head>
+<body><h1>Asistentes de IA accesibles</h1>
+<p>Versión 1.0.0 para Tiresias.</p>
+<p>Este complemento hace más cómodas las aplicaciones de escritorio de <strong>Claude</strong> y <strong>Codex</strong> (en el menú Inicio aparece como ChatGPT) y el panel de agente de <strong>Antigravity IDE</strong>. Te avisa cuando el asistente termina y te deja leer la conversación sin perder el sitio en el que estás.</p>
+<p>El complemento solo lee. Nunca escribe en la aplicación, nunca envía nada y nunca pulsa sus botones. Lo único que mueve es el foco, y solo al cuadro de escribir y cuando se lo pides.</p>
+
+<h2 id="aviso">Aviso al terminar</h2>
+<p>Mientras el asistente trabaja puedes hacer otra cosa, también en otra ventana. Cuando termina oyes un pitido y Tiresias dice, por ejemplo, «Claude ha terminado». Si activas la lectura automática, además te lee la respuesta cuando la aplicación está en primer plano.</p>
+
+<h2 id="ordenes">Órdenes</h2>
+<p>Funcionan dentro de las tres aplicaciones y se pueden cambiar en Gestos de entrada, categoría «Asistentes de IA».</p>
+<table><caption>Órdenes de los asistentes de IA</caption><thead><tr><th scope="col">Tecla</th><th scope="col">Qué hace</th></tr></thead>
+<tbody>
+<tr><td>Tiresias+Alt+U</td><td>Lee la última respuesta del asistente sin mover el foco. Con dos pulsaciones la copia al portapapeles.</td></tr>
+<tr><td>Tiresias+Control+Flecha arriba</td><td>Lee el mensaje anterior de la conversación.</td></tr>
+<tr><td>Tiresias+Control+Flecha abajo</td><td>Lee el mensaje siguiente.</td></tr>
+<tr><td>Tiresias+Control+Inicio</td><td>Lee el primer mensaje.</td></tr>
+<tr><td>Tiresias+Control+Fin</td><td>Lee el último mensaje.</td></tr>
+<tr><td>Tiresias+Alt+Y</td><td>Abre el mensaje por el que vas en una ventana de texto, para leerlo con las flechas y copiar trozos.</td></tr>
+<tr><td>Tiresias+Alt+P</td><td>Lleva el foco al cuadro de escribir.</td></tr>
+<tr><td>Tiresias+Alt+Q</td><td>Dice si el asistente está trabajando y cuántos mensajes hay.</td></tr>
+<tr><td>Tiresias+Alt+Z</td><td>Activa o desactiva la lectura automática de la respuesta al terminar.</td></tr>
+</tbody></table>
+
+<h2 id="opciones">Opciones</h2>
+<p>Están en las Opciones de Tiresias, categoría «Asistentes de IA»:</p>
+<ul>
+<li>Avisar cuando el asistente termina de trabajar (activada).</li>
+<li>Sonido al terminar (activada).</li>
+<li>Avisar también si la aplicación no está en primer plano (activada).</li>
+<li>Leer la respuesta automáticamente al terminar (desactivada).</li>
+</ul>
+
+<h2 id="aplicaciones">Qué se hace en cada aplicación</h2>
+<ul>
+<li><strong>Claude.</strong> Se leen los mensajes de la conversación y se sabe si está trabajando por el indicador de ocupado de la propia conversación.</li>
+<li><strong>Codex.</strong> Además de lo anterior, los botones de la navegación «Mensajes de usuarios» ya no leen el turno entero: la descripción se acorta. Se sabe si está trabajando por el botón de detener junto al cuadro de escribir.</li>
+<li><strong>Antigravity IDE.</strong> Conserva todo lo que Tiresias hace en los editores basados en Visual Studio Code y añade estas órdenes para el panel de agente.</li>
+</ul>
+
+<h2 id="limites">Límites</h2>
+<ul>
+<li>La conversación se lee de lo que la aplicación tiene cargado. Si una aplicación descarga los mensajes antiguos al desplazarte, esos mensajes no están hasta que vuelven a cargarse.</li>
+<li>En Codex y Antigravity el aviso depende de que aparezca el botón de detener. Si una versión nueva le cambia el nombre, pulsa Tiresias+Alt+Q para ver si lo sigue detectando.</li>
+</ul>
+</body></html>

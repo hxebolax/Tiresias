@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8"><title>Explorador del historial de voz para Tiresias</title>
+<style>body{font-family:Segoe UI,Arial,sans-serif;max-width:60em;margin:1em auto;line-height:1.5}table{border-collapse:collapse}td,th{border:1px solid #888;padding:.3em .6em;text-align:left}</style></head>
+<body><h1>Explorador del historial de voz</h1>
+<p>Versión 1.0.0 para Tiresias. Basado en <a href="https://github.com/davidacm/SpeechHistoryExplorer">Speech History Explorer para NVDA</a>, de David CM, que a su vez continúa Speech History de James Scholes y Clip Copy de Tyler Spivey.</p>
+<p>Este complemento te deja repasar con la voz lo último que ha dicho Tiresias, elemento a elemento y sin abrir ninguna ventana; copiar al portapapeles el elemento en el que estás; y abrir un diálogo con todos los elementos recientes para buscarlos, seleccionar varios y copiarlos.</p>
+<p>No guarda un historial aparte: usa el historial de voz del propio Tiresias, el mismo que ves con <strong>Tiresias+Alt+X</strong>. Por eso el número máximo de elementos es la opción <strong>Tamaño del historial de voz</strong> de la categoría Voz de las Opciones de Tiresias (de 10 a 10.000, 500 por defecto); el complemento la muestra también en su propia categoría para que la tengas a mano.</p>
+
+<h2 id="ordenes">Órdenes</h2>
+<table><caption>Órdenes del Explorador del historial de voz</caption><thead><tr><th scope="col">Tecla</th><th scope="col">Acción</th></tr></thead><tbody>
+<tr><td>Tiresias+Alt+F11</td><td>Dice el elemento anterior (más antiguo) del historial.</td></tr>
+<tr><td>Tiresias+Alt+F12</td><td>Dice el elemento siguiente (más reciente) del historial.</td></tr>
+<tr><td>Tiresias+Control+F12</td><td>Copia al portapapeles el elemento en el que estás; si no has navegado, lo último que ha dicho Tiresias.</td></tr>
+<tr><td>Tiresias+Mayúsculas+F12</td><td>Abre el diálogo «Elementos del historial de voz».</td></tr>
+</tbody></table>
+<p>Todas las órdenes están en la categoría «Explorador del historial de voz» del diálogo <em>Gestos de entrada</em> de Tiresias, donde puedes asignarles o cambiarles las teclas. Las tres primeras funcionan también en el modo de voz «a demanda».</p>
+<p>Diferencia con el original: en NVDA el elemento anterior es NVDA+Mayúsculas+F11, el siguiente NVDA+Mayúsculas+F12 y el diálogo NVDA+Alt+F12. En Tiresias, <strong>Tiresias+Mayúsculas+F11</strong> ya es la lista de procesos, así que anterior y siguiente van juntos en Tiresias+Alt+F11 y Tiresias+Alt+F12, y el diálogo pasa a Tiresias+Mayúsculas+F12. Copiar conserva su tecla original.</p>
+
+<h2 id="navegar">Repasar el historial con la voz</h2>
+<p>Cada vez que Tiresias dice algo nuevo, la posición vuelve al elemento más reciente. Desde ahí, Tiresias+Alt+F11 dice el elemento anterior a lo último que has oído, y pulsándolo otra vez sigues hacia atrás; Tiresias+Alt+F12 vuelve hacia delante hasta el más reciente.</p>
+<p>Cuando no hay más elementos en esa dirección suena un pitido y se repite el elemento en el que estás: a la <strong>izquierda</strong> si no hay más antiguos y a la <strong>derecha</strong> si no hay más recientes (con la opción «Pitido a la izquierda o a la derecha» activada; si la desactivas, el pitido suena centrado). Si el historial está vacío, Tiresias lo dice.</p>
+<p>Lo que el propio explorador dice al navegar no cuenta como elemento nuevo: no mueve la posición ni aparece en la lista del diálogo.</p>
+
+<h2 id="copiar">Copiar al portapapeles</h2>
+<p>Tiresias+Control+F12 copia el texto del elemento actual. Por defecto se quitan los espacios en blanco del final del texto (y no los del principio); puedes cambiarlo en las opciones. Si se copia bien suena un pitido agudo (opción «Pitar al realizar acciones»), además del sonido de copia de Tiresias. En las pantallas seguras (modo seguro o pantalla de bloqueo) no se copia nada.</p>
+
+<h2 id="dialogo">El diálogo «Elementos del historial de voz»</h2>
+<p>Tiresias+Mayúsculas+F12 abre un diálogo con los elementos recientes, el más reciente primero, con el foco en la lista. Muévete por ella con las flechas; cada elemento muestra solo sus primeros 100 caracteres, pero al pulsar Tab llegas al cuadro de texto de solo lectura <strong>Texto de los elementos seleccionados</strong> con el contenido completo.</p>
+<p>Puedes seleccionar varios elementos con las teclas habituales de Windows: Mayúsculas+flechas para una selección contigua y Control+flechas y Control+Espacio para una selección salteada. El cuadro de texto muestra todos los seleccionados, uno por línea.</p>
+<p>En el cuadro <strong>Buscar</strong> escribe una o varias palabras y pulsa Intro: la lista pasa a mostrar solo los elementos que las contienen todas (sin distinguir mayúsculas ni tildes). La búsqueda también se hace al salir del cuadro con Tab. Para quitarla, borra el texto y pulsa Intro. El diálogo recuerda en qué elemento estabas en cada búsqueda.</p>
+<p>Botones:</p>
+<ul>
+<li><strong>Copiar elemento</strong>: copia al portapapeles el texto del cuadro, es decir, todos los elementos seleccionados.</li>
+<li><strong>Copiar todo</strong>: copia todos los elementos de la lista, uno por línea; si hay una búsqueda, solo los encontrados.</li>
+<li><strong>Limpiar historial</strong>: tras confirmarlo, borra todo el historial de voz de Tiresias y cierra el diálogo.</li>
+<li><strong>Actualizar</strong>: vuelve a leer el historial. La lista no se actualiza sola con lo que Tiresias va diciendo mientras el diálogo está abierto.</li>
+<li><strong>Cerrar</strong> (o Escape): cierra el diálogo.</li>
+</ul>
+<p>Si el diálogo ya está abierto, la orden lo actualiza y lo trae al frente.</p>
+
+<h2 id="opciones">Opciones</h2>
+<p>En <em>Opciones de Tiresias</em>, categoría <strong>Explorador del historial de voz</strong>:</p>
+<ul>
+<li><strong>Número máximo de elementos del historial</strong>: es la opción «Tamaño del historial de voz» de la categoría Voz de Tiresias (de 10 a 10.000, 500 por defecto); cambiarla aquí o allí es lo mismo y surte efecto al instante.</li>
+<li><strong>Recortar los espacios del principio al copiar el texto</strong> (desactivada por defecto).</li>
+<li><strong>Recortar los espacios del final al copiar el texto</strong> (activada por defecto).</li>
+<li><strong>Pitar al realizar acciones</strong> (activada por defecto): pitido al copiar y al llegar al principio o al final del historial.</li>
+<li><strong>Pitido a la izquierda o a la derecha cuando no hay más elementos anteriores o siguientes</strong> (activada por defecto): si la desactivas, el pitido de los extremos suena centrado.</li>
+</ul>
+
+<h2 id="creditos">Créditos y licencia</h2>
+<p>Speech History Explorer para NVDA: Copyright 2022-2023 David CM; Speech History: Copyright 2015-2021 James Scholes; Clip Copy: Copyright 2012 Tyler Spivey. Publicados bajo la licencia GNU GPL versión 2.</p>
+<p>Esta versión para Tiresias es código propio escrito para la API de Tiresias, con el mismo funcionamiento, y se distribuye también bajo la licencia GNU GPL versión 2.</p>
+</body></html>

@@ -151,7 +151,7 @@ def getStatesText(obj: Any, states: set[State], role: Role, reason: Reason, chan
 		if st == State.SELECTED and role == Role.RADIOBUTTON and State.CHECKED in states:
 			# Botón de opción UIA: «seleccionado» es lo mismo que «marcado».
 			continue
-		if st == State.READONLY and role not in (Role.EDITABLETEXT, Role.PASSWORDEDIT, Role.COMBOBOX, Role.DOCUMENT):
+		if st == State.READONLY and role not in (Role.EDITABLETEXT, Role.PASSWORDEDIT, Role.COMBOBOX, Role.DOCUMENT, Role.SPINBUTTON, Role.SLIDER):
 			continue
 		if st == State.READONLY and role == Role.DOCUMENT:
 			continue
@@ -169,9 +169,14 @@ def getStatesText(obj: Any, states: set[State], role: Role, reason: Reason, chan
 			out.append(label)
 	# Estados negativos relevantes.
 	if changedOnly is None:
-		if role in (Role.CHECKBOX, Role.CHECKMENUITEM) and State.CHECKED not in states and State.HALFCHECKED not in states:
+		if (role in (Role.CHECKBOX, Role.CHECKMENUITEM) or (State.CHECKABLE in states and role in _CHECKABLE_ITEM_ROLES)) and State.CHECKED not in states and State.HALFCHECKED not in states:
 			if not _stateHandled(State.CHECKED, negative=True):
 				out.append(NEGATIVE_STATE_LABELS[State.CHECKED])
+		if reason == Reason.FOCUS and role in _UNSELECTED_ROLES and State.SELECTED not in states and State.SELECTABLE in states and State.FOCUSABLE in states:
+			# NVDA #17639: con Control+flechas por una lista de selección múltiple,
+			# un elemento sin seleccionar sonaba igual que uno seleccionado.
+			if not _stateHandled(State.SELECTED, negative=True):
+				out.append(NEGATIVE_STATE_LABELS[State.SELECTED])
 		if role == Role.SWITCH and State.ON not in states:
 			if not _stateHandled(State.ON, negative=True):
 				out.append(NEGATIVE_STATE_LABELS[State.ON])
@@ -189,6 +194,11 @@ def getStatesText(obj: Any, states: set[State], role: Role, reason: Reason, chan
 					out.append(NEGATIVE_STATE_LABELS[st])
 	return out
 
+
+#: Elementos que dicen «no seleccionado» al llegarles el foco (como NVDA).
+_UNSELECTED_ROLES = {Role.LISTITEM, Role.TREEVIEWITEM, Role.TABLEROW, Role.TABLECELL, Role.TABLECOLUMNHEADER, Role.TABLEROWHEADER, Role.DATAITEM}
+#: Elementos de lista con casilla: dicen «no marcado».
+_CHECKABLE_ITEM_ROLES = {Role.LISTITEM, Role.TREEVIEWITEM, Role.DATAITEM}
 
 _GUESSABLE_ROLES = {Role.LISTITEM, Role.TREEVIEWITEM, Role.MENUITEM, Role.TAB, Role.RADIOBUTTON, Role.CHECKMENUITEM, Role.RADIOMENUITEM, Role.DATAITEM}
 
@@ -414,6 +424,11 @@ def _caretContext(obj: Any, role: Role, states: set[State], reason: Reason) -> s
 		info = obj.makeTextInfo(textinfo.POSITION_CARET)
 		info.expand(textinfo.UNIT_LINE)
 		line = info.text.rstrip("\r\n")
+		if line.strip() and line.strip() == (obj.name or "").strip() and "ProseMirror" in (getattr(obj, "UIAClassName", "") or ""):
+			# Rev. 1.0.15: el editor ProseMirror vacío (Codex, ChatGPT, Notion...)
+			# escribe su texto de ejemplo como contenido: «Trabaja con Codex
+			# edición multilínea Trabaja con Codex».
+			return _("en blanco")
 		return line if line.strip() else _("en blanco")
 	except Exception:
 		return None

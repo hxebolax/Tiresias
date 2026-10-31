@@ -167,6 +167,18 @@
 		{"symbol": "Σ", "name": "sigma mayúscula", "level": 100, "preserve": "norep"},
 		{"symbol": "Φ", "name": "fi mayúscula", "level": 100, "preserve": "norep"},
 		{"symbol": "Ψ", "name": "psi mayúscula", "level": 100, "preserve": "norep"},
-		{"symbol": "Ω", "name": "omega mayúscula", "level": 100, "preserve": "norep"}
+		{"symbol": "Ω", "name": "omega mayúscula", "level": 100, "preserve": "norep"},
+		{"symbol": "▾", "name": "triángulo pequeño abajo", "level": 200, "preserve": "never"},
+		{"symbol": "▴", "name": "triángulo pequeño arriba", "level": 200, "preserve": "never"},
+		{"symbol": "▸", "name": "triángulo pequeño derecha", "level": 200, "preserve": "never"},
+		{"symbol": "◂", "name": "triángulo pequeño izquierda", "level": 200, "preserve": "never"},
+		{"symbol": "▼", "name": "triángulo abajo", "level": 200, "preserve": "never"},
+		{"symbol": "▲", "name": "triángulo arriba", "level": 200, "preserve": "never"},
+		{"symbol": "►", "name": "triángulo derecha", "level": 200, "preserve": "never"},
+		{"symbol": "◄", "name": "triángulo izquierda", "level": 200, "preserve": "never"},
+		{"symbol": "▶", "name": "triángulo derecha", "level": 200, "preserve": "never"},
+		{"symbol": "◀", "name": "triángulo izquierda", "level": 200, "preserve": "never"},
+		{"symbol": "◇", "name": "rombo blanco", "level": 200, "preserve": "never"},
+		{"symbol": "✘", "name": "aspa", "level": 200, "preserve": "never"}
 	]
 }

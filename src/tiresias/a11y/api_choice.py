@@ -27,6 +27,7 @@ from __future__ import annotations
 
 import ctypes
 import os
+import re
 import time
 from ctypes import wintypes
 
@@ -265,11 +266,24 @@ def _fileMajorVersion(path: str) -> int:
 	return ms >> 16
 
 
+#: ``WindowsForms10.SysListView32.app.0.141b42a_r9_ad1`` es un ``SysListView32``.
+_WINFORMS_CLASS = re.compile(r"^WindowsForms\d*\.(.+?)\.app\.")
+
+
+def normalizeClassName(className: str) -> str:
+	"""Clase real de un control de Windows Forms o ATL (NVDA #21051, #20891)."""
+	m = _WINFORMS_CLASS.match(className)
+	if m:
+		return m.group(1)
+	return className[4:] if className.startswith("ATL:") else className
+
+
 def isJavaWindowClass(className: str) -> bool:
 	return className.startswith(JAVA_CLASS_PREFIX)
 
 
 def _decide(hwnd: int, className: str) -> str:
+	className = normalizeClassName(className)
 	lower = className.lower()
 	if isJavaWindowClass(className):
 		try:

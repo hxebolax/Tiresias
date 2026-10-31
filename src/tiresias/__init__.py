@@ -14,8 +14,8 @@ Este paquete contiene el núcleo del lector. La estructura general es:
 
 APP_NAME = "Tiresias"
 APP_ID = "tiresias"
-VERSION = "1.0.14"
-VERSION_TUPLE = (1, 0, 14)
+VERSION = "1.0.15"
+VERSION_TUPLE = (1, 0, 15)
 # Versión de la API para complementos. Un complemento declara ``minApiVersion``.
 API_VERSION = (1, 0)
 COPYRIGHT = "Copyright (C) 2026 Proyecto Tiresias"

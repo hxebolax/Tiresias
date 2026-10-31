@@ -564,6 +564,12 @@ class BrowseModeDocument(BrowseExtrasMixin, TableNavigationMixin, BufferLoaderMi
 			return _("encabezado de nivel {level}").format(level=lvl) if lvl else _("encabezado")
 		if role == Role.LIST and df["reportLists"]:
 			count = sum(1 for c in node.children if c.role == Role.LISTITEM) or sum(1 for c in node.children if c.end > c.start)
+			# NVDA #14411: una lista virtualizada solo tiene en la página unos pocos
+			# elementos; aria-setsize dice cuántos son de verdad.
+			count = max((c.setSize for c in node.children if c.role == Role.LISTITEM and c.setSize > 0), default=0) or count
+			level = 1 + sum(1 for a in node.ancestors() if a.role == Role.LIST)
+			if level > 1:
+				return _("lista de nivel {level} con {n} elementos").format(level=level, n=count) if count != 1 else _("lista de nivel {level} con 1 elemento").format(level=level)
 			return _("lista con {n} elementos").format(n=count) if count != 1 else _("lista con 1 elemento")
 		if role in (Role.TABLE, Role.DATAGRID) and df["reportTables"]:
 			if node.tableSize:
@@ -632,7 +638,7 @@ class BrowseModeDocument(BrowseExtrasMixin, TableNavigationMixin, BufferLoaderMi
 			if st in node.states and showStates:
 				if st == State.SELECTED and role not in (Role.TAB,):
 					continue
-				if st == State.READONLY and role not in (Role.EDITABLETEXT, Role.COMBOBOX, Role.PASSWORDEDIT):
+				if st == State.READONLY and role not in (Role.EDITABLETEXT, Role.COMBOBOX, Role.PASSWORDEDIT, Role.SPINBUTTON, Role.SLIDER):
 					continue
 				if st == State.HASPOPUP and role != Role.COMBOBOX and node.aria.get("haspopup") not in (None, "", "false"):
 					# El tipo de emergente (menú, lista, diálogo...) va en la información ARIA.
@@ -1663,11 +1669,51 @@ class BrowseModeDocument(BrowseExtrasMixin, TableNavigationMixin, BufferLoaderMi
 				speech.speakMessage(" ".join(exits))
 			self.caret = node.start
 			self.selectionAnchor = None
-		if conf["browseMode"]["autoPassThroughOnFocusChange"] and not self._disableAutoPassThrough and not self._focusModeLocked:
+		if not self._passThroughForApplication(node) and conf["browseMode"]["autoPassThroughOnFocusChange"] and not self._disableAutoPassThrough and not self._focusModeLocked:
 			self._autoPassThroughForFocus(obj, node)
+		self._browseInnerDocument(node)
 		# Se llega desde otro documento en otro modo: se indica el modo.
 		self.reportModeOnEnter()
 		nextHandler()
+
+	def _browseInnerDocument(self, node: Node | None) -> None:
+		"""Modo exploración en un ``role="document"`` dentro de una aplicación ARIA.
+
+		NVDA #20695: Control+Intro en un mensaje de Teams lleva el foco a un
+		documento pensado para leerse con las flechas. Seguir en modo foco
+		dejaba el mensaje sin poder leerse.
+		"""
+		if node is None or node.ariaRole != "document" or node.parent is None or not self.passThrough:
+			return
+		if any(a.role == Role.APPLICATION for a in node.ancestors()):
+			self._focusModeLocked = False
+			self.passThrough = False
+
+	def _passThroughForApplication(self, node: Node | None) -> bool:
+		"""Modo foco dentro de ``role="application"``, aunque el paso automático esté desactivado.
+
+		Rev. 1.0.15: NVDA no considera parte del documento nada que esté dentro
+		de una aplicación ARIA (el banco de trabajo de VS Code, Antigravity y
+		los demás editores basados en él, Teams...): las teclas son siempre de
+		la aplicación. Con «modo foco automático al cambiar el foco» desactivado,
+		Tiresias se quedaba en modo exploración y las flechas leían líneas del
+		búfer en lugar de mover el cursor del editor o el elemento del árbol de
+		archivos. Al salir de la aplicación se vuelve al modo que había.
+		Devuelve ``True`` si el foco está dentro de una aplicación.
+		"""
+		inApp = node is not None and self.insideApplication(node)
+		previous = self.__dict__.get("_appPassThrough")
+		if inApp:
+			if previous is None:
+				self.__dict__["_appPassThrough"] = bool(self.passThrough)
+			if not self.passThrough:
+				self.passThrough = True
+			return True
+		if previous is not None:
+			self.__dict__.pop("_appPassThrough", None)
+			if not self._focusModeLocked and self.passThrough != previous:
+				self.passThrough = previous
+		return False
 
 	#: Roles que siempre pasan a modo foco al recibir el foco (como NVDA).
 	ALWAYS_PASS_THROUGH_ROLES = frozenset(
@@ -1786,8 +1832,9 @@ class BrowseModeDocument(BrowseExtrasMixin, TableNavigationMixin, BufferLoaderMi
 		self.__dict__.pop("_pendingFocus", None)
 		self.caret = node.start
 		self.selectionAnchor = None
-		if conf["browseMode"]["autoPassThroughOnFocusChange"] and not self._disableAutoPassThrough and not self._focusModeLocked:
+		if not self._passThroughForApplication(node) and conf["browseMode"]["autoPassThroughOnFocusChange"] and not self._disableAutoPassThrough and not self._focusModeLocked:
 			self._autoPassThroughForFocus(focus, node)
+		self._browseInnerDocument(node)
 		try:
 			api.setReviewPosition(self.makeTextInfo(textinfo.POSITION_CARET), isCaret=True)
 		except Exception:

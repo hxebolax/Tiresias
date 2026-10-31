@@ -1,0 +1,11 @@
+{
+	"id": "speechHistoryExplorer",
+	"name": "Explorador del historial de voz",
+	"version": "1.0.0",
+	"author": "Proyecto Tiresias (basado en Speech History Explorer de Tyler Spivey, James Scholes y David CM)",
+	"description": "Recorre con la voz lo último que ha dicho Tiresias: Tiresias+Alt+F11 dice el elemento anterior y Tiresias+Alt+F12 el siguiente (con un pitido a la izquierda o a la derecha al llegar al principio o al final del historial), Tiresias+Control+F12 copia al portapapeles el elemento en el que estás (el más reciente si no has navegado) y Tiresias+Mayúsculas+F12 abre un diálogo con todos los elementos recientes, donde puedes buscar, seleccionar varios, ver el texto completo y copiar el elemento o todos, limpiar el historial o actualizar la lista. La posición vuelve al elemento más reciente cada vez que Tiresias dice algo nuevo. Opciones: recortar los espacios del principio y del final al copiar, pitar al realizar acciones, pitido paneado en los extremos y el tamaño del historial de voz de Tiresias.",
+	"minApiVersion": "1.0",
+	"lastTestedApiVersion": "1.0",
+	"url": "https://github.com/davidacm/SpeechHistoryExplorer",
+	"changelog": "Primera versión para Tiresias: todas las funciones de Speech History Explorer 2023 para NVDA (elemento anterior y siguiente del historial con pitidos paneados en los extremos, copia al portapapeles del elemento actual con recorte opcional de espacios, diálogo de elementos del historial con búsqueda, selección múltiple, texto completo, Copiar elemento, Copiar todo, Limpiar historial, Actualizar y Cerrar, y categoría propia en las Opciones de Tiresias). Usa el historial de voz del propio Tiresias, así que el tamaño máximo es la opción «Tamaño del historial de voz» de la categoría Voz. Las órdenes anterior y siguiente van en Tiresias+Alt+F11 y Tiresias+Alt+F12 y el diálogo en Tiresias+Mayúsculas+F12 porque Tiresias+Mayúsculas+F11 ya es la lista de procesos."
+}

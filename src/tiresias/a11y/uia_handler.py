@@ -13,6 +13,7 @@ from ctypes import c_int as ctypes_c_int
 import time
 from typing import Any
 
+import ctypes
 import comtypes
 from comtypes import COMObject
 
@@ -915,7 +916,8 @@ def unregisterStructureChanged(listener) -> None:
 		return
 	try:
 		uc.client.RemoveStructureChangedEventHandler(entry[1], entry[2])
-	except comtypes.COMError:
+	except (comtypes.COMError, ctypes.ArgumentError):
+		# ArgumentError: al cerrar, el manejador ya no se puede pasar como interfaz.
 		pass
 
 

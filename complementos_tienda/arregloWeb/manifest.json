@@ -1,0 +1,11 @@
+{
+	"id": "arregloWeb",
+	"name": "Arreglo web: reparar páginas poco accesibles",
+	"version": "1.0.0",
+	"author": "Proyecto Tiresias",
+	"description": "Cuando una página web tiene problemas de accesibilidad, pulsa Tiresias+Mayúsculas+Alt+P en el modo exploración: el complemento la analiza y presenta un informe por voz y en una lista (enlaces y botones sin nombre o con nombres inútiles o repetidos, imágenes sin texto alternativo, campos de formulario sin etiqueta, elementos pulsables que no son botones, falta de encabezados o de regiones, tablas de maquetación, textos que parecen encabezados y superposiciones de cookies que tapan el contenido). Elige qué arreglos aplicar sobre lo que Tiresias presenta: nombres deducidos del título, de la imagen, del texto cercano o de la dirección; etiquetas de los campos por el texto anterior o la cabecera de columna; botones para lo pulsable; encabezados con nivel según el tamaño de letra; región principal deducida; tablas de maquetación; ocultación de las superposiciones con la web flexible; y descripción con IA de las imágenes sin alternativo. Los arreglos se guardan por sitio y se aplican solos la próxima vez.",
+	"minApiVersion": "1.0",
+	"lastTestedApiVersion": "1.0",
+	"url": "https://github.com/hxebolax/Tiresias",
+	"changelog": "Primera versión: análisis de la página con informe por voz y diálogo con casillas, arreglos sobre la presentación (nombres, etiquetas, botones, encabezados, región principal, tablas de maquetación y ocultación de superposiciones), descripción de imágenes con los proveedores de IA de Tiresias, arreglos guardados por sitio con aplicación automática al cargar, orden para quitarlos y diálogo de gestión en el menú Herramientas."
+}

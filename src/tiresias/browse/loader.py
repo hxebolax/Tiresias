@@ -100,6 +100,11 @@ class BufferLoaderMixin(ScriptableObject):
 
 	def configureBuffer(self, buf: VirtualBuffer) -> None:
 		try:
+			# Para los manejadores de ``buffer.filter_node`` (reglas por sitio).
+			buf.documentKey = self._documentKey()
+		except Exception:
+			buf.documentKey = ""
+		try:
 			from . import flexweb
 
 			rules = flexweb.rulesFor(self._documentKey())

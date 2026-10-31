@@ -37,7 +37,7 @@ nav li { margin: .2em 0; }
 <a class="saltar" href="#contenido">Saltar al contenido</a>
 <header>
 <h1>Manual de usuario de Tiresias</h1>
-<p>Lector de pantalla para Windows. Versión 1.0.14.</p>
+<p>Lector de pantalla para Windows. Versión 1.0.15.</p>
 </header>
 <nav aria-labelledby="indice"><h2 id="indice">Índice</h2>
 <ul>
@@ -264,6 +264,9 @@ nav li { margin: .2em 0; }
 </ul></li>
 <li><a href="#whatsapp">18.3. WhatsApp accesible</a></li>
 <li><a href="#eloquence">18.4. Eloquence</a></li>
+<li><a href="#asistentes-ia">18.5. Asistentes de IA accesibles</a></li>
+<li><a href="#explorador-historial">18.6. Explorador del historial de voz</a></li>
+<li><a href="#arreglo-web">18.7. Arreglo web</a></li>
 </ul></li>
 <li><a href="#remoto">19. Acceso remoto</a>
 <ul>
@@ -486,7 +489,7 @@ nav li { margin: .2em 0; }
 <p>Para el reconocimiento de texto (OCR) y las voces de Windows (OneCore) se usan componentes que ya vienen con Windows 10 y 11. Para reconocer texto en español, Windows debe tener instalado el idioma español; normalmente ya lo está si tu Windows está en español.</p>
 
 <h3 id="portable">2.2. La versión portable: descomprimir y usar</h3>
-<p>La versión portable es un archivo ZIP cuyo nombre termina en <code>-portable.zip</code>, por ejemplo <code>Tiresias-1.0.14-portable.zip</code>. Dentro hay una carpeta llamada <code>Tiresias</code>. Basta con descomprimir el ZIP en el lugar que prefieras. Si prefieres instalarlo en el equipo, usa el instalador (apartado <a href="#instalar">2.9</a>).</p>
+<p>La versión portable es un archivo ZIP cuyo nombre termina en <code>-portable.zip</code>, por ejemplo <code>Tiresias-1.0.15-portable.zip</code>. Dentro hay una carpeta llamada <code>Tiresias</code>. Basta con descomprimir el ZIP en el lugar que prefieras. Si prefieres instalarlo en el equipo, usa el instalador (apartado <a href="#instalar">2.9</a>).</p>
 <ol>
 <li>Localiza el archivo ZIP en el Explorador de archivos (por ejemplo, en la carpeta Descargas).</li>
 <li>Con el archivo seleccionado, pulsa la tecla <kbd>Aplicaciones</kbd> (o <kbd>Mayúsculas+F10</kbd>) y elige «Extraer todo...».</li>
@@ -580,7 +583,7 @@ nav li { margin: .2em 0; }
 <div class="nota"><p>Consejo: si Tiresias dice «Escritorio seguro…» y se queda en silencio, por ejemplo al instalar un programa, ha aparecido el aviso del control de cuentas de usuario. Con la copia instalada, activa «Usar Tiresias durante el inicio de sesión y en las pantallas seguras» (apartado <a href="#pantallas-seguras">4.7</a>) y Tiresias leerá esas pantallas. Con una copia portable puedes activar un momento el Narrador de Windows con <kbd>Control+Windows+Intro</kbd>; cuando termines, apágalo con la misma tecla: mientras el Narrador está activo, Tiresias se queda en espera (apartado <a href="#convivencia">3.14</a>). Si conoces bien el aviso, también puedes responderlo de memoria: el botón «Sí» se pulsa con <kbd>Alt+S</kbd>.</p></div>
 
 <h3 id="instalar">2.9. Instalar Tiresias en el equipo</h3>
-<p>Además de la versión portable, Tiresias tiene un instalador: un archivo cuyo nombre termina en <code>-instalador.exe</code>, por ejemplo <code>Tiresias-1.0.14-instalador.exe</code>. Al ejecutarlo, descomprime el programa unos segundos en silencio y arranca Tiresias, que empieza a hablar y muestra el cuadro «Instalar Tiresias». Así puedes hacer toda la instalación con Tiresias. Si ya estás usando la copia portable, también puedes instalarla desde el menú de Tiresias, «Herramientas», «Instalar Tiresias en este equipo...».</p>
+<p>Además de la versión portable, Tiresias tiene un instalador: un archivo cuyo nombre termina en <code>-instalador.exe</code>, por ejemplo <code>Tiresias-1.0.15-instalador.exe</code>. Al ejecutarlo, descomprime el programa unos segundos en silencio y arranca Tiresias, que empieza a hablar y muestra el cuadro «Instalar Tiresias». Así puedes hacer toda la instalación con Tiresias. Si ya estás usando la copia portable, también puedes instalarla desde el menú de Tiresias, «Herramientas», «Instalar Tiresias en este equipo...».</p>
 <p>El cuadro de instalación tiene:</p>
 <dl>
 <dt>Información</dt><dd>Un texto de solo lectura que puedes recorrer con las flechas. Si ya hay una copia instalada, dice su versión: se actualizará conservando tu configuración.</dd>
@@ -1478,6 +1481,7 @@ nav li { margin: .2em 0; }
 <li><strong>Etiquetas braille.</strong> Si la página da a un botón o a un enlace una etiqueta pensada para braille (más corta), o un nombre de tipo de control para braille, la línea braille muestra esas en lugar de las normales; la voz no cambia.</li>
 </ul>
 <p id="apps-modo-foco">Algunos programas que usan contenido web funcionan mejor como una aplicación normal: Teams, Slack, WhatsApp, el nuevo Outlook para Windows y la búsqueda de Windows. En ellos, Tiresias empieza directamente en modo foco; si quieres leerlos en modo exploración, pulsa <kbd>Tiresias+Espacio</kbd>. En estas aplicaciones, el cambio automático entre modos queda en pausa hasta que pases tú al modo exploración, y <kbd>Escape</kbd> pertenece a la aplicación (no te saca del modo foco).</p>
+<p id="busqueda-inicio">En la búsqueda del menú Inicio de Windows 11 el foco se queda en el cuadro de búsqueda mientras escribes. Tiresias te dice el resultado resaltado cada vez que cambia. Con las flechas arriba y abajo pasas de un resultado a otro, sin salir del cuadro, e <kbd>Intro</kbd> abre el resultado.</p>
 
 <h3 id="lectura-rapida">6.12. Lectura rápida y vistazo</h3>
 <p>La <strong>lectura rápida</strong> (<kbd>Tiresias+Control+Mayúsculas+S</kbd>) resume un documento largo según una regla: la primera frase de cada párrafo (con los encabezados), solo los encabezados, los párrafos que contienen un texto o los que cumplen una expresión regular. Los resultados aparecen en una lista: <strong>Ir al resultado</strong> lleva el cursor allí y <strong>Leer todos</strong> los lee seguidos.</p>
@@ -3369,7 +3373,7 @@ fuera de lista</pre>
 <h3 id="que-son-complementos">18.1. Qué son los complementos</h3>
 <p>Los complementos amplían Tiresias: pueden añadir voces, controladores de líneas braille, mejoras para aplicaciones concretas u órdenes nuevas. Se distribuyen como archivos con la extensión <code>.tiresias-addon</code>.</p>
 <p>Tiresias trae un complemento ya instalado y activado: <strong>WhatsApp accesible</strong> (apartado <a href="#whatsapp">18.3</a>). El complemento de la voz <strong>Eloquence (IBMTTS)</strong> (apartado <a href="#eloquence">18.4</a>) no viene incluido porque es software propietario.</p>
-<p>En la tienda de complementos encontrarás, entre otros: <strong>zRadio BASS</strong> (radio en línea), <strong>Audiocinemateca</strong>, <strong>Visor de consola</strong>, <strong>zUtilidades</strong> (lanzador de aplicaciones y notas rápidas), <strong>Voces neuronales de Microsoft</strong> con la voz <strong>Álvaro</strong>, <strong>Monitor de recursos</strong>, <strong>Traductor Avanzado Pro</strong> y el propio <strong>Eloquence</strong>. Cada uno trae su manual: en el administrador de complementos, botón «Ayuda del complemento», o pulsando F1 en su categoría de Opciones. La tienda avisa de los complementos que son software propietario (Eloquence y la voz Álvaro), que necesitan una licencia válida.</p>
+<p>En la tienda de complementos encontrarás, entre otros: <strong>zRadio BASS</strong> (radio en línea), <strong>Audiocinemateca</strong>, <strong>Visor de consola</strong>, <strong>zUtilidades</strong> (lanzador de aplicaciones y notas rápidas), <strong>Voces neuronales de Microsoft</strong> con la voz <strong>Álvaro</strong>, <strong>Monitor de recursos</strong>, <strong>Traductor Avanzado Pro</strong>, <strong>Asistentes de IA accesibles</strong>, <strong>Explorador del historial de voz</strong>, <strong>Arreglo web</strong> y el propio <strong>Eloquence</strong>. Cada uno trae su manual: en el administrador de complementos, botón «Ayuda del complemento», o pulsando F1 en su categoría de Opciones. La tienda avisa de los complementos que son software propietario (Eloquence y la voz Álvaro), que necesitan una licencia válida.</p>
 <div class="nota"><p>Un complemento es un programa que se ejecuta dentro de Tiresias con tus mismos permisos. Instala solo complementos de fuentes de confianza.</p></div>
 
 <h3 id="administrador-complementos">18.2. El administrador de complementos</h3>
@@ -3538,6 +3542,51 @@ fuera de lista</pre>
 </section>
 
 <section>
+<h3 id="asistentes-ia">18.5. Asistentes de IA accesibles</h3>
+<p>Este complemento de la tienda hace más cómodas las aplicaciones de escritorio de Claude y Codex (en el menú Inicio aparece como ChatGPT) y el panel de agente de Antigravity IDE. Solo lee: nunca escribe en la aplicación ni pulsa sus botones.</p>
+<p>Cuando el asistente termina oyes un pitido y Tiresias dice, por ejemplo, «Claude ha terminado», también si estás en otra ventana. Lo configuras en las Opciones, categoría «Asistentes de IA».</p>
+<table>
+<caption>Órdenes de Asistentes de IA accesibles</caption>
+<thead><tr><th scope="col">Tecla</th><th scope="col">Qué hace</th></tr></thead>
+<tbody>
+<tr><td><kbd>Tiresias+Alt+U</kbd></td><td>Lee la última respuesta sin mover el foco. Con dos pulsaciones la copia.</td></tr>
+<tr><td><kbd>Tiresias+Control+Flecha arriba</kbd></td><td>Lee el mensaje anterior de la conversación.</td></tr>
+<tr><td><kbd>Tiresias+Control+Flecha abajo</kbd></td><td>Lee el mensaje siguiente.</td></tr>
+<tr><td><kbd>Tiresias+Control+Inicio</kbd></td><td>Lee el primer mensaje.</td></tr>
+<tr><td><kbd>Tiresias+Control+Fin</kbd></td><td>Lee el último mensaje.</td></tr>
+<tr><td><kbd>Tiresias+Alt+Y</kbd></td><td>Abre el mensaje por el que vas en una ventana de texto.</td></tr>
+<tr><td><kbd>Tiresias+Alt+P</kbd></td><td>Lleva el foco al cuadro de escribir.</td></tr>
+<tr><td><kbd>Tiresias+Alt+Q</kbd></td><td>Dice si el asistente está trabajando y cuántos mensajes hay.</td></tr>
+<tr><td><kbd>Tiresias+Alt+Z</kbd></td><td>Activa o desactiva la lectura automática de la respuesta al terminar.</td></tr>
+</tbody>
+</table>
+<h3 id="explorador-historial">18.6. Explorador del historial de voz</h3>
+<p>Este complemento de la tienda es la versión para Tiresias de Speech History Explorer. Completa el historial de voz de Tiresias (<kbd>Tiresias+Alt+X</kbd>) con órdenes para repasar lo dicho sin abrir ningún diálogo.</p>
+<table>
+<caption>Órdenes del Explorador del historial de voz</caption>
+<thead><tr><th scope="col">Tecla</th><th scope="col">Qué hace</th></tr></thead>
+<tbody>
+<tr><td><kbd>Tiresias+Alt+F11</kbd></td><td>Lee el elemento anterior del historial.</td></tr>
+<tr><td><kbd>Tiresias+Alt+F12</kbd></td><td>Lee el elemento siguiente.</td></tr>
+<tr><td><kbd>Tiresias+Control+F12</kbd></td><td>Copia el elemento actual al portapapeles.</td></tr>
+<tr><td><kbd>Tiresias+Mayúsculas+F12</kbd></td><td>Abre la lista del historial, con búsqueda y selección múltiple.</td></tr>
+</tbody>
+</table>
+<p>En NVDA estas órdenes usan otras teclas porque <kbd>Tiresias+Mayúsculas+F11</kbd> ya abre la lista de procesos.</p>
+<h3 id="arreglo-web">18.7. Arreglo web</h3>
+<p>Este complemento de la tienda intenta mejorar una página web poco accesible cuando se lo pides. Cambia lo que Tiresias te presenta en modo exploración, nunca la página, así que el resto de lectores y usuarios la siguen viendo igual.</p>
+<p>Con el cursor en la página, pulsa <kbd>Tiresias+Mayúsculas+Alt+P</kbd>. Tiresias te dice cuántos problemas ha encontrado y abre una lista con casillas, donde cada problema indica el arreglo propuesto. Desmarca los que no quieras y pulsa «Aplicar los marcados», o «Aplicar todos». Con dos pulsaciones de la orden se aplican todos sin abrir la lista.</p>
+<p>Detecta y arregla:</p>
+<ul>
+<li>Enlaces y botones sin nombre, con nombres inútiles como «clic aquí» o repetidos con distinto destino.</li>
+<li>Imágenes sin texto alternativo. Puede describirlas con los proveedores de inteligencia artificial de Tiresias.</li>
+<li>Campos de formulario sin etiqueta.</li>
+<li>Elementos que se pueden pulsar pero no son botones.</li>
+<li>Textos que parecen encabezados, y páginas sin encabezados ni regiones.</li>
+<li>Tablas usadas solo para maquetar.</li>
+<li>Avisos de cookies, que se ocultan en modo exploración.</li>
+</ul>
+<p>Los arreglos se guardan para ese sitio y se aplican solos la próxima vez. <kbd>Tiresias+Mayúsculas+Alt+Q</kbd> quita los del sitio actual. Las opciones están en la categoría «Arreglo web» de las Opciones, y la gestión de los sitios guardados, en el menú Herramientas.</p>
 <h2 id="remoto">19. Acceso remoto</h2>
 
 <h3 id="remoto-que-es">19.1. Qué es el acceso remoto</h3>
@@ -5872,6 +5921,6 @@ Otros nombres que puedes usar en lugar de <code>espeak</code> son <code>onecore<
 </section>
 
 </main>
-<footer><p>Manual de usuario de Tiresias 1.0.14. <a href="#indice">Volver al índice</a>.</p></footer>
+<footer><p>Manual de usuario de Tiresias 1.0.15. <a href="#indice">Volver al índice</a>.</p></footer>
 </body>
 </html>

@@ -13,15 +13,29 @@ from typing import Any, Callable, Iterator
 
 import comtypes
 
+from .. import extension_points
 from ..a11y import uia_client as uc
 from ..config import conf
 from ..i18n import _
 from ..log import getLogger
 from ..objects.roles import HEADING_ROLES, Role, State
-from ..objects.uia import _ARIA_ROLES, _CONTROLTYPE_ROLES, _LANDMARK_ARIA, _LANDMARK_TYPES, isMsaaProxyProvider, looksLikeTextLeaf, parseAriaProperties
+from ..objects.uia import _ARIA_ROLES, _CONTROLTYPE_ROLES, _LANDMARK_ARIA, _LANDMARK_TYPES, isMsaaProxyProvider, looksLikeTextLeaf, parseAriaProperties, uiaHeadingLevel
 from . import aria as ariaSem
 
 log = getLogger("vbuf")
+
+#: Filtro de cada nodo del búfer en el momento de crearlo (punto de extensión
+#: para complementos como «Arreglo web»). Manejadores:
+#: ``(value: Node, buffer: VirtualBuffer, controlType: int) -> Node | None``.
+#: Reciben el nodo ya resuelto (rol, nombre, estados, etiquetas del usuario y
+#: de la IA), con su ``parent`` asignado y los hermanos anteriores ya en
+#: ``parent.children``, pero todavía sin hijos ni texto. Pueden cambiar lo que
+#: Tiresias presenta (``role``, ``name``, ``level``, ``landmark``,
+#: ``layoutTable``, ``clickable``, ``states``...) y devolver el nodo, o devolver
+#: ``None`` para dejarlo fuera del búfer con todos sus descendientes. Si llega
+#: ``None`` (otro manejador lo quitó) se devuelve tal cual. Se llama en el hilo
+#: que construye el búfer; ``buffer.documentKey`` dice de qué documento es.
+filter_node = extension_points.Filter()
 
 #: Puntuación que cierra una frase o un inciso: se queda pegada al enlace que
 #: la precede aunque el texto siguiente vaya en otra línea (#11073).
@@ -203,6 +217,7 @@ class Node:
 		"semantic",
 		"unlabeled",
 		"spaceAround",
+		"setSize",
 	)
 
 	def __init__(self) -> None:
@@ -262,6 +277,7 @@ class Node:
 		self.unlabeled = False
 		#: El nombre original empezaba o terminaba con espacio (antes de quitarlo).
 		self.spaceAround = (False, False)
+		self.setSize = 0
 
 	def ancestors(self) -> Iterator["Node"]:
 		n = self.parent
@@ -279,6 +295,81 @@ class Node:
 
 	def __repr__(self) -> str:
 		return f"<Node {self.role.name} {self.name[:30]!r} [{self.start},{self.end})>"
+
+
+#: Roles cuyo nombre sale de su contenido: si el nombre tiene texto que no está
+#: en ningún hijo, ese texto existe en la página (ver :class:`NameGaps`).
+NAME_FROM_CONTENT_ROLES = frozenset({Role.LISTITEM, Role.TABLECELL, Role.TABLECOLUMNHEADER, Role.TABLEROWHEADER, Role.TREEVIEWITEM, Role.LINK}) | frozenset(HEADING_ROLES)
+#: Nombres más largos no se comparan: un elemento así no es un trozo suelto.
+MAX_GAP_NAME = 2000
+
+
+def _edgeLeafName(el, last: bool, depth: int = 0) -> str:
+	"""Nombre de la primera (o última) hoja con nombre de ``el`` (en la caché)."""
+	if depth > 30:
+		return ""
+	try:
+		children = el.GetCachedChildren()
+		count = children.Length if children else 0
+	except (comtypes.COMError, ValueError):
+		count = 0
+	for i in range(count - 1, -1, -1) if last else range(count):
+		name = _edgeLeafName(children.GetElement(i), last, depth + 1)
+		if name:
+			return name
+	if count:
+		return ""
+	name = _cached(el, uc.P_NAME, "")
+	return name.strip() if isinstance(name, str) else ""
+
+
+class NameGaps:
+	"""Texto del nombre de un elemento que no está en ninguno de sus hijos.
+
+	Rev. 1.0.15: Chromium no publica en la vista de control los textos sueltos
+	de un elemento que tiene además otros hijos: un
+	``<li><span class="sr-only">listo</span><div>Tarea</div></li>`` llega con
+	un solo hijo («Tarea»), aunque su nombre sí sea «listoTarea». El estado de
+	las listas de tareas de la aplicación de Claude no se leía, y lo mismo pasa
+	con cualquier texto suelto junto a un bloque en cualquier web. NVDA no lo
+	pierde porque lee Chromium con IAccessible2.
+
+	Se recorre el nombre a la vez que los hijos: lo que hay entre el texto de
+	uno y el del siguiente es lo que falta. Si un hijo no aparece en el nombre
+	(``aria-label``, espacios distintos) se deja de buscar: nunca se inventa
+	nada, como mucho no se recupera.
+	"""
+
+	def __init__(self, name: str) -> None:
+		self.name = name
+		self.pos = 0
+
+	def before(self, kid) -> str:
+		"""Texto que falta antes de ``kid``."""
+		if self.pos < 0:
+			return ""
+		first = _edgeLeafName(kid, False)
+		if not first:
+			return ""
+		i = self.name.find(first, self.pos)
+		if i < 0:
+			self.pos = -1
+			return ""
+		gap = self.name[self.pos : i].strip()
+		self.pos = i
+		return gap
+
+	def after(self, kid) -> None:
+		if self.pos < 0:
+			return
+		last = _edgeLeafName(kid, True)
+		if last:
+			i = self.name.find(last, self.pos)
+			self.pos = i + len(last) if i >= 0 else -1
+
+	def tail(self) -> str:
+		"""Texto que falta tras el último hijo."""
+		return self.name[self.pos :].strip() if self.pos > 0 else ""
 
 
 def _cached(el, propId: int, default: Any = None) -> Any:
@@ -318,10 +409,14 @@ class VirtualBuffer:
 		self._parts: list[str] = []
 		self._pos = 0
 		self._atLineStart = True
+		self._keepLine = False
 		self._lastRect: tuple[int, int, int, int] | None = None
 		self._screenLayout = True
 		#: Reglas de la web flexible (elementos ocultos por el usuario) o ``None``.
 		self.hiddenRules = None
+		#: Dirección (o título) del documento; la fija el documento al configurar
+		#: el búfer (``configureBuffer``) para que ``filter_node`` sepa de qué sitio es.
+		self.documentKey = ""
 		#: Orden de lectura visual (por columnas) en lugar del orden del documento.
 		self.visualOrder = False
 		#: Orden de lectura propio, a mano o con IA (``reading_order.ReadingOrder``, foros 3.10).
@@ -426,6 +521,9 @@ class VirtualBuffer:
 		self._lastRect = None
 		self._lastOwnRect = None
 		self._pendingBreak = False
+		if self._keepLine:
+			# Lo que sigue va en la misma línea que el texto recuperado del nombre.
+			return
 		if not self._atLineStart:
 			self._append("\n")
 
@@ -434,6 +532,7 @@ class VirtualBuffer:
 		text = text.replace("\r\n", "\n").replace("\r", "\n").replace("\xad", "")
 		if not text:
 			return
+		self._keepLine = False
 		if self._pendingBreak:
 			# #11073: lo que sigue a un enlace va en otra línea, salvo la
 			# puntuación que lo cierra («enlace,» «enlace.»), que se queda con él.
@@ -458,9 +557,11 @@ class VirtualBuffer:
 		while rect is None and anc is not None:
 			rect = anc.location
 			anc = anc.parent
-		if self._screenLayout and rect is not None and self._lastRect is not None and not self._atLineStart:
+		if (self._screenLayout or (node.role == Role.STATICTEXT and self._lastOwnRect is not None)) and rect is not None and self._lastRect is not None and not self._atLineStart:
 			# Distribución de pantalla: si el elemento empieza en una fila
-			# inferior a la del anterior, va en una línea nueva.
+			# inferior a la del anterior, va en una línea nueva. Rev. 1.0.15: sin
+			# ella también para dos textos seguidos: Chromium no publica los
+			# <p> ni los <div>, y todos los párrafos acababan en una sola línea.
 			top = rect[1]
 			ltop, lh = self._lastRect[1], self._lastRect[3]
 			if top >= ltop + lh - 2:
@@ -540,11 +641,10 @@ class VirtualBuffer:
 			# Trozo de texto de Gecko a través del puente MSAA (cuerpo de los correos
 			# de Thunderbird 102): es texto normal, no un campo «edición».
 			role = Role.STATICTEXT
-		heading =_cached(el, uc.P_HEADINGLEVEL, 0) or 0
-		if heading and heading > uc.HEADINGLEVEL_NONE:
-			lvl = heading - uc.HEADINGLEVEL_NONE
-			role = Role(Role.HEADING1 + lvl - 1) if 1 <= lvl <= 6 else Role.HEADING
-			n.level = lvl
+		lvl = uiaHeadingLevel(ct, _cached(el, uc.P_HEADINGLEVEL, 0))
+		if lvl:
+			role = Role(Role.HEADING1 + lvl - 1) if lvl <= 6 else Role.HEADING
+			n.level = lvl if lvl <= 6 else 0
 		elif ariaRole == "heading":
 			role = Role.HEADING
 			try:
@@ -669,6 +769,11 @@ class VirtualBuffer:
 		if rc is not None and cc is not None and role in (Role.TABLE, Role.DATAGRID):
 			n.tableSize = (int(rc), int(cc))
 		n.description = _cached(el, uc.P_FULLDESCRIPTION, "") or ""
+		if role == Role.LISTITEM:
+			try:
+				n.setSize = int(_cached(el, uc.P_SIZEOFSET, 0) or 0)
+			except (TypeError, ValueError):
+				n.setSize = 0
 		if role == Role.LINK:
 			n.url = str(_cached(el, uc.P_VALUEVALUE, "") or "")
 		elif role in (Role.SLIDER, Role.PROGRESSBAR, Role.SPINBUTTON, Role.SCROLLBAR):
@@ -709,6 +814,11 @@ class VirtualBuffer:
 			if label:
 				n.name = label
 				n.unlabeled = False
+		if len(filter_node):
+			# Complementos que cambian lo que se presenta (o quitan el nodo).
+			n = filter_node.apply(n, buffer=self, controlType=ct)
+			if n is None:
+				return None
 		return n
 
 	def _walk(self, el, parent: Node | None, depth: int) -> Node | None:
@@ -770,21 +880,42 @@ class VirtualBuffer:
 				kids = visualOrder(kids)
 			# Fórmulas que UIA no publica en la vista de control (role="math" con solo etiqueta).
 			extras = getattr(self, "_extraMath", None)
+			if role == Role.LINK and node.name and custom is None and any((t := _edgeLeafName(k, False)) and t not in node.name for k in kids):
+				# NVDA #19605: con aria-label el enlace se llama así también en modo
+				# exploración, igual que al llegar con Tab.
+				self._emit(node.name, node)
+				kids = []
+			gaps = NameGaps(node.name) if role in NAME_FROM_CONTENT_ROLES and kids and custom is None and 0 < len(node.name) <= MAX_GAP_NAME else None
 			for kid in kids:
 				if extras:
 					from ..mathpres import browse_support
 
 					browse_support.emitExtras(self, node, kid, "before")
+				if gaps is not None:
+					gap = gaps.before(kid)
+					if gap:
+						self._emit(gap + " ", node)
+						self._keepLine = True
 				child = self._walk(kid, node, depth + 1)
 				if child is not None:
 					node.children.append(child)
+				if gaps is not None:
+					gaps.after(kid)
 				if extras:
 					browse_support.emitExtras(self, node, kid, "after")
+			if gaps is not None and self._pos != before:
+				tail = gaps.tail()
+				if tail:
+					self._emit(" " + tail, node)
+			self._keepLine = False
 			if self._pos == before:
 				# Sin hijos con texto: se usa el nombre (p. ej. texto estático).
 				text = node.name
 				if role == Role.LINK and not text:
-					text = _("enlace")
+					# NVDA #20152: un enlace con icono dice su descripción o el archivo al que lleva.
+					from ..a11y import ia2_bridge
+
+					text = node.description or ia2_bridge.fileNameFromURL(node.url) or _("enlace")
 				if text and role not in (Role.LIST, Role.TABLE, Role.DATAGRID, Role.LANDMARK, Role.DOCUMENT):
 					self._emit(text, node)
 				elif role in (Role.TABLECELL, Role.DATAITEM) and node.rowCol:

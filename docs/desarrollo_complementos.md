@@ -155,6 +155,64 @@ Para añadir un panel en el cuadro de Opciones:
 donde `MiPanel` hereda de `settings.SettingsPanel`. Las categorías de los
 complementos aparecen en la lista detrás de «Aplicaciones» (y antes de «Avanzado»).
 
+## 6 bis. Cambiar lo que presenta el modo exploración
+
+El búfer virtual de las páginas web (`tiresias.browse.buffer.VirtualBuffer`)
+ofrece el punto de extensión `filter_node`: un filtro que recibe cada `Node`
+en el momento de crearlo, antes de recorrer sus hijos y de emitir su texto.
+Sirve para arreglar lo que una página presenta mal **sin tocar la página**
+(nombres, roles, niveles de encabezado, regiones, tablas de maquetación) o
+para quitar elementos:
+
+```python
+from tiresias.browse import buffer as vbuf
+from tiresias.browse.flexweb import siteKey
+from tiresias.objects.roles import Role, State
+
+
+class GlobalPlugin(BaseGlobalPlugin):
+	def __init__(self):
+		super().__init__()
+		vbuf.filter_node.register(self.filtrarNodo)
+
+	def terminate(self):
+		vbuf.filter_node.unregister(self.filtrarNodo)
+
+	def filtrarNodo(self, value, buffer, controlType):
+		# value: el Node (o None si otro manejador lo quitó: devuélvelo tal cual).
+		# buffer.documentKey: dirección del documento (siteKey() da el sitio).
+		# controlType: tipo de control UIA (uc.CT_GROUP, uc.CT_HYPERLINK...).
+		if value is None or siteKey(buffer.documentKey) != "www.ejemplo.com":
+			return value
+		if value.automationId == "anuncio":
+			return None                      # fuera del búfer, con sus descendientes
+		if value.clickable and value.role == Role.GROUPING:
+			value.role = Role.BUTTON         # se presenta y se activa como botón
+			value.clickable = False
+			value.states.discard(State.CLICKABLE)
+		return value
+```
+
+Reglas:
+
+- Se llama en el **hilo que construye el búfer** (no en el núcleo), una vez
+  por nodo y también en las actualizaciones parciales: tiene que ser rápido
+  (una búsqueda en un diccionario) y no debe tocar la interfaz.
+- El nodo tiene `parent` y los hermanos anteriores ya están en
+  `parent.children`, pero **no tiene hijos ni texto** todavía: lo que se
+  decida se basa en `role`, `name`, `automationId`, `className`, `ariaRole`,
+  `lct`, `url`, `aria`, `location` y los antecesores.
+- Cambiar `role` surte efecto en el recorrido: los roles atómicos (botones,
+  campos) emiten su `name` y no recorren hijos; un encabezado o una región
+  recorre los suyos y se anuncia con su prefijo.
+- Para que el documento se reconstruya conservando la posición tras cambiar
+  tus reglas, llama a `doc.requestRebuild()` (en el núcleo) sobre el
+  documento (`tiresias.ai.assistant.currentBrowseDocument()` da el actual).
+
+El complemento de tienda **Arreglo web** (`complementos_tienda/arregloWeb`)
+es el ejemplo completo: analiza la página (`analisis.py`), guarda reglas por
+sitio (`almacen.py`) y las aplica con este filtro (`arreglos.py`).
+
 ## 7. Sintetizadores
 
 ```python

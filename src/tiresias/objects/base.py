@@ -295,8 +295,9 @@ class AccObject(ScriptableObject):
 
 	def _get_windowClassName(self) -> str:
 		from .. import winapi
+		from ..a11y.api_choice import normalizeClassName
 
-		return winapi.getClassName(self.windowHandle)
+		return normalizeClassName(winapi.getClassName(self.windowHandle))
 
 	def _get_processID(self) -> int:
 		from .. import winapi

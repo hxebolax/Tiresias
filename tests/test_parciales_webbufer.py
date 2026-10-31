@@ -110,10 +110,10 @@ class ContainerLinesTests(Base):
 		inner = lst(item("sub"))
 		outer = lst(item("a"), item("b", inner))
 		buf = build(FakeEl(uc.CT_DOCUMENT, "d", [outer, group(text("fin"))]), makeDoc())
-		self.assertEqual(buf.text, "lista con 2 elementos\na\nb\nlista con 1 elemento\nsub\nfuera de lista\nfuera de lista\nfin\n")
+		self.assertEqual(buf.text, "lista con 2 elementos\na\nb\nlista de nivel 2 con 1 elemento\nsub\nfuera de lista\nfuera de lista\nfin\n")
 		o, i = buf.byRid[outer.rid], buf.byRid[inner.rid]
 		self.assertTrue(o.start <= i.start and i.end <= o.end)
-		self.assertEqual(buf.text[i.start : i.end], "lista con 1 elemento\nsub\nfuera de lista\n")
+		self.assertEqual(buf.text[i.start : i.end], "lista de nivel 2 con 1 elemento\nsub\nfuera de lista\n")
 		self.assertTrue(buf.text[o.start : o.end].endswith("fuera de lista\nfuera de lista\n"))
 
 	def test_splice_equals_full_build(self) -> None:

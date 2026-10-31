@@ -18,6 +18,31 @@ kbd { font-family: inherit; font-weight: bold; }
 <h1>Novedades de Tiresias</h1>
 <p>Esta página resume lo que ha cambiado en cada versión, empezando por la más reciente; al final, las novedades de la versión 1.0.1 ordenadas por áreas. Los detalles de cada función están en el manual de usuario (menú de Tiresias, Ayuda, Manual de usuario). Todas las teclas nuevas están también en la referencia rápida de órdenes del manual y en Ayuda, Referencia rápida de órdenes.</p>
 
+<h2 id="v1-0-15">Versión 1.0.15</h2>
+<p>Lee mejor las interfaces que fallaban frente a NVDA: la búsqueda del menú Inicio, Thunderbird, los campos de solo lectura y las aplicaciones Electron. Trae tres complementos nuevos en la tienda.</p>
+<ul>
+<li><strong>Búsqueda del menú Inicio de Windows 11.</strong> Al escribir ya oyes el resultado resaltado («Bloc de notas, Aplicación...») y con las flechas arriba y abajo pasas de un resultado a otro. Antes no se oía ningún resultado y Tiresias decía «Búsqueda: contenido web región». Es el fallo de la búsqueda nueva de Windows que tienen abierto NVDA y Narrador.</li>
+<li><strong>Textos que se perdían en páginas y aplicaciones web.</strong> Los navegadores basados en Chromium no publican algunos textos sueltos que van junto a un bloque. Tiresias ya los recupera en modo exploración. Por ejemplo, en la lista de tareas de la aplicación de Claude ahora oyes «listo», «en progreso» o «sin completar» delante de cada tarea.</li>
+<li><strong>Campos RichEdit de solo lectura.</strong> Ya no se leen como «RichEdit Control documento»: se leen como en NVDA, «edición multilínea» con «solo lectura», y con su etiqueta si la tienen.</li>
+<li><strong>Thunderbird.</strong> Las cuentas y carpetas de la lista ya no dicen «encabezado de nivel 1». Cualquier elemento de árbol o de lista que el puente de accesibilidad de Windows marcaba así se lee con su rol real. Los triángulos de la lista se nombran en español.</li>
+<li><strong>Antigravity IDE y otras aplicaciones con <code>role="application"</code>.</strong> Antigravity IDE usa ahora todo lo que Tiresias hace en Visual Studio Code. Dentro de una aplicación web, las flechas siempre son de la aplicación, también con el cambio automático a modo foco desactivado: mueven el cursor del editor y el árbol de archivos.</li>
+<li><strong>Aplicaciones Electron.</strong> Al entrar en Claude, Codex y similares ya no se oye el título de la ventana repetido («Claude», «Claude región»). Los editores vacíos con texto de ejemplo, como el de Codex, dicen «en blanco» en lugar de repetir su etiqueta.</li>
+<li><strong>Complemento nuevo: Asistentes de IA accesibles.</strong> Para Claude, Codex y el panel de agente de Antigravity IDE. Avisa cuando el asistente termina (<kbd>Tiresias+Alt+Q</kbd> te dice su estado), lee la última respuesta sin mover el foco (<kbd>Tiresias+Alt+U</kbd>), pasa de un mensaje a otro (<kbd>Tiresias+Control+Flecha arriba</kbd> y <kbd>Abajo</kbd>) y lleva al cuadro de escribir (<kbd>Tiresias+Alt+P</kbd>).</li>
+<li><strong>Complemento nuevo: Explorador del historial de voz.</strong> Trae a Tiresias el complemento Speech History Explorer de NVDA: repasa lo dicho sin abrir ningún diálogo (<kbd>Tiresias+Alt+F11</kbd> y <kbd>F12</kbd>), copia un elemento (<kbd>Tiresias+Control+F12</kbd>) y abre una lista con búsqueda (<kbd>Tiresias+Mayúsculas+F12</kbd>).</li>
+<li><strong>Complemento nuevo: Arreglo web.</strong> Si una página da problemas, pulsa <kbd>Tiresias+Mayúsculas+Alt+P</kbd> en modo exploración. Tiresias la analiza, te cuenta lo que ha encontrado y te deja aplicar los arreglos: nombres para enlaces y botones vacíos, etiquetas para campos, botones donde solo había algo pulsable, encabezados deducidos, región principal y ocultar el aviso de cookies. Los arreglos cambian lo que Tiresias te presenta, no la página, y se guardan por sitio. <kbd>Tiresias+Mayúsculas+Alt+Q</kbd> los quita.</li>
+<li><strong>Mejoras tomadas de las incidencias abiertas de NVDA.</strong>
+<ul>
+<li>En Teams, un mensaje abierto con <kbd>Control+Intro</kbd> se lee en modo exploración.</li>
+<li>Las listas de <strong>Windows Forms</strong> y otros controles .NET se tratan como los controles nativos que son, y leen sus columnas.</li>
+<li>En las páginas web, un enlace con <code>aria-label</code> se llama igual en modo exploración que con <kbd>Tab</kbd>. Un enlace con icono y sin nombre dice su descripción o el archivo al que lleva.</li>
+<li>Los campos numéricos y deslizadores de solo lectura avisan de que lo son.</li>
+<li>Una lista web muy larga dice su tamaño real y no solo los elementos cargados, y las listas anidadas dicen su nivel.</li>
+<li>Con <kbd>Control+flechas</kbd> en una lista de selección múltiple se oye «no seleccionado», y las listas con casillas dicen «no marcado».</li>
+<li>Los emojis que algunas aplicaciones parten en dos se leen enteros al moverse por caracteres.</li>
+</ul></li>
+<li>Con la distribución de pantalla desactivada, los párrafos seguidos de una página ya no se unen en una sola línea.</li>
+</ul>
+
 <h2 id="v1-0-14">Versión 1.0.14</h2>
 <p>Corrige lo que contaban los usuarios de WhatsApp: al entrar en la ventana no se oía nada, no aparecían los controles, <kbd>Control+flechas</kbd> no leían y <kbd>Retroceso</kbd> no decía lo borrado.</p>
 <ul>
@@ -292,6 +317,7 @@ kbd { font-family: inherit; font-weight: bold; }
 
 <nav aria-labelledby="indice"><h2 id="indice">Índice</h2>
 <ul>
+<li><a href="#v1-0-15">Versión 1.0.15</a></li>
 <li><a href="#v1-0-14">Versión 1.0.14</a></li>
 <li><a href="#v1-0-13">Versión 1.0.13</a></li>
 <li><a href="#v1-0-12">Versión 1.0.12</a></li>
