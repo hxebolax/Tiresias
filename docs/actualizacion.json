@@ -1,27 +1,27 @@
 {
 	"format": "tiresias-actualizacion",
 	"formatVersion": 1,
-	"version": "1.0.15",
-	"date": "2026-10-31",
-	"url": "descargas/1.0.15/Tiresias-1.0.15-instalador.exe",
-	"sha256": "45de238152225f91874546928f15b298d7c3f3884295b3661930aa39908bb207",
-	"size": 62377984,
+	"version": "1.0.16",
+	"date": "2026-11-04",
+	"url": "descargas/1.0.16/Tiresias-1.0.16-instalador.exe",
+	"sha256": "8b271ba82a3a077a6853abfd8723f4bb1056013951bdd60857846e995b4daf0a",
+	"size": 62373888,
 	"minWindows": "10.0.10240",
-	"notes": "Lee mejor la búsqueda del menú Inicio, Thunderbird, los campos de solo lectura y las aplicaciones Electron. Tres complementos nuevos: Asistentes de IA accesibles, Explorador del historial de voz y Arreglo web.",
+	"notes": "Firefox lee el contenido de las listas con viñetas, formato de la hora configurable (12 o 24 horas), menú de Tiresias ordenado, mejoras de NVDA y dos complementos nuevos: TCA SystemUtilities y TCA-Portapapeles.",
 	"notesUrl": "novedades.html",
 	"installer": {
-		"url": "descargas/1.0.15/Tiresias-1.0.15-instalador.exe",
-		"sha256": "45de238152225f91874546928f15b298d7c3f3884295b3661930aa39908bb207",
-		"size": 62377984
+		"url": "descargas/1.0.16/Tiresias-1.0.16-instalador.exe",
+		"sha256": "8b271ba82a3a077a6853abfd8723f4bb1056013951bdd60857846e995b4daf0a",
+		"size": 62373888
 	},
 	"portable": {
-		"url": "descargas/1.0.15/Tiresias-1.0.15-portable.zip",
-		"sha256": "48127229e40140d8703ef11abc3e0c83047383e0066fad8d80b67e073d26a929",
-		"size": 85106688
+		"url": "descargas/1.0.16/Tiresias-1.0.16-portable.zip",
+		"sha256": "4030fc3f8675ae0476aced2dc5df7c66bf23afee4c111776635423681a2cf89b",
+		"size": 85125721
 	},
 	"source": {
-		"url": "descargas/1.0.15/Tiresias-1.0.15-codigo-fuente.zip",
-		"sha256": "fdadff03c5a1dafe09490e5a3c8e8cba1ea7dc915f9ce401adec6651d0a5fa25",
-		"size": 16804990
+		"url": "descargas/1.0.16/Tiresias-1.0.16-codigo-fuente.zip",
+		"sha256": "4d062942604226ed633b4c5b65d1a3be7641b44b1443b410f69d0bad4e361760",
+		"size": 17068572
 	}
 }
