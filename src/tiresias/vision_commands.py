@@ -371,34 +371,36 @@ def menuActions() -> list[tuple[str, str, Callable[[], None]]]:
 	from .ai.autolabel import autoLabeler
 	from .ai.camera import faceCheck
 
-	ia = _("Inteligencia artificial")
-	rec = _("Reconocimiento de texto")
-	tools = _("Herramientas")
+	describe = _("&Describir con IA")
+	docs = _("Documentos y &páginas con IA")
+	trans = _("&Traducción")
+	captchaGroup = _("&CAPTCHA")
+	rec = _("&Reconocimiento de texto (OCR)")
+	tools = _("Ratón y &audio")
+	# Grupo vacío: entrada directa del submenú «Visión e IA», tras los submenús.
 	return [
-		(ia, _("Describir el objeto navegador"), assistant.describeNavigatorObject),
-		(ia, _("Describir la ventana activa"), assistant.describeForegroundWindow),
-		(ia, _("Describir toda la pantalla"), assistant.describeScreen),
-		(ia, _("Describir un archivo de imagen..."), assistant.describeFileDialog),
-		(ia, _("Describir la imagen del portapapeles"), assistant.describeClipboardImage),
-		(ia, _("Resumir el documento o la página"), assistant.summarizeDocument),
-		(ia, _("Preguntar sobre el documento o la página..."), assistant.askAboutDocument),
-		(ia, _("Explorar la página (diseño visual y cómo moverse)"), explorer.explorePage),
-		(ia, _("Sugerir una etiqueta para el objeto navegador"), assistant.suggestLabel),
-		(ia, _("Etiquetado automático de elementos sin nombre (activar o desactivar)"), autoLabeler.toggle),
-		(ia, _("Proponer el orden de lectura del documento..."), reading.suggestReadingOrder),
-		(ia, _("Texto alternativo para las imágenes sin descripción (iniciar o detener)"), reading.describeUnlabeledImages),
-		(ia, _("Ayuda de Tiresias..."), assistant.askHelp),
-		(ia, _("Describir un CAPTCHA"), assistant.describeCaptcha),
-		(ia, _("CAPTCHA: ir al reto de audio"), captcha.jumpToAudio),
-		(ia, _("CAPTCHA: bajar la voz durante el audio (activar o desactivar)"), captcha.toggleDuck),
-		(ia, _("Traducir la selección"), translate.translateSelection),
-		(ia, _("Traducir el portapapeles"), translate.translateClipboard),
-		(ia, _("Traducir lo último que se dijo"), translate.translateLastSpoken),
-		(ia, _("Copiar la última traducción"), translate.copyLastTranslation),
-		(ia, _("Cambiar el idioma al que se traduce"), translate.cycleTargetLanguage),
-		(ia, _("Traducir todo lo que se dice (activar o desactivar)"), translate.toggleTranslateSpeech),
-		(ia, _("Agente de IA..."), startDialog),
-		(ia, _("Cara a la vista (comprobar la cámara)"), faceCheck.toggle),
+		(describe, _("Describir el objeto navegador"), assistant.describeNavigatorObject),
+		(describe, _("Describir la ventana activa"), assistant.describeForegroundWindow),
+		(describe, _("Describir toda la pantalla"), assistant.describeScreen),
+		(describe, _("Describir un archivo de imagen..."), assistant.describeFileDialog),
+		(describe, _("Describir la imagen del portapapeles"), assistant.describeClipboardImage),
+		(describe, _("Cara a la vista (comprobar la cámara)"), faceCheck.toggle),
+		(docs, _("Resumir el documento o la página"), assistant.summarizeDocument),
+		(docs, _("Preguntar sobre el documento o la página..."), assistant.askAboutDocument),
+		(docs, _("Explorar la página (diseño visual y cómo moverse)"), explorer.explorePage),
+		(docs, _("Proponer el orden de lectura del documento..."), reading.suggestReadingOrder),
+		(docs, _("Texto alternativo para las imágenes sin descripción (iniciar o detener)"), reading.describeUnlabeledImages),
+		(docs, _("Sugerir una etiqueta para el objeto navegador"), assistant.suggestLabel),
+		(docs, _("Etiquetado automático de elementos sin nombre (activar o desactivar)"), autoLabeler.toggle),
+		(trans, _("Traducir la selección"), translate.translateSelection),
+		(trans, _("Traducir el portapapeles"), translate.translateClipboard),
+		(trans, _("Traducir lo último que se dijo"), translate.translateLastSpoken),
+		(trans, _("Copiar la última traducción"), translate.copyLastTranslation),
+		(trans, _("Cambiar el idioma al que se traduce"), translate.cycleTargetLanguage),
+		(trans, _("Traducir todo lo que se dice (activar o desactivar)"), translate.toggleTranslateSpeech),
+		(captchaGroup, _("Describir un CAPTCHA"), assistant.describeCaptcha),
+		(captchaGroup, _("CAPTCHA: ir al reto de audio"), captcha.jumpToAudio),
+		(captchaGroup, _("CAPTCHA: bajar la voz durante el audio (activar o desactivar)"), captcha.toggleDuck),
 		(rec, _("Reconocer el objeto navegador"), ocr.recognizeNavigatorObject),
 		(rec, _("Reconocer la ventana activa (revisión de pantalla por OCR)"), ocr.screenReview),
 		(rec, _("Reconocer toda la pantalla"), ocr.recognizeScreen),
@@ -410,6 +412,8 @@ def menuActions() -> list[tuple[str, str, Callable[[], None]]]:
 		(tools, _("Guardar la selección como audio WAV..."), lambda: audio_export.exportDialog("selection")),
 		(tools, _("Guardar el documento como audio WAV..."), lambda: audio_export.exportDialog("document")),
 		(tools, _("Guardar el portapapeles como audio WAV..."), lambda: audio_export.exportDialog("clipboard")),
+		("", _("A&gente de IA..."), startDialog),
+		("", _("Ay&uda de Tiresias con IA..."), assistant.askHelp),
 	]
 
 
@@ -418,7 +422,7 @@ def showActionsMenu() -> None:
 	from . import gui
 
 	actions = menuActions()
-	labels = [f"{label} ({group})" for group, label, _f in actions]
+	labels = [_actionLabel(group, label) for group, label, _f in actions]
 
 	def chosen(text: str) -> None:
 		for (_group, _label, func), shown in zip(actions, labels, strict=True):
@@ -429,18 +433,32 @@ def showActionsMenu() -> None:
 	gui.chooseFromList(_("Inteligencia artificial y visión"), _("&Acciones:"), labels, chosen)
 
 
+def _actionLabel(group: str, label: str) -> str:
+	"""Etiqueta de una acción en la lista filtrable (sin letras de acceso)."""
+	label = label.replace("&", "")
+	return f"{label} ({group.replace('&', '')})" if group else label
+
+
 def buildMenu(frame) -> object:
 	"""Submenú «Visión e IA» del menú de Tiresias (hilo de la interfaz)."""
 	import wx
 
 	menu = wx.Menu()
 	subs: dict[str, wx.Menu] = {}
+	direct = []
 	for group, label, func in menuActions():
+		if not group:
+			direct.append((label, func))
+			continue
 		sub = subs.get(group)
 		if sub is None:
 			sub = subs[group] = wx.Menu()
 			menu.AppendSubMenu(sub, group)
 		frame.addMenuItem(sub, label, lambda f=func: queue_handler.queueFunction(f))
+	if direct:
+		menu.AppendSeparator()
+		for label, func in direct:
+			frame.addMenuItem(menu, label, lambda f=func: queue_handler.queueFunction(f))
 	return menu
 
 

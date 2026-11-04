@@ -30,8 +30,9 @@ CAT = _("Explorador de Windows")
 
 #: Marcas invisibles de dirección de texto que Windows mete en fechas y horas.
 _INVISIBLE = dict.fromkeys(map(ord, "\u200e\u200f\u202a\u202b\u202c\u202d\u202e\u200b"), None)
-#: Clases de los elementos de la vista de tareas (Alt+Tab) en Windows 10 y 11.
-TASK_SWITCHER_CLASSES = ("MultitaskingViewFrame", "XamlExplorerHostIslandWindow", "TaskSwitcherWnd", "ForegroundStaging")
+#: Clases de los elementos de la vista de tareas (Alt+Tab) en Windows 10 y 11;
+#: ``#32771`` es el Alt+Tab clásico (Windows 10 con AltTabSettings=1).
+TASK_SWITCHER_CLASSES = ("MultitaskingViewFrame", "XamlExplorerHostIslandWindow", "TaskSwitcherWnd", "ForegroundStaging", "#32771")
 #: Panel de entrada de las islas XAML de Windows 11: recibe un foco vacío al
 #: abrir Alt+Tab, justo después del foco en la ventana elegida.
 INPUT_SITE_CLASS = "Windows.UI.Input.InputSite.WindowClass"

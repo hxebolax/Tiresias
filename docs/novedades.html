@@ -18,6 +18,32 @@ kbd { font-family: inherit; font-weight: bold; }
 <h1>Novedades de Tiresias</h1>
 <p>Esta página resume lo que ha cambiado en cada versión, empezando por la más reciente; al final, las novedades de la versión 1.0.1 ordenadas por áreas. Los detalles de cada función están en el manual de usuario (menú de Tiresias, Ayuda, Manual de usuario). Todas las teclas nuevas están también en la referencia rápida de órdenes del manual y en Ayuda, Referencia rápida de órdenes.</p>
 
+<h2 id="v1-0-16">Versión 1.0.16</h2>
+<p>Corrige lo que contabais en el foro: las viñetas de Firefox, el formato de la hora y un menú más ordenado. Trae dos complementos nuevos en la tienda y varias mejoras tomadas de NVDA.</p>
+<ul>
+<li><strong>Firefox: las listas con viñetas se leen enteras.</strong> En Firefox solo se oía la viñeta de cada elemento de una lista y no lo que había en él. El UIA propio de Firefox deja fuera de la vista normal los trozos de texto de los elementos de lista, de los enlaces y de otros elementos que ya se llaman como su texto. Ahora Tiresias recorre en Firefox y en Thunderbird el árbol completo, como hace NVDA. También se leen bien las listas anidadas (antes se repetían trozos) y la viñeta va en la misma línea que su texto aunque el contenido del elemento sea un bloque.</li>
+<li><strong>Formato de la hora.</strong> <kbd>Tiresias+F12</kbd> dice ahora la hora con el mismo formato que el reloj de Windows: si Windows usa 12 horas, oyes «3:45 p. m.». Puedes elegir otro formato en Opciones, Generales, «Formato de la hora»: «El del reloj de Windows» (por defecto), «24 horas» o «12 horas». Vale también para la hora de la línea braille dividida.</li>
+<li><strong>Menú de Tiresias ordenado.</strong> Dentro de cada submenú, las entradas están agrupadas por temas y separadas por una línea, y ninguna letra subrayada se repite en un mismo submenú. En concreto:
+<ul>
+<li>En Preferencias, primero las opciones, los ajustes rápidos y los perfiles; luego la voz y el braille; luego los diccionarios, los símbolos y las demás opciones de lo que se dice; y al final el teclado y la entrada.</li>
+<li>Herramientas empieza por la paleta de órdenes. Siguen los visores e historiales (también el de notificaciones), los avisos y el mezclador, las entradas de los complementos y la instalación (importar de NVDA, copia portable, instalar). El visor de registro, la consola de Python, la carpeta de datos y la reparación de los registros COM están en el submenú nuevo «Herramientas avanzadas».</li>
+<li>«Recargar complementos» pasa al submenú Complementos.</li>
+<li>Visión e IA tiene ahora seis submenús más claros: «Describir con IA», «Documentos y páginas con IA», «Traducción», «CAPTCHA», «Reconocimiento de texto (OCR)» y «Ratón y audio». «Agente de IA...» y «Ayuda de Tiresias con IA...» van sueltos al final.</li>
+<li>Acceso remoto y Ayuda también están agrupados.</li>
+</ul></li>
+<li><strong>Complemento nuevo: TCA SystemUtilities</strong>, basado en el de Peter Reina para NVDA. Reúne en un menú (<kbd>Tiresias+Mayúsculas+8</kbd> o Herramientas, TCA SystemUtilities) más de cincuenta acciones de Windows. Puedes apagar y reiniciar con el sonido clásico (y 3 segundos para anular), entrar en Modo seguro o en la BIOS-UEFI y reparar con SFC y DISM. También limpia el disco y la caché DNS, maneja el control de cuentas y Microsoft Defender, activa o desactiva la webcam y cierra las aplicaciones colgadas. En el Explorador, copia la ruta o la lista de archivos, abre consolas en la carpeta y oculta o muestra archivos. Cada acción se puede asignar a una tecla en Gestos de entrada. Solo pide permiso de administrador cuando hace falta, dice siempre si ha salido bien y nunca cierra Tiresias ni otros lectores de pantalla.</li>
+<li><strong>Complemento nuevo: TCA-Portapapeles</strong>, basado en el de Peter Reina para NVDA. Anuncia con voz y con sonidos seleccionar todo, copiar, cortar, pegar, deshacer y rehacer, y avisa de «Sin selección», sin quitarle las teclas a la aplicación. Su historial guarda todos los formatos, también archivos e imágenes, y los pega en el foco. Además lee el portapapeles completo, da estadísticas de la selección y copia solo las palabras que elijas. Su modo juego traduce lo que copian los juegos; mientras está activo, Tiresias no repite «Copiado» antes de cada traducción. Todo está en la capa <kbd>Tiresias+Control+Mayúsculas+V</kbd> (<kbd>F1</kbd> dice sus teclas).</li>
+<li><strong>Mejoras tomadas de NVDA.</strong>
+<ul>
+<li><strong>Seguridad del acceso remoto.</strong> El servidor local limita el tamaño de los mensajes: 64 KiB antes de dar la clave y 10 MiB después. Así nadie sin la clave puede agotar la memoria del equipo, y los mensajes grandes gastan menos.</li>
+<li>Windows 10: al cambiar de ventana con <kbd>Alt+Tab</kbd> en el conmutador clásico vuelve a decirse la ventana elegida, aunque Windows dé el conmutador por colgado.</li>
+<li>Las notificaciones urgentes de las páginas web y las aplicaciones (por ejemplo, <code>ariaNotify</code> con prioridad alta) se dicen antes que los mensajes que estaban esperando.</li>
+<li>Voces OneCore de Windows: al deletrear, sobre todo un solo carácter, ya no suenan con una pronunciación, un tono o un volumen raros.</li>
+<li>Crear copia portable: si escribes una unidad sin barra («D:»), el aviso explica que hay que escribir «D:\» para la raíz o «D:\carpeta». Las variables como <code>%USERPROFILE%</code> se expanden.</li>
+<li>Al actualizar la copia instalada, si sigue abierta otra copia (la de la pantalla de inicio de sesión o la de otro usuario), el instalador espera unos segundos y pregunta si cerrarla, en lugar de fallar con archivos en uso.</li>
+</ul></li>
+</ul>
+
 <h2 id="v1-0-15">Versión 1.0.15</h2>
 <p>Lee mejor las interfaces que fallaban frente a NVDA: la búsqueda del menú Inicio, Thunderbird, los campos de solo lectura y las aplicaciones Electron. Trae tres complementos nuevos en la tienda.</p>
 <ul>
@@ -317,6 +343,7 @@ kbd { font-family: inherit; font-weight: bold; }
 
 <nav aria-labelledby="indice"><h2 id="indice">Índice</h2>
 <ul>
+<li><a href="#v1-0-16">Versión 1.0.16</a></li>
 <li><a href="#v1-0-15">Versión 1.0.15</a></li>
 <li><a href="#v1-0-14">Versión 1.0.14</a></li>
 <li><a href="#v1-0-13">Versión 1.0.13</a></li>

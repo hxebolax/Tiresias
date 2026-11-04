@@ -9,6 +9,7 @@ con su rango ``[start, end)`` dentro del texto del búfer.
 from __future__ import annotations
 
 import bisect
+import re
 from typing import Any, Callable, Iterator
 
 import comtypes
@@ -323,6 +324,14 @@ def _edgeLeafName(el, last: bool, depth: int = 0) -> str:
 	return name.strip() if isinstance(name, str) else ""
 
 
+_LIST_MARKER_RE = re.compile(r"^(?:[•◦▪▫■□●○‣⁃–—→➢✓✔*\-+>·]|\(?[0-9]{1,4}[.)]|\(?[a-zA-Z]{1,4}[.)])$")
+
+
+def isListMarker(node: Node) -> bool:
+	"""¿El nodo es la viñeta o el número de un elemento de lista («•», «1.», «b)»)?"""
+	return node.role == Role.STATICTEXT and not node.children and bool(_LIST_MARKER_RE.match(node.name.strip()))
+
+
 class NameGaps:
 	"""Texto del nombre de un elemento que no está en ninguno de sus hijos.
 
@@ -453,7 +462,7 @@ class VirtualBuffer:
 	# ------------------------------------------------------------ construcción
 	def build(self) -> None:
 		try:
-			cached = self.rootElement.BuildUpdatedCache(uc.treeCacheRequest)
+			cached = self.rootElement.BuildUpdatedCache(self._treeCacheRequest())
 		except comtypes.COMError:
 			log.debug("No se pudo construir la caché del documento", exc_info=True)
 			raise
@@ -598,6 +607,30 @@ class VirtualBuffer:
 			return False
 		gap = x - (px + pw)
 		return -1 <= gap <= 1
+
+	def _treeCacheRequest(self):
+		"""Petición de caché del árbol: la vista sin filtrar en Firefox y Thunderbird.
+
+		Rev. 1.0.16: el UIA propio de Gecko marca como «no de control» los trozos
+		de texto cuyo padre ya se llama como ellos. En la vista de control un
+		``<li>`` llegaba solo con su viñeta («• ») y en Firefox se oía la viñeta
+		pero no el texto del elemento (foro: «solo lee las viñetas»). NVDA lo ve
+		todo porque lee Gecko con IAccessible2, que no filtra nada.
+		"""
+		if uc.rawTreeCacheRequest is not None and self._isGeckoNative():
+			return uc.rawTreeCacheRequest
+		return uc.treeCacheRequest
+
+	def _isGeckoNative(self) -> bool:
+		"""El documento es de Gecko con su UIA propio (no el puente MSAA→UIA)."""
+		val = self.__dict__.get("_geckoNative")
+		if val is None:
+			try:
+				val = str(self.rootElement.CurrentFrameworkId or "") == "Gecko" and not self._isGeckoMsaaProxy()
+			except (comtypes.COMError, AttributeError, ValueError):
+				val = False
+			self._geckoNative = val
+		return val
 
 	def _isGeckoMsaaProxy(self) -> bool:
 		"""El documento es de Gecko sin UIA propio (lo da el puente MSAA→UIA del sistema)."""
@@ -899,6 +932,10 @@ class VirtualBuffer:
 				child = self._walk(kid, node, depth + 1)
 				if child is not None:
 					node.children.append(child)
+					if role == Role.LISTITEM and len(node.children) == 1 and isListMarker(child):
+						# La viñeta («• », «1. ») va en la misma línea que el contenido
+						# del elemento aunque sea un bloque (<li><div>, <li><p>).
+						self._keepLine = True
 				if gaps is not None:
 					gaps.after(kid)
 				if extras:

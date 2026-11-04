@@ -1,0 +1,11 @@
+{
+	"id": "tcaPortapapeles",
+	"name": "TCA-Portapapeles",
+	"version": "1.0.0",
+	"author": "Proyecto Tiresias (basado en TCA-Portapapeles de Peter Reina, a su vez basado en zPortapapeles de Héctor J. Benítez Corredera)",
+	"description": "Anuncia con voz y con sonidos las teclas del portapapeles (seleccionar todo, copiar, cortar, pegar, deshacer y rehacer) y avisa de «Sin selección» al copiar sin nada seleccionado, sin quitarle las teclas a la aplicación. Tiene un historial propio que guarda todos los formatos de lo copiado (texto con formato, imágenes, archivos y carpetas) y lo pega en la aplicación que estaba detrás, dejando luego el portapapeles como estaba. Además lee el portapapeles completo, da las estadísticas del texto seleccionado, permite copiar solo algunas palabras de la selección y tiene un modo juego que traduce y lee lo que los juegos copian al portapapeles. Las órdenes están en una capa: Tiresias+Control+Mayúsculas+V y una letra (F1 dice las teclas).",
+	"minApiVersion": "1.0",
+	"lastTestedApiVersion": "1.0",
+	"url": "https://github.com/peterrc87/TCA_Portapapeles",
+	"changelog": "Primera versión para Tiresias: todas las funciones de TCA-Portapapeles 0.6.1 para NVDA (anuncios hablados y sonidos de seleccionar todo, copiar, cortar, pegar, deshacer y rehacer, «Sin selección», activar y desactivar los anuncios, teclas disparadoras configurables, historial con formatos, archivos y carpetas que pega en el foco y restaura el portapapeles, sonido y lectura de lo añadido al historial, tiempo del monitor, leer el portapapeles, estadísticas del texto seleccionado, selector de trozos de texto y modo juego con traducción automática), con una capa de órdenes en Tiresias+Control+Mayúsculas+V, entrada en el menú Herramientas y categoría propia en las Opciones."
+}

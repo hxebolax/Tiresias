@@ -30,6 +30,9 @@ DEFAULTS: dict = {
 		"announceStartup": True,
 		# Impide que la pantalla se apague durante la lectura continua.
 		"preventDisplayTurningOff": True,
+		# Formato de la hora (Tiresias+F12, braille): "system" (el del reloj de
+		# Windows), "24" o "12" horas (ver tiresias.time_format).
+		"timeFormat": "system",
 		# Versión con la que se ejecutó Tiresias por última vez (novedades).
 		"lastRunVersion": "",
 		"showNewsAfterUpdate": True,

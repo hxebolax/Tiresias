@@ -113,6 +113,7 @@ del _ctx
 #: Valores permitidos de las opciones de texto con una lista fija.
 CHOICES: dict[tuple[str, str], tuple[str, ...]] = {
 	("general", "logLevel"): ("OFF", "DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"),
+	("general", "timeFormat"): ("system", "24", "12"),
 	("speech", "speechMode"): ("talk", "onDemand", "beeps", "off"),
 	("speech", "sayAllUnit"): ("line", "sentence", "paragraph"),
 	("speech", "sayAllRateMode"): ("sayAll", "temporary", "global"),

@@ -170,8 +170,13 @@ def _createPortableFromCommandLine(args: argparse.Namespace) -> int:
 		_logToConsole("Falta --portable-path con la carpeta de destino")
 		return 2
 	try:
+		dest = installer.validatePortableDir(args.portable_path)
+	except installer.PortablePathError as e:
+		_logToConsole(f"Carpeta de destino no válida: {e}")
+		return 2
+	try:
 		installer.createPortableCopy(
-			args.portable_path,
+			dest,
 			copyConfig=not args.portable_no_config,
 			copyAddons=not args.portable_no_addons,
 		)

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8"><title>TCA SystemUtilities para Tiresias</title>
+<style>body{font-family:Segoe UI,Arial,sans-serif;max-width:60em;margin:1em auto;line-height:1.5}table{border-collapse:collapse}td,th{border:1px solid #888;padding:.3em .6em;text-align:left}</style></head>
+<body><h1>TCA SystemUtilities</h1>
+<p>Versión 1.0.0 para Tiresias. Basado en <a href="https://github.com/peterrc87/TCA-SystemUtilities-NVDA-Complemento">TCA SystemUtilities para NVDA</a>, de Peter Reina (Tecnoconocimiento Accesible), versión 0.12, con el lanzador de consolas de Héctor J. Benítez Corredera.</p>
+<p>Este complemento te permite ejecutar rápidamente muchas acciones de Windows sin buscarlas en la Configuración ni en el Panel de control: apagar o reiniciar con el sonido clásico de Windows, entrar en el Modo seguro o en la BIOS-UEFI, reparar el sistema con SFC o DISM, limpiar el disco, analizar con Microsoft Defender, copiar al portapapeles la ruta o la lista de archivos de la carpeta en la que estás, abrir una consola en esa carpeta, ocultar o mostrar archivos y mucho más.</p>
+
+<h2 id="usar">Cómo se usa</h2>
+<p>Todas las acciones están en tres sitios:</p>
+<ul>
+<li><strong>Tiresias+Mayúsculas+8</strong> abre el menú de TCA SystemUtilities donde estés. Es la forma más cómoda para las acciones del Explorador: el menú recuerda la ventana del Explorador que estaba activa y la carpeta o el archivo con el foco.</li>
+<li>El menú de Tiresias, <strong>Herramientas &gt; TCA SystemUtilities</strong>, con los mismos submenús.</li>
+<li>El diálogo <em>Gestos de entrada</em>, categoría <strong>TCA SystemUtilities</strong>: cada acción es una orden a la que puedes asignar la tecla que quieras. Como en el original, ninguna acción tiene tecla asignada de fábrica (solo el menú).</li>
+</ul>
+<p>Muchas acciones necesitan permiso de administrador: Windows mostrará el Control de cuentas de usuario y, si no das el permiso, Tiresias te dice que no se ha hecho nada. Las acciones que no lo necesitan (apagar, planes de energía, menú de contexto, abrir programas...) ya no lo piden, a diferencia del original. Cada acción te dice si ha salido bien o no.</p>
+<p>Con la sesión bloqueada o en las pantallas seguras no se ejecuta ninguna acción.</p>
+
+<h2 id="apagado">Apagado del sistema</h2>
+<ul>
+<li><strong>Apagar</strong> y <strong>Reiniciar</strong>: avisan con un mensaje, suenan con el clásico sonido de cierre de Windows y apagan o reinician en 3 segundos.</li>
+<li><strong>Anular el apagado o reinicio</strong>: anula cualquiera de los dos anteriores. Solo hay 3 segundos para hacerlo, así que conviene asignarle una tecla en Gestos de entrada. Si no hay ningún apagado en curso, Tiresias lo dice.</li>
+<li><strong>Entrar a la BIOS-UEFI</strong>: tras confirmarlo, reinicia el equipo y entra en la configuración del firmware. En la BIOS-UEFI no hay sonido ni lector de pantalla; para volver a Windows sin cambiar nada puedes pulsar Control+Alt+Supr. Solo funciona en equipos con firmware UEFI.</li>
+<li><strong>Hibernar</strong>: pone el equipo en hibernación (si está activada en el equipo).</li>
+<li><strong>Reiniciar y entrar en Modo seguro con funciones de red</strong>: tras confirmarlo, configura el arranque en Modo seguro con funciones de red y reinicia. En ese modo Windows arranca con lo mínimo; sirve para limpiezas a fondo o quitar programas no deseados. En sistemas anteriores a Windows 10 puede que no haya sonido. El equipo seguirá arrancando en Modo seguro hasta que lo desactives.</li>
+<li><strong>Reiniciar en Modo normal</strong>: quita el Modo seguro del arranque y reinicia.</li>
+<li><strong>Suspender</strong>: suspende el equipo (suspensión, no hibernación).</li>
+</ul>
+
+<h2 id="explorador">Explorador y procesos</h2>
+<ul>
+<li><strong>Borrar el portapapeles</strong>: vacía el portapapeles y borra su historial de Windows 10 y 11 (los elementos anclados se conservan).</li>
+<li><strong>Cerrar todas las aplicaciones</strong>: tras confirmarlo, cierra a la fuerza todas las aplicaciones abiertas del usuario, también las de segundo plano. No se podrán guardar los documentos. A diferencia del original, nunca cierra Tiresias, los lectores de pantalla (NVDA, JAWS, Narrador) ni los componentes de Windows (los programas de la carpeta de Windows, como el Explorador).</li>
+<li><strong>Cerrar tareas que no responden</strong>: cierra los programas cuyas ventanas no responden y dice cuáles.</li>
+<li><strong>Habilitar menú de contexto clásico</strong> y <strong>Habilitar menú de contexto tipo: Windows 11</strong>: en Windows 11, eligen entre el menú contextual clásico (el de Windows 10) y el nuevo. Se reinicia el Explorador para aplicarlo.</li>
+<li><strong>Matar procesos</strong>: pide el nombre de una aplicación y termina todos los procesos cuyo nombre empieza por lo escrito (por ejemplo, «chrome»).</li>
+<li><strong>Monitor de recursos de Windows</strong>: abre esta herramienta de Windows, un administrador de tareas avanzado.</li>
+<li><strong>Reiniciar Explorador</strong>: cierra y vuelve a iniciar el Explorador de Windows.</li>
+</ul>
+
+<h2 id="reparacion">Reparación y optimización</h2>
+<ul>
+<li><strong>Activar almacenamiento reservado</strong> y <strong>Desactivar almacenamiento reservado</strong>: el espacio (unos 7 a 10 GB) que Windows reserva para las actualizaciones. No hace falta para que funcionen. Si hay actualizaciones pendientes, Windows no deja cambiarlo hasta reiniciar.</li>
+<li><strong>Activar el plan alto rendimiento</strong> y <strong>Activar el plan equilibrado</strong>: cambian el plan de energía. Algunos equipos modernos solo tienen el plan equilibrado.</li>
+<li><strong>Análisis del sistema con SFC</strong>: ejecuta <code>sfc /scannow</code> en una consola, que espera una tecla al terminar para que puedas leer el resultado.</li>
+<li><strong>Limpiar caché DNS</strong>: puede arreglar problemas al navegar por Internet.</li>
+<li><strong>Limpiar configuración guardada en pantallas seguras</strong>: tras confirmarlo, borra la configuración de Tiresias copiada para las pantallas seguras (inicio de sesión, Control de cuentas de usuario, Control+Alt+Supr), que vuelven a usar la configuración de fábrica. En Tiresias los complementos nunca se cargan en las pantallas seguras, así que no hay complementos que borrar.</li>
+<li><strong>Limpiar disco</strong>: abre el Liberador de espacio en disco con un perfil de limpieza que limpia todas las unidades. La primera vez aparece un aviso para <strong>Crear perfil</strong> (marca en él todo lo que quieras limpiar y pulsa Aceptar; la limpieza empieza al cerrarlo), <strong>Limpiar sin crear perfil</strong> o <strong>Cancelar</strong>, con la casilla <strong>No volver a mostrar este mensaje</strong>. Para volver a verlo, activa la opción del complemento (ver más abajo).</li>
+<li><strong>Optimizar las unidades</strong>: abre la herramienta de Windows para desfragmentar y optimizar los discos.</li>
+<li><strong>Restablecer PC</strong>: abre la página Recuperación de la Configuración, donde está «Restablecer este PC».</li>
+<li><strong>Reparar sistema con Dism</strong>: ejecuta <code>DISM /Online /Cleanup-Image /RestoreHealth</code> en una consola.</li>
+</ul>
+
+<h2 id="seguridad">Seguridad de Windows</h2>
+<ul>
+<li><strong>Activar el control de cuentas de usuario (uac)</strong>: vuelve a poner el nivel de fábrica de Windows (preguntar cuando un programa quiere hacer cambios).</li>
+<li><strong>Desactivar el control de cuentas de usuario (uac)</strong>: los programas obtienen permiso de administrador sin preguntar. Los dos cambios se aplican al momento; solo si el control de cuentas estaba desactivado del todo hace falta reiniciar, y entonces se pregunta si quieres hacerlo.</li>
+<li><strong>Analizar arranque del sistema</strong>, <strong>Análisis completo</strong> y <strong>Análisis rápido</strong>: analizan con Microsoft Defender en una consola que muestra el progreso y espera una tecla al terminar. El análisis del arranque revisa el sector de arranque y la carpeta Boot de Windows.</li>
+<li><strong>Escanear archivos comprimidos</strong> y <strong>No escanear archivos comprimidos</strong>: activan o desactivan el análisis de los archivos ZIP, RAR, etc.</li>
+<li><strong>Listado de archivos en cuarentena al portapapeles</strong>: copia la lista de los archivos que Microsoft Defender ha puesto en cuarentena.</li>
+</ul>
+
+<h2 id="multimedia">Voz y multimedia</h2>
+<ul>
+<li><strong>Activar Webcam</strong> y <strong>Desactivar Webcam</strong>: activan o desactivan las cámaras del equipo (desactivadas, ningún programa puede usarlas).</li>
+<li><strong>Opciones de sonido</strong>: abre el panel Sonido (Reproducción, Grabación, Sonidos y Comunicaciones).</li>
+<li><strong>Opciones de voz</strong>: abre las propiedades de texto a voz de Windows (voz SAPI predeterminada).</li>
+</ul>
+
+<h2 id="utilidades">Utilidades del sistema</h2>
+<ul>
+<li><strong>Asistente guardar contraseñas de usuarios</strong>: copia de seguridad de las credenciales guardadas de Windows.</li>
+<li><strong>Asistente transferir archivos por Bluetooth</strong>: enviar o recibir archivos por Bluetooth.</li>
+<li><strong>Carpeta Roaming</strong>: abre la carpeta AppData\Roaming del usuario.</li>
+<li><strong>Asistente para guardar la contraseña del sistema</strong>: crea un disco para restablecer la contraseña de Windows.</li>
+<li><strong>Mapa de caracteres</strong>.</li>
+</ul>
+
+<h2 id="archivos">Archivos y carpetas (Explorador)</h2>
+<p>Estas acciones trabajan sobre la ventana del Explorador de archivos (o el escritorio) que esté activa: si no lo está, Tiresias dice «Active una ventana del explorador antes de ejecutar esta acción». En el original solo tenían orden de teclado; en Tiresias están también en el submenú <strong>Archivos y carpetas (Explorador)</strong>. La ruta se obtiene de la propia ventana del Explorador, sin copiar nada al portapapeles.</p>
+<ul>
+<li><strong>Copiar la ruta</strong>: copia la ruta completa (entre comillas) del archivo o carpeta con el foco; si no hay ninguno, la de la carpeta abierta.</li>
+<li><strong>Copiar la lista de carpetas y archivos</strong>: copia los nombres, primero las carpetas y luego los archivos, por orden alfabético y sin los ocultos. Si el foco está en una carpeta, se copia el contenido de esa carpeta; si está en un archivo, el de la carpeta que lo contiene.</li>
+<li><strong>Abrir CMD en la ruta actual</strong> y <strong>Abrir CMD como administrador en la ruta actual</strong>: en la carpeta con el foco o en la que contiene el archivo con el foco.</li>
+<li><strong>Lanzador de consolas</strong>: una lista con CMD, PowerShell, Windows Terminal y Git Bash (las que estén instaladas), cada una normal o como administrador, que se abren en esa carpeta. Intro abre la elegida y Escape cierra.</li>
+<li><strong>Ocultar el archivo o carpeta con el foco</strong>: le pone el atributo oculto. Si el Explorador muestra los elementos ocultos, lo seguirás viendo.</li>
+<li><strong>Mostrar archivos o carpetas ocultos</strong>: si el elemento con el foco está oculto, lo muestra; si no, muestra los elementos ocultos que hay en esa carpeta (o en la que contiene el archivo con el foco). A diferencia del original, no entra en las subcarpetas ni toca los archivos ocultos de sistema, que Windows protege.</li>
+</ul>
+
+<h2 id="informacion">Información al portapapeles</h2>
+<ul>
+<li><strong>Copiar información de todo el sistema</strong>: un resumen del equipo (el de <code>systeminfo</code>). Tarda unos segundos; Tiresias avisa cuando está copiado.</li>
+<li><strong>Copiar información de las tarjetas de sonido</strong>: nombre, fabricante y estado de todos los dispositivos de sonido.</li>
+</ul>
+
+<h2 id="opciones">Opciones</h2>
+<p>En <em>Opciones de Tiresias</em>, categoría <strong>TCA SystemUtilities</strong>: <strong>Preguntar si se quiere crear un perfil de limpieza antes de limpiar el disco</strong> (activada por defecto). Se desactiva sola al marcar «No volver a mostrar este mensaje».</p>
+
+<h2 id="diferencias">Diferencias con el original</h2>
+<ul>
+<li>Nuevo menú emergente con Tiresias+Mayúsculas+8 y submenús «Archivos y carpetas (Explorador)» e «Información al portapapeles».</li>
+<li>Solo se pide permiso de administrador cuando hace falta, y se dice el resultado real de cada acción (el original daba por hecho que todo había salido bien).</li>
+<li>El Modo seguro es el Modo seguro con funciones de red con el Explorador (el original activaba también la consola como interfaz). «Reiniciar en Modo normal» quita las dos cosas.</li>
+<li>Activar el control de cuentas de usuario pone el nivel de fábrica de Windows, en lugar del nivel más alto («Notificarme siempre») que ponía el original.</li>
+<li>La webcam se busca por la clase «Cámara» de Windows además de por el nombre, y no hace falta pulsar Intro para confirmar.</li>
+<li>Cerrar todas las aplicaciones pide confirmación y no cierra Tiresias, los lectores de pantalla ni Windows.</li>
+<li>Limpiar la configuración de las pantallas seguras borra la de Tiresias (no la de NVDA) y no reinicia el Explorador, que no hace falta.</li>
+<li>Se quitan las prácticas del original de pulsar teclas por ti (F5 para actualizar el Explorador, Control+C para obtener la ruta, Intro para confirmar): el Explorador se actualiza solo.</li>
+</ul>
+
+<h2 id="creditos">Créditos y licencia</h2>
+<p>TCA SystemUtilities para NVDA: Copyright 2020-2026 Peter Reina &lt;peterrc87@gmail.com&gt;, Tecnoconocimiento Accesible. Lanzador de consolas y función para obtener la ruta: Héctor J. Benítez Corredera; con funciones del complemento NAO de Alessandro Albano, Davide De Carne y Simone Dal Maso. Publicado bajo la licencia GNU GPL.</p>
+<p>Esta versión para Tiresias es código propio escrito para la API de Tiresias, con el mismo funcionamiento, y se distribuye también bajo la licencia GNU GPL.</p>
+</body></html>

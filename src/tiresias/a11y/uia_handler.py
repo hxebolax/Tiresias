@@ -774,7 +774,9 @@ def _onNotification(element, kind: int, processing: int, displayString: str, act
 		if obj is None:
 			# Sin elemento: se habla igualmente.
 			if displayString:
-				speech.speakText(displayString)
+				from ..objects.base import notificationPriority
+
+				speech.speakText(displayString, priority=notificationPriority(processing))
 			return
 		executeEvent("notification", obj, displayString=displayString, activityId=activityId, notificationKind=kind, notificationProcessing=processing)
 

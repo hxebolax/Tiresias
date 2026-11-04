@@ -22,6 +22,8 @@ rawWalker = None
 controlWalker = None
 baseCacheRequest = None
 treeCacheRequest = None
+#: Como ``treeCacheRequest`` pero con la vista sin filtrar (documentos de Gecko).
+rawTreeCacheRequest = None
 trueCondition = None
 _version = 1
 
@@ -377,7 +379,7 @@ MIXED_ATTRIBUTE = None
 
 def initialize(connectionTimeoutMs: int = 2000) -> None:
 	"""Crea el cliente UIA. Debe llamarse en el hilo del núcleo (MTA)."""
-	global client, rawWalker, controlWalker, baseCacheRequest, treeCacheRequest, trueCondition, _version
+	global client, rawWalker, controlWalker, baseCacheRequest, treeCacheRequest, rawTreeCacheRequest, trueCondition, _version
 	global NOT_SUPPORTED, MIXED_ATTRIBUTE
 	obj = comtypes.client.CreateObject(UIA.CUIAutomation8, interface=UIA.IUIAutomation)
 	best = obj
@@ -413,6 +415,7 @@ def initialize(connectionTimeoutMs: int = 2000) -> None:
 	trueCondition = client.CreateTrueCondition()
 	baseCacheRequest = makeCacheRequest(BASE_PROPERTIES)
 	treeCacheRequest = makeCacheRequest(TREE_PROPERTIES, scope=TreeScope_Subtree)
+	rawTreeCacheRequest = makeCacheRequest(TREE_PROPERTIES, scope=TreeScope_Subtree, condition=trueCondition)
 	NOT_SUPPORTED = client.ReservedNotSupportedValue
 	MIXED_ATTRIBUTE = client.ReservedMixedAttributeValue
 	log.info("UI Automation iniciado (IUIAutomation%s)", _version if _version > 1 else "")

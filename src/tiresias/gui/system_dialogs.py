@@ -868,9 +868,11 @@ class CreatePortableDialog(_Dialog):
 	def _onCreate(self, evt: Any) -> None:
 		from .. import installer
 
-		dest = self.path.GetValue().strip()
-		if not dest:
-			showError(_("Escriba la carpeta de destino."), self)
+		try:
+			dest = installer.validatePortableDir(self.path.GetValue())
+		except installer.PortablePathError as e:
+			showError(str(e), self)
+			self.path.SetFocus()
 			return
 		self.okButton.Enable(False)
 		speakMessage(_("Creando la copia portable..."))

@@ -37,7 +37,7 @@ nav li { margin: .2em 0; }
 <a class="saltar" href="#contenido">Saltar al contenido</a>
 <header>
 <h1>Manual de usuario de Tiresias</h1>
-<p>Lector de pantalla para Windows. Versión 1.0.15.</p>
+<p>Lector de pantalla para Windows. Versión 1.0.16.</p>
 </header>
 <nav aria-labelledby="indice"><h2 id="indice">Índice</h2>
 <ul>
@@ -489,7 +489,7 @@ nav li { margin: .2em 0; }
 <p>Para el reconocimiento de texto (OCR) y las voces de Windows (OneCore) se usan componentes que ya vienen con Windows 10 y 11. Para reconocer texto en español, Windows debe tener instalado el idioma español; normalmente ya lo está si tu Windows está en español.</p>
 
 <h3 id="portable">2.2. La versión portable: descomprimir y usar</h3>
-<p>La versión portable es un archivo ZIP cuyo nombre termina en <code>-portable.zip</code>, por ejemplo <code>Tiresias-1.0.15-portable.zip</code>. Dentro hay una carpeta llamada <code>Tiresias</code>. Basta con descomprimir el ZIP en el lugar que prefieras. Si prefieres instalarlo en el equipo, usa el instalador (apartado <a href="#instalar">2.9</a>).</p>
+<p>La versión portable es un archivo ZIP cuyo nombre termina en <code>-portable.zip</code>, por ejemplo <code>Tiresias-1.0.16-portable.zip</code>. Dentro hay una carpeta llamada <code>Tiresias</code>. Basta con descomprimir el ZIP en el lugar que prefieras. Si prefieres instalarlo en el equipo, usa el instalador (apartado <a href="#instalar">2.9</a>).</p>
 <ol>
 <li>Localiza el archivo ZIP en el Explorador de archivos (por ejemplo, en la carpeta Descargas).</li>
 <li>Con el archivo seleccionado, pulsa la tecla <kbd>Aplicaciones</kbd> (o <kbd>Mayúsculas+F10</kbd>) y elige «Extraer todo...».</li>
@@ -535,7 +535,7 @@ nav li { margin: .2em 0; }
 <p>Tiresias arranca cuando tu sesión ya está iniciada, es decir, después de escribir tu contraseña o PIN: la pantalla de inicio de sesión no la puede leer (apartado <a href="#administrador">2.8</a>). Cada vez que arranca, Tiresias actualiza la ruta del inicio automático; si mueves la carpeta de sitio, basta con arrancarlo una vez a mano desde la nueva ubicación.</p>
 
 <h3 id="carpeta-data">2.6. La carpeta data</h3>
-<p>Todo lo que Tiresias guarda está en su <strong>carpeta de datos</strong>. En la versión portable es la carpeta <code>data</code>, junto a <code>Tiresias.exe</code>, así que tu configuración viaja con Tiresias. En la copia instalada es la carpeta <code>%APPDATA%\Tiresias</code> de tu usuario (apartado <a href="#instalar">2.9</a>). En los dos casos, el menú de Tiresias, «Herramientas», «Abrir carpeta de datos» te lleva a la correcta. Fuera de ella, Tiresias solo guarda lo que tú decidas crear, como el acceso directo del escritorio o el inicio automático con Windows.</p>
+<p>Todo lo que Tiresias guarda está en su <strong>carpeta de datos</strong>. En la versión portable es la carpeta <code>data</code>, junto a <code>Tiresias.exe</code>, así que tu configuración viaja con Tiresias. En la copia instalada es la carpeta <code>%APPDATA%\Tiresias</code> de tu usuario (apartado <a href="#instalar">2.9</a>). En los dos casos, el menú de Tiresias, «Herramientas», «Herramientas avanzadas», «Abrir carpeta de datos» te lleva a la correcta. Fuera de ella, Tiresias solo guarda lo que tú decidas crear, como el acceso directo del escritorio o el inicio automático con Windows.</p>
 <table>
 <caption>Carpetas de la carpeta de datos</caption>
 <thead><tr><th scope="col">Carpeta</th><th scope="col">Qué contiene</th><th scope="col">¿Se copia en la copia de seguridad?</th></tr></thead>
@@ -583,7 +583,7 @@ nav li { margin: .2em 0; }
 <div class="nota"><p>Consejo: si Tiresias dice «Escritorio seguro…» y se queda en silencio, por ejemplo al instalar un programa, ha aparecido el aviso del control de cuentas de usuario. Con la copia instalada, activa «Usar Tiresias durante el inicio de sesión y en las pantallas seguras» (apartado <a href="#pantallas-seguras">4.7</a>) y Tiresias leerá esas pantallas. Con una copia portable puedes activar un momento el Narrador de Windows con <kbd>Control+Windows+Intro</kbd>; cuando termines, apágalo con la misma tecla: mientras el Narrador está activo, Tiresias se queda en espera (apartado <a href="#convivencia">3.14</a>). Si conoces bien el aviso, también puedes responderlo de memoria: el botón «Sí» se pulsa con <kbd>Alt+S</kbd>.</p></div>
 
 <h3 id="instalar">2.9. Instalar Tiresias en el equipo</h3>
-<p>Además de la versión portable, Tiresias tiene un instalador: un archivo cuyo nombre termina en <code>-instalador.exe</code>, por ejemplo <code>Tiresias-1.0.15-instalador.exe</code>. Al ejecutarlo, descomprime el programa unos segundos en silencio y arranca Tiresias, que empieza a hablar y muestra el cuadro «Instalar Tiresias». Así puedes hacer toda la instalación con Tiresias. Si ya estás usando la copia portable, también puedes instalarla desde el menú de Tiresias, «Herramientas», «Instalar Tiresias en este equipo...».</p>
+<p>Además de la versión portable, Tiresias tiene un instalador: un archivo cuyo nombre termina en <code>-instalador.exe</code>, por ejemplo <code>Tiresias-1.0.16-instalador.exe</code>. Al ejecutarlo, descomprime el programa unos segundos en silencio y arranca Tiresias, que empieza a hablar y muestra el cuadro «Instalar Tiresias». Así puedes hacer toda la instalación con Tiresias. Si ya estás usando la copia portable, también puedes instalarla desde el menú de Tiresias, «Herramientas», «Instalar Tiresias en este equipo...».</p>
 <p>El cuadro de instalación tiene:</p>
 <dl>
 <dt>Información</dt><dd>Un texto de solo lectura que puedes recorrer con las flechas. Si ya hay una copia instalada, dice su versión: se actualizará conservando tu configuración.</dd>
@@ -734,65 +734,42 @@ nav li { margin: .2em 0; }
 <li>Con Tiresias activo y el otro lector también: «Ceder el paso a NVDA (Tiresias en espera)».</li>
 <li>Sin otro lector abierto, pero con uno recordado: «Volver a NVDA (cierra Tiresias)».</li>
 </ul>
-<p>Después vienen los submenús, en este orden. Algunas entradas no aparecen si el administrador del equipo las ha desactivado o si Tiresias está en modo seguro (apartado <a href="#empresa">2.12</a>).</p>
+<p>Después vienen los submenús, en este orden. Dentro de cada uno, las entradas están agrupadas por temas y separadas por una línea; ninguna letra subrayada (la que pulsas para ir directamente a una entrada) se repite dentro de un mismo submenú. Algunas entradas no aparecen si el administrador del equipo las ha desactivado o si Tiresias está en modo seguro (apartado <a href="#empresa">2.12</a>).</p>
 <ul>
 <li><strong>Preferencias</strong>
 <ul>
-<li>«Opciones...»: el cuadro de opciones completo (capítulo <a href="#opciones">16</a>).</li>
-<li>«Ajustes rápidos...»: buscar y cambiar cualquier opción (apartado <a href="#ajustes-rapidos">3.11</a>).</li>
-<li>«Seleccionar sintetizador...»: elegir el sintetizador de voz (apartado <a href="#sintetizadores">8.1</a>).</li>
-<li>«Gestor de voces neuronales Piper...» (apartado <a href="#piper">8.13</a>).</li>
-<li>«Seleccionar línea braille...» (apartado <a href="#lineas-braille">10.1</a>).</li>
-<li>«Perfiles de configuración...» (capítulo <a href="#perfiles">15</a>).</li>
-<li>«Diccionarios de voz»: «Diccionario por defecto...», «Diccionario de la voz actual...», «Diccionario temporal...» y «Diccionario del perfil activo...» (apartado <a href="#diccionarios">8.6</a>).</li>
-<li>«Puntuación y símbolos...» (apartado <a href="#simbolos">8.5</a>).</li>
-<li>«Alfabeto fonético...» (apartado <a href="#alfabeto-fonetico">8.5</a>).</li>
-<li>«Esquemas de voz y sonido...» (apartado <a href="#voces-contexto">8.11</a>).</li>
-<li>«Plantillas de anuncio de controles...» (apartado <a href="#verbosidad">8.12</a>).</li>
-<li>«Gestos de entrada...»: cambiar las teclas de las órdenes (capítulo <a href="#gestos">17</a>).</li>
-<li>«Interacción táctil...»: las opciones de la pantalla táctil (apartado <a href="#tactil-opciones">20.7</a>).</li>
-<li>«Tecla del menú de Tiresias...» (apartado <a href="#tecla-menu">17.6</a>).</li>
-<li>«Etiquetas personalizadas...»: el gestor de etiquetas (apartado <a href="#gestor-etiquetas">14.3</a>).</li>
-<li>«Restablecer valores de fábrica...» y, después de usarlo, «Deshacer el restablecimiento de fábrica» (apartado <a href="#restablecer">2.7</a>).</li>
+<li>Configuración general: «Opciones...», el cuadro de opciones completo (capítulo <a href="#opciones">16</a>); «Ajustes rápidos...», buscar y cambiar cualquier opción (apartado <a href="#ajustes-rapidos">3.11</a>); y «Perfiles de configuración...» (capítulo <a href="#perfiles">15</a>).</li>
+<li>Voz y braille: «Seleccionar sintetizador...» (apartado <a href="#sintetizadores">8.1</a>), «Gestor de voces neuronales Piper...» (apartado <a href="#piper">8.13</a>) y «Seleccionar línea braille...» (apartado <a href="#lineas-braille">10.1</a>).</li>
+<li>Qué se dice y cómo: «Diccionarios de voz», con «Diccionario por defecto...», «Diccionario de la voz actual...», «Diccionario temporal...» y «Diccionario del perfil activo...» (apartado <a href="#diccionarios">8.6</a>); «Puntuación y símbolos...» (apartado <a href="#simbolos">8.5</a>); «Alfabeto fonético...» (apartado <a href="#alfabeto-fonetico">8.5</a>); «Esquemas de voz y sonido...» (apartado <a href="#voces-contexto">8.11</a>); «Plantillas de anuncio de controles...» (apartado <a href="#verbosidad">8.12</a>) y «Etiquetas personalizadas...», el gestor de etiquetas (apartado <a href="#gestor-etiquetas">14.3</a>).</li>
+<li>Teclado y entrada: «Gestos de entrada...», cambiar las teclas de las órdenes (capítulo <a href="#gestos">17</a>); «Tecla del menú de Tiresias...» (apartado <a href="#tecla-menu">17.6</a>) e «Interacción táctil...», las opciones de la pantalla táctil (apartado <a href="#tactil-opciones">20.7</a>).</li>
+<li>Al final, «Restablecer valores de fábrica...» y, después de usarlo, «Deshacer el restablecimiento de fábrica» (apartado <a href="#restablecer">2.7</a>).</li>
 </ul></li>
 <li><strong>Herramientas</strong>
 <ul>
-<li>«Visor de voz»: muestra por escrito todo lo que dice Tiresias (apartado <a href="#visor-voz">8.9</a>).</li>
-<li>«Visor braille»: muestra lo que aparecería en una línea braille (apartado <a href="#visor-braille">10.5</a>).</li>
-<li>«Historial de voz...» (apartado <a href="#historial-voz">8.7</a>).</li>
-<li>«Historial del portapapeles...» (apartado <a href="#historial-portapapeles">13.3</a>).</li>
 <li>«Paleta de órdenes...» (apartado <a href="#paleta">3.8</a>).</li>
-<li>«Mezclador de audio...» (apartado <a href="#mezclador">9.6</a>).</li>
-<li>«Historial de notificaciones...» (apartado <a href="#historial-notificaciones">24.2</a>).</li>
-<li>«Reglas de notificaciones...» (apartado <a href="#reglas-notificaciones">24.3</a>).</li>
-<li>«Vigilancias...» (apartado <a href="#vigilancias">24.4</a>).</li>
-<li>«Visor de registro...»: el registro de funcionamiento de Tiresias (apartado <a href="#registro">26.5</a>).</li>
-<li>«Consola de Python...»: herramienta para desarrolladores; no la necesitas para usar Tiresias. Su código se ejecuta en el hilo del núcleo, el mismo de los objetos <code>focus</code> y <code>nav</code>; para tocar ventanas de la interfaz, usa <code>gui.runOnGui(función)</code>.</li>
-<li>«Recargar complementos»: vuelve a cargar los complementos sin reiniciar.</li>
-<li>«Abrir carpeta de datos» (apartado <a href="#carpeta-data">2.6</a>).</li>
-<li>«Crear copia portable...» (apartado <a href="#crear-portable">2.10</a>).</li>
-<li>«Instalar Tiresias en este equipo...»: solo en la copia portable (apartado <a href="#instalar">2.9</a>).</li>
-<li>«Reparar los registros COM de accesibilidad...»: si Tiresias deja de leer los navegadores, los menús o los cuadros de diálogo (apartado <a href="#reparar-com">B.4</a>).</li>
-<li>«Importar configuración de NVDA...» (apartado <a href="#importar-nvda">2.15</a>).</li>
+<li>Visores e historiales: «Visor de voz», que muestra por escrito todo lo que dice Tiresias (apartado <a href="#visor-voz">8.9</a>); «Visor braille», que muestra lo que aparecería en una línea braille (apartado <a href="#visor-braille">10.5</a>); «Historial de voz...» (apartado <a href="#historial-voz">8.7</a>); «Historial del portapapeles...» (apartado <a href="#historial-portapapeles">13.3</a>) e «Historial de notificaciones...» (apartado <a href="#historial-notificaciones">24.2</a>).</li>
+<li>Avisos y sonido: «Reglas de notificaciones...» (apartado <a href="#reglas-notificaciones">24.3</a>), «Vigilancias...» (apartado <a href="#vigilancias">24.4</a>) y «Mezclador de audio...» (apartado <a href="#mezclador">9.6</a>).</li>
+<li>Las entradas de los complementos que añaden alguna, por orden alfabético.</li>
+<li>Instalación y configuración: «Importar configuración de NVDA...» (apartado <a href="#importar-nvda">2.15</a>), «Crear copia portable...» (apartado <a href="#crear-portable">2.10</a>) e «Instalar Tiresias en este equipo...», solo en la copia portable (apartado <a href="#instalar">2.9</a>).</li>
+<li>«Herramientas avanzadas», un submenú con «Visor de registro...», el registro de funcionamiento de Tiresias (apartado <a href="#registro">26.5</a>); «Consola de Python...», una herramienta para desarrolladores que no necesitas para usar Tiresias (su código se ejecuta en el hilo del núcleo, el mismo de los objetos <code>focus</code> y <code>nav</code>; para tocar ventanas de la interfaz, usa <code>gui.runOnGui(función)</code>); «Abrir carpeta de datos» (apartado <a href="#carpeta-data">2.6</a>) y «Reparar los registros COM de accesibilidad...», por si Tiresias deja de leer los navegadores, los menús o los cuadros de diálogo (apartado <a href="#reparar-com">B.4</a>).</li>
 </ul></li>
-<li><strong>Visión e IA</strong>: las mismas acciones que la lista de acciones de IA y visión (<kbd>Tiresias+Alt+I</kbd>), en tres submenús:
+<li><strong>Visión e IA</strong>: las mismas acciones que la lista de acciones de IA y visión (<kbd>Tiresias+Alt+I</kbd>), en seis submenús y dos entradas sueltas:
 <ul>
-<li>«Inteligencia artificial» (capítulo <a href="#ia">22</a>): «Describir el objeto navegador», «Describir la ventana activa», «Describir toda la pantalla», «Describir un archivo de imagen...», «Describir la imagen del portapapeles», «Resumir el documento o la página», «Preguntar sobre el documento o la página...», «Explorar la página (diseño visual y cómo moverse)», «Sugerir una etiqueta para el objeto navegador», «Etiquetado automático de elementos sin nombre (activar o desactivar)», «Proponer el orden de lectura del documento...», «Texto alternativo para las imágenes sin descripción (iniciar o detener)», «Ayuda de Tiresias...», «Describir un CAPTCHA», «CAPTCHA: ir al reto de audio», «CAPTCHA: bajar la voz durante el audio (activar o desactivar)», «Traducir la selección», «Traducir el portapapeles», «Traducir lo último que se dijo», «Traducir todo lo que se dice (activar o desactivar)», «Agente de IA...» y «Cara a la vista (comprobar la cámara)».</li>
-<li>«Reconocimiento de texto» (capítulo <a href="#ocr">12</a>): «Reconocer el objeto navegador», «Reconocer la ventana activa (revisión de pantalla por OCR)», «Reconocer toda la pantalla», «Reconocer un archivo de imagen o PDF...», «Reconocer el portapapeles» y «Lectura continua del objeto navegador (activar o desactivar)».</li>
-<li>«Herramientas» (capítulo <a href="#herramientas-extra">23</a>): «Ratón por teclado (activar o desactivar)», «Posiciones del ratón guardadas...», «Guardar la selección como audio WAV...», «Guardar el documento como audio WAV...» y «Guardar el portapapeles como audio WAV...».</li>
+<li>«Describir con IA» (capítulo <a href="#ia">22</a>): «Describir el objeto navegador», «Describir la ventana activa», «Describir toda la pantalla», «Describir un archivo de imagen...», «Describir la imagen del portapapeles» y «Cara a la vista (comprobar la cámara)».</li>
+<li>«Documentos y páginas con IA»: «Resumir el documento o la página», «Preguntar sobre el documento o la página...», «Explorar la página (diseño visual y cómo moverse)», «Proponer el orden de lectura del documento...», «Texto alternativo para las imágenes sin descripción (iniciar o detener)», «Sugerir una etiqueta para el objeto navegador» y «Etiquetado automático de elementos sin nombre (activar o desactivar)».</li>
+<li>«Traducción»: «Traducir la selección», «Traducir el portapapeles», «Traducir lo último que se dijo», «Copiar la última traducción», «Cambiar el idioma al que se traduce» y «Traducir todo lo que se dice (activar o desactivar)».</li>
+<li>«CAPTCHA»: «Describir un CAPTCHA», «CAPTCHA: ir al reto de audio» y «CAPTCHA: bajar la voz durante el audio (activar o desactivar)».</li>
+<li>«Reconocimiento de texto (OCR)» (capítulo <a href="#ocr">12</a>): «Reconocer el objeto navegador», «Reconocer la ventana activa (revisión de pantalla por OCR)», «Reconocer toda la pantalla», «Reconocer un archivo de imagen o PDF...», «Reconocer el portapapeles» y «Lectura continua del objeto navegador (activar o desactivar)».</li>
+<li>«Ratón y audio» (capítulo <a href="#herramientas-extra">23</a>): «Ratón por teclado (activar o desactivar)», «Posiciones del ratón guardadas...», «Guardar la selección como audio WAV...», «Guardar el documento como audio WAV...» y «Guardar el portapapeles como audio WAV...».</li>
+<li>Y, tras una línea de separación, «Agente de IA...» y «Ayuda de Tiresias con IA...».</li>
 </ul></li>
-<li><strong>Acceso remoto</strong>: «Conectar...» (o «Desconectar», si hay una conexión), «Alternar control entre equipo local y remoto», «Silenciar el equipo remoto», «Enviar el portapapeles», «Copiar el enlace de conexión», «Enviar Control+Alt+Supr», «Estado de la conexión» y «Opciones de acceso remoto...» (capítulo <a href="#remoto">19</a>).</li>
-<li><strong>Complementos</strong>: «Administrador de complementos...» y «Tienda de complementos...» (capítulo <a href="#complementos">18</a>).</li>
+<li><strong>Acceso remoto</strong>: «Conectar...» (o «Desconectar», si hay una conexión), «Estado de la conexión» y «Copiar el enlace de conexión»; después, «Alternar control entre equipo local y remoto», «Silenciar el equipo remoto», «Enviar el portapapeles» y «Enviar Control+Alt+Supr»; y al final, «Opciones de acceso remoto...» (capítulo <a href="#remoto">19</a>).</li>
+<li><strong>Complementos</strong>: «Administrador de complementos...», «Tienda de complementos...» (capítulo <a href="#complementos">18</a>) y «Recargar complementos», que vuelve a cargar los complementos sin reiniciar (<kbd>Tiresias+Control+F3</kbd>).</li>
 <li><strong>Ayuda</strong>
 <ul>
-<li>«Manual de usuario»: este documento.</li>
-<li>«Referencia rápida de órdenes»: una página con todas las órdenes y tus teclas actuales, con un encabezado por sección (capítulo <a href="#referencia">25</a>).</li>
-<li>«Novedades»: los cambios de esta versión.</li>
-<li>«Tutorial de primeros pasos...» (apartado <a href="#tutorial">3.10</a>).</li>
-<li>«Diálogo de bienvenida...» (apartado <a href="#bienvenida">3.7</a>).</li>
-<li>«Licencia».</li>
-<li>«Buscar actualización...» y, solo cuando hay una versión nueva, «Instalar la actualización» seguida de su número (apartado <a href="#actualizaciones">2.11</a>).</li>
-<li>«Acerca de...»: la versión y los datos del programa, con el botón «Copiar el número de versión».</li>
+<li>Aprender a usar Tiresias: «Manual de usuario» (este documento); «Referencia rápida de órdenes», una página con todas las órdenes y tus teclas actuales, con un encabezado por sección (capítulo <a href="#referencia">25</a>); «Tutorial de primeros pasos...» (apartado <a href="#tutorial">3.10</a>) y «Diálogo de bienvenida...» (apartado <a href="#bienvenida">3.7</a>).</li>
+<li>Versiones: «Novedades», los cambios de cada versión; «Buscar actualización...» y, solo cuando hay una versión nueva, «Instalar la actualización» seguida de su número (apartado <a href="#actualizaciones">2.11</a>).</li>
+<li>«Licencia» y «Acerca de...»: la versión y los datos del programa, con el botón «Copiar el número de versión».</li>
 </ul></li>
 </ul>
 <p>Al final del menú hay tres entradas sueltas:</p>
@@ -840,7 +817,7 @@ nav li { margin: .2em 0; }
 <tr><th scope="row">Título de la ventana</th><td><kbd>Tiresias+T</kbd></td><td><kbd>Tiresias+T</kbd></td><td>Lee el título de la ventana activa. Dos veces: lo deletrea. Tres veces: lo copia al portapapeles.</td></tr>
 <tr><th scope="row">Leer la ventana</th><td><kbd>Tiresias+B</kbd></td><td><kbd>Tiresias+B</kbd></td><td>Lee el título y todos los controles de la ventana activa. Muy útil en cuadros de diálogo y avisos.</td></tr>
 <tr><th scope="row">Leer todo</th><td><kbd>Tiresias+Flecha abajo</kbd></td><td><kbd>Tiresias+A</kbd></td><td>Lee desde la posición del cursor hasta el final. Pulsa Control, o cualquier otra tecla, para detener la lectura.</td></tr>
-<tr><th scope="row">Hora y fecha</th><td><kbd>Tiresias+F12</kbd></td><td><kbd>Tiresias+F12</kbd></td><td>Una vez: dice la hora. Dos veces: dice la fecha completa (día de la semana, día, mes y año).</td></tr>
+<tr><th scope="row">Hora y fecha</th><td><kbd>Tiresias+F12</kbd></td><td><kbd>Tiresias+F12</kbd></td><td>Una vez: dice la hora, con el formato elegido en Opciones, Generales, «Formato de la hora» (por defecto, el del reloj de Windows). Dos veces: dice la fecha completa (día de la semana, día, mes y año).</td></tr>
 <tr><th scope="row">Modo de voz</th><td><kbd>Tiresias+S</kbd></td><td><kbd>Tiresias+S</kbd></td><td>Pasa por los modos de voz: activada, a demanda, pitidos y desactivada.</td></tr>
 <tr><th scope="row">Pasar la siguiente tecla</th><td><kbd>Tiresias+F2</kbd></td><td><kbd>Tiresias+F2</kbd></td><td>La siguiente tecla o combinación que pulses llega directamente a la aplicación, sin que Tiresias la interprete, incluida la propia tecla Tiresias: por ejemplo, <kbd>Tiresias+F2</kbd> y después <kbd>Insertar+T</kbd> envía <kbd>Insertar+T</kbd> al programa. Tiresias vuelve a la normalidad cuando sueltas todas las teclas de esa combinación.</td></tr>
 </tbody>
@@ -2331,7 +2308,7 @@ fuera de lista</pre>
 <p>Si no hay texto que reconocer, Tiresias dice «No se reconoció texto». El OCR funciona aunque estén activadas la cortina de pantalla o la lupa.</p>
 
 <h3 id="ocr-archivos">12.2. Imágenes, PDF y portapapeles</h3>
-<p>Desde la lista de acciones de IA y visión (<kbd>Tiresias+Alt+I</kbd>), desde el submenú «Visión e IA» del menú de Tiresias, en «Reconocimiento de texto», o desde la paleta de órdenes puedes reconocer:</p>
+<p>Desde la lista de acciones de IA y visión (<kbd>Tiresias+Alt+I</kbd>), desde el submenú «Visión e IA» del menú de Tiresias, en «Reconocimiento de texto (OCR)», o desde la paleta de órdenes puedes reconocer:</p>
 <ul>
 <li><strong>Un archivo de imagen o PDF</strong> («Reconocer un archivo de imagen o PDF...»): eliges el archivo y Tiresias lo reconoce. En los PDF cada página empieza con un encabezado «Página N», así que con <kbd>H</kbd> saltas de página. Sirve para PDF escaneados que no tienen texto.</li>
 <li><strong>El portapapeles</strong> («Reconocer el portapapeles»): una imagen copiada (por ejemplo, una captura) o un archivo de imagen o PDF copiado en el Explorador.</li>
@@ -2572,6 +2549,7 @@ fuera de lista</pre>
 <tbody>
 <tr id="opt-general-language"><th scope="row">Idioma de la interfaz (requiere reiniciar)</th><td>Automático (el idioma de Windows si hay traducción; si no, español)</td><td>Al cambiarlo, Tiresias pregunta si quieres reiniciar. Apartado <a href="#idioma-interfaz">2.14</a>.</td></tr>
 <tr id="opt-general-logLevel"><th scope="row">Nivel del registro</th><td>Información</td><td>Cuánta información técnica se guarda en el registro: Depuración, Información, Advertencias, Errores, Solo errores graves o Desactivado (no se guarda nada).</td></tr>
+<tr id="opt-general-timeFormat"><th scope="row">Formato de la hora</th><td>El del reloj de Windows</td><td>Cómo dice la hora <kbd>Tiresias+F12</kbd> y cómo se muestra en la línea braille dividida: «El del reloj de Windows» (si Windows usa 12 horas, Tiresias también), «24 horas» (15:45) o «12 horas» (3:45 p. m.).</td></tr>
 <tr id="opt-general-preventDisplayTurningOff"><th scope="row">Impedir que la pantalla se apague durante la lectura continua</th><td>Marcada</td><td>Apartado <a href="#lectura-continua">5.3</a>.</td></tr>
 <tr id="opt-general-startOnLogon"><th scope="row">Iniciar Tiresias automáticamente al iniciar sesión en Windows</th><td>Desmarcada</td><td>Apartado <a href="#inicio-windows">2.5</a>.</td></tr>
 <tr id="opt-general-showWelcomeDialogAtStartup"><th scope="row">Mostrar el diálogo de bienvenida al iniciar</th><td>Marcada</td><td>Apartado <a href="#bienvenida">3.7</a>.</td></tr>
@@ -4158,7 +4136,7 @@ Algunas empresas desactivan los complementos de Escritorio remoto con directivas
 <section>
 <h2 id="ia">22. Inteligencia artificial</h2>
 <p>Tiresias puede pedir ayuda a un servicio de inteligencia artificial (IA) para describir imágenes, resumir páginas, responder preguntas o traducir. Necesitas tu propia cuenta y clave del servicio que elijas, o un programa de IA que funcione en tu equipo (Ollama o LM Studio), que no envía nada a Internet.</p>
-<p>Todas las acciones de este capítulo están en <strong>la lista de acciones de IA y visión</strong>, que se abre con <kbd>Tiresias+Alt+I</kbd>: escribe parte del nombre en el filtro para encontrar una enseguida. Las mismas acciones están en el menú de Tiresias, submenú «Visión e IA», «Inteligencia artificial». En este capítulo, los nombres entre comillas son los de esa lista.</p>
+<p>Todas las acciones de este capítulo están en <strong>la lista de acciones de IA y visión</strong>, que se abre con <kbd>Tiresias+Alt+I</kbd>: escribe parte del nombre en el filtro para encontrar una enseguida. Las mismas acciones están en el menú de Tiresias, submenú «Visión e IA», repartidas en «Describir con IA», «Documentos y páginas con IA», «Traducción» y «CAPTCHA», más «Agente de IA...» y «Ayuda de Tiresias con IA...». En este capítulo, los nombres entre comillas son los de esa lista.</p>
 
 <h3 id="ia-configurar">22.1. Configurar el servicio</h3>
 <ol>
@@ -4190,7 +4168,7 @@ Algunas empresas desactivan los complementos de Escritorio remoto con directivas
 <p>Está desactivado por defecto porque envía imágenes de la pantalla al servicio y cada etiqueta es una petición. Para no gastar: solo se hace una petición a la vez, si pasas de largo por un elemento no se pide nada, cada elemento se intenta una sola vez y hay un máximo de etiquetas por hora (20 por defecto; al llegar a él, Tiresias te avisa y espera). Si el servicio rechaza la clave, el etiquetado automático se detiene y te lo dice; si no hay conexión o se ha superado el límite de uso del servicio, te avisa una vez, espera un par de minutos antes de volver a intentarlo y esas peticiones fallidas no cuentan para el máximo por hora. Si desmarcas «Guardar las etiquetas automáticas para las próximas veces», solo se recuerdan hasta que cierres Tiresias. La primera vez se te muestra el aviso de privacidad de las imágenes, y no se envía nada hasta que lo aceptes.</p>
 
 <h3 id="ia-ayuda">22.5. Ayuda sobre Tiresias</h3>
-<p>«Ayuda de Tiresias...» te deja preguntar cómo se hace algo («¿cómo cambio la velocidad de la voz?»). La respuesta se basa en este manual y te da las teclas exactas. El manual es más largo que el máximo de caracteres que se envían (opción «Máximo de caracteres de un documento que se envían»): por eso Tiresias envía el índice y los apartados que más tienen que ver con tu pregunta, y te avisa de ello.</p>
+<p>«Ayuda de Tiresias con IA...» te deja preguntar cómo se hace algo («¿cómo cambio la velocidad de la voz?»). La respuesta se basa en este manual y te da las teclas exactas. El manual es más largo que el máximo de caracteres que se envían (opción «Máximo de caracteres de un documento que se envían»): por eso Tiresias envía el índice y los apartados que más tienen que ver con tu pregunta, y te avisa de ello.</p>
 
 <h3 id="ia-traducir">22.6. Traducir</h3>
 <p><kbd>Tiresias+Mayúsculas+T</kbd> traduce el texto seleccionado al idioma elegido en las opciones (español por defecto). En la lista también están «Traducir el portapapeles», «Traducir lo último que se dijo», «Copiar la última traducción» y «Cambiar el idioma al que se traduce»; estas dos últimas no tienen tecla asignada: puedes asignársela en Gestos de entrada. Los textos largos se traducen por partes; si aun así la traducción se corta, al final se dice «[Traducción incompleta: el texto era demasiado largo.]».</p>
@@ -4243,7 +4221,7 @@ Algunas empresas desactivan los complementos de Escritorio remoto con directivas
 
 <section>
 <h2 id="herramientas-extra">23. Ratón por teclado y guardar texto como audio</h2>
-<p>Este capítulo explica dos herramientas que no necesitan inteligencia artificial: manejar el puntero del ratón con las flechas y guardar un texto como archivo de audio. Las dos están en la lista de acciones de IA y visión (<kbd>Tiresias+Alt+I</kbd>) y en el menú de Tiresias, submenú «Visión e IA», «Herramientas».</p>
+<p>Este capítulo explica dos herramientas que no necesitan inteligencia artificial: manejar el puntero del ratón con las flechas y guardar un texto como archivo de audio. Las dos están en la lista de acciones de IA y visión (<kbd>Tiresias+Alt+I</kbd>) y en el menú de Tiresias, submenú «Visión e IA», «Ratón y audio».</p>
 
 <h3 id="raton-teclado">23.1. Ratón por teclado y posiciones guardadas</h3>
 <p>Pulsa <kbd>Tiresias+Mayúsculas+Alt+K</kbd> (o elige «Ratón por teclado (activar o desactivar)» en la lista) para activar el ratón por teclado. Tiresias dice «Ratón por teclado activado». Mientras está activo:</p>
@@ -5027,7 +5005,7 @@ Otros nombres que puedes usar en lugar de <code>espeak</code> son <code>onecore<
 
 <h3 id="registro">26.5. El registro: qué es y dónde está</h3>
 <p>Tiresias anota lo que hace en el archivo <code>tiresias.log</code>, dentro de la carpeta <code>logs</code> de tus datos (apartado <a href="#carpeta-data">2.6</a>). Cuando el archivo crece mucho, se guardan copias anteriores numeradas. Si Tiresias se bloquea o se cierra de golpe, añade información técnica en <code>fallos.log</code>, en la misma carpeta: la hora, el motivo y en qué estaba cada parte del programa. Ese archivo solo crece cuando pasa algo de verdad, así que normalmente está vacío; si tiene contenido, adjúntalo cuando informes de un problema.</p>
-<p>Puedes ver el registro sin salir de Tiresias: menú de Tiresias, Herramientas, «Visor de registro...». La ventana muestra el registro con el cursor al principio de la última línea (lo más reciente está al final). <kbd>F5</kbd> o el botón Actualizar lo recargan, y el botón «Guardar como...» lo guarda en un archivo para enviarlo.</p>
+<p>Puedes ver el registro sin salir de Tiresias: menú de Tiresias, Herramientas, «Herramientas avanzadas», «Visor de registro...». La ventana muestra el registro con el cursor al principio de la última línea (lo más reciente está al final). <kbd>F5</kbd> o el botón Actualizar lo recargan, y el botón «Guardar como...» lo guarda en un archivo para enviarlo.</p>
 <p>Para investigar un problema, sube el detalle del registro. Lo más sencillo es pulsar <kbd>Tiresias+Q</kbd> y elegir «Reiniciar con el registro de depuración activado»: el detalle se anota solo hasta que vuelvas a cerrar Tiresias. También puedes cambiar «Nivel del registro» a Depuración en las opciones generales; en ese caso, recuerda volver a ponerlo en Información al terminar, porque el nivel de depuración genera mucho texto.</p>
 <p>Por privacidad, el registro de depuración no guarda las teclas de carácter que pulsas: aparecen como <code>kb:&lt;carácter&gt;</code>. Las combinaciones de órdenes sí se registran. Si Tiresias no puede escribir en su carpeta de datos, el registro se guarda en la carpeta temporal, <code>%TEMP%\Tiresias\logs</code> (apartado <a href="#arranque-seguro">26.4.2</a>).</p>
 
@@ -5827,7 +5805,7 @@ Otros nombres que puedes usar en lugar de <code>espeak</code> son <code>onecore<
 </dl>
 
 <h3 id="reparar-com">B.4. Reparar los registros COM de accesibilidad</h3>
-<p>Algunos programas mal desinstalados o los «limpiadores del registro» estropean el registro de las bibliotecas de accesibilidad de Windows. Los síntomas son que Tiresias no lee los navegadores, los menús o los cuadros de diálogo, o dice «desconocido» en todas partes. En ese caso, abre el menú de Tiresias, «Herramientas», «Reparar los registros COM de accesibilidad...», confirma y acepta el permiso de administrador. Tarda unos segundos. Al terminar, reinicia Windows para que todos los programas usen los registros reparados. Sin abrir el menú, la opción <code>--repair-com</code> hace lo mismo.</p>
+<p>Algunos programas mal desinstalados o los «limpiadores del registro» estropean el registro de las bibliotecas de accesibilidad de Windows. Los síntomas son que Tiresias no lee los navegadores, los menús o los cuadros de diálogo, o dice «desconocido» en todas partes. En ese caso, abre el menú de Tiresias, «Herramientas», «Herramientas avanzadas», «Reparar los registros COM de accesibilidad...», confirma y acepta el permiso de administrador. Tarda unos segundos. Al terminar, reinicia Windows para que todos los programas usen los registros reparados. Sin abrir el menú, la opción <code>--repair-com</code> hace lo mismo.</p>
 
 <h3 id="admin-citrix">B.5. Citrix: permitir el canal de Tiresias</h3>
 <p>Para que el usuario oiga en su equipo la voz del Tiresias que se ejecuta en una sesión de Citrix (capítulo <a href="#remoto">19</a>, apartado <a href="#rdp-citrix">19.15</a>), Tiresias abre en el servidor un canal virtual dinámico llamado <code>TiresiasRdp</code>, que en el equipo del usuario recibe el complemento <code>TiresiasRdp</code> cargado por Citrix Workspace app para Windows. No hay que instalar nada en el servidor salvo Tiresias, ni nada en los equipos de los usuarios salvo Tiresias y Citrix Workspace app. Lo único que hace falta es que la directiva de Citrix permita ese canal, porque las versiones actuales de Citrix bloquean de fábrica los canales que no son suyos.</p>
@@ -5921,6 +5899,6 @@ Otros nombres que puedes usar en lugar de <code>espeak</code> son <code>onecore<
 </section>
 
 </main>
-<footer><p>Manual de usuario de Tiresias 1.0.15. <a href="#indice">Volver al índice</a>.</p></footer>
+<footer><p>Manual de usuario de Tiresias 1.0.16. <a href="#indice">Volver al índice</a>.</p></footer>
 </body>
 </html>

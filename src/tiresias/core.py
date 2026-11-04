@@ -93,6 +93,7 @@ def parseArgs(argv: list[str]) -> argparse.Namespace:
 	p.add_argument("--no-start-menu", action="store_true", help="Con --install-silent: sin accesos directos en el menú Inicio")
 	p.add_argument("--start-on-logon", action="store_true", help="Con --install-silent: iniciar Tiresias al iniciar sesión")
 	p.add_argument("--all-users", choices=("0", "1"), default=None, help="Con --install-silent: 1 para todos los usuarios, 0 solo para el usuario actual")
+	p.add_argument("--close-running", action="store_true", help="Con --install-silent: al actualizar, cerrar las demás copias de Tiresias que se ejecuten desde la carpeta de instalación (otras sesiones, pantallas seguras)")
 	p.add_argument("--no-elevate", action="store_true", help="No pedir permiso de administrador (lo usan las copias ya elevadas)")
 	p.add_argument("--uninstall", action="store_true", help="Desinstalar Tiresias (pide confirmación)")
 	p.add_argument("--uninstall-silent", action="store_true", help="Desinstalar sin preguntar")

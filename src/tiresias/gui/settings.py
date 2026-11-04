@@ -551,6 +551,7 @@ def _symbolLevelChoices() -> ChoiceList:
 
 _TYPED_CHOICES: ChoiceList = [("off", _("No")), ("always", _("Siempre")), ("editOnly", _("Solo en campos de edición"))]
 _LOG_LEVELS: ChoiceList = [("DEBUG", _("Depuración")), ("INFO", _("Información")), ("WARNING", _("Advertencias")), ("ERROR", _("Errores")), ("CRITICAL", _("Solo errores graves")), ("OFF", _("Desactivado"))]
+_TIME_FORMATS: ChoiceList = [("system", _("El del reloj de Windows")), ("24", _("24 horas (15:45)")), ("12", _("12 horas (3:45 p. m.)"))]
 _LAYOUTS: ChoiceList = [("desktop", _("Sobremesa")), ("laptop", _("Portátil"))]
 _TEXT_UNITS: ChoiceList = [("character", _("Carácter")), ("word", _("Palabra")), ("line", _("Línea")), ("paragraph", _("Párrafo"))]
 _PROGRESS_MODES: ChoiceList = [("off", _("Desactivado")), ("speak", _("Voz")), ("beep", _("Pitidos")), ("both", _("Voz y pitidos"))]
@@ -809,6 +810,7 @@ class GeneralPanel(ConfigPanel):
 		return [
 			Choice("language", _("Idioma de la interfaz (requiere reiniciar):"), _languageChoices),
 			Choice("logLevel", _("Nivel del registro:"), _LOG_LEVELS),
+			Choice("timeFormat", _("&Formato de la hora:"), _TIME_FORMATS),
 			Bool("preventDisplayTurningOff", _("Impedir que la pantalla se apague durante la lectura continua")),
 			Bool("startOnLogon", _("Iniciar Tiresias automáticamente al iniciar sesión en Windows"), group=gs),
 			Bool("showWelcomeDialogAtStartup", _("Mostrar el diálogo de bienvenida al iniciar"), group=gs),

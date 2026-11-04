@@ -90,6 +90,23 @@ def shouldReportLiveText(text: str) -> bool:
 _hiddenMainHwnd = 0
 
 
+#: ``NotificationProcessing`` de UIA que piden decirse antes que lo que espera:
+#: ImportantAll (0) e ImportantCurrentThenMostRecent (2). Los navegadores
+#: mandan así las notificaciones ARIA de prioridad alta (``ariaNotify``).
+IMPORTANT_NOTIFICATION_PROCESSING = (0, 2)
+
+
+def notificationPriority(processing: Any):
+	"""Prioridad de voz de una notificación UIA según su ``notificationProcessing``.
+
+	Las importantes van con ``NEXT`` (tras lo que se está diciendo y antes de
+	lo que espera, como las regiones vivas «assertive»); el resto, ``NORMAL``.
+	"""
+	from ..speech.api import Priority
+
+	return Priority.NEXT if processing in IMPORTANT_NOTIFICATION_PROCESSING else Priority.NORMAL
+
+
 def isHiddenMainWindow(hwnd: int) -> bool:
 	"""``True`` si ``hwnd`` es la ventana principal oculta de Tiresias."""
 	global _hiddenMainHwnd
@@ -613,7 +630,7 @@ class AccObject(ScriptableObject):
 
 		tones.playSound("notification")
 
-		speech.speakText(displayString)
+		speech.speakText(displayString, priority=notificationPriority(kwargs.get("notificationProcessing")))
 
 	def event_alert(self) -> None:
 		from .. import presentation

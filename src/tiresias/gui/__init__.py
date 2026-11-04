@@ -293,30 +293,36 @@ def _buildMainMenu(frame: MainFrame) -> wx.Menu:
 
 	from ..config import policy as _policy
 
+	# Rev. 1.0.16: cada submenú agrupa sus entradas por temas, separadas, y
+	# ninguna letra de acceso se repite dentro de un mismo submenú.
 	prefs = wx.Menu()
 	add(prefs, _("&Opciones..."), lambda: showSettings())
 	add(prefs, _("Ajustes &rápidos..."), showQuickSettings)
+	add(prefs, _("&Perfiles de configuración..."), showProfiles)
+	prefs.AppendSeparator()
 	add(prefs, _("Seleccionar &sintetizador..."), showSynthSelection)
 	add(prefs, _("Gestor de voces &neuronales Piper..."), _showPiperVoiceManager)
 	add(prefs, _("Seleccionar &línea braille..."), showBrailleDisplaySelection)
-	add(prefs, _("&Perfiles de configuración..."), showProfiles)
+	prefs.AppendSeparator()
 	dicts = wx.Menu()
 	add(dicts, _("Diccionario &por defecto..."), lambda: showSpeechDictionary("default"))
 	add(dicts, _("Diccionario de la &voz actual..."), lambda: showSpeechDictionary("voice"))
 	add(dicts, _("Diccionario &temporal..."), lambda: showSpeechDictionary("temp"))
 	add(dicts, _("Diccionario del p&erfil activo..."), lambda: showSpeechDictionary("profile"))
 	prefs.AppendSubMenu(dicts, _("Diccionarios de &voz"))
-	add(prefs, _("Puntuación y &símbolos..."), showSymbols)
+	add(prefs, _("Puntuación y sí&mbolos..."), showSymbols)
 	add(prefs, _("Alfabeto &fonético..."), lambda: _speechDialog("showPhoneticAlphabet"))
 	add(prefs, _("&Esquemas de voz y sonido..."), lambda: _speechDialog("showVoiceSchemes"))
 	add(prefs, _("Plantillas de &anuncio de controles..."), lambda: _speechDialog("showRoleTemplates"))
-	add(prefs, _("&Gestos de entrada..."), showInputGestures)
-	add(prefs, _("&Interacción táctil..."), lambda: showSettings("touch"))
-	add(prefs, _("&Tecla del menú de Tiresias..."), showMenuKeyDialog)
-	add(prefs, _("&Etiquetas personalizadas..."), showLabelsManager)
+	add(prefs, _("Etiquetas personali&zadas..."), showLabelsManager)
 	prefs.AppendSeparator()
+	add(prefs, _("&Gestos de entrada..."), showInputGestures)
+	add(prefs, _("&Tecla del menú de Tiresias..."), showMenuKeyDialog)
+	add(prefs, _("&Interacción táctil..."), lambda: showSettings("touch"))
+	if _policy.isAllowed("factoryReset") or conf.canUndoFactoryReset:
+		prefs.AppendSeparator()
 	if _policy.isAllowed("factoryReset"):
-		add(prefs, _("Restablecer valores de &fábrica..."), askFactoryReset)
+		add(prefs, _("Restablecer valores de fá&brica..."), askFactoryReset)
 	if conf.canUndoFactoryReset:
 		add(prefs, _("&Deshacer el restablecimiento de fábrica"), undoFactoryReset)
 	menu.AppendSubMenu(prefs, _("&Preferencias"))
@@ -324,19 +330,26 @@ def _buildMainMenu(frame: MainFrame) -> wx.Menu:
 	tools = wx.Menu()
 	from . import speech_viewer
 
+	add(tools, _("&Paleta de órdenes..."), _commandPaletteFromMenu)
+	tools.AppendSeparator()
 	add(tools, _("&Visor de voz"), toggleSpeechViewer, wx.ITEM_CHECK, speech_viewer.isActive())
 	add(tools, _("Visor &braille"), toggleBrailleViewer, wx.ITEM_CHECK, _isBrailleViewerActive())
 	add(tools, _("&Historial de voz..."), showSpeechHistory)
-	add(tools, _("Historial del &portapapeles..."), showClipboardHistory)
-	add(tools, _("Paleta de ó&rdenes..."), _commandPaletteFromMenu)
-	add(tools, _("&Mezclador de audio..."), _showAudioMixer)
+	add(tools, _("Historial del p&ortapapeles..."), showClipboardHistory)
+	productivity = None
 	try:
-		from . import productivity_dialogs
-
-		productivity_dialogs.appendToolsMenu(frame, tools)
+		from . import productivity_dialogs as productivity
 	except Exception:
 		log.exception("No se pudieron añadir las entradas de productividad")
+	if productivity is not None:
+		add(tools, _("Historial de no&tificaciones..."), productivity.showNotificationHistory)
+	tools.AppendSeparator()
+	if productivity is not None:
+		add(tools, _("Reglas de noti&ficaciones..."), lambda: productivity.showNotificationRules())
+		add(tools, _("Vigi&lancias..."), productivity.showWatches)
+	add(tools, _("&Mezclador de audio..."), _showAudioMixer)
 	if _addonToolsEntries:
+		# Entradas de los complementos, por orden alfabético.
 		tools.AppendSeparator()
 		for label, action, submenu in sorted(_addonToolsEntries.values(), key=lambda e: e[0].replace("&", "").lower()):
 			try:
@@ -346,21 +359,21 @@ def _buildMainMenu(frame: MainFrame) -> wx.Menu:
 					add(tools, label, action)
 			except Exception:
 				log.exception("No se pudo añadir la entrada de complemento %r", label)
-		tools.AppendSeparator()
-	add(tools, _("Visor de &registro..."), showLogViewer)
-	if _policy.isAllowed("pythonConsole"):
-		add(tools, _("Consola de P&ython..."), showPythonConsole)
-	add(tools, _("&Recargar complementos"), _reloadPlugins)
-	if _policy.isAllowed("openDataFolder"):
-		add(tools, _("Abrir carpeta de &datos"), _openDataFolder)
 	tools.AppendSeparator()
-	if _policy.isAllowed("createPortable"):
-		add(tools, _("Crear copia por&table..."), showCreatePortable)
-	if paths.FROZEN and not paths.isInstalledCopy() and _policy.isAllowed("install"):
-		add(tools, _("&Instalar Tiresias en este equipo..."), showInstaller)
-	add(tools, _("Reparar los registros &COM de accesibilidad..."), runComRepair)
 	if not conf.readOnly:
 		add(tools, _("Importar configuración de &NVDA..."), showNvdaImport)
+	if _policy.isAllowed("createPortable"):
+		add(tools, _("Crear &copia portable..."), showCreatePortable)
+	if paths.FROZEN and not paths.isInstalledCopy() and _policy.isAllowed("install"):
+		add(tools, _("&Instalar Tiresias en este equipo..."), showInstaller)
+	advanced = wx.Menu()
+	add(advanced, _("Visor de &registro..."), showLogViewer)
+	if _policy.isAllowed("pythonConsole"):
+		add(advanced, _("Consola de P&ython..."), showPythonConsole)
+	if _policy.isAllowed("openDataFolder"):
+		add(advanced, _("Abrir carpeta de &datos"), _openDataFolder)
+	add(advanced, _("Reparar los registros &COM de accesibilidad..."), runComRepair)
+	tools.AppendSubMenu(advanced, _("Herramientas &avanzadas"))
 	menu.AppendSubMenu(tools, _("&Herramientas"))
 
 	try:
@@ -381,15 +394,17 @@ def _buildMainMenu(frame: MainFrame) -> wx.Menu:
 	add(addonsMenu, _("&Administrador de complementos..."), showAddonsManager)
 	if _policy.isAllowed("addonStore"):
 		add(addonsMenu, _("&Tienda de complementos..."), showAddonStore)
+	addonsMenu.AppendSeparator()
+	add(addonsMenu, _("&Recargar complementos"), _reloadPlugins)
 	menu.AppendSubMenu(addonsMenu, _("&Complementos"))
 
 	helpMenu = wx.Menu()
 	add(helpMenu, _("&Manual de usuario"), showUserManual)
 	add(helpMenu, _("&Referencia rápida de órdenes"), showKeyCommandsReference)
-	add(helpMenu, _("&Novedades"), showNews)
 	add(helpMenu, _("&Tutorial de primeros pasos..."), showTutorial)
 	add(helpMenu, _("Diálogo de &bienvenida..."), showWelcome)
-	add(helpMenu, _("&Licencia"), showLicense)
+	helpMenu.AppendSeparator()
+	add(helpMenu, _("&Novedades"), showNews)
 	if _policy.isAllowed("updateCheck"):
 		from .. import updates
 
@@ -397,6 +412,8 @@ def _buildMainMenu(frame: MainFrame) -> wx.Menu:
 		if updates.pendingUpdate is not None:
 			info = updates.pendingUpdate
 			add(helpMenu, _("&Instalar la actualización {version}...").format(version=info.version), lambda: showUpdateDialog(info))
+	helpMenu.AppendSeparator()
+	add(helpMenu, _("&Licencia"), showLicense)
 	add(helpMenu, _("&Acerca de..."), showAbout)
 	menu.AppendSubMenu(helpMenu, _("Ay&uda"))
 
