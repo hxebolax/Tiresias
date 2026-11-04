@@ -67,7 +67,7 @@ class TestMenuHerramientas(unittest.TestCase):
 			self.assertIn("Mi radio...", labels)
 			self.assertIn("Utilidades", labels)
 			self.assertLess(labels.index("Mi radio..."), labels.index("Utilidades"))
-			self.assertLess(labels.index("Utilidades"), labels.index("Visor de registro..."))
+			self.assertLess(labels.index("Utilidades"), labels.index("Herramientas avanzadas"))
 			sub = next(i.GetSubMenu() for i in tools.GetMenuItems() if i.GetItemLabel().replace("&", "") == "Utilidades")
 			self.assertEqual([lbl for lbl in self._labels(sub) if lbl], ["Uno", "Más"])
 			# La acción queda registrada en el marco.
@@ -87,7 +87,7 @@ class TestMenuHerramientas(unittest.TestCase):
 				raise RuntimeError("fallo")
 
 			gui.registerToolsMenuItem("prueba", "Roto", roto, submenu=True)
-			self.assertIn("Visor de registro...", self._labels(self._tools(frame)))
+			self.assertIn("Herramientas avanzadas", self._labels(self._tools(frame)))
 		finally:
 			frame.Destroy()
 

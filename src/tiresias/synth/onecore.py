@@ -140,7 +140,13 @@ class SynthDriver(AudioSynthDriver):
 				out.append(_xmlEscape(it))
 			elif isinstance(it, CharacterModeCommand):
 				if it.state:
-					out.append('<say-as interpret-as="characters">')
+					# Truco de NVDA (#20959): algunas voces OneCore deletrean con
+					# pronunciación, timbre y volumen raros (sobre todo un único
+					# carácter); un carácter que no se dice pero tampoco se quita
+					# lo evita. NVDA mete U+001A y su escape XML lo convierte en
+					# U+FFFD; aquí se pone U+FFFD directamente (``_xmlEscape``
+					# cambiaría el control por un espacio).
+					out.append('<say-as interpret-as="characters">�')
 					closing.append("</say-as>")
 				elif "</say-as>" in closing:
 					closing.remove("</say-as>")

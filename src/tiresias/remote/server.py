@@ -59,6 +59,13 @@ def _ipOf(addr: Any) -> str:
 		return ""
 
 
+#: Tamaño máximo de un mensaje antes de unirse al canal: los de autenticación
+#: son pequeños, así un cliente sin clave apenas puede ocupar memoria.
+MAX_UNAUTHENTICATED_LINE = 64 * 1024
+#: Tamaño máximo de un mensaje ya dentro del canal (p. ej. texto del portapapeles).
+MAX_AUTHENTICATED_LINE = 10 * 1024 * 1024
+
+
 class _Client:
 	_ids = itertools.count(1)
 
@@ -71,7 +78,13 @@ class _Client:
 		self.protocolVersion = 1
 		self.authenticated = False
 		self.connectedAt = time.monotonic()
-		self.conn = LineConnection(sock, self._onLine, self._onClose, name=f"servidor-cliente {self.id}")
+		self.conn = LineConnection(
+			sock, self._onLine, self._onClose, name=f"servidor-cliente {self.id}", maxLine=self.maxLineSize
+		)
+
+	def maxLineSize(self) -> int:
+		"""Tamaño máximo de un mensaje de este cliente según si ya se unió."""
+		return MAX_AUTHENTICATED_LINE if self.authenticated else MAX_UNAUTHENTICATED_LINE
 
 	@property
 	def ip(self) -> str:

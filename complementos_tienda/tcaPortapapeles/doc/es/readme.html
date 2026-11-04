@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8"><title>TCA-Portapapeles para Tiresias</title>
+<style>body{font-family:Segoe UI,Arial,sans-serif;max-width:60em;margin:1em auto;line-height:1.5}table{border-collapse:collapse}td,th{border:1px solid #888;padding:.3em .6em;text-align:left}</style></head>
+<body><h1>TCA-Portapapeles</h1>
+<p>Versión 1.0.0 para Tiresias. Basado en <a href="https://github.com/peterrc87/TCA_Portapapeles">TCA-Portapapeles para NVDA</a>, de Peter Reina, que a su vez se basa en zPortapapeles de Héctor J. Benítez Corredera (idea original de Peter Vagner, con la base del complemento Fake Clipboard Announcement).</p>
+<p>TCA-Portapapeles anuncia las pulsaciones de seleccionar todo, copiar, cortar, pegar, deshacer y rehacer, con voz y con sonidos que refuerzan los mensajes. Además tiene un historial propio que pega en el foco, lee el portapapeles completo, da estadísticas del texto seleccionado, permite copiar solo algunas palabras de una selección y tiene un modo juego que traduce lo que los juegos copian al portapapeles.</p>
+
+<h2 id="capa">La capa de órdenes</h2>
+<p>Pulsa <strong>Tiresias+Control+Mayúsculas+V</strong> para entrar en la capa de órdenes de TCA-Portapapeles (oirás un pitido corto y la línea braille mostrará «TCA-Portapapeles»). Después pulsa una de estas teclas:</p>
+<table><caption>Teclas de la capa de TCA-Portapapeles</caption><thead><tr><th scope="col">Tecla</th><th scope="col">Orden</th></tr></thead><tbody>
+<tr><td>H</td><td>Abre la ventana del historial de TCA-Portapapeles.</td></tr>
+<tr><td>L</td><td>Lee el contenido completo del portapapeles: todo el texto, por largo que sea, o los nombres de los archivos y carpetas copiados.</td></tr>
+<tr><td>E</td><td>Estadísticas del texto seleccionado.</td></tr>
+<tr><td>P</td><td>Abre la ventana para copiar al portapapeles solo algunas palabras del texto seleccionado.</td></tr>
+<tr><td>A</td><td>Activa o desactiva los anuncios de las teclas del portapapeles (pitido agudo al activar, grave al desactivar).</td></tr>
+<tr><td>J</td><td>Activa o desactiva el modo juego.</td></tr>
+<tr><td>F1</td><td>Dice las teclas de la capa.</td></tr>
+<tr><td>Escape</td><td>Sale de la capa (con un pitido).</td></tr>
+</tbody></table>
+<p>Mientras estás en la capa puedes pulsar varias órdenes seguidas. Escape sale de la capa; cualquier otra tecla también sale y llega a la aplicación con normalidad.</p>
+<p>Todas las órdenes están en la categoría «TCA-Portapapeles» del diálogo <em>Gestos de entrada</em> de Tiresias, donde puedes asignarles una tecla directa. En el original ninguna orden traía tecla asignada; en Tiresias se usa la capa para no ocupar más combinaciones. El historial, los anuncios y el modo juego también están en <em>Herramientas &gt; TCA-Portapapeles</em> del menú de Tiresias.</p>
+
+<h2 id="anuncios">Anuncios de las teclas del portapapeles</h2>
+<p>Al pulsar Control+A o Control+E (seleccionar todo), Control+C (copiar), Control+X (cortar), Control+V (pegar), Control+Z (deshacer) o Control+Y (rehacer), el complemento lo anuncia con voz y con un sonido distinto para cada acción. Al copiar o cortar se espera a que cambie el portapapeles: si no cambia, se dice «Sin selección» (en las consolas no, porque allí Control+C interrumpe el programa).</p>
+<p>A diferencia del original, el complemento no captura esas teclas: solo las observa, así que llegan a la aplicación exactamente igual que sin el complemento. Por eso no hacen falta los arreglos del original para Word, WhatsApp, las consolas, los navegadores o las aplicaciones Electron: todo funciona como siempre, también el modo exploración de Tiresias.</p>
+<p>Tiresias ya dice de serie «Copiado», «Cortado» y «Pegado» con las opciones de la categoría <em>Portapapeles</em> de sus Opciones («Anunciar el texto copiado» y «Distinguir cortar, copiar y pegar al usar sus teclas»). Para no oír dos veces lo mismo, cuando Tiresias ya anuncia la copia, el corte o el pegado, el complemento solo pone su sonido; si desactivas esos anuncios de Tiresias, el complemento dice «Copiar», «Cortar» y «Pegar». Seleccionar todo, deshacer, rehacer y «Sin selección» los dice siempre el complemento.</p>
+<p>Con <strong>A</strong> en la capa activas o desactivas rápidamente los anuncios de las teclas; el historial sigue funcionando aunque los desactives.</p>
+
+<h2 id="historial">Historial de TCA-Portapapeles</h2>
+<p>El complemento vigila el portapapeles y guarda en su historial (hasta 50 elementos, el más reciente primero) todo lo que se copia, también lo que copian Tiresias y otros complementos. Guarda todos los formatos: texto con formato, HTML, imágenes, archivos y carpetas, no solo el texto. Si copias algo que ya estaba, sube al principio. Lo que los gestores de contraseñas marcan como protegido no se guarda nunca.</p>
+<p>La ventana del historial solo se abre si hay alguna entrada guardada y si el historial está activado. Tiene la lista <strong>Historial</strong> y estos botones:</p>
+<ul>
+<li><strong>Pegar en el foco</strong> (Alt+P), Intro o doble clic en la lista: pega el elemento elegido en la aplicación que estaba detrás de la ventana, con todos sus formatos. Por ejemplo, si tenías abierto el Bloc de notas, se pega allí. Después se deja el portapapeles como estaba antes de pegar.</li>
+<li><strong>Borrar</strong> (Alt+B) o Suprimir en la lista: borra el elemento elegido.</li>
+<li><strong>Borrar todo</strong> (Alt+T): borra todas las entradas (pide confirmación).</li>
+<li><strong>Refrescar</strong> (Alt+R): vuelve a cargar la lista con lo que se haya copiado mientras la ventana estaba abierta.</li>
+<li><strong>Cerrar</strong> (Alt+C), Escape o Alt+F4: cierra la ventana.</li>
+</ul>
+<p>Si al borrar se queda vacío, la ventana se cierra. Solo puede haber una ventana del complemento abierta a la vez (historial o selector de trozos de texto); el complemento te avisa si intentas abrir otra.</p>
+<p>Diferencia con el historial de Tiresias: Tiresias tiene de serie su propio historial del portapapeles (<strong>Tiresias+Alt+V</strong>), que guarda solo texto y lo copia al portapapeles. El de TCA-Portapapeles guarda todos los formatos y los archivos, y pega directamente en el foco. Puedes usar los dos, o desactivar el que no quieras (el de Tiresias en Opciones &gt; Portapapeles; el del complemento en sus opciones).</p>
+<p>Como en el original, las entradas del historial se borran al cerrar Tiresias. El historial del portapapeles de Windows (Windows+V) puede tener entradas duplicadas al pegar desde este historial.</p>
+
+<h2 id="leer">Leer el portapapeles</h2>
+<p>La tecla <strong>L</strong> de la capa lee todo el texto del portapapeles, aunque tenga miles de caracteres, o los nombres de los archivos y carpetas copiados. Tiresias tiene además de serie <strong>Tiresias+C</strong>, que dice cuántos caracteres hay y los primeros 300 (y deletrea con dos pulsaciones).</p>
+
+<h2 id="estadisticas">Estadísticas del texto seleccionado</h2>
+<p>Con un texto seleccionado, la tecla <strong>E</strong> de la capa dice:</p>
+<ul>
+<li>caracteres sin espacios;</li>
+<li>caracteres con espacios (sin contar los saltos de línea);</li>
+<li>número de palabras;</li>
+<li>número de líneas;</li>
+<li>número de párrafos (bloques de texto separados por líneas en blanco).</li>
+</ul>
+
+<h2 id="trozos">Copiar parte de un texto seleccionado</h2>
+<p>Con un texto seleccionado de al menos dos palabras, la tecla <strong>P</strong> de la capa abre una ventana con una lista de casillas, una por palabra. Marca con la barra espaciadora las que quieras y pulsa <strong>Copiar al portapapeles lo seleccionado</strong> (Alt+C). Las palabras se copian separadas por espacios y en el orden del texto original, da igual en qué orden las marques. Por ejemplo, de «Hola, como estás, el perro tiene hambre», marcando hambre, Hola y perro se copia «Hola perro hambre». Hay que marcar al menos una palabra.</p>
+<p>Las palabras se muestran sin signos de puntuación (por ejemplo, <code>event.GetUnicodeKey()</code> aparece como <code>eventGetUnicodeKey</code>). Si los quieres, marca la casilla <strong>Conservar los signos de puntuación</strong> (Alt+S): la lista se vuelve a crear con los signos (y se quitan las marcas que hubiera). Esta casilla es la opción que el autor original ofrecía añadir si se pedía.</p>
+
+<h2 id="juego">Modo juego</h2>
+<p>Pensado para los juegos que copian sus textos al portapapeles y necesitan traducción. Con la tecla <strong>J</strong> de la capa lo activas o lo desactivas (pitido agudo al activar, grave al desactivar). Mientras está activo, cada texto nuevo que llega al portapapeles se traduce al idioma que elijas en las opciones (el idioma de origen se detecta solo) y se lee. Si no se puede traducir (por ejemplo, sin conexión), se avisa con «No se pudo traducir» y se lee el texto original.</p>
+<p>Mientras el modo juego está activo, los anuncios de las teclas y el historial quedan en pausa, y el historial, el selector de trozos y la tecla A no están disponibles. No se puede activar con una ventana del complemento abierta. El estado del modo juego se recuerda al reiniciar Tiresias.</p>
+<p>La traducción usa el servicio gratuito de Google Translate, como el original: el texto copiado se envía a Google. Mientras el modo juego está activo, Tiresias no dice «Copiado» ni el texto original antes de cada traducción, aunque tengas activado «Anunciar el texto copiado» (Opciones &gt; Portapapeles); al desactivarlo, vuelve a avisar como siempre.</p>
+
+<h2 id="opciones">Opciones</h2>
+<p>En <em>Opciones de Tiresias</em>, categoría <strong>TCA-Portapapeles</strong>:</p>
+<ul>
+<li><strong>Activar los anuncios de las teclas del portapapeles</strong> (lo mismo que la tecla A de la capa).</li>
+<li><strong>Anunciar con voz las teclas del portapapeles</strong>.</li>
+<li><strong>Reproducir sonidos al usar las teclas del portapapeles</strong>.</li>
+<li><strong>Activar el historial de TCA-Portapapeles</strong>.</li>
+<li><strong>Tiempo de actualización del monitor del portapapeles</strong>: de 1 décima de segundo a 1 segundo (2 décimas por defecto). Si empiezas a notar errores del portapapeles, aumenta este tiempo.</li>
+<li><strong>Notificar con un sonido cada vez que se agregue algo al historial</strong>.</li>
+<li><strong>Leer el texto completo de lo que se agrega al historial</strong>: desactivada por defecto (en el original estaba activada), porque Tiresias ya anuncia lo copiado.</li>
+<li><strong>Tiempo de actualización del monitor del portapapeles en el modo juego</strong>.</li>
+<li><strong>Idioma de destino de la traducción en el modo juego</strong>: alemán, árabe, croata, español (por defecto), francés, inglés, italiano, polaco, portugués, ruso, turco o ucraniano.</li>
+<li><strong>Teclas del portapapeles</strong>: las combinaciones que disparan cada anuncio (seleccionar todo, copiar, cortar, pegar, deshacer y rehacer), separadas por comas, por ejemplo <code>control+a, control+e</code>. Cámbialas solo si tu idioma o tu sistema usa otras teclas para el portapapeles. Con las distribuciones de teclado cirílicas funcionan las mismas teclas, porque se reconocen por su posición.</li>
+</ul>
+
+<h2 id="limitaciones">Limitaciones</h2>
+<ul>
+<li>No es compatible con otros complementos que hagan lo mismo; si tienes alguno parecido, desactívalo.</li>
+<li>Algunas aplicaciones (como Excel con rangos grandes) generan los formatos al pedirlos, y guardarlos todos en el historial puede tardar un poco. Se hace en segundo plano: Tiresias sigue respondiendo.</li>
+<li>En las pantallas seguras (inicio de sesión, control de cuentas de usuario) el complemento no hace nada, como el original.</li>
+</ul>
+
+<h2 id="creditos">Créditos y licencia</h2>
+<p>TCA-Portapapeles para NVDA: Copyright 2026 Peter Reina &lt;peterrc87@gmail.com&gt;, basado en zPortapapeles de Héctor J. Benítez Corredera; idea original de Peter Vagner. Agradecimientos del original a Javi Domínguez por la función de monitoreo del portapapeles. Publicado bajo la licencia GNU GPL versión 2.</p>
+<p>Esta versión para Tiresias es código propio escrito para la API de Tiresias y se distribuye también bajo la licencia GNU GPL versión 2. Los sonidos son los del complemento original (GPL versión 2).</p>
+<p>Historial de cambios del original: <a href="https://github.com/peterrc87/TCA_Portapapeles/blob/main/changelog.md">changelog.md</a>.</p>
+</body></html>

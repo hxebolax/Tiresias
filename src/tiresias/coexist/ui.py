@@ -156,11 +156,11 @@ def appendMenuItems(frame, menu: wx.Menu) -> None:
 	if c.isStandby():
 		info = menu.Append(wx.ID_ANY, _("Tiresias en espera: {reader} tiene preferencia").format(reader=r.name if r else _("otro lector")))
 		info.Enable(False)
-		frame.addMenuItem(menu, _("&Activar Tiresias aunque haya otro lector ({key})...").format(key=HOTKEY_LABEL), askForceActivate)
+		frame.addMenuItem(menu, _("Ac&tivar Tiresias aunque haya otro lector ({key})...").format(key=HOTKEY_LABEL), askForceActivate)
 		menu.AppendSeparator()
 	elif readers:
 		name = (r or readers[0]).name
-		frame.addMenuItem(menu, _("&Ceder el paso a {reader} (Tiresias en espera)").format(reader=name), lambda: queue_handler.queueFunction(c.yieldNow))
+		frame.addMenuItem(menu, _("C&eder el paso a {reader} (Tiresias en espera)").format(reader=name), lambda: queue_handler.queueFunction(c.yieldNow))
 		menu.AppendSeparator()
 	else:
 		try:
@@ -172,7 +172,7 @@ def appendMenuItems(frame, menu: wx.Menu) -> None:
 			# Cierra Tiresias e inicia el lector profesional que se usaba antes.
 			frame.addMenuItem(
 				menu,
-				_("&Volver a {reader} (cierra Tiresias)").format(reader=remembered.get("name", "")),
+				_("V&olver a {reader} (cierra Tiresias)").format(reader=remembered.get("name", "")),
 				lambda: queue_handler.queueFunction(c.switchToRememberedReader),
 			)
 			menu.AppendSeparator()

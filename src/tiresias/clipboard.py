@@ -28,6 +28,8 @@ registerDefaults("clipboard", {"appendSeparator": "newline"})
 history: list[tuple[float, str]] = []
 _lastSeq = 0
 _ignoreSeq: set[int] = set()
+#: Quién calla los avisos de copia y corte (ver :func:`silenceAnnouncements`).
+_silencedBy: set[str] = set()
 _timer: int | None = None
 
 #: Última tecla de cortar o copiar pulsada: (acción, instante).
@@ -158,6 +160,24 @@ def ignoreNextChange() -> None:
 	_ignoreSeq.add(winapi.user32.GetClipboardSequenceNumber() + 1)
 
 
+def silenceAnnouncements(owner: str, silenced: bool = True) -> None:
+	"""Calla (o vuelve a dar) los avisos «Copiado: …» y «Cortado: …».
+
+	Para un complemento que lee él mismo lo que llega al portapapeles (el modo
+	juego de TCA-Portapapeles traduce y lee cada texto copiado). El historial
+	sigue guardando lo copiado. ``owner`` identifica al complemento: los avisos
+	vuelven cuando nadie los calla.
+	"""
+	if silenced:
+		_silencedBy.add(owner)
+	else:
+		_silencedBy.discard(owner)
+
+
+def announcementsSilenced() -> bool:
+	return bool(_silencedBy)
+
+
 def cancelIgnore() -> None:
 	"""La escritura de Tiresias falló: el próximo cambio sí se anuncia."""
 	_ignoreSeq.clear()
@@ -185,7 +205,8 @@ def _onGesture(gesture) -> bool:
 	return True
 
 
-def _focusIsEditable() -> bool:
+def focusIsEditable() -> bool:
+	"""¿El foco es un campo donde se escribe (edición, documento editable, consola)?"""
 	from . import api
 	from .objects.roles import Role, State
 
@@ -198,6 +219,10 @@ def _focusIsEditable() -> bool:
 	except Exception:
 		return False
 	return role in (Role.EDITABLETEXT, Role.RICHEDIT, Role.TERMINAL, Role.COMBOBOX) or (role == Role.DOCUMENT and State.EDITABLE in states) or State.EDITABLE in states
+
+
+#: Nombre antiguo (complementos escritos para la 1.0.15).
+_focusIsEditable = focusIsEditable
 
 
 def _onClipboardKey(action: str) -> None:
@@ -214,7 +239,7 @@ def _onClipboardKey(action: str) -> None:
 
 def _announcePaste() -> None:
 	cb = conf["clipboard"]
-	if not _focusIsEditable():
+	if not focusIsEditable():
 		return
 	# Contraseña de un gestor: se dice «Pegado», nunca el texto.
 	text = "" if isSensitiveContent() else (winapi.getClipboardText() or "")
@@ -277,6 +302,9 @@ def _check() -> None:
 			del history[: -conf["clipboard"]["historySize"]]
 		return
 	action = _takeAction() if conf["clipboard"]["announceCutCopyPaste"] else None
+	if _silencedBy:
+		# Un complemento lee él mismo lo copiado: solo se guarda en el historial.
+		action = None
 	if not text:
 		if action is not None and conf["clipboard"]["announceCopy"]:
 			# Se copió algo que no es texto (archivos, imágenes...).
@@ -286,7 +314,7 @@ def _check() -> None:
 	if isNew and conf["clipboard"]["historyEnabled"]:
 		history.append((time.time(), text))
 		del history[: -conf["clipboard"]["historySize"]]
-	if conf["clipboard"]["announceCopy"] and (isNew or action is not None):
+	if conf["clipboard"]["announceCopy"] and (isNew or action is not None) and not _silencedBy:
 		speech.speakMessage(changeMessage(action, text))
 
 

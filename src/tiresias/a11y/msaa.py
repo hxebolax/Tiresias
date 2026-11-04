@@ -562,7 +562,14 @@ PROBE_TIMEOUT_MS = 50
 
 WM_NULL = 0x0000
 WM_GETOBJECT = 0x003D
+SMTO_NORMAL = 0x0000
 SMTO_ABORTIFHUNG = 0x0002
+
+#: Conmutadores de tareas clásicos (Alt+Tab de Windows 10 y anteriores) que
+#: Windows da por colgados mientras están abiertos aunque sí atienden MSAA
+#: (NVDA #21052): no se descartan por «colgados» o «lentos» y se les pregunta
+#: con ``SMTO_NORMAL`` (con el mismo tiempo máximo), o Alt+Tab no diría nada.
+HUNG_TOLERANT_CLASSES = ("#32771", "TaskSwitcherWnd")
 
 _user32p = ctypes.WinDLL("user32", use_last_error=True)
 _user32p.SendMessageTimeoutW.argtypes = [
@@ -571,6 +578,8 @@ _user32p.SendMessageTimeoutW.argtypes = [
 _user32p.SendMessageTimeoutW.restype = wintypes.LPARAM
 _user32p.GetWindowThreadProcessId.argtypes = [wintypes.HWND, POINTER(wintypes.DWORD)]
 _user32p.GetWindowThreadProcessId.restype = wintypes.DWORD
+_user32p.GetClassNameW.argtypes = [wintypes.HWND, wintypes.LPWSTR, ctypes.c_int]
+_user32p.GetClassNameW.restype = ctypes.c_int
 _oleaccP = ctypes.OleDLL("oleacc")
 _oleaccP.ObjectFromLresult.argtypes = [wintypes.LPARAM, POINTER(GUID), wintypes.WPARAM, c_void_p]
 _oleaccP.CreateStdAccessibleObject.argtypes = [wintypes.HWND, c_long, POINTER(GUID), c_void_p]
@@ -595,11 +604,28 @@ def _isForeignWindow(hwnd: int) -> bool:
 	return bool(pid) and pid != _OWN_PID
 
 
+def _windowClassName(hwnd: int) -> str:
+	if not hwnd:
+		return ""
+	buf = ctypes.create_unicode_buffer(256)
+	try:
+		_user32p.GetClassNameW(hwnd, buf, 256)
+	except Exception:
+		return ""
+	return buf.value
+
+
+def _isHungTolerantWindow(hwnd: int) -> bool:
+	"""``True`` si ``hwnd`` es un conmutador de tareas clásico (ver :data:`HUNG_TOLERANT_CLASSES`)."""
+	return _windowClassName(hwnd) in HUNG_TOLERANT_CLASSES
+
+
 def _sendMessageTimeout(hwnd: int, msg: int, wParam: int, lParam: int, timeoutMs: int) -> int | None:
 	"""``SendMessageTimeout``: el resultado del mensaje, o ``None`` si no respondió a tiempo."""
 	result = ctypes.c_size_t()
+	flags = SMTO_NORMAL if _isHungTolerantWindow(hwnd) else SMTO_ABORTIFHUNG
 	try:
-		ok = _user32p.SendMessageTimeoutW(hwnd, msg, wParam, lParam, SMTO_ABORTIFHUNG, timeoutMs, byref(result))
+		ok = _user32p.SendMessageTimeoutW(hwnd, msg, wParam, lParam, flags, timeoutMs, byref(result))
 	except Exception:
 		return None
 	if not ok:
@@ -619,7 +645,7 @@ def markSlowWindow(hwnd: int, seconds: float = SLOW_WINDOW_SECONDS) -> None:
 
 def isSlowWindow(hwnd: int) -> bool:
 	"""``True`` si el hilo de ``hwnd`` no respondió hace poco y sigue sin responder."""
-	if not _slowThreads:
+	if not _slowThreads or _isHungTolerantWindow(hwnd):
 		return False
 	tid, _pid = _windowThreadProcess(hwnd)
 	until = _slowThreads.get(tid)
@@ -653,7 +679,12 @@ def _foreignObjectFromWindow(hwnd: int, objectId: int, interface=None):
 
 def _isUsableWindow(hwnd: int) -> bool:
 	try:
-		return bool(hwnd) and bool(user32.IsWindow(hwnd)) and not user32.IsHungAppWindow(hwnd) and not isSlowWindow(hwnd)
+		if not hwnd or not user32.IsWindow(hwnd):
+			return False
+		if _isHungTolerantWindow(hwnd):
+			# Alt+Tab clásico: Windows lo da por colgado, pero responde.
+			return True
+		return not user32.IsHungAppWindow(hwnd) and not isSlowWindow(hwnd)
 	except Exception:
 		return False
 

@@ -314,7 +314,9 @@ class GlobalCommands(ScriptableObject):
 	def script_dateTime(self, gesture) -> None:
 		now = datetime.datetime.now()
 		if repeatCount() == 0:
-			speech.speakMessage(now.strftime("%H:%M"))
+			from .time_format import formatTime
+
+			speech.speakMessage(formatTime(now))
 		else:
 			speech.speakMessage(f"{_WEEKDAYS[now.weekday()]}, {now.day} de {_MONTHS[now.month - 1]} de {now.year}")
 

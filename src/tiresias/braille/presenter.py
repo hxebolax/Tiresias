@@ -672,7 +672,9 @@ class BraillePresenter:
 				fg = api.getForegroundObject()
 				return fg.name if fg is not None else ""
 			if view == "clock":
-				return time.strftime("%H:%M %d/%m/%Y")
+				from ..time_format import formatTime
+
+				return f"{formatTime()} {time.strftime('%d/%m/%Y')}"
 		except Exception:
 			log.debug("Error obteniendo la vista secundaria", exc_info=True)
 		return ""

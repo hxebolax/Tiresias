@@ -418,6 +418,123 @@ class InstallOptions:
 	sourceDir: str = ""
 	userDataDir: str | None = None
 	targets: SystemTargets = field(default_factory=SystemTargets)
+	#: Al actualizar, cerrar las demás copias que se ejecutan desde la carpeta
+	#: de destino (el usuario lo ha aceptado; ver :func:`waitForRunningCopies`).
+	closeRunning: bool = False
+
+
+# ---------------------------------------------------------------------- copias en ejecución
+# Al actualizar una instalación, otra copia que se ejecute desde esa carpeta
+# (la de las pantallas seguras o la de otra sesión de usuario) bloquea sus
+# archivos y la instalación falla a medias (NVDA #20998 y #21033). Se buscan
+# con psutil, que lee la ruta del ejecutable sin abrir el proceso (no hace
+# falta ser administrador para verlas); terminarlas sí lo necesita para las
+# de otros usuarios, y lo hace la copia elevada que instala.
+
+#: Espera máxima (s) a que terminen solas antes de preguntar al usuario.
+RUNNING_WAIT_BEFORE_ASK = 3.0
+#: Espera máxima (s) en la copia que instala antes de terminarlas.
+RUNNING_WAIT_BEFORE_KILL = 1.0
+#: Espera máxima (s) a que terminen tras pedírselo a Windows.
+KILL_WAIT = 2.0
+
+
+def findRunningCopies(folder: str) -> list:
+	"""Procesos (``psutil.Process``) cuyo ejecutable está dentro de ``folder``.
+
+	Incluye los de todas las sesiones y usuarios. Nunca el propio proceso ni
+	sus hijos (su guardián, por ejemplo). Sin psutil devuelve ``[]``.
+	"""
+	try:
+		import psutil
+	except ImportError:
+		log.warning("Sin psutil: no se pueden buscar las copias en ejecución")
+		return []
+	own = os.getpid()
+	found = []
+	for proc in psutil.process_iter(["exe", "ppid"]):
+		try:
+			info = proc.info
+			exe = info.get("exe") or ""
+			if proc.pid == own or info.get("ppid") == own or not exe:
+				continue
+			if isInside(exe, folder):
+				found.append(proc)
+		except Exception:
+			continue
+	return found
+
+
+def _isRunning(proc) -> bool:
+	try:
+		return bool(proc.is_running())
+	except Exception:
+		return False
+
+
+def waitForRunningCopies(folder: str, timeout: float = RUNNING_WAIT_BEFORE_ASK, poll: float = 0.1) -> list:
+	"""Espera hasta ``timeout`` s a que terminen las copias de :func:`findRunningCopies`.
+
+	Devuelve las que siguen en marcha. Al arrancar, Windows (Accesibilidad)
+	inicia un momento la copia instalada, que se cierra sola en un par de
+	segundos: por eso no se pregunta por las que terminan en ese tiempo.
+	"""
+	processes = findRunningCopies(folder)
+	deadline = time.monotonic() + timeout
+	while True:
+		processes = [p for p in processes if _isRunning(p)]
+		if not processes or time.monotonic() >= deadline:
+			return processes
+		time.sleep(poll)
+
+
+def _describe(proc) -> str:
+	try:
+		return f"{proc.pid} ({proc.info.get('exe')})"
+	except Exception:
+		return str(getattr(proc, "pid", "?"))
+
+
+def terminateProcesses(processes: list, timeout: float = KILL_WAIT) -> list:
+	"""Termina los procesos (los hijos antes que sus padres) y devuelve los que siguen vivos.
+
+	Los hijos primero: el guardián de una copia no llega a ver su cierre y
+	no vuelve a iniciar un lector desde la carpeta que se va a reemplazar.
+	Los fallos se registran y no impiden terminar los demás.
+	"""
+	if not processes:
+		return []
+	import psutil
+
+	pids = {p.pid for p in processes}
+
+	def isChild(proc) -> bool:
+		try:
+			return proc.info.get("ppid") in pids
+		except Exception:
+			return False
+
+	terminated = []
+	for proc in sorted(processes, key=lambda p: 0 if isChild(p) else 1):
+		log.info("Se termina la copia en ejecución %s", _describe(proc))
+		try:
+			proc.kill()
+		except psutil.NoSuchProcess:
+			continue
+		except Exception:
+			log.warning("No se pudo terminar %s", _describe(proc), exc_info=True)
+			continue
+		terminated.append(proc)
+	_gone, alive = psutil.wait_procs(terminated, timeout=timeout)
+	for proc in alive:
+		log.warning("La copia %s no terminó en %g s", _describe(proc), timeout)
+	return list(alive)
+
+
+def closeRunningCopies(folder: str, timeout: float = RUNNING_WAIT_BEFORE_KILL) -> list:
+	"""Espera un poco a las copias de ``folder`` y termina las que sigan. Devuelve las que no se cerraron."""
+	running = waitForRunningCopies(folder, timeout=timeout)
+	return terminateProcesses(running) if running else []
 
 
 def programFiles(sourceDir: str) -> list[str]:
@@ -443,6 +560,14 @@ def install(opts: InstallOptions) -> str:
 	t = opts.targets
 	previous = _regReadAll(t.hive, t.uninstallKey) if t.writeRegistry else {}
 	log.info("Instalando %s %s en %s", APP_NAME, VERSION, target)
+	if wasInstalled and opts.closeRunning:
+		# Antes de borrar nada: otra copia en marcha bloquearía sus archivos.
+		try:
+			alive = closeRunningCopies(target)
+			if alive:
+				log.warning("Siguen en ejecución %d copias de %s en %s", len(alive), APP_NAME, target)
+		except Exception:
+			log.exception("No se pudieron cerrar las copias en ejecución")
 	os.makedirs(target, exist_ok=True)
 	# Se borran las bibliotecas de una versión anterior para no mezclar archivos,
 	# y las carpetas que antes iban fuera de data (ahora están en data).
@@ -742,6 +867,40 @@ def uninstallCommandLine(target: str) -> str | None:
 #: Código fuente de una copia portable hecha desde el código (los binarios de
 #: controller y rdp van en data, con :data:`PROGRAM_DATA_INCLUDE`).
 SOURCE_TREE_ITEMS = ["src", "manual", "docs", "tools", "resources", "controller", "rdp", "Tiresias.bat", "requirements.txt", "README.md", "LEEME.txt", "LICENSE.txt", "setup_cxfreeze.py"]
+
+
+class PortablePathError(ValueError):
+	"""Carpeta de destino no válida para una copia portable (el mensaje es para el usuario)."""
+
+
+def validatePortableDir(text: str) -> str:
+	"""Expande y comprueba la carpeta de destino de una copia portable (NVDA #21045).
+
+	Admite variables del sistema (``%temp%``...). Devuelve la ruta absoluta o
+	lanza :class:`PortablePathError` con un mensaje en español. «D:» o
+	«D:carpeta» (letra sin barra) se rechazan aparte: no son la raíz de la
+	unidad sino la carpeta actual de esa unidad.
+	"""
+	text = (text or "").strip()
+	if not text:
+		raise PortablePathError("Escriba la carpeta de destino.")
+	expanded = os.path.expandvars(text)
+	if not os.path.isabs(expanded):
+		drive, root, _tail = os.path.splitroot(expanded)
+		if drive and not root:
+			raise PortablePathError(
+				"Escriba la ruta completa de la carpeta de la copia portable. "
+				f"La letra de unidad debe ir seguida de una barra: usa {drive}\\ para la raíz o {drive}\\carpeta.\n"
+				f"Ruta actual: {expanded}"
+			)
+		raise PortablePathError(
+			"Escriba la ruta completa de la carpeta de la copia portable. "
+			"Debe empezar por una letra de unidad seguida de una barra (por ejemplo, C:\\carpeta). "
+			"Puede llevar variables del sistema (por ejemplo, %temp% o %homepath%).\n"
+			f"Ruta actual: {expanded}"
+		)
+	# Rutas UNC incluidas; abspath normaliza «..» y separadores (NVDA #14681).
+	return os.path.abspath(expanded)
 
 
 def createPortableCopy(dest: str, copyConfig: bool = True, copyAddons: bool = True, appDir: str | None = None, dataDir: str | None = None, programDataDir: str | None = None, frozen: bool | None = None) -> str:
@@ -1081,6 +1240,7 @@ def silentInstallPlan(args) -> tuple[InstallOptions, bool]:
 		startMenu=not getattr(args, "no_start_menu", False),
 		# Sin --start-on-logon no se toca el inicio automático que hubiera.
 		startOnLogon=True if logon else None,
+		closeRunning=bool(getattr(args, "close_running", False)),
 	)
 	return opts, logon
 
@@ -1095,11 +1255,17 @@ def elevatedInstallArgs(opts: InstallOptions) -> list[str]:
 	args = ["--install-silent", "--install-dir", opts.targetDir, "--all-users", "1" if opts.allUsers else "0", "--no-elevate"]
 	args += [] if opts.desktopShortcut else ["--no-desktop-shortcut"]
 	args += [] if opts.startMenu else ["--no-start-menu"]
+	# Terminar las copias de otros usuarios necesita la copia elevada.
+	args += ["--close-running"] if opts.closeRunning else []
 	return args
 
 
 def runSilentInstall(args) -> int:
-	"""``--install-silent [--install-dir X] [--all-users 0|1] [--launch] [--start-on-logon]``."""
+	"""``--install-silent [--install-dir X] [--all-users 0|1] [--launch] [--start-on-logon] [--close-running]``.
+
+	Sin preguntar nunca: las demás copias en ejecución solo se cierran con
+	``--close-running`` (el diálogo de instalación lo pasa si el usuario acepta).
+	"""
 	opts, logon = silentInstallPlan(args)
 	if opts.allUsers and not isElevated():
 		if getattr(args, "no_elevate", False):

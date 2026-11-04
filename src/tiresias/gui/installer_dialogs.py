@@ -143,15 +143,52 @@ class InstallDialog(wx.Dialog):
 			showError(_("La carpeta {folder} no está vacía y no es una copia de {app}. Elija una carpeta vacía o la de una copia de {app}.").format(folder=target, app=APP_NAME), self)
 			return
 		self._setBusy(True)
-		self.status.SetLabel(_("Instalando..."))
+		from .system_dialogs import _runInThread
+
+		if not os.path.isfile(os.path.join(target, paths.INSTALLED_MARKER)):
+			# Instalación nueva: no puede haber copias en marcha desde esa carpeta.
+			self._install(target, closeRunning=False)
+			return
+		# Actualización: otra copia que se ejecute desde la carpeta (pantallas
+		# seguras, otra sesión) bloquearía sus archivos (NVDA #20998, #21033).
+		self.status.SetLabel(_("Comprobando si hay otras copias en ejecución..."))
 		speakMessage(_("Instalando, espere por favor..."))
+
+		def checked(running: Any, error: Exception | None) -> None:
+			if not isAlive(self):
+				return
+			if error is not None:
+				log.warning("No se pudieron buscar las copias en ejecución: %s", error)
+				running = []
+			if running and not confirmCloseRunningCopies(len(running), self):
+				log.warning("Instalación cancelada: el usuario no quiso cerrar las copias en ejecución")
+				self._setBusy(False)
+				self.status.SetLabel("")
+				showError(
+					_("No se ha instalado {app}: hay otras copias en ejecución desde {folder}. Ciérrelas y vuelva a intentarlo.").format(app=APP_NAME, folder=target),
+					self,
+				)
+				return
+			# Si se preguntó, se vuelve a avisar de que empieza la instalación.
+			self._install(target, closeRunning=bool(running), announce=bool(running))
+
+		_runInThread(lambda: inst.waitForRunningCopies(target), checked)
+
+	def _install(self, target: str, closeRunning: bool, announce: bool = True) -> None:
+		"""Instala en ``target`` (en otro hilo); ``closeRunning``: cerrar antes las demás copias."""
+		inst = self.installer
+		self.status.SetLabel(_("Instalando..."))
+		if announce:
+			speakMessage(_("Instalando, espere por favor..."))
 		allUsers = self.allUsers.GetValue()
 		desktop, startMenu, logon = self.desktop.GetValue(), self.startMenu.GetValue(), self.logon.GetValue()
 		copyConfig, launch = self.copyConfig.GetValue(), self.launch.GetValue()
 
 		def work() -> str:
 			# El inicio automático (None) lo decide este proceso, con la cuenta del usuario.
-			opts = inst.InstallOptions(targetDir=target, allUsers=allUsers, desktopShortcut=desktop, startMenu=startMenu, startOnLogon=None, copyConfig=False, launchAfter=False)
+			opts = inst.InstallOptions(
+				targetDir=target, allUsers=allUsers, desktopShortcut=desktop, startMenu=startMenu, startOnLogon=None, copyConfig=False, launchAfter=False, closeRunning=closeRunning
+			)
 			exe = os.path.join(target, inst.EXE_NAME)
 			if allUsers and not inst.isElevated():
 				# La copia elevada recibe «todos los usuarios» y --no-elevate; no inicia nada.
@@ -192,6 +229,20 @@ class InstallDialog(wx.Dialog):
 		from .system_dialogs import _runInThread
 
 		_runInThread(work, done)
+
+
+def confirmCloseRunningCopies(count: int, parent: wx.Window | None = None) -> bool:
+	"""Pregunta si se pueden cerrar las demás copias en ejecución (por defecto, No)."""
+	from .settings import askYesNo
+
+	message = _(
+		"Hay otras copias de {app} en ejecución desde la carpeta de instalación ({count}). "
+		"Puede ser la copia de la pantalla de inicio de sesión y las pantallas seguras, o la de otro usuario con la sesión iniciada. "
+		"Hay que cerrarlas para continuar con la instalación y no se volverán a abrir solas. "
+		"Quien las esté usando perderá los cambios de configuración que no haya guardado.\n\n"
+		"¿Cerrarlas ahora?"
+	).format(app=APP_NAME, count=count)
+	return askYesNo(message, _("{app} sigue en ejecución").format(app=APP_NAME), parent)
 
 
 def showInstallDialog() -> None:
