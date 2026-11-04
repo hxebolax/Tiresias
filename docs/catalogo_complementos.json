@@ -59,6 +59,34 @@
 			]
 		},
 		{
+			"id": "TCA_SystemUtilities",
+			"name": "TCA SystemUtilities",
+			"version": "1.0.0",
+			"author": "Proyecto Tiresias (basado en TCA SystemUtilities de Peter Reina, con el lanzador de consolas de Héctor J. Benítez Corredera)",
+			"description": "Ejecuta rápidamente acciones de Windows: apagar y reiniciar con el sonido clásico de cierre (con 3 segundos para anularlo), hibernar, suspender, reiniciar en Modo seguro con funciones de red o en modo normal y entrar en la BIOS-UEFI; reiniciar el Explorador, cerrar todas las aplicaciones, las tareas que no responden o los procesos de una aplicación, borrar el portapapeles y su historial, y elegir el menú de contexto clásico o el de Windows 11; reparar el sistema con SFC y DISM, limpiar el disco, optimizar las unidades, limpiar la caché DNS, activar el plan alto rendimiento o el equilibrado, el almacenamiento reservado y limpiar la configuración de Tiresias de las pantallas seguras; activar o desactivar el control de cuentas de usuario y la webcam, analizar con Microsoft Defender, escanear o no los archivos comprimidos y copiar la lista de la cuarentena; abrir las opciones de voz y de sonido, el Monitor de recursos, el mapa de caracteres, la carpeta Roaming y varios asistentes de Windows; y, en el Explorador, copiar la ruta o la lista de archivos, abrir CMD (también como administrador) o el lanzador de consolas en la carpeta y ocultar o mostrar archivos y carpetas. También copia al portapapeles la información del sistema y de las tarjetas de sonido. Todo está en Herramientas > TCA SystemUtilities y en un menú que se abre con Tiresias+Mayúsculas+8; cada acción se puede asignar a una tecla en Gestos de entrada, categoría TCA SystemUtilities.",
+			"minApiVersion": "1.0",
+			"lastTestedApiVersion": "1.0",
+			"url": "TCA_SystemUtilities/TCA_SystemUtilities-1.0.0.tiresias-addon",
+			"sha256": "77a6321a62692858b5a37fde5e492d3df5d2a40a222066623b571ab75addfcf8",
+			"size": 33308,
+			"homepage": "https://github.com/peterrc87/TCA-SystemUtilities-NVDA-Complemento",
+			"changelog": "Primera versión para Tiresias: todas las funciones de TCA SystemUtilities 0.12 para NVDA (apagado, reinicio y anulación con el sonido clásico de Windows, hibernar, suspender, Modo seguro con funciones de red y modo normal, BIOS-UEFI, reiniciar el Explorador, cerrar todas las aplicaciones, tareas que no responden y procesos por nombre, borrar el portapapeles y su historial, menú de contexto clásico y de Windows 11, SFC, DISM, limpieza de disco con perfil, optimizar unidades, Restablecer este PC, caché DNS, planes de energía, almacenamiento reservado, configuración de las pantallas seguras, control de cuentas de usuario, análisis rápido, completo y del sector de arranque con Microsoft Defender, archivos comprimidos y cuarentena, webcam, opciones de voz y de sonido, Monitor de recursos, mapa de caracteres, carpeta Roaming, asistentes de credenciales, de contraseña y de Bluetooth, copiar ruta, lista de archivos, información del sistema y de las tarjetas de sonido, abrir CMD normal y como administrador, lanzador de consolas y ocultar o mostrar archivos). Novedades frente al original: menú emergente con Tiresias+Mayúsculas+8 y submenús de Archivos y carpetas e Información en el menú, pide permiso de administrador solo cuando hace falta, avisa del resultado real de cada acción y nunca cierra Tiresias ni los lectores de pantalla.",
+			"date": "2026-11-04",
+			"proprietary": false,
+			"versions": [
+				{
+					"version": "1.0.0",
+					"url": "TCA_SystemUtilities/TCA_SystemUtilities-1.0.0.tiresias-addon",
+					"sha256": "77a6321a62692858b5a37fde5e492d3df5d2a40a222066623b571ab75addfcf8",
+					"size": 33308,
+					"minApiVersion": "1.0",
+					"lastTestedApiVersion": "1.0",
+					"changelog": "Primera versión para Tiresias: todas las funciones de TCA SystemUtilities 0.12 para NVDA (apagado, reinicio y anulación con el sonido clásico de Windows, hibernar, suspender, Modo seguro con funciones de red y modo normal, BIOS-UEFI, reiniciar el Explorador, cerrar todas las aplicaciones, tareas que no responden y procesos por nombre, borrar el portapapeles y su historial, menú de contexto clásico y de Windows 11, SFC, DISM, limpieza de disco con perfil, optimizar unidades, Restablecer este PC, caché DNS, planes de energía, almacenamiento reservado, configuración de las pantallas seguras, control de cuentas de usuario, análisis rápido, completo y del sector de arranque con Microsoft Defender, archivos comprimidos y cuarentena, webcam, opciones de voz y de sonido, Monitor de recursos, mapa de caracteres, carpeta Roaming, asistentes de credenciales, de contraseña y de Bluetooth, copiar ruta, lista de archivos, información del sistema y de las tarjetas de sonido, abrir CMD normal y como administrador, lanzador de consolas y ocultar o mostrar archivos). Novedades frente al original: menú emergente con Tiresias+Mayúsculas+8 y submenús de Archivos y carpetas e Información en el menú, pide permiso de administrador solo cuando hace falta, avisa del resultado real de cada acción y nunca cierra Tiresias ni los lectores de pantalla.",
+					"date": "2026-11-04"
+				}
+			]
+		},
+		{
 			"id": "TraductorAvanzadoPro",
 			"name": "Traductor Avanzado Pro",
 			"version": "1.0.0",
@@ -319,6 +347,34 @@
 					"lastTestedApiVersion": "1.0",
 					"changelog": "Primera versión para Tiresias: todas las funciones de Speech History Explorer 2023 para NVDA (elemento anterior y siguiente del historial con pitidos paneados en los extremos, copia al portapapeles del elemento actual con recorte opcional de espacios, diálogo de elementos del historial con búsqueda, selección múltiple, texto completo, Copiar elemento, Copiar todo, Limpiar historial, Actualizar y Cerrar, y categoría propia en las Opciones de Tiresias). Usa el historial de voz del propio Tiresias, así que el tamaño máximo es la opción «Tamaño del historial de voz» de la categoría Voz. Las órdenes anterior y siguiente van en Tiresias+Alt+F11 y Tiresias+Alt+F12 y el diálogo en Tiresias+Mayúsculas+F12 porque Tiresias+Mayúsculas+F11 ya es la lista de procesos.",
 					"date": "2026-10-31"
+				}
+			]
+		},
+		{
+			"id": "tcaPortapapeles",
+			"name": "TCA-Portapapeles",
+			"version": "1.0.0",
+			"author": "Proyecto Tiresias (basado en TCA-Portapapeles de Peter Reina, a su vez basado en zPortapapeles de Héctor J. Benítez Corredera)",
+			"description": "Anuncia con voz y con sonidos las teclas del portapapeles (seleccionar todo, copiar, cortar, pegar, deshacer y rehacer) y avisa de «Sin selección» al copiar sin nada seleccionado, sin quitarle las teclas a la aplicación. Tiene un historial propio que guarda todos los formatos de lo copiado (texto con formato, imágenes, archivos y carpetas) y lo pega en la aplicación que estaba detrás, dejando luego el portapapeles como estaba. Además lee el portapapeles completo, da las estadísticas del texto seleccionado, permite copiar solo algunas palabras de la selección y tiene un modo juego que traduce y lee lo que los juegos copian al portapapeles. Las órdenes están en una capa: Tiresias+Control+Mayúsculas+V y una letra (F1 dice las teclas).",
+			"minApiVersion": "1.0",
+			"lastTestedApiVersion": "1.0",
+			"url": "tcaPortapapeles/tcaPortapapeles-1.0.0.tiresias-addon",
+			"sha256": "243001c861a3ac082e680aaafb2fe58ac649c914f86e73532f99438e3a1c973c",
+			"size": 174390,
+			"homepage": "https://github.com/peterrc87/TCA_Portapapeles",
+			"changelog": "Primera versión para Tiresias: todas las funciones de TCA-Portapapeles 0.6.1 para NVDA (anuncios hablados y sonidos de seleccionar todo, copiar, cortar, pegar, deshacer y rehacer, «Sin selección», activar y desactivar los anuncios, teclas disparadoras configurables, historial con formatos, archivos y carpetas que pega en el foco y restaura el portapapeles, sonido y lectura de lo añadido al historial, tiempo del monitor, leer el portapapeles, estadísticas del texto seleccionado, selector de trozos de texto y modo juego con traducción automática), con una capa de órdenes en Tiresias+Control+Mayúsculas+V, entrada en el menú Herramientas y categoría propia en las Opciones.",
+			"date": "2026-11-04",
+			"proprietary": false,
+			"versions": [
+				{
+					"version": "1.0.0",
+					"url": "tcaPortapapeles/tcaPortapapeles-1.0.0.tiresias-addon",
+					"sha256": "243001c861a3ac082e680aaafb2fe58ac649c914f86e73532f99438e3a1c973c",
+					"size": 174390,
+					"minApiVersion": "1.0",
+					"lastTestedApiVersion": "1.0",
+					"changelog": "Primera versión para Tiresias: todas las funciones de TCA-Portapapeles 0.6.1 para NVDA (anuncios hablados y sonidos de seleccionar todo, copiar, cortar, pegar, deshacer y rehacer, «Sin selección», activar y desactivar los anuncios, teclas disparadoras configurables, historial con formatos, archivos y carpetas que pega en el foco y restaura el portapapeles, sonido y lectura de lo añadido al historial, tiempo del monitor, leer el portapapeles, estadísticas del texto seleccionado, selector de trozos de texto y modo juego con traducción automática), con una capa de órdenes en Tiresias+Control+Mayúsculas+V, entrada en el menú Herramientas y categoría propia en las Opciones.",
+					"date": "2026-11-04"
 				}
 			]
 		},
