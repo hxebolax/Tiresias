@@ -425,6 +425,8 @@ class Magnifier:
 
 	def __init__(self) -> None:
 		self.active = False
+		#: Se soltó porque otro lector de pantalla tiene preferencia (se recupera al volver).
+		self._suspended = False
 		self.center: tuple[int, int] | None = None
 		self._origin: tuple[float, float] | None = None
 		self._lastMouse: tuple[int, int] | None = None
@@ -1003,6 +1005,22 @@ class Magnifier:
 		api.post_navigatorObjectChange.register(self.onNavigator)
 		events.post_event.register(self.onEvent)
 		if conf["magnifier"]["enableAtStartup"]:
+			if _otherReaderHasPriority():
+				# En espera la API de ampliación es del otro lector (su lupa y su cortina).
+				self._suspended = True
+			else:
+				self.setActive(True, announce=False)
+
+	# --------------------------------------------------------- otro lector
+	def suspendForOtherReader(self) -> None:
+		"""Otro lector tiene preferencia: se suelta la lupa (la API de ampliación es suya)."""
+		if self.active:
+			self._suspended = True
+			self.setActive(False, announce=False)
+
+	def resumeAfterOtherReader(self) -> None:
+		if self._suspended:
+			self._suspended = False
 			self.setActive(True, announce=False)
 
 	def terminate(self) -> None:
@@ -1043,6 +1061,15 @@ def runOnGuiAndWait(func, timeout: float = 3.0) -> None:
 	wx.CallAfter(run)
 	if not done.wait(timeout):
 		log.warning("La interfaz no respondió a tiempo al cerrar %r", func)
+
+
+def _otherReaderHasPriority() -> bool:
+	try:
+		from . import coexist
+
+		return bool(coexist.isStandby())
+	except Exception:
+		return False
 
 
 magnifier = Magnifier()

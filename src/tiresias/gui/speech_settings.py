@@ -62,6 +62,9 @@ class SpeechReadingPanel(S.ConfigPanel):
 		return [
 			S.Choice("numberReading", _("Lectura de números:"), _NUMBERS, group=gt),
 			S.Bool("splitAlphanumeric", _("Lectura alfanumérica: separar letras y números («abc123»)"), group=gt),
+			S.Bool("splitCamelCase", _("Separar las palabras unidas con mayúsculas («AndroidTools» se lee «Android Tools»)"), group=gt),
+			S.Bool("verseCitations", _("Leer las citas como capítulo y versículo («Romanos 13:11» se lee «13, 11» y no como una hora)"), group=gt),
+			S.Int("maxSelectionReportingLength", _("Longitud máxima de la selección que se lee (caracteres; por encima solo se dice cuántos):"), 1, 10000, group=gt),
 			S.Bool("decodeHtmlEntities", _("Leer las entidades HTML (por ejemplo «&&amp;») como su carácter"), group=gt),
 			S.Choice("sayAllUnit", _("Leer todo:"), _SAYALL_UNITS, group=gs),
 			S.Bool("sayAllWithoutPauses", _("Leer todo sin pausas en los saltos de línea"), group=gs),

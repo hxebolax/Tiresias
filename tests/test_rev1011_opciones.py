@@ -491,6 +491,7 @@ class ValidationCoherenceTests(unittest.TestCase):
 			("audio", "soundTheme"),
 			("braille", "translationTable"),
 			("braille", "inputTable"),
+			("braille", "perkinsTable"),
 			("ocr", "language"),
 			("ocr", "tesseractLanguage"),
 			("ai", "anthropicModel"),

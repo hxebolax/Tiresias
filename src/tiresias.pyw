@@ -19,6 +19,13 @@ if "--console-helper" in sys.argv:
 
 	sys.exit(console_reader.helperMain())
 
+if "--com-get-active-object" in sys.argv:
+	# Auxiliar sin uiAccess que pasa a la copia instalada un objeto COM de la
+	# tabla de objetos en ejecución (Outlook...), como nvda_slave en NVDA.
+	from tiresias import uiaccess  # noqa: E402
+
+	sys.exit(uiaccess.comHelperMain())
+
 from tiresias import core  # noqa: E402
 
 if __name__ == "__main__":

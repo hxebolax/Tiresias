@@ -391,6 +391,7 @@ def main(argv: list[str] | None = None) -> int:
 	app.Bind(wx.EVT_QUERY_END_SESSION, _onQueryEndSession)
 	app.Bind(wx.EVT_END_SESSION, _onEndSession)
 	gui.initialize(app, MAIN_WINDOW_TITLE)
+	_reportUiAccess()
 	_startCoreThread()
 	app.MainLoop()
 	log.info("Bucle de la interfaz terminado")
@@ -1320,10 +1321,25 @@ def _shellExecuteRunas(exe: str, params: str) -> int:
 			ole32.CoUninitialize()
 
 
+def _reportUiAccess() -> None:
+	"""Anota si esta copia lee las ventanas de administrador y deja que la cierre un proceso normal."""
+	from . import gui, uiaccess
+
+	try:
+		active = uiaccess.hasUiAccess()
+	except Exception:
+		active = False
+	log.info("Acceso a las ventanas de administrador (uiAccess): %s", "sí" if active else "no")
+	if active and gui.mainFrameHwnd:
+		uiaccess.allowCloseFromNormalProcesses(gui.mainFrameHwnd)
+
+
 def _spawnNewInstance() -> None:
 	cmd = _launchCommand() + ["--data", paths.DATA_DIR] + restartArguments() + list(_restartExtraArgs)
 	try:
-		subprocess.Popen(cmd, close_fds=True)
+		from . import uiaccess
+
+		uiaccess.spawn(cmd)
 	except OSError:
 		log.exception("No se pudo reiniciar")
 

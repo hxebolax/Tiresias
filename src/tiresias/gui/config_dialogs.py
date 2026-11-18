@@ -1918,6 +1918,10 @@ class SymbolsDialog(_ModelessDialog):
 		self.filterCtrl.Bind(wx.EVT_TEXT, lambda evt: self._refresh(self._selectedSymbol()))
 		self.list.Bind(wx.EVT_LIST_ITEM_SELECTED, lambda evt: self._loadFields())
 		self.list.Bind(wx.EVT_LIST_ITEM_DESELECTED, lambda evt: self._loadFields())
+		# Como NVDA (#20910): Supr quita el símbolo y el menú contextual (tecla
+		# Aplicaciones o Mayúsculas+F10) ofrece Quitar.
+		self.list.Bind(wx.EVT_KEY_DOWN, self._onListKey)
+		self.list.Bind(wx.EVT_CONTEXT_MENU, self._onListContextMenu)
 		self.nameCtrl.Bind(wx.EVT_TEXT, self._onFieldChange)
 		self.levelCtrl.Bind(wx.EVT_CHOICE, self._onFieldChange)
 		self.preserveCtrl.Bind(wx.EVT_CHOICE, self._onFieldChange)
@@ -2004,7 +2008,22 @@ class SymbolsDialog(_ModelessDialog):
 		self.nameCtrl.SetFocus()
 		self.nameCtrl.SelectAll()
 
-	def _onRemove(self, evt: wx.CommandEvent) -> None:
+	def _onListKey(self, evt: wx.KeyEvent) -> None:
+		if evt.GetKeyCode() in (wx.WXK_DELETE, wx.WXK_NUMPAD_DELETE) and not evt.HasAnyModifiers():
+			self._onRemove(None)
+			return
+		evt.Skip()
+
+	def _onListContextMenu(self, evt: wx.ContextMenuEvent) -> None:
+		if self._selectedSymbol() is None:
+			return
+		menu = wx.Menu()
+		item = menu.Append(wx.ID_ANY, _("&Quitar	Supr"))
+		self.Bind(wx.EVT_MENU, lambda e: self._onRemove(None), item)
+		self.list.PopupMenu(menu)
+		menu.Destroy()
+
+	def _onRemove(self, evt: wx.CommandEvent | None) -> None:
 		key = self._selectedSymbol()
 		if key is None:
 			return

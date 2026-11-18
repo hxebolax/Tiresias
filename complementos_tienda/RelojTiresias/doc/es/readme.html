@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Reloj para Tiresias</title>
+</head>
+<body>
+<h1>Reloj para Tiresias</h1>
+<p>Complemento de reloj para Tiresias, versión 1.6.3.</p>
+<p>Tiresias+Control+H: la H es de «hora». En versiones anteriores era Tiresias+Control+R, pero esa tecla ya es de Tiresias (vuelve a la configuración guardada) y el complemento la anulaba. Si prefieres otra, cámbiala en el menú de Tiresias, Preferencias, «Gestos de entrada...», categoría Reloj.</p>
+<h2>Tecla de acceso</h2>
+<p>Pulsa <strong>Tiresias+Control+H</strong> (la tecla Tiresias es Insertar, Insertar del teclado numérico o Bloqueo de mayúsculas). Suena un pitido: ya estás en la capa del reloj. Después pulsa una sola letra. Al terminar, la capa se cierra sola.</p>
+<h2>Funciones</h2>
+<ul>
+<li><strong>H:</strong> dice la hora. Si es una hora en punto o un cuarto y hay una grabación para esa hora, reproduce la grabación.</li>
+<li><strong>F:</strong> dice la fecha completa, por ejemplo lunes, 9 de noviembre de 2026.</li>
+<li><strong>T:</strong> dice la hora y la fecha.</li>
+<li><strong>A:</strong> activa o desactiva el anuncio de la hora. Cuando está activado, Tiresias dice la hora sola, cada cierto tiempo, sin pulsar nada.</li>
+<li><strong>I:</strong> cambia cada cuánto se anuncia la hora: 60, 30 o 15 minutos. Cada vez que la pulsas pasa al siguiente: de 60 a 30, de 30 a 15, y de 15 otra vez a 60. Con 60 minutos anuncia en las horas en punto; con 30, a las horas en punto y a las medias; con 15, a las :00, :15, :30 y :45.</li>
+<li><strong>S:</strong> abre el cuadro para elegir el motor de voz y la voz solo para el reloj. En el cuadro se elige primero el motor (por ejemplo eSpeak NG, las voces de Windows o Piper) y después una voz de ese motor. Al cambiar de motor, la lista de voces cambia a las voces de ese motor y la voz vuelve a la normal. También se puede volver al motor y a la voz normal de Tiresias. Solo el reloj habla con ese motor y esa voz; Tiresias sigue leyendo todo lo demás con su motor de siempre. Aceptar aplica lo elegido; Cancelar no cambia nada. El motor y la voz elegidos se guardan y se conservan al reiniciar. Si un motor no se puede abrir aparte, el reloj avisa y sigue con el motor que tenía.</li>
+<li><strong>O:</strong> abre la carpeta de tus grabaciones, para poner las tuyas. Abre clock12 si tu formato es de 12 horas, o clock24 si es de 24 horas. Esta carpeta no se borra al actualizar el complemento.</li>
+<li><strong>G:</strong> activa o desactiva el anuncio de la hora con grabaciones. Cuando está activado y hay un archivo wav para la hora que toca, se reproduce la grabación; si no hay archivo, se dice la hora con la voz. Cuando está desactivado, la hora siempre se dice con la voz.</li>
+<li><strong>C:</strong> cambia el formato de la hora entre 12 horas (3:45 de la tarde) y 24 horas (15:45).</li>
+<li><strong>E:</strong> dice el estado: si el anuncio está activado, cada cuánto se anuncia, qué motor usa solo el reloj, qué voz usa el reloj, si el anuncio con grabaciones está activado y qué formato se usa.</li>
+<li><strong>Escape:</strong> sale de la capa sin hacer nada.</li>
+</ul>
+<h2>Grabaciones</h2>
+<p>El complemento trae 48 grabaciones, una por cada cuarto de hora de 1 a 12. No dicen «de la mañana» ni «de la tarde», así que valen para los dos formatos: con el de 24 horas, las 15:00 usan la grabación de las 3:00.</p>
+<p>Para usar tus propias grabaciones, al cargar el complemento se crean las carpetas <strong>sonidos/clock12</strong> y <strong>sonidos/clock24</strong> en la carpeta de datos del complemento (<strong>addonsData/RelojTiresias</strong>, dentro de la carpeta de datos de Tiresias); la tecla O la abre. Tus grabaciones tienen preferencia sobre las del complemento y no se pierden al actualizarlo. Pon ahí tus grabaciones en formato <strong>wav</strong>, una por cada cuarto de hora. El nombre es la hora, sin espacios: <strong>HH-MM.wav</strong>.</p>
+<p>En clock12, la hora es de 1 a 12: 01-00.wav, 01-15.wav, 01-30.wav, 01-45.wav, 02-00.wav, y así hasta 12-45.wav. Son 48 archivos.</p>
+<p>En clock24, la hora es de 00 a 23: 00-00.wav, 00-15.wav, 00-30.wav, 00-45.wav, 01-00.wav, y así hasta 23-45.wav. Son 96 archivos.</p>
+<p>Si hay un archivo para la hora que toca, el reloj reproduce esa grabación en vez de decir la hora con la voz. Si no hay archivo, dice la hora con la voz, como siempre. Con la tecla O abres la carpeta que te toca, y con la tecla G activas o desactivas las grabaciones.</p>
+<h2>Ejemplos</h2>
+<p>Para oír la hora: Tiresias+Control+H, después H.</p>
+<p>Para que anuncie la hora cada 15 minutos: Tiresias+Control+H, después I dos veces (de 60 pasa a 30 y luego a 15), y después Tiresias+Control+H, después A para activarlo.</p>
+<p>Para elegir el motor y la voz del reloj: Tiresias+Control+H, después S, y en el cuadro elige primero el motor y después la voz. Aceptar aplica lo elegido; Cancelar no cambia nada. Solo el reloj habla con ese motor y esa voz; Tiresias sigue leyendo todo lo demás con su motor de siempre.</p>
+<p>Para poner tus grabaciones: Tiresias+Control+H, después O, y copia tus archivos wav con el nombre que toca en esa carpeta.</p>
+<h2>Ajustes</h2>
+<p>El anuncio, el intervalo, la voz, las grabaciones y el formato se guardan solos en la configuración de Tiresias y se conservan al reiniciar. Por defecto el anuncio viene desactivado, el intervalo es de 60 minutos, la voz es la normal de Tiresias, las grabaciones vienen activadas y el formato es de 12 horas. Si cambias de sintetizador y la voz elegida ya no existe, el reloj vuelve solo a la voz normal.</p>
+<p>Ten en cuenta que Tiresias ya dice la hora con Tiresias+F12 (y la fecha si lo pulsas dos veces). Este complemento añade el anuncio periódico, la voz propia del reloj, las grabaciones y las funciones con la tecla Tiresias+Control+H.</p>
+</body>
+</html>

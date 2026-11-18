@@ -119,6 +119,27 @@ executables = [
 		target_name="Tiresias-depuracion.exe",
 		icon=icon if os.path.isfile(icon) else None,
 	),
+	# Como NVDA (nvda_uiAccess.exe y nvda_noUIAccess.exe): la copia instalada
+	# en Archivos de programa usa el ejecutable con uiAccess, firmado al
+	# instalar, para leer y manejar las ventanas de administrador (Administrador
+	# de tareas, programas elevados, el control de cuentas...). La portable y
+	# las copias portables creadas desde la instalada usan el normal: Windows
+	# no deja abrir un ejecutable con uiAccess fuera de una carpeta protegida.
+	Executable(
+		os.path.join(SRC, "tiresias.pyw"),
+		base="gui",
+		target_name="Tiresias_uiAccess.exe",
+		icon=icon if os.path.isfile(icon) else None,
+		copyright=tiresias.COPYRIGHT,
+		uac_uiaccess=True,
+	),
+	Executable(
+		os.path.join(SRC, "tiresias.pyw"),
+		base="gui",
+		target_name="Tiresias_noUIAccess.exe",
+		icon=icon if os.path.isfile(icon) else None,
+		copyright=tiresias.COPYRIGHT,
+	),
 ]
 
 def _flattenLicenses(dist: str) -> None:

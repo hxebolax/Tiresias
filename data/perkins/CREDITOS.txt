@@ -1,0 +1,19 @@
+Sonidos del modo Perkins de Tiresias
+====================================
+
+teclaN.wav, espacioN.wav, retroceso.wav, linea.wav y papel.wav son trozos
+de la grabación «brailler.wav» de DennyD74 en Freesound: una máquina Perkins
+real («Rolling in a piece of paper, brailling a few lines with backspaces,
+and rolling out the paper quickly»).
+
+  https://freesound.org/people/DennyD74/sounds/611444/
+  Licencia: Creative Commons 0 (dominio público)
+  https://creativecommons.org/publicdomain/zero/1.0/
+
+campana.wav está sintetizado por Tiresias (la grabación no tiene la campana).
+
+Puedes poner tus propios sonidos con estos mismos nombres en la carpeta
+«perkinsPropios» de tu carpeta de datos de Tiresias (créala si no existe):
+tienen preferencia y no se tocan al actualizar Tiresias. Si un
+sonido tiene variantes (tecla1.wav, tecla2.wav...), se elige una al azar en
+cada pulsación.

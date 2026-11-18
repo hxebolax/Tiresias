@@ -74,6 +74,15 @@ DEFAULTS = {
 	"roleAbbreviations": {},
 	# Teclado braille con las teclas del PC: «8» (A S D F J K L Ñ) o «6» (S D F J K L).
 	"pcKeyboardDots": 8,
+	# Modo Perkins (Tiresias+Control+Mayúsculas+B): sonidos de la máquina,
+	# campana cerca del final de la línea, celdas por línea y si solo actúa
+	# al escribir en un campo de texto (si no, en cualquier sitio).
+	"perkinsSounds": True,
+	"perkinsBell": True,
+	"perkinsLineLength": 40,
+	"perkinsOnlyInEditable": True,
+	# Tabla del modo Perkins: «auto» = español integral de 6 puntos.
+	"perkinsTable": "auto",
 }
 conf.registerDefaults("braille", DEFAULTS)
 conf.registerDefaults(

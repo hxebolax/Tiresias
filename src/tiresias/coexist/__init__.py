@@ -332,6 +332,8 @@ def _suspendAll() -> None:
 	_step("táctil", _setTouchAllowed, False)
 	_step("eventos UIA", _uiaSuspend, True)
 	_step("braille", _releaseBraille)
+	# La API de ampliación solo admite un dueño: sin esto NVDA no podía poner su cortina.
+	_step("cortina y lupa", _visionStandby, True)
 	_step("indicador de lector de pantalla", _releaseScreenReaderFlag)
 	_step("punto de conexión de NVDA", _applyController)
 
@@ -357,6 +359,7 @@ def _resumeSteps() -> list[tuple]:
 		("táctil", _setTouchAllowed, (True,)),
 		("eventos UIA", _uiaSuspend, (False,)),
 		("braille", _restoreBraille, ()),
+		("cortina y lupa", _visionStandby, (False,)),
 		# Avisa a todas las ventanas (WM_SETTINGCHANGE): puede tardar.
 		("indicador de lector de pantalla", _applyScreenReaderFlag, ()),
 		("punto de conexión de NVDA", _applyController, ()),
@@ -394,6 +397,18 @@ def _synthStandby(standby: bool) -> None:
 	from .. import synth
 
 	synth.setStandby(standby)
+
+
+def _visionStandby(standby: bool) -> None:
+	"""En espera se sueltan la cortina y la lupa (el otro lector puede usar las suyas)."""
+	from .. import magnifier, vision
+
+	if standby:
+		vision.handler.suspendForOtherReader()
+		magnifier.magnifier.suspendForOtherReader()
+	else:
+		vision.handler.resumeAfterOtherReader()
+		magnifier.magnifier.resumeAfterOtherReader()
 
 
 def _setTouchAllowed(allowed: bool) -> None:

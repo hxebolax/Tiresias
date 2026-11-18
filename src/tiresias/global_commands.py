@@ -184,8 +184,15 @@ class GlobalCommands(ScriptableObject):
 			speech.speakMessage(_("sin selección"))
 			return
 		count = repeatCount()
-		if count == 0:
-			speech.speakText(_("{text} seleccionado").format(text=text) if len(text) < 2000 else _("{n} caracteres seleccionados").format(n=len(text)))
+		from .presentation import selectionLimit
+
+		if count < 3 and len(text) > selectionLimit():
+			# Como NVDA (#21104): una selección más larga que el límite de las
+			# Opciones no se lee ni se deletrea (bloquearía la voz); con cuatro
+			# pulsaciones se puede ver entera en una ventana.
+			speech.speakMessage(_("{n} caracteres seleccionados").format(n=len(text)))
+		elif count == 0:
+			speech.speakText(_("{text} seleccionado").format(text=text))
 		elif count == 1:
 			speech.speakSpelling(text)
 		elif count == 2:
