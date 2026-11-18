@@ -409,7 +409,8 @@ def _symbolDictionaries(v: Any) -> bool:
 
 
 def _maxLength(v: Any) -> int:
-	return max(10, min(1000, toInt(v)))
+	# NVDA 2027.1 (#21105): 0 = no partir las líneas.
+	return max(0, min(1000, toInt(v)))
 
 
 def _linesPerPage(v: Any) -> int:

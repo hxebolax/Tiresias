@@ -89,6 +89,8 @@ class VisionHandler:
 		self.curtainActive = False
 		#: La cortina tiene tomada una referencia de la API de ampliación (hilo de la interfaz).
 		self._curtainAcquired = False
+		#: La cortina se ha soltado porque otro lector tiene preferencia (se recupera al volver).
+		self._curtainSuspended = False
 		self._refreshTimer: int | None = None
 		self._drawn: dict[str, tuple[int, int, int, int]] = {}
 
@@ -159,6 +161,38 @@ class VisionHandler:
 			if conf["vision"]["curtainPlaySounds"]:
 				tones.playSound("screenCurtainOn" if enable else "screenCurtainOff")
 			speech.speakMessage(_("Cortina de pantalla activada") if enable else _("Cortina de pantalla desactivada"))
+
+	# --------------------------------------------------------- otro lector
+	def suspendForOtherReader(self) -> None:
+		"""Otro lector de pantalla tiene preferencia: se suelta la cortina.
+
+		La API de ampliación de Windows solo admite un efecto de color a pantalla
+		completa: con la cortina de Tiresias puesta, NVDA no podía activar la
+		suya («Failed to enable Screen Curtain», error 87). La opción guardada no
+		cambia: al volver Tiresias, la cortina se recupera.
+		"""
+		if not (self.curtainActive or self._curtainAcquired):
+			return
+		from .magnifier import runOnGuiAndWait
+
+		def off() -> None:
+			try:
+				self._applyCurtain(False)
+			except Exception:
+				log.debug("No se pudo soltar la cortina", exc_info=True)
+
+		runOnGuiAndWait(off)
+		self.curtainActive = False
+		self._curtainSuspended = True
+		log.info("Cortina de pantalla soltada mientras Tiresias está en espera")
+
+	def resumeAfterOtherReader(self) -> None:
+		"""Tiresias vuelve a estar activo: recupera la cortina si estaba puesta."""
+		if not self._curtainSuspended:
+			return
+		self._curtainSuspended = False
+		if conf["vision"]["screenCurtain"]:
+			self.setScreenCurtain(True, announce=False, startup=True)
 
 	def curtainStateText(self) -> str:
 		return _("Cortina de pantalla activada") if self.curtainActive else _("Cortina de pantalla desactivada")
@@ -330,7 +364,11 @@ class VisionHandler:
 		api.post_reviewMove.register(self.onReviewMove)
 		api.post_navigatorObjectChange.register(self.onNavigatorChange)
 		if conf["vision"]["screenCurtain"]:
-			self.setScreenCurtain(True, announce=False, startup=True)
+			if _otherReaderHasPriority():
+				# Arranca en espera: la cortina es del otro lector hasta que Tiresias se active.
+				self._curtainSuspended = True
+			else:
+				self.setScreenCurtain(True, announce=False, startup=True)
 		if self.anyHighlight():
 			queue_handler.callLater(500, self.refresh)
 
@@ -352,6 +390,15 @@ class VisionHandler:
 			highlighter.destroy()
 		except Exception:
 			pass
+
+
+def _otherReaderHasPriority() -> bool:
+	try:
+		from . import coexist
+
+		return bool(coexist.isStandby())
+	except Exception:
+		return False
 
 
 handler = VisionHandler()

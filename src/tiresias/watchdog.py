@@ -30,7 +30,6 @@ from __future__ import annotations
 import ctypes
 import json
 import os
-import subprocess
 import threading
 import time
 
@@ -228,11 +227,11 @@ def emergencyRestart(frozenFor: float) -> None:
 			log.exception("No se pudo guardar la configuración antes del reinicio")
 		finally:
 			conf._lock.release()
-	from . import core, paths
+	from . import core, paths, uiaccess
 
 	cmd = core._launchCommand() + ["--data", paths.DATA_DIR] + core.restartArguments()
 	try:
-		subprocess.Popen(cmd, close_fds=True)
+		uiaccess.spawn(cmd)
 		# Para el guardián: es un reinicio (espera a la copia nueva). Si no se
 		# pudo iniciar, no hay marcador y el guardián lo trata como un fallo.
 		from .coexist import guardian

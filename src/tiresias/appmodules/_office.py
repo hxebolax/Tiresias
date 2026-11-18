@@ -254,10 +254,12 @@ def nativeOMFromWindow(hwnd: int) -> Any:
 
 def activeObject(progId: str) -> Any:
 	"""Objeto activo registrado en la ROT (p. ej. ``Outlook.Application``)."""
-	import comtypes.client
+	from .. import uiaccess
 
 	try:
-		obj = comtypes.client.GetActiveObject(progId, dynamic=True)
+		# Con uiAccess (copia instalada) la ROT no muestra los objetos de los
+		# programas normales: se piden a un proceso auxiliar, como NVDA.
+		obj = uiaccess.getActiveObject(progId, dynamic=True)
 	except OSError as e:
 		raise OfficeUnavailable(str(e)) from e
 	if obj is None:

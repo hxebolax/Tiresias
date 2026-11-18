@@ -179,6 +179,18 @@ class SpeechGlobalPlugin(GlobalPlugin):
 		conf["speech"]["splitAlphanumeric"] = val
 		speech.speakMessage(_("lectura alfanumérica activada") if val else _("lectura alfanumérica desactivada"))
 
+	@script(description=_("Activa o desactiva la separación de las palabras unidas con mayúsculas («AndroidTools»)"), category=CAT_SPEECH)
+	def script_toggleSplitCamelCase(self, gesture) -> None:
+		val = not conf["speech"]["splitCamelCase"]
+		conf["speech"]["splitCamelCase"] = val
+		speech.speakMessage(_("separar palabras con mayúsculas activado") if val else _("separar palabras con mayúsculas desactivado"))
+
+	@script(description=_("Activa o desactiva la lectura de las citas como capítulo y versículo («Romanos 13:11»)"), category=CAT_SPEECH)
+	def script_toggleVerseCitations(self, gesture) -> None:
+		val = not conf["speech"]["verseCitations"]
+		conf["speech"]["verseCitations"] = val
+		speech.speakMessage(_("citas como capítulo y versículo activado") if val else _("citas como capítulo y versículo desactivado"))
+
 	@script(description=_("Cambia la detección automática del idioma: desactivada, por alfabeto, o por alfabeto y palabras"), category=CAT_SPEECH)
 	def script_cycleLanguageDetection(self, gesture) -> None:
 		_cycleSetting("languageDetection", DETECTION_LABELS)

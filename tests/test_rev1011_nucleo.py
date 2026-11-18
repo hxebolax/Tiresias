@@ -43,7 +43,7 @@ if not getattr(paths, "_dataDirForTests", None):
 	paths.ensureDataDirs()
 	paths._dataDirForTests = _TMP  # type: ignore[attr-defined]
 
-from tiresias import core, crash_log, extension_points, i18n, queue_handler, watchdog  # noqa: E402
+from tiresias import core, crash_log, extension_points, i18n, queue_handler, uiaccess, watchdog  # noqa: E402
 from tiresias import log as logModule  # noqa: E402
 from tiresias.config import ConfigManager  # noqa: E402
 
@@ -185,7 +185,7 @@ class TestLimiteDeReinicios(unittest.TestCase):
 		from tiresias.coexist import guardian
 		from tiresias.config import conf
 
-		with mock.patch.object(watchdog.ctypes.windll.kernel32, "Beep"), mock.patch.object(conf, "save"), mock.patch.object(watchdog.subprocess, "Popen") as popen, mock.patch.object(guardian, "writeMarkerNow") as marker, mock.patch.object(logModule, "shutdown") as shut, mock.patch.object(logModule, "flush") as flush, mock.patch.object(crash_log, "uninstall"), mock.patch.object(watchdog.os, "_exit", side_effect=_Stop):
+		with mock.patch.object(watchdog.ctypes.windll.kernel32, "Beep"), mock.patch.object(conf, "save"), mock.patch.object(uiaccess.subprocess, "Popen") as popen, mock.patch.object(guardian, "writeMarkerNow") as marker, mock.patch.object(logModule, "shutdown") as shut, mock.patch.object(logModule, "flush") as flush, mock.patch.object(crash_log, "uninstall"), mock.patch.object(watchdog.os, "_exit", side_effect=_Stop):
 			with self.assertRaises(_Stop):
 				watchdog.emergencyRestart(35)
 		popen.assert_called_once()

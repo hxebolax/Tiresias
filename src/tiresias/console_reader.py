@@ -181,8 +181,14 @@ class _Helper:
 		from . import paths
 
 		if paths.FROZEN:
-			exe = os.path.join(os.path.dirname(sys.executable), "Tiresias.exe")
-			return [exe if os.path.isfile(exe) else sys.executable, "--console-helper"]
+			folder = os.path.dirname(sys.executable)
+			# En la copia instalada, Tiresias.exe es el de uiAccess: el auxiliar
+			# usa el ejecutable normal (CreateProcess no siempre puede con uiAccess).
+			for name in ("Tiresias_noUIAccess.exe", "Tiresias.exe"):
+				exe = os.path.join(folder, name)
+				if os.path.isfile(exe):
+					return [exe, "--console-helper"]
+			return [sys.executable, "--console-helper"]
 		exe = sys.executable
 		pyw = os.path.join(os.path.dirname(exe), "pythonw.exe")
 		script = os.path.join(paths.SOURCE_DIR, "tiresias.pyw")

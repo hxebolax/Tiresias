@@ -286,6 +286,12 @@ def script_braille_togglePcKeyboard(self, gesture) -> None:
 		_speak(_("teclado braille del PC desactivado"))
 
 
+def script_braille_togglePerkins(self, gesture) -> None:
+	from . import perkins
+
+	_speak(perkins.toggle())
+
+
 # ====================================================================== instalación
 #: (función, descripción, gestos)
 _SCRIPTS: list[tuple[Any, str, tuple[str, ...]]] = [
@@ -319,6 +325,11 @@ _SCRIPTS: list[tuple[Any, str, tuple[str, ...]]] = [
 	(script_braille_toggleControlShift, _("Teclado braille: Control y Mayúsculas para la siguiente tecla"), ()),
 	(script_braille_toggleAltShift, _("Teclado braille: Alt y Mayúsculas para la siguiente tecla"), ()),
 	(script_braille_togglePcKeyboard, _("Usa las teclas F D S J K L del teclado como teclado braille"), ("kb:tiresias+control+alt+b",)),
+	(
+		script_braille_togglePerkins,
+		_("Cambia entre el teclado normal y el modo Perkins: escribir en los campos de texto como en una máquina Perkins (F D S J K L, espacio, A interlineado, Ñ retroceso)"),
+		("kb:tiresias+control+shift+b",),
+	),
 ]
 
 #: Gestos por defecto de órdenes que ya existen en las órdenes globales.

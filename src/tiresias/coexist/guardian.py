@@ -119,12 +119,16 @@ def guardianCommand(pid: int, dataDir: str) -> list[str]:
 
 
 def _spawn(cmd: list[str]) -> subprocess.Popen:
+	# uiaccess.spawn: la copia instalada (con uiAccess) se inicia con
+	# ShellExecuteEx si CreateProcess no puede (error 740).
+	from .. import uiaccess
+
 	try:
 		# Fuera del trabajo (job) del proceso padre: si quien lanzó Tiresias
 		# cierra su trabajo, el guardián tiene que seguir vivo.
-		return subprocess.Popen(cmd, close_fds=True, creationflags=CREATE_NO_WINDOW | CREATE_BREAKAWAY_FROM_JOB)
+		return uiaccess.spawn(cmd, creationflags=CREATE_NO_WINDOW | CREATE_BREAKAWAY_FROM_JOB)
 	except OSError:
-		return subprocess.Popen(cmd, close_fds=True, creationflags=CREATE_NO_WINDOW)
+		return uiaccess.spawn(cmd, creationflags=CREATE_NO_WINDOW)
 
 
 def start(args=None) -> bool:

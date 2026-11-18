@@ -771,6 +771,15 @@ class ExtraCommands(ScriptableObject):
 	def script_activateClipboardSettings(self, gesture) -> None:
 		self._settings("clipboard")
 
+	# Como NVDA 2027.1 (#21158): sin tecla; se asignan en Gestos de entrada.
+	@script(description=_("Abre las opciones de navegación por documentos"), category=CAT_CONFIG)
+	def script_activateDocumentNavigationSettings(self, gesture) -> None:
+		self._settings("documentNavigation")
+
+	@script(description=_("Abre las opciones de matemáticas"), category=CAT_CONFIG)
+	def script_activateMathSettings(self, gesture) -> None:
+		self._settings("math")
+
 	@script(description=_("Abre las opciones de UI Automation (categoría Avanzado)"), category=CAT_CONFIG)
 	def script_activateUIASettings(self, gesture) -> None:
 		# Las opciones de UI Automation están en «Avanzado» (grupo «UI Automation»).

@@ -420,7 +420,7 @@ def _caretContext(obj: Any, role: Role, states: set[State], reason: Reason) -> s
 		sel = obj.makeTextInfo(textinfo.POSITION_SELECTION)
 		if not sel.isCollapsed:
 			text = sel.text
-			return _("{text} seleccionado").format(text=_truncate(text, 500)) if text.strip() else ""
+			return _("{text} seleccionado").format(text=_truncate(text, min(500, selectionLimit()))) if text.strip() else ""
 		info = obj.makeTextInfo(textinfo.POSITION_CARET)
 		info.expand(textinfo.UNIT_LINE)
 		line = info.text.rstrip("\r\n")
@@ -818,7 +818,22 @@ def speakTextInfo(info: textinfo.TextInfo, unit: str, reason: Reason = Reason.CA
 		braille.handler.handleCaretMove(info)
 
 
-def _truncate(text: str, limit: int = 1000) -> str:
+def selectionLimit() -> int:
+	"""Caracteres de una selección que se dicen enteros (``speech.maxSelectionReportingLength``).
+
+	Como NVDA (#21104): por encima de este límite se dice solo cuántos
+	caracteres hay seleccionados (o el principio y «y N caracteres más»), y
+	no se deletrea, para no bloquear la voz con una selección enorme.
+	"""
+	try:
+		return max(1, int(conf["speech"]["maxSelectionReportingLength"]))
+	except Exception:
+		return 1000
+
+
+def _truncate(text: str, limit: int | None = None) -> str:
+	if limit is None:
+		limit = selectionLimit()
 	if len(text) > limit:
 		return text[:limit] + " " + _("y {n} caracteres más").format(n=len(text) - limit)
 	return text

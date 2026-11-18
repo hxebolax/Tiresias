@@ -618,6 +618,16 @@ def _brailleTableChoices() -> ChoiceList:
 		return []
 
 
+def _perkinsTableChoices() -> ChoiceList:
+	try:
+		from ..braille import perkins
+
+		return perkins.tableChoices()
+	except Exception:
+		log.exception("No se pudo obtener la lista de tablas del modo Perkins")
+		return []
+
+
 def _brailleInputTableChoices() -> ChoiceList:
 	try:
 		from ..braille import tables
@@ -1498,6 +1508,11 @@ class BraillePanel(ConfigPanel):
 			Choice("translationTable", _("Tabla de salida:"), _brailleTableChoices, group=gt),
 			Choice("inputTable", _("Tabla de entrada:"), _brailleInputTableChoices, group=gt),
 			Choice("pcKeyboardDots", _("Teclado braille del PC:"), bp.PC_DOTS, group=gt),
+			Choice("perkinsTable", _("Modo Perkins: tabla braille:"), _perkinsTableChoices, group=_("Modo Perkins")),
+			Bool("perkinsOnlyInEditable", _("Modo Perkins: actuar solo al escribir en campos de texto y documentos"), group=_("Modo Perkins")),
+			Bool("perkinsSounds", _("Modo Perkins: sonidos de la máquina"), group=_("Modo Perkins")),
+			Bool("perkinsBell", _("Modo Perkins: campana cerca del final de la línea"), group=_("Modo Perkins")),
+			Int("perkinsLineLength", _("Modo Perkins: celdas por línea:"), 10, 100, group=_("Modo Perkins")),
 			Bool("expandAtCursor", _("Expandir a braille informático la palabra del cursor"), group=gt),
 			Choice("mode", _("Modo braille:"), _BRAILLE_MODES, group=gs),
 			Choice("tetherTo", _("Braille sigue:"), _BRAILLE_TETHER, group=gs),
@@ -1853,7 +1868,7 @@ class BrowseModePanel(ConfigPanel):
 			Choice("loadingIndicator", _("Indicación mientras carga el documento:"), [("off", _("Ninguna")), ("beep", _("Pitidos")), ("speech", _("Voz"))], group=gl),
 			Bool("reportPageSummary", _("Decir un resumen de la página al cargarla (encabezados, enlaces, regiones)"), group=gl),
 			Bool("announceModeOnDocumentChange", _("Anunciar el modo al entrar en otro documento"), group=gl),
-			Int("maxLineLength", _("Máximo de caracteres por línea:"), 10, 1000, group=gd),
+			Int("maxLineLength", _("Máximo de caracteres por línea (0 = no partir las líneas):"), 0, 1000, group=gd),
 			Int("linesPerPage", _("Líneas por página:"), 5, 500, group=gd),
 			Bool("useScreenLayout", _("Usar la disposición en pantalla (enlaces en la misma línea)"), group=gd),
 			# #11073 y #3997.

@@ -46,6 +46,8 @@ INCLUDE = [
 	# (data/locale se copia aparte con copyLocale: solo los .mo.)
 	"docs",
 	"images",
+	# Sonidos del modo Perkins (grabación CC0 de una máquina Perkins).
+	"perkins",
 ]
 
 #: Archivos de la raíz del proyecto que van a ``data`` (origen, destino en data).

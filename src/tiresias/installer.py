@@ -52,9 +52,9 @@ PUBLISHER = "Proyecto Tiresias"
 
 #: Partes de ``data`` que acompañan al programa (también los binarios: API de
 #: control, Escritorio remoto, eSpeak NG, documentos e icono).
-PROGRAM_DATA_INCLUDE = ["symbols", "sounds", "brailleTables", "addons", "speechDicts/default.json", "controller", "rdp", "synthDrivers", "louis", "locale", "docs", "images"]
+PROGRAM_DATA_INCLUDE = ["symbols", "sounds", "brailleTables", "addons", "speechDicts/default.json", "controller", "rdp", "synthDrivers", "louis", "locale", "docs", "images", "perkins"]
 #: Partes de ``data`` del programa que se sustituyen enteras al instalar encima.
-PROGRAM_DATA_REPLACE = ["controller", "rdp", "synthDrivers", "louis", "locale", "docs", "images"]
+PROGRAM_DATA_REPLACE = ["controller", "rdp", "synthDrivers", "louis", "locale", "docs", "images", "perkins"]
 #: Carpetas de versiones anteriores a 1.0.2 (fuera de ``data``) que se borran al actualizar.
 LEGACY_PROGRAM_DIRS = ["controller", "rdp", "synthDrivers", "docs", "share"]
 #: Partes de los datos del usuario que se copian con «copiar la configuración»
@@ -131,9 +131,34 @@ def copyTreeNoLinks(src: str, dst: str) -> int:
 			if isLink(path):
 				log.warning("No se copia %s: es un enlace", path)
 				continue
-			shutil.copy2(path, os.path.join(target, fn), follow_symlinks=False)
+			_copyWithRetries(path, os.path.join(target, fn))
 			count += 1
 	return count
+
+
+#: Intentos y espera al copiar un archivo bloqueado un momento (NVDA #21090).
+COPY_RETRIES = 6
+COPY_RETRY_WAIT = 0.5
+
+
+def _copyWithRetries(src: str, dst: str, retries: int = COPY_RETRIES, wait: float = COPY_RETRY_WAIT) -> None:
+	"""``shutil.copy2`` que reintenta si el archivo está bloqueado un momento.
+
+	Un antivirus o un guardado a medias de la configuración bloquean el archivo
+	unas décimas: antes la copia a la configuración del sistema fallaba entera.
+	"""
+	for attempt in range(retries):
+		try:
+			shutil.copy2(src, dst, follow_symlinks=False)
+			return
+		except PermissionError:
+			if attempt == retries - 1:
+				raise
+		except OSError as e:
+			if getattr(e, "winerror", None) not in (32, 33) or attempt == retries - 1:
+				raise
+		log.debug("%s está bloqueado; se reintenta la copia", src)
+		time.sleep(wait)
 
 
 def folderSize(path: str) -> int:
@@ -421,6 +446,9 @@ class InstallOptions:
 	#: Al actualizar, cerrar las demás copias que se ejecutan desde la carpeta
 	#: de destino (el usuario lo ha aceptado; ver :func:`waitForRunningCopies`).
 	closeRunning: bool = False
+	#: Acceso a las ventanas de administrador (uiAccess, como NVDA instalado):
+	#: solo al instalar para todos los usuarios en Archivos de programa.
+	uiAccess: bool = True
 
 
 # ---------------------------------------------------------------------- copias en ejecución
@@ -592,8 +620,16 @@ def install(opts: InstallOptions) -> str:
 		if os.path.exists(p):
 			copyTree(p, os.path.join(target, "data", *part.split("/")))
 	exe = os.path.join(target, EXE_NAME)
+	uiAccess = False
+	if opts.uiAccess and opts.allUsers and t.writeRegistry:
+		# Como NVDA instalado: el ejecutable con uiAccess, firmado, para leer el
+		# Administrador de tareas y demás ventanas de administrador sin
+		# ejecutar Tiresias como administrador.
+		from . import uiaccess
+
+		uiAccess = uiaccess.enable(target)
 	with open(os.path.join(target, paths.INSTALLED_MARKER), "w", encoding="utf-8") as f:
-		json.dump({"version": VERSION, "date": datetime.date.today().isoformat(), "allUsers": opts.allUsers}, f, ensure_ascii=False, indent="\t")
+		json.dump({"version": VERSION, "date": datetime.date.today().isoformat(), "allUsers": opts.allUsers, "uiAccess": uiAccess}, f, ensure_ascii=False, indent="\t")
 	if opts.copyConfig:
 		dest = opts.userDataDir or paths.userDataDir()
 		if os.path.normcase(os.path.abspath(dest)) != os.path.normcase(os.path.abspath(paths.DATA_DIR)):
@@ -821,6 +857,11 @@ def uninstall(targetDir: str | None = None, targets: SystemTargets | None = None
 			from . import secure_screens
 
 			secure_screens.unregisterIfFrom(exe)
+			from . import uiaccess
+
+			if os.path.isfile(os.path.join(target, uiaccess.NO_UIACCESS_EXE)):
+				# El certificado local con el que se firmó el ejecutable con uiAccess.
+				uiaccess.removeCertificates()
 	if removeUserData:
 		shutil.rmtree(userDataDir or paths.userDataDir(), ignore_errors=True)
 	return _removeFolder(target)
@@ -922,6 +963,13 @@ def createPortableCopy(dest: str, copyConfig: bool = True, copyAddons: bool = Tr
 	if frozen:
 		for entry in programFiles(appDir):
 			copyTree(os.path.join(appDir, entry), os.path.join(dest, entry), exclude=PROGRAM_COPY_EXCLUDE)
+		from . import uiaccess
+
+		normal = uiaccess.portableExecutable(appDir)
+		if os.path.normcase(normal) != os.path.normcase(os.path.join(appDir, EXE_NAME)):
+			# Desde la copia instalada, Tiresias.exe es el de uiAccess: fuera de
+			# Archivos de programa Windows no lo abre. La portable lleva el normal.
+			shutil.copy2(normal, os.path.join(dest, EXE_NAME))
 	else:
 		for entry in SOURCE_TREE_ITEMS:
 			p = os.path.join(appDir, entry)
@@ -1148,7 +1196,9 @@ def runApplyUpdate(args) -> int:
 		pass
 	exe = os.path.join(target, EXE_NAME)
 	if os.path.isfile(exe) and not getattr(args, "no_launch_after_update", False):
-		subprocess.Popen([exe], cwd=target, close_fds=True)
+		from . import uiaccess
+
+		uiaccess.spawn([exe], cwd=target)
 		try:
 			# Si la copia actualizada no llega a arrancar, el lector de pantalla recordado.
 			from .coexist import guardian
@@ -1302,7 +1352,10 @@ def runSilentInstall(args) -> int:
 
 def _startInstalled(exe: str) -> None:
 	try:
-		subprocess.Popen([exe], cwd=os.path.dirname(exe), close_fds=True)
+		# Con uiAccess, CreateProcess no puede iniciarlo desde aquí: ShellExecuteEx.
+		from . import uiaccess
+
+		uiaccess.spawn([exe], cwd=os.path.dirname(exe))
 	except OSError:
 		log.exception("No se pudo iniciar %s", exe)
 

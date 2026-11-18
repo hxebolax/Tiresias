@@ -36,6 +36,11 @@ log = getLogger("coexist")
 
 #: Lo que se espera como mucho a que el lector esté listo (s).
 READY_TIMEOUT = 30.0
+#: Reintentos de speakText si NVDA aún no lo acepta, y la espera entre ellos (s).
+NVDA_SPEAK_RETRIES = 4
+NVDA_SPEAK_RETRY_WAIT = 2.0
+#: Margen tras aparecer la ventana principal de NVDA (aún está fijando el foco).
+NVDA_WINDOW_SETTLE = 1.0
 
 PATH_NVDA = "nvda"
 PATH_JAWS = "jaws"
@@ -45,6 +50,38 @@ PATH_NONE = "none"
 
 
 # ------------------------------------------------------------------ NVDA
+def _nvdaMainWindowPid() -> int:
+	"""PID de la ventana principal (oculta) de NVDA, «NVDA» de clase wxWindowNR; 0 si no hay."""
+	user32 = ctypes.windll.user32
+	user32.FindWindowW.argtypes = [wt.LPCWSTR, wt.LPCWSTR]
+	user32.FindWindowW.restype = wt.HWND
+	hwnd = user32.FindWindowW("wxWindowNR", "NVDA")
+	if not hwnd:
+		return 0
+	pid = wt.DWORD()
+	user32.GetWindowThreadProcessId(hwnd, ctypes.byref(pid))
+	return int(pid.value)
+
+
+def waitNvdaReady(reader: ReaderInfo | None, deadline: float, valid: Callable[[], bool], sleep=time.sleep, findPid=_nvdaMainWindowPid) -> bool:
+	"""Espera a que NVDA termine de arrancar (su ventana principal existe).
+
+	NVDA atiende ``testIfRunning`` en cuanto carga su biblioteca, mucho antes
+	de tener foco: si se le pide ``speakText`` entonces, falla
+	(«'NoneType' object has no attribute 'sleepMode'» en su registro) y
+	Tiresias se quedaba en un tono. La ventana principal la crea al final del
+	arranque, justo antes de fijar el foco.
+	"""
+	want = getattr(reader, "pid", 0) or 0
+	while valid() and time.monotonic() < deadline:
+		pid = findPid()
+		if pid and (not want or pid == want):
+			sleep(NVDA_WINDOW_SETTLE)
+			return True
+		sleep(0.5)
+	return False
+
+
 def speakThroughNvda(text: str, reader: ReaderInfo | None, timeout: float, valid: Callable[[], bool]) -> bool:
 	from ..controller import server
 
@@ -70,7 +107,17 @@ def speakThroughNvda(text: str, reader: ReaderInfo | None, timeout: float, valid
 		log.debug("NVDA responde con el PID %d (detectado %d)", pid, reader.pid)
 	if not valid():
 		return False
-	res = client.speakText(text)
+	if not waitNvdaReady(reader, deadline, valid):
+		log.info("NVDA no ha terminado de arrancar: se intenta igualmente")
+	res = -1
+	for attempt in range(NVDA_SPEAK_RETRIES):
+		if not valid():
+			return False
+		res = client.speakText(text)
+		if res == 0:
+			break
+		if attempt < NVDA_SPEAK_RETRIES - 1:
+			time.sleep(NVDA_SPEAK_RETRY_WAIT)
 	if res != 0:
 		log.info("NVDA no aceptó speakText (estado %d)", res)
 		return False

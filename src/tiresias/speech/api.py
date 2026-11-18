@@ -858,6 +858,10 @@ def processText(text: str, symbolLevel: int | None = None, language: str | None 
 	if sp["unicodeNormalization"]:
 		text = unicodedata.normalize("NFKC", text)
 	text = dictionaries.processText(text)
+	if sp["verseCitations"]:
+		text = numbers.readVerseCitations(text)
+	if sp["splitCamelCase"]:
+		text = numbers.splitCamelCase(text)
 	if sp["splitAlphanumeric"]:
 		text = numbers.splitAlphanumeric(text)
 	mode = numbers.effectiveNumberMode(sp)

@@ -14,7 +14,6 @@ iniciar al iniciar sesión) se hace después en este proceso.
 from __future__ import annotations
 
 import os
-import subprocess
 from typing import Any
 
 import wx
@@ -222,7 +221,10 @@ class InstallDialog(wx.Dialog):
 			if launch:
 				# La copia instalada sustituye a esta al arrancar.
 				try:
-					subprocess.Popen([exe], cwd=os.path.dirname(exe), close_fds=True)
+					# Con uiAccess, CreateProcess no puede iniciarla: uiaccess.spawn usa ShellExecuteEx.
+					from .. import uiaccess
+
+					uiaccess.spawn([exe], cwd=os.path.dirname(exe))
 				except OSError:
 					log.exception("No se pudo iniciar la copia instalada")
 

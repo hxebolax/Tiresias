@@ -110,7 +110,21 @@ class BrailleInputHandler:
 	# ---------------------------------------------------------- tabla
 	@staticmethod
 	def table() -> tables.Table:
+		if pcKeyboard.perkins:
+			# El modo Perkins escribe braille literario de 6 puntos (su propia tabla).
+			from . import perkins
+
+			return perkins.inputTable()
 		return tables.getTable(conf["braille"]["inputTable"], forInput=True)
+
+	def _wordText(self, table: tables.Table, cells: list[int]) -> str:
+		"""Texto de las celdas de la palabra en curso."""
+		text = self._backTranslate(table, cells)
+		if pcKeyboard.perkins and text:
+			from . import perkins
+
+			text = perkins.fixSpanishMarks(text)
+		return text
 
 	def _backTranslate(self, table: tables.Table, cells: list[int]) -> str:
 		try:
@@ -196,7 +210,7 @@ class BrailleInputHandler:
 		if table.contracted:
 			self._updateDisplay()
 			return
-		text = self._backTranslate(table, self.cells)
+		text = self._wordText(table, self.cells)
 		self._applyText(text)
 		self._updateDisplay()
 		if not text and len(self.cells) > 4:
@@ -291,18 +305,19 @@ class BrailleInputHandler:
 		self.translate()
 		self.sendKey("enter")
 
-	def eraseLastCell(self) -> None:
+	def eraseLastCell(self, announce: bool = True) -> None:
 		if not self.cells:
 			self.sendKey("backspace", [])
 			return
 		self.cells.pop()
 		table = self.table()
 		if not table.contracted:
-			self._applyText(self._backTranslate(table, self.cells) if self.cells else "")
+			self._applyText(self._wordText(table, self.cells) if self.cells else "")
 		self._updateDisplay()
-		from .. import speech
+		if announce:
+			from .. import speech
 
-		speech.speakMessage(_("celda borrada"))
+			speech.speakMessage(_("celda borrada"))
 
 	# ---------------------------------------------------------- modificadores
 	def toggleModifier(self, mod: str) -> str:
@@ -345,29 +360,102 @@ handler = BrailleInputHandler()
 #: Códigos de exploración (posición física, no dependen de la distribución).
 _SCAN_DOTS = {0x21: 1, 0x20: 2, 0x1F: 3, 0x24: 4, 0x25: 5, 0x26: 6, 0x1E: 7, 0x27: 8}
 _SCAN_SPACE = 0x39
+#: Modo Perkins: las teclas de los lados hacen de las de la máquina.
+#: A (a la izquierda de S) es la tecla de interlineado y Ñ (a la derecha de
+#: L; «;» en los teclados ingleses), la de retroceso, como en la Perkins.
+_SCAN_PERKINS_LINE = 0x1E
+_SCAN_PERKINS_BACK = 0x27
+_SCAN_ENTER = 0x1C
+_SCAN_BACKSPACE = 0x0E
+#: Teclas de una sola pulsación del modo Perkins (no forman acordes).
+_PERKINS_SPECIAL = {_SCAN_PERKINS_LINE: "line", _SCAN_PERKINS_BACK: "back", _SCAN_ENTER: "line", _SCAN_BACKSPACE: "back"}
 
 
 class PcBrailleKeyboard:
-	"""Teclas del PC como teclado braille (se activa con una orden)."""
+	"""Teclas del PC como teclado braille (se activa con una orden).
+
+	Tiene dos formas:
+
+	- **teclado braille del PC** (Tiresias+Control+Alt+B): F D S J K L (y A,
+	  Ñ para los puntos 7 y 8) en cualquier sitio;
+	- **modo Perkins** (Tiresias+Control+Mayúsculas+B): como una máquina
+	  Perkins. Solo actúa al escribir en un campo de texto, un documento o
+	  una consola (en los demás sitios el teclado es el normal), usa seis
+	  puntos, A es la tecla de interlineado y Ñ la de retroceso (además de
+	  Intro y Retroceso), suena como la máquina y toca la campana al acercarse
+	  al final de la línea. Las demás teclas del teclado siguen funcionando.
+	"""
 
 	def __init__(self) -> None:
 		self.enabled = False
+		self.perkins = False
 		self._down: set[int] = set()
 		self._chord: set[int] = set()
+		self._special: set[int] = set()
 		self._registered = False
+		#: Foco actual y si es un sitio donde se escribe (lo actualiza el núcleo).
+		self._focusObj: Any = None
+		self._focusEditable = False
+		self._focusRegistered = False
 
-	def setEnabled(self, on: bool) -> None:
+	def setEnabled(self, on: bool, perkins: bool = False) -> None:
 		from ..input import core as inputCore
 
 		self.enabled = bool(on)
+		self.perkins = self.enabled and bool(perkins)
 		self._down.clear()
 		self._chord.clear()
+		self._special.clear()
 		if self.enabled and not self._registered:
 			inputCore.decide_handleRawKey.register(self.onRawKey)
 			self._registered = True
 		elif not self.enabled and self._registered:
 			inputCore.decide_handleRawKey.unregister(self.onRawKey)
 			self._registered = False
+		if self.perkins:
+			self._watchFocus()
+			from . import perkins as perkinsModule
+
+			perkinsModule.machine.reset()
+
+	# ---------------------------------------------------------- foco (modo Perkins)
+	def _watchFocus(self) -> None:
+		from .. import api
+
+		if not self._focusRegistered:
+			api.post_focusChange.register(self._onFocusChange)
+			self._focusRegistered = True
+		self._onFocusChange(api.getFocusObject())
+
+	def _onFocusChange(self, obj: Any = None) -> None:
+		"""Hilo del núcleo: anota si el foco nuevo es un sitio donde se escribe."""
+		from .. import clipboard
+
+		self._focusObj = obj
+		try:
+			self._focusEditable = obj is not None and clipboard.focusIsEditable()
+		except Exception:
+			self._focusEditable = False
+		if self.perkins:
+			from . import perkins as perkinsModule
+
+			perkinsModule.machine.reset()
+
+	def perkinsActiveHere(self) -> bool:
+		"""¿El modo Perkins actúa ahora? (en un campo de texto y fuera del modo exploración).
+
+		Se llama en el hilo de los ganchos: solo lee atributos ya calculados.
+		"""
+		if not self.perkins:
+			return False
+		if not conf["braille"]["perkinsOnlyInEditable"]:
+			return True
+		if not self._focusEditable:
+			return False
+		obj = self._focusObj
+		ti = obj.__dict__.get("_treeInterceptor") if obj is not None else None
+		# En el modo exploración de una página, las letras son de navegación rápida.
+		return ti is None or bool(getattr(ti, "_passThrough", True))
 
 	def _keyFor(self, scanCode: int) -> int | None:
 		"""Número de punto (1-8), 0 para el espacio o ``None``."""
@@ -376,13 +464,40 @@ class PcBrailleKeyboard:
 		dot = _SCAN_DOTS.get(scanCode)
 		if dot is None:
 			return None
-		if dot > 6 and int(conf["braille"]["pcKeyboardDots"] or 8) == 6:
+		if dot > 6 and (self.perkins or int(conf["braille"]["pcKeyboardDots"] or 8) == 6):
 			return None
 		return dot
 
 	def onRawKey(self, vk: int = 0, scanCode: int = 0, extended: bool = False, pressed: bool = True, injected: bool = False) -> bool:
 		"""Hilo de ganchos. ``False`` = la tecla se captura."""
-		if not self.enabled or injected or extended:
+		if not self.enabled or injected:
+			return True
+		if self.perkins:
+			if scanCode in self._special:
+				# La soltura de una tecla especial que se capturó al pulsarla.
+				if not pressed:
+					self._special.discard(scanCode)
+				else:
+					queue_handler.queueFunction(_executePerkinsKey, _PERKINS_SPECIAL[scanCode])
+				return False
+			if not self.perkinsActiveHere():
+				if self._down or self._chord:
+					self._down.clear()
+					self._chord.clear()
+				return True
+			special = _PERKINS_SPECIAL.get(scanCode)
+			if special is not None and not extended:
+				if not pressed or self._down:
+					return True
+				from ..input import core as inputCore
+
+				mgr = inputCore.manager
+				if mgr._tiresiasDown or mgr._mods:
+					return True
+				self._special.add(scanCode)
+				queue_handler.queueFunction(_executePerkinsKey, special)
+				return False
+		if extended:
 			return True
 		key = self._keyFor(scanCode)
 		if key is None:
@@ -396,6 +511,11 @@ class PcBrailleKeyboard:
 			if not self._down and (mgr._tiresiasDown or mgr._mods):
 				# Con modificadores la tecla funciona como siempre (atajos).
 				return True
+			if self.perkins and not self._down:
+				# La máquina suena al bajar la primera tecla, no al soltarlas.
+				from . import perkins as perkinsModule
+
+				perkinsModule.machine.keyDown(key == 0)
 			self._down.add(scanCode)
 			self._chord.add(key)
 			return False
@@ -413,10 +533,27 @@ class PcBrailleKeyboard:
 		return False
 
 
+def _executePerkinsKey(action: str) -> None:
+	"""Interlineado (A o Intro) o retroceso (Ñ o Retroceso) del modo Perkins (hilo del núcleo)."""
+	from . import perkins as perkinsModule
+
+	if action == "line":
+		perkinsModule.machine.newLine()
+		handler.enter()
+	else:
+		perkinsModule.machine.backspace()
+		handler.eraseLastCell(announce=False)
+
+
 def _executePcGesture(dots: int, space: bool) -> None:
 	from ..input import core as inputCore
 
 	mgr = inputCore.manager
+	if pcKeyboard.perkins and bool(dots) != bool(space):
+		# Una celda o un espacio: el carro avanza (y quizá suena la campana).
+		from . import perkins as perkinsModule
+
+		perkinsModule.machine.cell()
 	gesture = BrailleKeyboardGesture(dots, space)
 	capture = getattr(mgr, "captureFunc", None)
 	if capture is not None:

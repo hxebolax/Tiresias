@@ -25,6 +25,13 @@ SPEECH_DEFAULTS: dict = {
 	"numberReading": "full",
 	# Separar letras y números en palabras mixtas («abc123» -> «abc 123»).
 	"splitAlphanumeric": False,
+	# Separar las palabras unidas con mayúsculas («AndroidTools» -> «Android Tools»; foro 1.0.17).
+	"splitCamelCase": False,
+	# Leer «13:11» como capítulo y versículo («13, 11») y no como una hora (foro 1.0.17).
+	"verseCitations": False,
+	# Caracteres de una selección que se dicen enteros; por encima, solo cuántos
+	# hay (y no se deletrea). Como NVDA 2027.1 (#21104).
+	"maxSelectionReportingLength": 1000,
 	# Leer entidades HTML («&amp;», «&#233;») como el carácter que representan.
 	"decodeHtmlEntities": True,
 	# Leer por su nombre Unicode los símbolos que no están en la tabla.

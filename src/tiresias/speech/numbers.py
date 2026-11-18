@@ -6,6 +6,10 @@
   el sintetizador no las lea como una sola palabra («abc123» -> «abc 123»).
 - Entidades HTML (#3805): «&amp;», «&#233;» o «&#x20AC;» se leen como el
   carácter que representan.
+- Palabras unidas con mayúsculas (foro, 1.0.17): «AndroidTools» se lee
+  «Android Tools». eSpeak ya las separa; Eloquence y otras voces no.
+- Citas con dos puntos (foro, 1.0.17): «Romanos 13:11» se lee «13, 11»,
+  capítulo y versículo, y no como una hora («la una y once»).
 """
 
 from __future__ import annotations
@@ -21,6 +25,13 @@ NUMBER_MODES = (NUMBER_FULL, NUMBER_DIGITS, NUMBER_PAIRS, NUMBER_TRIPLES)
 
 _digitRun = re.compile(r"\d{2,}")
 _alnumBoundary = re.compile(r"(?<=[^\W\d_])(?=\d)|(?<=\d)(?=[^\W\d_])")
+#: Minúsculas y mayúsculas latinas (con acentos, eñe, diéresis...).
+_LOWER = "a-zß-öø-ÿ"
+_UPPER = "A-ZÀ-ÖØ-Þ"
+#: «androidTools» -> «android Tools»; «XMLParser» -> «XML Parser».
+_camelBoundary = re.compile(rf"(?<=[{_LOWER}])(?=[{_UPPER}])|(?<=[{_UPPER}])(?=[{_UPPER}][{_LOWER}])")
+#: «13:11», sin más cifras ni dos puntos alrededor (las horas con segundos «10:30:15» no).
+_verseCitation = re.compile(r"(?<![\d:.,])(\d{1,3}):(\d{1,3})(?![\d:])")
 _entity = re.compile(r"&(#\d{1,7}|#[xX][0-9a-fA-F]{1,6}|[A-Za-z][A-Za-z0-9]{1,31});")
 
 
@@ -124,6 +135,22 @@ def applyNumberMode(text: str, mode: str, language: str | None = None) -> str:
 def splitAlphanumeric(text: str) -> str:
 	"""Inserta un espacio entre letras y cifras contiguas."""
 	return _alnumBoundary.sub(" ", text)
+
+
+def splitCamelCase(text: str) -> str:
+	"""Separa las palabras unidas con mayúsculas: «AndroidTools» -> «Android Tools»."""
+	return _camelBoundary.sub(" ", text)
+
+
+def readVerseCitations(text: str) -> str:
+	"""Lee las citas como capítulo y versículo: «Romanos 13:11» -> «Romanos 13, 11».
+
+	Es la forma habitual de escribir y decir las citas bíblicas en español
+	(«Rom 13,11»). Así ninguna voz las lee como una hora («la una y once»).
+	"""
+	if ":" not in text:
+		return text
+	return _verseCitation.sub(lambda m: f"{m.group(1)}, {m.group(2)}", text)
 
 
 def decodeEntities(text: str) -> str:
