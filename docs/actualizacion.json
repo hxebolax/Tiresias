@@ -1,27 +1,27 @@
 {
 	"format": "tiresias-actualizacion",
 	"formatVersion": 1,
-	"version": "1.0.16",
-	"date": "2026-11-04",
-	"url": "descargas/1.0.16/Tiresias-1.0.16-instalador.exe",
-	"sha256": "8b271ba82a3a077a6853abfd8723f4bb1056013951bdd60857846e995b4daf0a",
-	"size": 62373888,
+	"version": "1.0.17",
+	"date": "2026-11-18",
+	"url": "descargas/1.0.17/Tiresias-1.0.17-instalador.exe",
+	"sha256": "1ca700b575ea3375f9ccbad05d0d95510c85f0f25cbe3dd99423fcc6e32d848e",
+	"size": 62730240,
 	"minWindows": "10.0.10240",
-	"notes": "Firefox lee el contenido de las listas con viñetas, formato de la hora configurable (12 o 24 horas), menú de Tiresias ordenado, mejoras de NVDA y dos complementos nuevos: TCA SystemUtilities y TCA-Portapapeles.",
+	"notes": "La copia instalada lee los programas de administrador como NVDA; modo Perkins para escribir como en una máquina Perkins; opciones para separar palabras con mayúsculas y leer citas bíblicas; en espera Tiresias suelta la cortina; complemento Reloj para Tiresias en la tienda.",
 	"notesUrl": "novedades.html",
 	"installer": {
-		"url": "descargas/1.0.16/Tiresias-1.0.16-instalador.exe",
-		"sha256": "8b271ba82a3a077a6853abfd8723f4bb1056013951bdd60857846e995b4daf0a",
-		"size": 62373888
+		"url": "descargas/1.0.17/Tiresias-1.0.17-instalador.exe",
+		"sha256": "1ca700b575ea3375f9ccbad05d0d95510c85f0f25cbe3dd99423fcc6e32d848e",
+		"size": 62730240
 	},
 	"portable": {
-		"url": "descargas/1.0.16/Tiresias-1.0.16-portable.zip",
-		"sha256": "4030fc3f8675ae0476aced2dc5df7c66bf23afee4c111776635423681a2cf89b",
-		"size": 85125721
+		"url": "descargas/1.0.17/Tiresias-1.0.17-portable.zip",
+		"sha256": "09f8235a5bc2ee743bc15eb8ef337afbd57cc01e2793d89830e52e6a056c0569",
+		"size": 86455871
 	},
 	"source": {
-		"url": "descargas/1.0.16/Tiresias-1.0.16-codigo-fuente.zip",
-		"sha256": "4d062942604226ed633b4c5b65d1a3be7641b44b1443b410f69d0bad4e361760",
-		"size": 17068572
+		"url": "descargas/1.0.17/Tiresias-1.0.17-codigo-fuente.zip",
+		"sha256": "d8233644b9236238af19c7868c2ce26fb1c84afd44d4d2c146f1a5ba4f58c10f",
+		"size": 27794896
 	}
 }
