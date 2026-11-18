@@ -59,6 +59,34 @@
 			]
 		},
 		{
+			"id": "RelojTiresias",
+			"name": "Reloj para Tiresias",
+			"version": "1.6.3",
+			"author": "Guorco, con Mole",
+			"description": "Complemento de reloj para Tiresias. Pulsa Tiresias+Control+H y después una letra: H dice la hora, F dice la fecha, T dice la hora y la fecha, A activa o desactiva el anuncio de la hora, I cambia cada cuánto se anuncia (60, 30 o 15 minutos), S abre el cuadro para elegir el motor de voz y la voz solo para el reloj, O abre la carpeta de sonidos (clock12 o clock24), G activa o desactiva el anuncio con grabaciones wav, C cambia el formato entre 12 y 24 horas, E dice el estado, y Escape sale.",
+			"minApiVersion": "1.0",
+			"lastTestedApiVersion": "1.0",
+			"url": "RelojTiresias/RelojTiresias-1.6.3.tiresias-addon",
+			"sha256": "65557f68294760590ba495241a2e01dd98d560adf6513c7a718bb6330d5e8a7e",
+			"size": 10449557,
+			"homepage": "https://xebolax.synology.me/Tiresias/",
+			"changelog": "Versión 1.6.3, revisión para la tienda de Tiresias: la capa del reloj pasa a Tiresias+Control+H (H de hora), porque Tiresias+Control+R es una orden de Tiresias (volver a la configuración guardada; tres veces, valores de fábrica) y el complemento la anulaba; se puede cambiar en Gestos de entrada. Las grabaciones que trae el complemento son las mismas 48 de 1 a 12 y valen para los dos formatos (antes iban repetidas tres veces y en estéreo: el complemento pasa de 76 MB a 12 MB con el mismo sonido). Las grabaciones propias van ahora en la carpeta de datos del complemento (la abre la tecla O) y ya no se pierden al actualizarlo. El anuncio periódico no habla mientras Tiresias está en espera porque funciona otro lector de pantalla. Si Tiresias pasa a usar el mismo motor que tenía el reloj (por ejemplo, eSpeak NG), el reloj ya no lo cierra al salir: antes podía dejar a Tiresias sin voz. Versión 1.6.2: el cuadro de voz ahora se pone en primer plano al abrirlo, igual que los cuadros de Tiresias (Show, Raise y winapi.setForegroundWindow). Antes a veces aparecía en segundo plano, detrás de otras ventanas, y Guorco tenía que buscarlo. Por lo demás, igual que la 1.6.1: cuadro no modal que no traba Tiresias.",
+			"date": "2026-11-18",
+			"proprietary": false,
+			"versions": [
+				{
+					"version": "1.6.3",
+					"url": "RelojTiresias/RelojTiresias-1.6.3.tiresias-addon",
+					"sha256": "65557f68294760590ba495241a2e01dd98d560adf6513c7a718bb6330d5e8a7e",
+					"size": 10449557,
+					"minApiVersion": "1.0",
+					"lastTestedApiVersion": "1.0",
+					"changelog": "Versión 1.6.3, revisión para la tienda de Tiresias: la capa del reloj pasa a Tiresias+Control+H (H de hora), porque Tiresias+Control+R es una orden de Tiresias (volver a la configuración guardada; tres veces, valores de fábrica) y el complemento la anulaba; se puede cambiar en Gestos de entrada. Las grabaciones que trae el complemento son las mismas 48 de 1 a 12 y valen para los dos formatos (antes iban repetidas tres veces y en estéreo: el complemento pasa de 76 MB a 12 MB con el mismo sonido). Las grabaciones propias van ahora en la carpeta de datos del complemento (la abre la tecla O) y ya no se pierden al actualizarlo. El anuncio periódico no habla mientras Tiresias está en espera porque funciona otro lector de pantalla. Si Tiresias pasa a usar el mismo motor que tenía el reloj (por ejemplo, eSpeak NG), el reloj ya no lo cierra al salir: antes podía dejar a Tiresias sin voz. Versión 1.6.2: el cuadro de voz ahora se pone en primer plano al abrirlo, igual que los cuadros de Tiresias (Show, Raise y winapi.setForegroundWindow). Antes a veces aparecía en segundo plano, detrás de otras ventanas, y Guorco tenía que buscarlo. Por lo demás, igual que la 1.6.1: cuadro no modal que no traba Tiresias.",
+					"date": "2026-11-18"
+				}
+			]
+		},
+		{
 			"id": "TCA_SystemUtilities",
 			"name": "TCA SystemUtilities",
 			"version": "1.0.0",
